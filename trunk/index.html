@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bridge Hand Player</title>
+
+    <!-- Bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/lumen/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+    	.fill {   height: 100%; }
+		.alert { margin-bottom:20px;}   	
+
+}
+    </style>
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  	<header></header>
+  	<section>
+		<div class="container-fluid">
+			<!-- Example row of columns -->
+			<div class="row">
+				<div id="hand-information" class="col-xs-4">
+					<div class="cell panel panel-info">
+						<div class="panel-heading fill">				
+						</div>
+					</div>									
+				</div>
+				<div id="north" class="col-xs-4"></div>
+				<div class="col-xs-4 empty"></div>
+			</div>  
+			<div class="row">
+				<div id="west" class="col-xs-4"></div>
+				<div id="table" class="col-xs-4">
+					<div class="cell panel panel-success">
+						<div class="panel-heading fill">	
+							<div id="target"></div>			
+						</div>
+					</div>				
+				</div>
+				<div id="east" class="col-xs-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4 empty"></div>
+				<div id="south" class="col-xs-4"></div>
+				<div class="col-xs-4 empty"></div>		
+			</div>		  
+		</div>	
+    </section>
+    <footer>
+		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+			<div class="pull-right">
+				<p class="navbar-text"><span class="glyphicon glyphicon-copyright-mark"></span> Sriram Narasimhan</p>
+			</div>
+		</nav>   
+	</footer> 
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <!-- Include the hand player javascript -->
+    <script src="js/display_bridge_hand.js"></script>    
+    <script src="js/grids.js"></script>
+  	<script src="js/jquery.config.js"></script>
+  </body>
+</html>
