@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bridge Hand Player</title>
 
     <!-- Bootstrap -->
-    <link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/lumen/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-    <style>
+    <link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/lumen/bootstrap.min.css" rel="stylesheet" id="bootswatch-theme">
+	<style>
+		body, html {
+		  height: 100%;
+		  width:100%;
+		}    
     	.fill {   height: 100%; }
-		.alert { margin-bottom:20px;}   	
-
-}
+    	table.auto { width:auto; }	
+    	.card { position: relative; }
+    	.card-absolute { position: absolute; }
     </style>
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -26,9 +26,35 @@
     <![endif]-->
   </head>
   <body>
-  	<header></header>
+  	<header>
+		<nav class="navbar navbar-default navbar-static-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand">Bridge Hand Player</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Current Theme : <span id="current-theme">Default</span> (Change)<b class="caret"></b></a>
+							<ul id="themes" class="dropdown-menu">
+							</ul>
+						</li>					    
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<p class="navbar-text"><span class="glyphicon glyphicon-copyright-mark"></span> Sriram Narasimhan</p>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</nav>  	  		
+  	</header>
   	<section>
-		<div class="container-fluid">
+		<div id="main" class="container-fluid">
 			<!-- Example row of columns -->
 			<div class="row">
 				<div id="hand-information" class="col-xs-4">
@@ -37,33 +63,93 @@
 						</div>
 					</div>									
 				</div>
-				<div id="north" class="col-xs-4"></div>
-				<div class="col-xs-4 empty"></div>
+				<div id="north" class="col-xs-4">
+					<div class="cell panel panel-primary">
+					<div class="panel-heading">
+					<h3 class="panel-title">North</h3>
+					</div>
+					<div id="north-hand" class="panel-body">
+					<div id="north-s"></div>
+					<div id="north-h"></div>
+					<div id="north-d"></div>
+					<div id="north-c"></div>
+					</div>
+					</div>
+				</div>
+				<div class="col-xs-4 empty">
+					<button id="toggle-north-button" type="button" class="btn btn-primary">Toggle North</button>	
+				</div>
 			</div>  
 			<div class="row">
-				<div id="west" class="col-xs-4"></div>
+				<div id="west" class="col-xs-4">
+					<div class="cell panel panel-primary">
+					<div class="panel-heading">
+					<h3 class="panel-title">West</h3>
+					</div>
+					<div id="west-hand" class="panel-body">				
+					<div id="west-s"></div>
+					<div id="west-h"></div>
+					<div id="west-d"></div>
+					<div id="west-c"></div>		
+					</div>
+					</div>								
+				</div>
 				<div id="table" class="col-xs-4">
 					<div class="cell panel panel-success">
-						<div class="panel-heading fill">	
-							<div id="target"></div>			
-						</div>
+							<table>
+								<tr>
+									<td class="col-xs-4"></td>
+									<td align="center" class="col-xs-4" id="north-played-card"></td>
+									<td class="col-xs-4"></td>
+								</tr>
+								<tr>
+									<td align="left" id="west-played-card"></td>
+									<td></td>
+									<td align="right" id="east-played-card"></td>
+								</tr>							
+								<tr>
+									<td></td>
+									<td align="center" id="south-played-card"></td>
+									<td></td>
+								</tr>													
+							</table>	
 					</div>				
 				</div>
-				<div id="east" class="col-xs-4"></div>
+				<div id="east" class="col-xs-4">
+					<div class="cell panel panel-primary">
+					<div class="panel-heading">
+					<h3 class="panel-title">East</h3>
+					</div>
+					<div id="east-hand" class="panel-body">				
+					<div id="east-s"></div>
+					<div id="east-h"></div>
+					<div id="east-d"></div>
+					<div id="east-c"></div>			
+					</div>
+					</div>							
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-4 empty"></div>
-				<div id="south" class="col-xs-4"></div>
+				<div id="south" class="col-xs-4">
+					<div class="cell panel panel-primary">
+					<div class="panel-heading">
+					<h3 class="panel-title">South</h3>
+					</div>
+					<div id="south-hand" class="panel-body">				
+					<div id="south-s"></div>
+					<div id="south-h"></div>
+					<div id="south-d"></div>
+					<div id="south-c"></div>		
+					</div>
+					</div>							
+				</div>
 				<div class="col-xs-4 empty"></div>		
 			</div>		  
 		</div>	
     </section>
     <footer>
-		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-			<div class="pull-right">
-				<p class="navbar-text"><span class="glyphicon glyphicon-copyright-mark"></span> Sriram Narasimhan</p>
-			</div>
-		</nav>   
+ 		<div id="dealer" class=""></div>
 	</footer> 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -71,8 +157,11 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <!-- Include the hand player javascript -->
+    <script src="js/jquery.cookie.js"></script>
     <script src="js/display_bridge_hand.js"></script>    
     <script src="js/grids.js"></script>
   	<script src="js/jquery.config.js"></script>
+  	<script src="js/jquery.fittext.js"></script>
+  	<script>$('.cell').fitText();</script>
   </body>
 </html>
