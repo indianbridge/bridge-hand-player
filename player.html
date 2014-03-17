@@ -8,10 +8,13 @@
     
     <style>
     	.card { position: fixed; }
+    	.played-card { position: fixed; }
+    	.backgroundRed {  background: red; }
     </style>
     
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  -->
+    <script src="js/jquery.min.js"></script>  
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -29,6 +32,10 @@
   		<div id='table'></div>
   		<div id='w-hand'></div>
   		<div id='e-hand'></div>
+  		<div id='n-played-card'></div>
+  		<div id='s-played-card'></div>
+  		<div id='w-played-card'></div>
+  		<div id='e-played-card'></div>  		
   	</section>
   	<footer></footer>
   	<script src="js/bridge.js"></script>

@@ -4,108 +4,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bridge Hand Player</title>
-    <!-- Bootstrap -->
-    <link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/lumen/bootstrap.min.css" rel="stylesheet" id="bootswatch-theme">    
+    <title>Bridge Hand Player</title>  
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js" type="text/javascript"></script>
   </head>
   <body> 
-  	<section>
-		<div id="main" class="container-fluid">
-			<!-- Example row of columns -->
-			<div class="row">
-				<div id="hand-information" class="col-xs-4">
-					<div class="cell panel panel-info">
-						<div class="panel-heading fill">				
-						</div>
-					</div>									
-				</div>
-				<div id="north" class="col-xs-4">
-					<div class="cell panel panel-primary">
-					<div class="panel-heading">
-					<h3 class="panel-title">North</h3>
-					</div>
-					<div id="north-hand" class="panel-body">
-					<div id="north-s"></div>
-					<div id="north-h"></div>
-					<div id="north-d"></div>
-					<div id="north-c"></div>
-					</div>
-					</div>
-				</div>
-				<div class="col-xs-4 empty">
-					<button id="toggle-north-button" type="button" class="btn btn-primary">Toggle North</button>	
-				</div>
-			</div>  
-			<div class="row">
-				<div id="west" class="col-xs-4">
-					<div class="cell panel panel-primary">
-					<div class="panel-heading">
-					<h3 class="panel-title">West</h3>
-					</div>
-					<div id="west-hand" class="panel-body">				
-					<div id="west-s"></div>
-					<div id="west-h"></div>
-					<div id="west-d"></div>
-					<div id="west-c"></div>		
-					</div>
-					</div>								
-				</div>
-				<div id="table" class="col-xs-4">
-					<div class="cell panel panel-success">
-							<table>
-								<tr>
-									<td class="col-xs-4"></td>
-									<td align="center" class="col-xs-4" id="north-played-card"></td>
-									<td class="col-xs-4"></td>
-								</tr>
-								<tr>
-									<td align="left" id="west-played-card"></td>
-									<td></td>
-									<td align="right" id="east-played-card"></td>
-								</tr>							
-								<tr>
-									<td></td>
-									<td align="center" id="south-played-card"></td>
-									<td></td>
-								</tr>													
-							</table>	
-					</div>				
-				</div>
-				<div id="east" class="col-xs-4">
-					<div class="cell panel panel-primary">
-					<div class="panel-heading">
-					<h3 class="panel-title">East</h3>
-					</div>
-					<div id="east-hand" class="panel-body">				
-					<div id="east-s"></div>
-					<div id="east-h"></div>
-					<div id="east-d"></div>
-					<div id="east-c"></div>			
-					</div>
-					</div>							
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-4 empty"></div>
-				<div id="south" class="col-xs-4">
-					<div class="cell panel panel-primary">
-					<div class="panel-heading">
-					<h3 class="panel-title">South</h3>
-					</div>
-					<div id="south-hand" class="panel-body">				
-					<div id="south-s"></div>
-					<div id="south-h"></div>
-					<div id="south-d"></div>
-					<div id="south-c"></div>		
-					</div>
-					</div>							
-				</div>
-				<div class="col-xs-4 empty"></div>		
-			</div>		  
-		</div>	
-    </section>  
+  <div id="main">
+  	<h1>Title</h1>
+  	<p>Random Text</p>
+  	<div>
+  		<img src="images/cards/sa.png"></img>
+  		<img src="images/cards/sk.png"></img>
+  		<img src="images/cards/sq.png"></img>
+  		<img src="images/cards/sj.png"></img>
+  		<img src="images/cards/st.png"></img>
+  		<img src="images/cards/s9.png"></img>
+  	</div>
+  </div>
+  <input id="scale" name="scale" type="text" value="1"/>
+  <button id="run-scaling">Scale the div above</button>
   <script src="js/test.js"></script>
   </body>
 </html>
