@@ -1,11 +1,53 @@
+$ = jQuery;
+var Parameters = {}
+Parameters.viewport = {
+	width: jQuery(window).width(),
+	height: jQuery(window).height(),
+};
+Parameters.imageFolder = 'images/cards';
+Parameters.cardBack = Parameters.imageFolder + '/b1fv.png';
+Parameters.viewport.centerX = Parameters.viewport.width/2;
+Parameters.viewport.centerY = Parameters.viewport.height/2;
+Parameters.scalingFactor = 1;
+Parameters.imageDimensions = {
+	actualWidth: 76,
+	actualHeight: 92,
+	//actualWidth: 500,
+	//actualHeight: 726,
+	percentageWidthShowing: 0.25,
+	percentageHeightShowing: 0.5,
+};
+Parameters.tableDimensions = {
+	actualWidth: Parameters.imageDimensions.actualWidth * 5 + 20,
+	actualHeight: Parameters.imageDimensions.actualHeight * 3 + 20,	
+};
+
+function computeScaledDimensions( ) {
+	Parameters.imageDimensions.width = Parameters.imageDimensions.actualWidth * Parameters.scalingFactor;
+	Parameters.imageDimensions.height = Parameters.imageDimensions.actualHeight * Parameters.scalingFactor;
+	Parameters.imageDimensions.widthShowing = Parameters.imageDimensions.width * Parameters.imageDimensions.percentageWidthShowing;
+	Parameters.imageDimensions.heightShowing = Parameters.imageDimensions.height * Parameters.imageDimensions.percentageHeightShowing;
+	Parameters.tableDimensions.width = Parameters.tableDimensions.actualWidth * Parameters.scalingFactor;
+	Parameters.tableDimensions.height = Parameters.tableDimensions.actualHeight * Parameters.scalingFactor;
+	Parameters.tableDimensions.top = Parameters.viewport.centerY - Parameters.tableDimensions.height / 2;
+	Parameters.tableDimensions.left = Parameters.viewport.centerX - Parameters.tableDimensions.width / 2;	
+}
 
 var Directions = { 
-	'n' : { name : 'North', id : 'n-hand', layout : 'horizontal' },
-	's' : { name : 'South', id : 's-hand', layout : 'horizontal' },
-	'e' : { name : 'East', id : 'e-hand', layout : 'vertical' },
-	'w' : { name : 'West', id : 'w-hand', layout : 'vertical' },
+	'n' : { name : 'North', id : 'n-hand', layout : 'horizontal', position : 'top' },
+	's' : { name : 'South', id : 's-hand', layout : 'horizontal', position : 'bottom' },
+	'e' : { name : 'East', id : 'e-hand', layout : 'vertical', position : 'right' },
+	'w' : { name : 'West', id : 'w-hand', layout : 'vertical', position : 'left' },
 };
  
+Parameters.tableCardPosition = {};
+for( var direction in Directions ) {
+	Parameters.tableCardPosition[ direction ] = {
+		top: 0,
+		left: 0,
+	};
+};
+
 var Suits = { 
 	's' : { name : 'Spade', 	index : 0 }, 
 	'h' : { name : 'Heart', 	index : 1 }, 
@@ -35,7 +77,25 @@ for( var suit in Suits ) suitNames[ Suits[ suit ].index ] = suit;
 var rankNames = [];
 for( var rank in Ranks ) rankNames[ Ranks[ rank ].index ] = rank;
 
-function Card() {
+function getDisplayName( cardIndex ) {
+	return getSuit( cardIndex ) + getRank( cardIndex )
+}
+
+function getSuit( cardIndex ) {
+	return suitNames[ Math.floor( cardIndex / 13 ) ];
+};
+
+function getRank ( cardIndex ) {
+	return rankNames[ cardIndex % 13 ];
+};
+
+function getCardIndex( suit, rank ) {
+	return Suits[ suit ].index*13 + Ranks[ rank ].index;
+};
+
+function Card( cardIndex ) {
+	this.suit = getSuit( cardIndex );
+	this.rank = getRank( cardIndex );
 	this.belongsTo = ''; 	// Who owns this card
 	this.played = false;	// Has this card been played?
 };
@@ -48,7 +108,7 @@ function Position() {
 	for( var direction in Directions )
 	this.tableCards[ direction ] = ''; 
 	for( var i = 0; i < this.numCards; ++i ) {
-		this.cards[ i ] = new Card();
+		this.cards[ i ] = new Card( i );
 	}
 };
 
@@ -66,151 +126,178 @@ Position.prototype.getHand = function( direction ) {
 	for( var i = 0; i < this.numCards; ++i ) {
 		if ( this.cards[ i ].belongsTo === direction ) {
 			var suit = getSuit( i );
-			hand.suits[ suit ].ranks.push( getRank( i ) );
+			hand.suits[ suit ].ranks.push( this.cards[ i ] );
 			hand.suits[ suit ].length++;
 			if ( hand.suits[ suit ].length > hand.longest ) {
 				hand.longest = hand.suits[ suit ].length;
 			}
 		}
 	}
+	if ( Directions [ direction ].layout === 'horizontal' ) {
+		hand.height = Parameters.imageDimensions.height;
+		hand.width = getHorizontalWidth( hand );
+		if ( Directions[ direction ].position === 'top' ) {
+			hand.top = Parameters.viewport.centerY - Parameters.tableDimensions.height / 2 - 10 - hand.height;
+			Parameters.tableCardPosition[ direction ] = {
+				top: Parameters.tableDimensions.top,
+				left: Parameters.viewport.centerX - Parameters.imageDimensions.width / 2,
+			};			
+		}
+		else if ( Directions[ direction ].position === 'bottom' ) {
+			hand.top = Parameters.viewport.centerY + Parameters.tableDimensions.height / 2 + 10;
+			Parameters.tableCardPosition[ direction ] = {
+				top: Parameters.tableDimensions.top + Parameters.tableDimensions.height - Parameters.imageDimensions.height,
+				left: Parameters.viewport.centerX - Parameters.imageDimensions.width / 2,
+			};				
+		}
+		hand.left = Parameters.viewport.centerX - hand.width / 2;
+		
+	}
+	else if ( Directions [ direction ].layout === 'vertical' ) {
+		hand.height = getVerticalHeight( hand );
+		hand.width = getVerticalWidth( hand );
+		hand.top = Parameters.viewport.centerY - hand.height / 2;
+		if ( Directions[ direction ].position === 'left' ) {
+			hand.left = Parameters.viewport.centerX - Parameters.tableDimensions.width / 2 - 10 - hand.width;
+			Parameters.tableCardPosition[ direction ] = {
+				top: Parameters.viewport.centerY - Parameters.imageDimensions.height / 2,
+				left: Parameters.tableDimensions.left,
+			};			
+		}
+		else if ( Directions[ direction ].position === 'right' ) {
+			hand.left = Parameters.viewport.centerX + Parameters.tableDimensions.width / 2 + 10;
+			Parameters.tableCardPosition[ direction ] = {
+				top: Parameters.viewport.centerY - Parameters.imageDimensions.height / 2,
+				left: Parameters.tableDimensions.left + Parameters.tableDimensions.width - Parameters.imageDimensions.width,
+			};				
+		}		
+	}
 	return hand;
 };
 
-Position.prototype.drawPosition = function( ) {
-	var dimensions = getViewPortSize();
-	drawTable( dimensions );
-	this.drawNorth( dimensions );
-	this.drawSouth( dimensions );
-	this.drawEast( dimensions );
-	this.drawWest( dimensions );
-};
-
-function drawTable( dimensions ) {
-	var width = 200;
-	var height = 200;
-	var top = dimensions.height/2 - height/2;
-	var left = dimensions.width/2 - width/2;
-	$('#table').css({
-		'background-color':'green',
-		position:'fixed',
-		width:width,
-		height:height,
-		top:top,
-		left:left,
-	});
-	$('#table').html('width : '+dimensions.width+' height : '+dimensions.height);
-}
-
-function drawHorizontal( suits, id, top, left, percentage ) {
-	if ( percentage === undefined ) percentage = 1;
-	for ( var suit in suits ) {
-		if ( suit !== 'n' ) {
-			for ( var i = 0; i < suits[ suit ].ranks.length; ++i ) {
-				var rank = suits[ suit ].ranks[ i ];
-				var imageID = 'card-' + suit + rank;
-				html = '<img id="' + imageID + '"class="card" src="images/cards/' + suit + rank + '.png"></img>';
-				$( '#' + id ).append(html);
-				$('#'+imageID).animate({top:top,left:left}, 300, function() {});
-				left += 20*percentage;
-			}
-			left += 72*percentage;
-		}
-	}	
-};
-
-function calculateHeightHorizontal( percentage ) {
-	return 96 * percentage;
-};
-
-function calculateWidthHorizontal( suits, percentage ) {
+function getHorizontalWidth( hand ) {
+	var suits = hand.suits;
 	var firstSuit = true;
 	var width = 0;
 	for ( var suit in suits ) {
 		if ( suit !== 'n' && suits[ suit ].ranks.length > 0) {
-			width += ( firstSuit ? 0 : 20*percentage ) + ( suits[ suit ].ranks.length - 1 ) * ( 20*percentage ) + ( 72*percentage );
-			firstSuit = false
+			var gutter = Parameters.imageDimensions.widthShowing;
+			width += ( firstSuit ? 0 : gutter ) + ( suits[ suit ].ranks.length - 1 ) * gutter + ( Parameters.imageDimensions.width );
+			firstSuit = false;
 		}
 	}
 	return width;	
 };
 
-function calculateHeightVertical( percentage ) {
-	return 4 * 96 * percentage + 12;
+function getVerticalWidth( hand ) {
+	return ( hand.longest - 1 ) * Parameters.imageDimensions.widthShowing + Parameters.imageDimensions.width;
 };
 
-function calculateWidthVertical( longest, percentage ) {
-	return ( longest - 1 ) * ( 20 * percentage ) + ( 72*percentage );	
+function getVerticalHeight( hand ) {
+	return 3 * Parameters.imageDimensions.heightShowing + Parameters.imageDimensions.height;
 };
 
-function drawVertical( suits, id, top, left, percentage ) {
-	if ( percentage === undefined ) percentage = 1;
-	var startingLeft = left;
+Position.prototype.drawPosition = function( ) {
+	var dimensions = getViewPortSize();
+	drawTable( );
+	for( var direction in Directions ) {
+		this.drawHand( direction );
+	}
+	var self = this;
+	$( ".card" ).click(function() {
+		self.playCard ( this, dimensions );
+	});
+	$('body').on( 'mouseover', '.played', function() {
+		$( this ).attr( 'src', $( this ).attr('imageName') );
+	});
+	$('body').on( 'mouseout', '.played', function() {
+		$( this ).attr( 'src', Parameters.cardBack );
+	});	
+};
+
+Position.prototype.drawHand = function( direction ) {
+	var hand = this.getHand( direction );
+	var id = Directions[ direction ].id;
+	$( '#' + id ).empty();
+	var width = hand.width;
+	var top = hand.top;
+	var left = hand.left;
+	if ( Directions[ direction ].layout === 'horizontal' ) {
+		drawHorizontal( direction, hand.suits, id, top, left );	
+	}
+	else if ( Directions[ direction ].layout === 'vertical' ) {
+		drawVertical( direction, hand.suits, id, top, left );	
+	}
+};
+
+Position.prototype.playCard = function( card, dimensions ) {
+	if ( $(card).hasClass( 'played' ) ) return;
+	var id = $(card).attr( 'direction' ) + '-played-card';
+	var imageID = 'playedcard-' + $(card).attr( 'suit' ) + $(card).attr( 'rank' );
+	var html = '<img width="' + $(card).attr( 'width' ) + '" height="' + $(card).attr( 'height' ) + '" id="' + imageID + '"class="played-card" src="' + $(card).attr( 'src' ) + '"></img>';		
+	$('#'+id).empty().append( html );
+	$('#'+imageID).css({
+		top: $(card).position().top,
+		left: $(card).position().left,
+	});
+	var direction = $( card ).attr( 'direction' );
+	var top = Parameters.tableCardPosition[ direction ].top;
+	var left = Parameters.tableCardPosition[ direction ].left;
+	$( card ).attr( 'src', Parameters.cardBack );
+	$( card ).addClass( 'played' );
+	$('#'+imageID).animate({top:top,left:left}, 300, function() {});	
+}
+
+function drawTable(  ) {
+	$('#table').css({
+		'background-color':'green',
+		position:'fixed',
+		width: Parameters.tableDimensions.width,
+		height: Parameters.tableDimensions.height,
+		top: Parameters.tableDimensions.top,
+		left: Parameters.tableDimensions.left,
+	});
+	$('#table').html('width : '+Parameters.tableDimensions.width+' height : '+Parameters.tableDimensions.height);
+}
+
+function addImage( card, id, top, left ) {
+	var suit = card.suit;
+	var rank = card.rank;
+	var imageID = 'card-' + suit + rank;
+	var width = Parameters.imageDimensions.width;
+	var height = Parameters.imageDimensions.height;
+	var imageName = Parameters.imageFolder + '/' + suit + rank + '.png';
+	var html = '<img imageName="'+ imageName + '" width="' + width + '" height="' + height + '" suit="' + suit + '" rank="' + rank + '" direction="' + card.belongsTo + '" id="' + imageID + '"class="card" src="' + imageName + '"></img>';
+	$( '#' + id ).append(html);
+	$( '#' + imageID ).animate({top:top,left:left}, 300, function() {});
+};
+
+function drawHorizontal( direction, suits, id, top, left ) {
 	for ( var suit in suits ) {
 		if ( suit !== 'n' ) {
-			for ( var i = 0; i < suits[ suit ].ranks.length; ++i ) {
-				var rank = suits[ suit ].ranks[ i ];
-				var imageID = 'card-' + suit + rank;
-				html = '<img id="' + imageID + '"class="card" src="images/cards/' + suit + rank + '.png"></img>';
-				$( '#' + id ).append(html);
-				$('#'+imageID).animate({top:top,left:left}, 300, function() {});
-				left += 20*percentage;
+			for ( var i = 0; i < suits[ suit ].ranks.length; ++i ) {			
+				addImage(suits[ suit ].ranks[ i ], id, top, left );
+				left += Parameters.imageDimensions.widthShowing;
 			}
-			top += 96*percentage + 4;
-			left = startingLeft;
+			left += Parameters.imageDimensions.width;
 		}
 	}	
 };
 
-Position.prototype.drawNorth = function( dimensions ) {
-	var direction = 'n';
-	var percentage = 1;
-	var hand = this.getHand( direction );
-	var id = Directions[ direction ].id;
-	$( '#' + id ).empty();
-	var width = calculateWidthHorizontal( hand.suits, percentage );
-	var top = 10;
-	var left = dimensions.width/2 - width/2;
-	drawHorizontal( hand.suits, id, top, left );
-};
 
-Position.prototype.drawSouth = function( dimensions ) {
-	var direction = 's';
-	var percentage = 1;
-	var hand = this.getHand( direction );
-	var id = Directions[ direction ].id;
-	$( '#' + id ).empty();
-	var width = calculateWidthHorizontal( hand.suits, percentage );
-	var height = calculateHeightHorizontal( percentage );
-	var top = dimensions.height - height - 10;
-	var left = dimensions.width/2 - width/2;
-	drawHorizontal( hand.suits, id, top, left );
+function drawVertical( direction, suits, id, top, left ) {
+	var startingLeft = left;
+	for ( var suit in suits ) {
+		if ( suit !== 'n' ) {
+			for ( var i = 0; i < suits[ suit ].ranks.length; ++i ) {
+				addImage(suits[ suit ].ranks[ i ], id, top, left );
+				left += Parameters.imageDimensions.widthShowing;
+			}
+			top += Parameters.imageDimensions.heightShowing;
+			left = startingLeft;
+		}
+	}	
 };
-
-Position.prototype.drawEast = function( dimensions ) {
-	var direction = 'e';
-	var percentage = 1;
-	var hand = this.getHand( direction );
-	var id = Directions[ direction ].id;
-	$( '#' + id ).empty();
-	var width = calculateWidthVertical( hand.longest, percentage );
-	var height = calculateHeightVertical( percentage );	
-	var top = dimensions.height/2 - height/2;
-	var left = dimensions.width - width - 10;
-	drawVertical( hand.suits, id, top, left );
-};
-
-Position.prototype.drawWest = function( dimensions ) {
-	var direction = 'w';
-	var percentage = 1;
-	var hand = this.getHand( direction );
-	var id = Directions[ direction ].id;
-	$( '#' + id ).empty();
-	var height = calculateHeightVertical( percentage );	
-	var top = dimensions.height/2 - height/2;
-	var left = 10;
-	drawVertical( hand.suits, id, top, left );
-};
-
 
 Position.prototype.setTurn = function( direction ) {
 	this.turn = direction;
@@ -257,21 +344,7 @@ Position.prototype.checkValidity = function() {
 	return messages;
 };
 
-function getDisplayName( cardIndex ) {
-	return getSuit( cardIndex ) + getRank( cardIndex )
-}
 
-function getSuit( cardIndex ) {
-	return suitNames[ Math.floor( cardIndex / 13 ) ];
-};
-
-function getRank ( cardIndex ) {
-	return rankNames[ cardIndex % 13 ];
-};
-
-function getCardIndex( suit, rank ) {
-	return Suits[ suit ].index*13 + Ranks[ rank ].index;
-};
 
 function getLeader( declarer ) {
 	switch ( declarer ) {
@@ -445,10 +518,6 @@ function Deal() {
 			$( '#messages' ).append( '<h2>On Lead : ' + Directions[ this.leader ].name + '</h2>');
 			this.positions[ 0 ].setTurn( this.leader );
 			this.positions[ 0 ].drawPosition();
-			//this.positions[ 0 ].getHandHTML( 'n' );
-			/*for ( var direction in Directions ) {
-				this.positions[ 0 ].getHandHTML( direction );
-			}*/
 		}
 	}
 	else {
@@ -459,5 +528,8 @@ function Deal() {
 };
 
 jQuery(function($) {
+	computeScaledDimensions();
+	//alert(JSON.stringify(Parameters));
 	var deal = new Deal();
+	
 });
