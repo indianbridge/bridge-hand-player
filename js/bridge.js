@@ -1,5 +1,7 @@
-$ = jQuery;
+var deal;
 var Parameters = {}
+Parameters.showDebug = false;
+Parameters.manualHashChange = false;
 Parameters.viewport = {
 	width: jQuery(window).width(),
 	height: jQuery(window).height(),
@@ -8,7 +10,7 @@ Parameters.imageFolder = 'images/cards';
 Parameters.cardBack = Parameters.imageFolder + '/b1fv.png';
 Parameters.viewport.centerX = Parameters.viewport.width/2;
 Parameters.viewport.centerY = Parameters.viewport.height/2;
-Parameters.scalingFactor = 1;
+Parameters.scalingFactor = 1.4;
 Parameters.imageDimensions = {
 	actualWidth: 76,
 	actualHeight: 92,
@@ -17,12 +19,21 @@ Parameters.imageDimensions = {
 	percentageWidthShowing: 0.25,
 	percentageHeightShowing: 0.5,
 };
+Parameters.compassDimensions = {
+	actualWidth: 85,
+	actualHeight: 85,
+};
 Parameters.tableDimensions = {
 	actualWidth: Parameters.imageDimensions.actualWidth * 5 + 20,
 	actualHeight: Parameters.imageDimensions.actualHeight * 3 + 20,	
 };
 
 function computeScaledDimensions( ) {
+	var imageHeight = 0.152 * Parameters.viewport.height;
+	var imageWidth = 0.084 * Parameters.viewport.width;
+	var heightScalingFactor = imageHeight / Parameters.imageDimensions.actualHeight;
+	var widthScalingFactor = imageWidth / Parameters.imageDimensions.actualWidth;
+	Parameters.scalingFactor = Math.min( heightScalingFactor, widthScalingFactor );
 	Parameters.imageDimensions.width = Parameters.imageDimensions.actualWidth * Parameters.scalingFactor;
 	Parameters.imageDimensions.height = Parameters.imageDimensions.actualHeight * Parameters.scalingFactor;
 	Parameters.imageDimensions.widthShowing = Parameters.imageDimensions.width * Parameters.imageDimensions.percentageWidthShowing;
@@ -30,14 +41,18 @@ function computeScaledDimensions( ) {
 	Parameters.tableDimensions.width = Parameters.tableDimensions.actualWidth * Parameters.scalingFactor;
 	Parameters.tableDimensions.height = Parameters.tableDimensions.actualHeight * Parameters.scalingFactor;
 	Parameters.tableDimensions.top = Parameters.viewport.centerY - Parameters.tableDimensions.height / 2;
-	Parameters.tableDimensions.left = Parameters.viewport.centerX - Parameters.tableDimensions.width / 2;	
+	Parameters.tableDimensions.left = Parameters.viewport.centerX - Parameters.tableDimensions.width / 2;
+	Parameters.compassDimensions.width = Parameters.compassDimensions.actualWidth * Parameters.scalingFactor;
+	Parameters.compassDimensions.height = Parameters.compassDimensions.actualHeight * Parameters.scalingFactor;	
+	Parameters.compassDimensions.top = Parameters.viewport.centerY - Parameters.compassDimensions.width / 2;
+	Parameters.compassDimensions.left = Parameters.viewport.centerX - Parameters.compassDimensions.height / 2;
 }
 
 var Directions = { 
-	'n' : { name : 'North', id : 'n-hand', layout : 'horizontal', position : 'top' },
-	's' : { name : 'South', id : 's-hand', layout : 'horizontal', position : 'bottom' },
-	'e' : { name : 'East', id : 'e-hand', layout : 'vertical', position : 'right' },
-	'w' : { name : 'West', id : 'w-hand', layout : 'vertical', position : 'left' },
+	'n' : { name : 'North', id : 'n-hand', layout : 'horizontal', position : 'top', index: 0 },
+	'e' : { name : 'East', id : 'e-hand', layout : 'vertical', position : 'right', index: 1 },
+	's' : { name : 'South', id : 's-hand', layout : 'horizontal', position : 'bottom', index: 2 },
+	'w' : { name : 'West', id : 'w-hand', layout : 'vertical', position : 'left', index: 3 },
 };
  
 Parameters.tableCardPosition = {};
@@ -72,6 +87,8 @@ var Ranks = {
 	'2' : { name : '2', 	index : 12 }, 
 };
 
+var directionNames = [];
+for( var direction in Directions ) directionNames[ Directions[ direction ].index ] = direction;
 var suitNames = [];
 for( var suit in Suits ) suitNames[ Suits[ suit ].index ] = suit;
 var rankNames = [];
@@ -96,43 +113,25 @@ function getCardIndex( suit, rank ) {
 function Card( cardIndex ) {
 	this.suit = getSuit( cardIndex );
 	this.rank = getRank( cardIndex );
-	this.belongsTo = ''; 	// Who owns this card
-	this.played = false;	// Has this card been played?
+	this.belongsTo = '';
+	this.status = 'not-played';
 };
 
 function Position() {
 	this.numCards = 52;	
 	this.cards = [];
 	this.turn = '';
+	this.hands = {};
 	this.tableCards = {};
-	for( var direction in Directions )
-	this.tableCards[ direction ] = ''; 
+	this.setNSTricks(0);
+	this.setEWTricks(0);
 	for( var i = 0; i < this.numCards; ++i ) {
 		this.cards[ i ] = new Card( i );
 	}
 };
 
-Position.prototype.getHand = function( direction ) {
-	var hand = {
-		longest : 0,
-		suits : {},
-	};
-	for( var suit in Suits ) {
-		hand.suits[ suit ] = {
-			ranks : [],
-			length : 0,
-		};
-	};
-	for( var i = 0; i < this.numCards; ++i ) {
-		if ( this.cards[ i ].belongsTo === direction ) {
-			var suit = getSuit( i );
-			hand.suits[ suit ].ranks.push( this.cards[ i ] );
-			hand.suits[ suit ].length++;
-			if ( hand.suits[ suit ].length > hand.longest ) {
-				hand.longest = hand.suits[ suit ].length;
-			}
-		}
-	}
+Position.prototype.setHandDimensions = function( direction ) {
+	var hand = this.hands[ direction ];
 	if ( Directions [ direction ].layout === 'horizontal' ) {
 		hand.height = Parameters.imageDimensions.height;
 		hand.width = getHorizontalWidth( hand );
@@ -171,6 +170,29 @@ Position.prototype.getHand = function( direction ) {
 				left: Parameters.tableDimensions.left + Parameters.tableDimensions.width - Parameters.imageDimensions.width,
 			};				
 		}		
+	}	
+};
+
+Position.prototype.getHand = function( direction ) {
+	var hand = {
+		longest : 0,
+		suits : {},
+	};
+	for( var suit in Suits ) {
+		hand.suits[ suit ] = {
+			ranks : [],
+			length : 0,
+		};
+	};
+	for( var i = 0; i < this.numCards; ++i ) {
+		if ( this.cards[ i ].belongsTo === direction ) {
+			var suit = getSuit( i );
+			hand.suits[ suit ].ranks.push( this.cards[ i ] );
+			hand.suits[ suit ].length++;
+			if ( hand.suits[ suit ].length > hand.longest ) {
+				hand.longest = hand.suits[ suit ].length;
+			}
+		}
 	}
 	return hand;
 };
@@ -198,25 +220,22 @@ function getVerticalHeight( hand ) {
 };
 
 Position.prototype.drawPosition = function( ) {
-	var dimensions = getViewPortSize();
-	drawTable( );
 	for( var direction in Directions ) {
+		this.setHandDimensions( direction );
 		this.drawHand( direction );
 	}
-	var self = this;
-	$( ".card" ).click(function() {
-		self.playCard ( this, dimensions );
-	});
-	$('body').on( 'mouseover', '.played', function() {
-		$( this ).attr( 'src', $( this ).attr('imageName') );
-	});
-	$('body').on( 'mouseout', '.played', function() {
-		$( this ).attr( 'src', Parameters.cardBack );
-	});	
+	this.updateTableCards();
+	this.setPlayableCards();
 };
 
+Position.prototype.loadHands = function() {
+	for( var direction in Directions ) {
+		this.hands[ direction ] = this.getHand( direction );
+	}
+}
+
 Position.prototype.drawHand = function( direction ) {
-	var hand = this.getHand( direction );
+	var hand = this.hands[ direction ];
 	var id = Directions[ direction ].id;
 	$( '#' + id ).empty();
 	var width = hand.width;
@@ -230,24 +249,6 @@ Position.prototype.drawHand = function( direction ) {
 	}
 };
 
-Position.prototype.playCard = function( card, dimensions ) {
-	if ( $(card).hasClass( 'played' ) ) return;
-	var id = $(card).attr( 'direction' ) + '-played-card';
-	var imageID = 'playedcard-' + $(card).attr( 'suit' ) + $(card).attr( 'rank' );
-	var html = '<img width="' + $(card).attr( 'width' ) + '" height="' + $(card).attr( 'height' ) + '" id="' + imageID + '"class="played-card" src="' + $(card).attr( 'src' ) + '"></img>';		
-	$('#'+id).empty().append( html );
-	$('#'+imageID).css({
-		top: $(card).position().top,
-		left: $(card).position().left,
-	});
-	var direction = $( card ).attr( 'direction' );
-	var top = Parameters.tableCardPosition[ direction ].top;
-	var left = Parameters.tableCardPosition[ direction ].left;
-	$( card ).attr( 'src', Parameters.cardBack );
-	$( card ).addClass( 'played' );
-	$('#'+imageID).animate({top:top,left:left}, 300, function() {});	
-}
-
 function drawTable(  ) {
 	$('#table').css({
 		'background-color':'green',
@@ -257,17 +258,24 @@ function drawTable(  ) {
 		top: Parameters.tableDimensions.top,
 		left: Parameters.tableDimensions.left,
 	});
-	$('#table').html('width : '+Parameters.tableDimensions.width+' height : '+Parameters.tableDimensions.height);
+	var html = '<img class="compass" id="compass" src="images/compass.png" width="' + Parameters.compassDimensions.width + '" height="' + Parameters.compassDimensions.height + '"></img>';
+	
+	$( '#table' ).html(html);
+	$( '#compass' ).css( {
+		top: Parameters.compassDimensions.top,
+		left: Parameters.compassDimensions.left,
+	});
 }
 
 function addImage( card, id, top, left ) {
 	var suit = card.suit;
 	var rank = card.rank;
+	var status = card.status;
 	var imageID = 'card-' + suit + rank;
 	var width = Parameters.imageDimensions.width;
 	var height = Parameters.imageDimensions.height;
 	var imageName = Parameters.imageFolder + '/' + suit + rank + '.png';
-	var html = '<img imageName="'+ imageName + '" width="' + width + '" height="' + height + '" suit="' + suit + '" rank="' + rank + '" direction="' + card.belongsTo + '" id="' + imageID + '"class="card" src="' + imageName + '"></img>';
+	var html = '<img status="' + status + '" imageName="'+ imageName + '" width="' + width + '" height="' + height + '" suit="' + suit + '" rank="' + rank + '" direction="' + card.belongsTo + '" id="' + imageID + '"class="card" src="' + imageName + '"></img>';
 	$( '#' + id ).append(html);
 	$( '#' + imageID ).animate({top:top,left:left}, 300, function() {});
 };
@@ -301,6 +309,41 @@ function drawVertical( direction, suits, id, top, left ) {
 
 Position.prototype.setTurn = function( direction ) {
 	this.turn = direction;
+	$( '#turn' ).html( Directions[ direction ].name );
+};
+
+Position.prototype.setNSTricks = function( tricks ) {
+	this.nsTricks = tricks;
+};
+
+Position.prototype.setEWTricks = function( tricks ) {
+	this.ewTricks = tricks;
+};
+
+Position.prototype.setCurrentSuit = function( suit ) {
+	this.currentSuit = suit;
+	if ( suit !== '' ) {
+		$( '#suit' ).html( Suits[ suit ].name );
+	}
+	else {
+		$( '#suit' ).html( '' );
+	}
+	
+};
+
+Position.prototype.setTrickWinner = function( direction ) {
+	this.currentTrickWinner = direction;
+	if ( direction !== '' ) {
+		$( '#trick' ).html( Directions[ direction ].name );
+	}
+	else {
+		$( '#trick' ).html( '' );
+	}
+};
+
+Position.prototype.setNumCardsPlayed = function( num ) {
+	this.numCardsPlayed = num;
+	$( '#numcardsplayed' ).html( num );
 };
 
 Position.prototype.isAssigned = function ( cardIndex ) {
@@ -347,24 +390,9 @@ Position.prototype.checkValidity = function() {
 
 
 function getLeader( declarer ) {
-	switch ( declarer ) {
-		case 'n' :
-			return 'e';
-			break;
-		case 's' : 
-			return 'w';
-			break;
-		case 'e' :
-			return 's';
-			break;
-		case 'w' :
-			return 'n';
-			break;
-		default:
-			return '';
-			break;
-	}
-	return '';
+	var index = Directions[ declarer ].index;
+	index = ( index + 1 ) % 4;
+	return directionNames[ index ];
 }
 
 
@@ -423,6 +451,7 @@ Deal.prototype.loadContract = function( queryParameters ) {
 				else {
 					this.declarer = Directions[ declarer ].name;
 				}
+				if ( this.messages.length > 0 ) return;
 						
 				this.leader = getLeader( declarer );
 				this.contract = this.contractLevel + ' ' + Suits[ this.trumpSuit ].name + ' by ' + this.declarer;
@@ -433,6 +462,8 @@ Deal.prototype.loadContract = function( queryParameters ) {
 		this.messages.push( 'No contract has been specified!' );
 	}
 };
+
+
 
 Deal.prototype.loadInitialPosition = function( queryParameters ) {
 	this.unspecifiedHands = [];
@@ -493,13 +524,218 @@ function getViewPortSize() {
 	};
 };
 
+Deal.prototype.animateCard = function( card ) {
+	var id = $(card).attr( 'direction' ) + '-played-card';
+	var imageID = 'playedcard-' + $(card).attr( 'suit' ) + $(card).attr( 'rank' );
+	var html = '<img width="' + $(card).attr( 'width' ) + '" height="' + $(card).attr( 'height' ) + '" id="' + imageID + '"class="played-card" src="' + $(card).attr( 'src' ) + '"></img>';		
+	$( '#' + id ).empty().append( html );
+	$( '#' + imageID ).css({
+		top: $(card).position().top,
+		left: $(card).position().left,
+	});
+	var direction = $( card ).attr( 'direction' );
+	var top = Parameters.tableCardPosition[ direction ].top;
+	var left = Parameters.tableCardPosition[ direction ].left;
+	$( card ).attr( 'src', Parameters.cardBack );
+	$( card ).attr( 'status', 'played' );
+	$( card ).addClass( 'played' );
+	$('#'+imageID).animate({top:top,left:left}, 300, function() {});	
+};
+
+Deal.prototype.getNextPosition = function() {
+	var currentPosition = this.positions[ this.currentPositionIndex ];	
+	this.setPositionIndex( this.currentPositionIndex + 1 );
+	Parameters.manualHashChange = true;
+	window.location.hash = this.currentPositionIndex
+	this.positions[ this.currentPositionIndex ] = $.extend( true, {}, currentPosition );
+	return this.positions[ this.currentPositionIndex ];
+}
+
+Position.prototype.initializeTrick = function( leader, won ) {
+	if ( won === undefined ) won = false;
+	this.setTurn( leader );
+	if ( won ) {
+		if ( leader === 'n' || leader === 's' ) this.setNSTricks( this.nsTricks + 1 );
+		else if ( leader === 'e' || leader === 'w' ) this.setEWTricks( this.ewTricks + 1 );
+	}
+	this.setCurrentSuit( '' );
+	this.setTrickWinner( '' );
+	this.currentTrumpRank = '';
+	//this.tableCards = {};		
+};
+
+Position.prototype.setPlayableCards = function() {
+	for( var direction in Directions ) {
+		var allElements = '[direction='+ direction + ']';
+		$( allElements ).unbind( 'click' );
+		$( allElements ).removeClass( 'img-highlight' );
+	}
+	var elements = '[direction='+ this.turn + '][status="not-played"]';
+	if ( this.currentSuit !== '' ) {
+		var extendedElements = elements + '[suit="' + this.currentSuit + '"]';
+		var numInSuit = $( extendedElements ).length;
+		if ( numInSuit > 0 ) elements = extendedElements;
+	}
+	$( elements ).click(function() { deal.playCard ( this ); });
+	$( elements ).addClass( 'img-highlight' );
+	$( '#ew-tricks' ).html( this.ewTricks );
+	$( '#ns-tricks' ).html( this.nsTricks );
+};
+
+Position.prototype.updateTableCards = function() {
+	for ( var d in Directions ) {
+		$( '#' + d + '-played-card' ).empty();
+	}	
+	
+	for( var d in this.tableCards ) {
+		var card = this.tableCards[ d ];
+		var id = $(card).attr( 'direction' ) + '-played-card';
+		var imageID = 'playedcard-' + $(card).attr( 'suit' ) + $(card).attr( 'rank' );
+		var html = '<img width="' + $(card).attr( 'width' ) + '" height="' + $(card).attr( 'height' ) + '" id="' + imageID + '"class="played-card" src="' + $(card).attr( 'imageName' ) + '"></img>';		
+		$( '#' + id ).empty().append( html );
+		var direction = $( card ).attr( 'direction' );
+		$( '#' + imageID ).css({
+			top: Parameters.tableCardPosition[ direction ].top,
+			left: Parameters.tableCardPosition[ direction ].left,
+		});
+	}			
+};
+
+Deal.prototype.changeToPlay = function( playNumber ) {
+	if ( isNaN( playNumber ) ) {
+		alert( playNumber + ' is not a valid play number to return to!' );
+		return;
+	}
+	if ( playNumber > this.positions.length ) {
+		alert( 'Cannot advance to play number ' + playNumber + ' since you have made only ' + (this.positions.length) + 'plays!' );
+		return;
+	}
+	else if ( playNumber < 0 ) {
+		alert( 'Cannot undo to a negative play number ' + playNumber );
+		return;
+	}
+	if ( playNumber > this.currentPositionIndex ) {
+		for( var i = this.currentPositionIndex + 1; i <= playNumber; ++i ) this.redoCard();
+	}
+	else if ( playNumber < this.currentPositionIndex ) {
+		for( var i = this.currentPositionIndex - 1; i >= playNumber; --i ) this.undoCard();
+	}
+};
+
+Deal.prototype.undoCard = function( ) {
+	if ( this.currentPositionIndex === 0 ) {
+		alert( 'Nothing to Undo!' );
+		return;
+	}
+	var currentPosition = this.positions[ this.currentPositionIndex ];
+	this.setPositionIndex( this.currentPositionIndex - 1);
+	var previousPosition = this.positions[ this.currentPositionIndex ];
+	var previousCard = currentPosition.tableCards[ previousPosition.turn ];
+	$( previousCard ).attr( 'src', $( previousCard ).attr( 'imageName') ).attr( 'status', 'not-played' ).removeClass( 'played' );
+	previousPosition.setPlayableCards();
+	previousPosition.updateTableCards();
+	Parameters.manualHashChange = true;
+	window.location.hash = this.currentPositionIndex;
+};
+
+Deal.prototype.setPositionIndex = function( index ) {
+	this.currentPositionIndex = index;
+	$( '#play-number' ).html( this.currentPositionIndex );
+	if ( index < 1 ) {
+		$( '#undo' ).prop( 'disabled', true );
+	}
+	else {
+		$( '#undo' ).prop( 'disabled', false );
+	}
+	if ( index >= this.positions.length - 1 ) {
+		$( '#redo' ).prop( 'disabled', true );
+	}
+	else {
+		$( '#redo' ).prop( 'disabled', false );
+	}	
+};
+
+Deal.prototype.redoCard = function( ) {
+	if ( this.currentPositionIndex === this.positions.length-1 ) {
+		alert( 'Nothing to Redo!' );
+		return;
+	}
+	var currentPosition = this.positions[ this.currentPositionIndex ];
+	this.setPositionIndex( this.currentPositionIndex  +  1 );
+	var nextPosition = this.positions[ this.currentPositionIndex ];
+	var nextCard = nextPosition.tableCards[ currentPosition.turn ];
+	$( nextCard ).attr( 'src', Parameters.cardBack ).attr( 'status', 'played' ).addClass( 'played' );
+	nextPosition.setPlayableCards();
+	nextPosition.updateTableCards();
+	Parameters.manualHashChange = true;
+	window.location.hash = this.currentPositionIndex;	
+};
+
+Deal.prototype.playCard = function( card ) {
+	if ( $(card).hasClass( 'played' ) ) return;
+	var currentPosition = this.getNextPosition();
+	var direction = $( card ).attr( 'direction' );
+	var suit = $( card ).attr( 'suit' );
+	var rank = $( card ).attr( 'rank' );
+
+	var tableCards = Object.keys(currentPosition.tableCards).length;
+	if ( tableCards  === 4 ) currentPosition.tableCards = {};
+	currentPosition.tableCards[ direction ] = card;
+	tableCards = Object.keys(currentPosition.tableCards).length;
+
+	if ( tableCards === 1 ) {
+		for ( var d in Directions ) {
+			$( '#' + d + '-played-card' ).empty();
+		}			
+	}
+	currentPosition.turn = getLeader( currentPosition.turn );	
+	if ( currentPosition.currentSuit === '' ) {
+		currentPosition.currentSuit = suit;
+		if ( suit === this.trumpSuit ) currentPosition.currentTrumpRank = rank;
+		currentPosition.setTrickWinner( direction );
+		currentPosition.currentRank = rank;
+	}
+	else {
+		if ( currentPosition.currentTrumpRank === '' && suit === currentPosition.currentSuit && Ranks[ rank ].index < Ranks[ currentPosition.currentRank ].index ) {
+			currentPosition.setTrickWinner( direction );
+			currentPosition.currentRank = rank;
+		}
+		else if ( suit === this.trumpSuit && ( currentPosition.currentTrumpRank === '' || Ranks[ rank ].index < Ranks[ currentPosition.currentTrumpRank ].index ) ) {
+			currentPosition.setTrickWinner( direction );
+			currentPosition.currentTrumpRank = rank;
+		}			
+	}
+	if ( tableCards === 4 ) {
+		currentPosition.initializeTrick( currentPosition.currentTrickWinner, true );
+	}		
+
+	this.animateCard( card );
+	currentPosition.setPlayableCards();
+};
+
+Deal.prototype.reDraw = function() {
+	computeScaledDimensions();
+	drawTable();
+	var currentPosition = this.positions[ this.currentPositionIndex ];	
+	currentPosition.drawPosition();
+	
+			/*$( '#messages' ).append( '<h1>Valid Deal</h1>' );
+			$( '#messages' ).append( '<h2>Contract : ' + this.contract + '</h2>');
+			$( '#messages' ).append( '<h2>Trumps : ' + Suits[ this.trumpSuit ].name + '</h2>');
+			$( '#messages' ).append( '<h2>Declarer : ' + this.declarer + '</h2>');			
+			$( '#messages' ).append( '<h2>On Lead : ' + Directions[ this.leader ].name + '</h2>');*/
+				
+};
+
 function Deal() {
 	this.positions = [];
 	this.errorFound = false;
 	this.messages = [];
 	var queryParameters = parseQueryParameters();
 	if ( queryParameters.length > 0 ) {
+		this.setPositionIndex( 0 );
 		this.positions[ 0 ] = this.loadInitialPosition( queryParameters );
+		var currentPosition = this.positions[ 0 ];
 		var messages = this.positions[ 0 ].checkValidity();
 		this.loadContract( queryParameters );
 		if ( messages.length > 0 ) this.messages = this.messages.concat( messages );
@@ -511,13 +747,8 @@ function Deal() {
 			$( '#messages' ).append( html );
 		}
 		else {
-			$( '#messages' ).append( '<h1>Valid Deal</h1>' );
-			$( '#messages' ).append( '<h2>Contract : ' + this.contract + '</h2>');
-			$( '#messages' ).append( '<h2>Trumps : ' + Suits[ this.trumpSuit ].name + '</h2>');
-			$( '#messages' ).append( '<h2>Declarer : ' + this.declarer + '</h2>');			
-			$( '#messages' ).append( '<h2>On Lead : ' + Directions[ this.leader ].name + '</h2>');
-			this.positions[ 0 ].setTurn( this.leader );
-			this.positions[ 0 ].drawPosition();
+			currentPosition.loadHands();
+			currentPosition.initializeTrick( this.leader, false );
 		}
 	}
 	else {
@@ -527,9 +758,36 @@ function Deal() {
 	} 	
 };
 
+
+
 jQuery(function($) {
-	computeScaledDimensions();
-	//alert(JSON.stringify(Parameters));
-	var deal = new Deal();
+
 	
+	deal = new Deal();
+	deal.reDraw();
+	
+	if ( Parameters.showDebug ) $( '#debug-information' ).show();
+	else $( '#debug-information' ).hide();	
+	$('#undo').click(function() {
+		deal.undoCard();	
+	});
+	$('#redo').click(function() {
+		deal.redoCard();	
+	});	
+	$(window).keypress(function(e) {	
+		var key = e.which;
+		if ( key === 100 ) {
+			Parameters.showDebug = ! Parameters.showDebug;
+			if ( Parameters.showDebug ) $( '#debug-information' ).show();
+			else $( '#debug-information' ).hide();			
+		}
+	});
+	
+	$(window).hashchange( function(){
+		if ( ! Parameters.manualHashChange ) {
+	    	var hash = location.hash.substring(1);
+	    	deal.changeToPlay( parseInt( hash ) );
+    	}
+    	Parameters.manualHashChange = false;
+  	});
 });
