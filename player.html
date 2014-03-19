@@ -6,13 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bridge Hand Player</title>
     
-    <style>
-    	.compass { position: fixed; }
-    	.card { position: fixed; }
-    	.played-card { position: fixed; }
-    	.backgroundRed {  background: red; }
-    	.img-highlight { outline: 3px solid green; }
-    </style>
+    <link href="css/bridge-hand-player.css" rel="stylesheet">
+    <link href="css/table-styles.css" rel="stylesheet">
     
     <!-- jQuery -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  -->
@@ -25,34 +20,6 @@
     <![endif]-->      
   </head>
   <body>
-  	<header>
-  		<div id="messages"></div>	
-  		<div id="debug-information">
-  			<div>Current Turn : <span id="turn"></span></div>
-  			<div>Current suit : <span id="suit"></span></div>
-  			<div>Current Trick winner : <span id="trick"></span></div>
-  			<div>Num Cards Played : <span id="numcardsplayed"></span></div>
-  		</div>
-  		<div>
-  			<div>Play Number : <span id="play-number">0</span></div>
-  			<div>NS Tricks : <span id="ns-tricks">0</span></div>
-  			<div>EW Tricks : <span id="ew-tricks">0</span></div>
-  			<button id="undo">Take Back Play</button>
-  			<button id="redo">Go to Next Play</button>
-  		</div>
-  	</header>
-  	<section>
-  		<div id='n-hand'></div>
-  		<div id='s-hand'></div>
-  		<div id='table'></div>
-  		<div id='w-hand'></div>
-  		<div id='e-hand'></div>
-  		<div id='n-played-card'></div>
-  		<div id='s-played-card'></div>
-  		<div id='w-played-card'></div>
-  		<div id='e-played-card'></div>  		
-  	</section>
-  	<footer></footer>
   	<script>
 		jQuery.browser = {};
 		(function () {
