@@ -4,6 +4,39 @@
 	background-size:100% 100%;
 	background-repeat:no-repeat;	
 }
-.img-highlight { outline: 3px solid green; }
+.img-highlight { 
+	outline: 3px solid green; 
+		-moz-box-shadow: 0 0 5px rgba(0,0,1,0.5);
+	-webkit-box-shadow: 0 0 5px rgba(0,0,1,0.5);
+	box-shadow: 0 0 5px rgba(0,0,1,0.5);
+}
+
+
+span.codedirection { unicode-bidi:bidi-override; direction: rtl; }
     	
-    	
+#footer {
+	left:0;
+bottom: 0;
+/*height: 35px;*/
+position: fixed;
+width: 100%;
+}
+
+.fbar {
+    padding:0px;
+    text-align:center;
+    background-color:#DEF3CA;
+    border: 2px solid #E7EFE0;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+    color:#666;
+    text-shadow:1px 1px 1px #fff;
+}
+
+.pull-right {
+	 float: right;
+}
+.pull-left {
+	float: left;
+}

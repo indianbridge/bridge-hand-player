@@ -8,6 +8,7 @@
     
     <link href="css/bridge-hand-player.css" rel="stylesheet">
     <link href="css/table-styles.css" rel="stylesheet">
+    <link href="css/SexyButtons/sexybuttons.css" rel="stylesheet">
     
     <!-- jQuery -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>  -->
@@ -20,18 +21,40 @@
     <![endif]-->      
   </head>
   <body>
-  	<script>
-		jQuery.browser = {};
-		(function () {
-		    jQuery.browser.msie = false;
-		    jQuery.browser.version = 0;
-		    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
-		        jQuery.browser.msie = true;
-		        jQuery.browser.version = RegExp.$1;
-		    }
-		})();  		
-  	</script>
+  	<div id="instructions">
+  	<h1>Play out the hand Tool Instructions</h1>
+  	<ol class="rounded-list">
+  		<li>
+  			<span class="item">This tool lets you play out bridge hands in double dummy fashion to experiment the outcome of different lines of play.</span>
+  		</li>
+  		<li>
+  			<span class="item">Hands are specified using the format of BridgeBase Hand Viewer. Instructions on that format can be found at <a href="http://www.bridgebase.com/tools/hvdoc.html">http://www.bridgebase.com/tools/hvdoc.html</a>. While the hand viewer supports several parameters listed at the end of the above link, only a subset of them can be used with this tool. The supported parameters are 
+  			<ol>
+  				<li>a	auction</li>
+  				<li>b	board number</li>
+  				<li>d	dealer</li>
+  				<li>e	East hand</li>
+  				<li>n	North</li>
+  				<li>s	South</li>
+  				<li>v	vulernability</li>
+  				<li>w	West</li>
+  			</ol>
+  			</span>
+  		</li>
+  		<li>
+  			<span class="item">After a hand has loaded you can click on cards to play ( cards that can be played are highlighted with a green outline ). The undo and redo buttons can be used to take back and redo plays.</span>
+  		</li>
+  		<li>
+  			<span class="item">If you have any comments and suggestions please send me an email at <span class="codedirection">moc.oohay@17marirsn</span></span>
+  		</li>
+  	</ol>
+  	<h2></h2>
+  	</div>
+  	<div id="footer" class="fbar">
+  		<span class="pull-right">&copy; Sriram Narasimhan</span>
+  	</div>
+  	<script src="js/msie-fix.js"></script>
   	<script src="js/jquery.ba-hashchange.min.js"></script>
-  	<script src="js/bridge.js"></script>
+  	<script src="js/jquery.bridge-hand-player.js"></script>
   </body>
   </html>
