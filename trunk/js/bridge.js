@@ -289,10 +289,10 @@ Position.prototype.drawHand = function( direction ) {
 	var top = hand.top;
 	var left = hand.left;
 	if ( Directions[ direction ].layout === 'horizontal' ) {
-		drawHorizontal( hand.suits, top, left );	
+		this.drawHorizontal( hand.suits, top, left );	
 	}
 	else if ( Directions[ direction ].layout === 'vertical' ) {
-		drawVertical(  hand.suits, top, left );	
+		this.drawVertical(  hand.suits, top, left );	
 	}
 };
 
@@ -306,15 +306,18 @@ Position.prototype.drawHand = function( direction ) {
  * @param {number} left the left coordinate to place the image
  * @return void
  */
-function addImage( card, top, left ) {
+Position.prototype.addImage = function( card, top, left ) {
 	var container = 'body';
 	var suit = card.suit;
 	var rank = card.rank;
+	var cardIndex = getCardIndex( suit, rank );
+	var status = this.cards[ cardIndex ].status;
 	var imageID = 'card-' + suit + rank;
 	var imageName = Parameters.imageFolder + '/' + suit + rank + '.png';
+	var src = (status === 'played') ? Parameters.cardBack : imageName;
 	$( container ).append( '<img id="' + imageID + '" class="fixed card"></img>' );
 	var image = $( '#' + imageID );
-	image.attr( 'src', imageName );
+	image.attr( 'src', src );
 	image.attr( 'status', card.status );
 	image.attr( 'imageName', imageName );
 	image.attr( 'suit', suit );
@@ -337,11 +340,11 @@ function addImage( card, top, left ) {
  * @param {number} left the left coordinate to start placing the hand
  * @return void
  */
-function drawHorizontal( suits, top, left ) {
+Position.prototype.drawHorizontal = function( suits, top, left ) {
 	for ( var suit in suits ) {
 		if ( suit !== 'n' ) {
 			for ( var i = 0; i < suits[ suit ].ranks.length; ++i ) {			
-				addImage(suits[ suit ].ranks[ i ], top, left );
+				this.addImage(suits[ suit ].ranks[ i ], top, left );
 				left += Parameters.imageDimensions.widthShowing;
 			}
 			left += Parameters.imageDimensions.width;
@@ -358,12 +361,12 @@ function drawHorizontal( suits, top, left ) {
  * @param {number} left the left coordinate to start placing the hand
  * @return void
  */
-function drawVertical( suits, top, left ) {
+Position.prototype.drawVertical = function( suits, top, left ) {
 	var startingLeft = left;
 	for ( var suit in suits ) {
 		if ( suit !== 'n' ) {
 			for ( var i = 0; i < suits[ suit ].ranks.length; ++i ) {
-				addImage(suits[ suit ].ranks[ i ], top, left );
+				this.addImage(suits[ suit ].ranks[ i ], top, left );
 				left += Parameters.imageDimensions.widthShowing;
 			}
 			top += Parameters.imageDimensions.heightShowing;
@@ -386,14 +389,7 @@ Position.prototype.setEWTricks = function( tricks ) {
 };
 
 Position.prototype.setCurrentSuit = function( suit ) {
-	this.currentSuit = suit;
-	/*if ( suit !== '' ) {
-		$( '#suit' ).html( Suits[ suit ].name );
-	}
-	else {
-		$( '#suit' ).html( '' );
-	}*/
-	
+	this.currentSuit = suit;	
 };
 
 Position.prototype.setTrickWinner = function( direction ) {
@@ -626,15 +622,6 @@ Position.prototype.updateTableCards = function() {
 	for( var d in this.tableCards ) {
 		var card = this.tableCards[ d ];
 		this.playTableCard( card, false );
-		/*var id = $(card).attr( 'direction' ) + '-played-card';
-		var imageID = d + '-played-card';
-		var html = '<img width="' + $(card).attr( 'width' ) + '" height="' + $(card).attr( 'height' ) + '" id="' + imageID + '"class="played-card" src="' + $(card).attr( 'imageName' ) + '"></img>';		
-		$( '#' + id ).empty().append( html );
-		var direction = $( card ).attr( 'direction' );
-		$( '#' + imageID ).css({
-			top: Parameters.tableCardPosition[ direction ].top,
-			left: Parameters.tableCardPosition[ direction ].left,
-		});*/
 	}			
 };
 
@@ -675,9 +662,8 @@ Deal.prototype.undoCard = function( ) {
 	window.location.hash = this.currentPositionIndex;
 };
 
-Deal.prototype.setPositionIndex = function( index ) {
-	this.currentPositionIndex = index;
-	//$( '#play-number' ).html( this.currentPositionIndex );
+Deal.prototype.setUndoButtonsStatus = function() {
+	var index = this.currentPositionIndex;
 	if ( index < 1 ) {
 		$( '#undo' ).prop( 'disabled', true );
 	}
@@ -690,10 +676,15 @@ Deal.prototype.setPositionIndex = function( index ) {
 	else {
 		$( '#redo' ).prop( 'disabled', false );
 	}	
+}
+
+Deal.prototype.setPositionIndex = function( index ) {
+	this.currentPositionIndex = index;
+	this.setUndoButtonsStatus();
 };
 
 Deal.prototype.redoCard = function( ) {
-	if ( this.currentPositionIndex === this.positions.length-1 ) {
+	if ( this.currentPositionIndex === this.positions.length ) {
 		alert( 'Nothing to Redo!' );
 		return;
 	}
@@ -714,6 +705,9 @@ Deal.prototype.playCard = function( card ) {
 	var direction = $( card ).attr( 'direction' );
 	var suit = $( card ).attr( 'suit' );
 	var rank = $( card ).attr( 'rank' );
+	
+	var cardIndex = getCardIndex( suit, rank );
+	currentPosition.cards[ cardIndex ].status = 'played';
 
 	var tableCards = Object.keys(currentPosition.tableCards).length;
 	if ( tableCards  === 4 ) currentPosition.tableCards = {};
@@ -762,12 +756,13 @@ Deal.prototype.drawPositionInformation = function() {
 	var tableID = 'position-information';
 	var fields = {
 		'Play Number' : { value: 0, id : 'play-number', },
+		'Trick Number' : { value: 0, id : 'trick-number', },
 		'NS Tricks' : { value: 0, id : 'ns-tricks', },
 		'EW Tricks' : { value: 0, id : 'ew-tricks', },
 	}
 	var html = '<table id="' + tableID + '" class="fixed table1">';
 	html += '<thead><tr><th colspan=2>Play Information</th></tr></thead>';
-	html += getTableBody( fields );
+	html += getTableBody( fields, true );
 	html += '</table>';	
 	var container = 'body';
 	$( container ).append( html );
@@ -776,9 +771,17 @@ Deal.prototype.drawPositionInformation = function() {
 		top: 10,
 		left: 10,
 	});	
+	this.setUndoButtonsStatus();
+	$('#undo').click(function() {
+		deal.undoCard();	
+	});
+	$('#redo').click(function() {
+		deal.redoCard();	
+	});
 };
 
-function getTableBody( fields ) {
+function getTableBody( fields, addButtons ) {
+	if ( typeof addButtons === undefined ) addButtons = false;
 	var html = ''
 	html += '<tbody>';
 	for ( var key in fields ) {
@@ -797,6 +800,9 @@ function getTableBody( fields ) {
 			}
 		}
 		html += '</tr>';
+	}
+	if ( addButtons ) {
+		html += '<tr><td><button class="styled-button-13" id="undo">Undo Play</button></td><td><button class="styled-button-13" id="redo">Redo Play</button></td></tr>';
 	}
 	html += '</tbody>';
 	return html;
@@ -822,6 +828,7 @@ Deal.prototype.drawDealInformation = function() {
 		top: 10,
 		left: Parameters.viewport.width - table.width() - 10,
 	});
+		
 };
 
 /**
@@ -914,11 +921,12 @@ Deal.prototype.hasErrors = function() {
  * @return void
  */
 Deal.prototype.showErrors = function() {
+	if ( this.showInstructions ) return;
 	var container = 'body';
-	$( container ).append( '<h1>Errors Found as noted below</h1>' );
-	var html = '<ol><li>';
-	html += this.messages.join( '</li><li>' );
-	html += '</li></ol>'
+	$( container ).empty().append( '<h1>Errors Found as noted below</h1>' );
+	var html = '<ol class="rounded-list"><li><span class="item">';
+	html += this.messages.join( '</span></li><li><span class="item">' );
+	html += '</span></li></ol>'
 	$( container ).append( html );	
 };
 
@@ -1065,6 +1073,7 @@ Deal.prototype.parseQueryParameters = function() {
  * @param void
  */
 function Deal() {
+	this.showInstructions = false;
 	this.positions = [];
 	this.dealInformation = {
 		'Board' : { value: 0 },
@@ -1110,6 +1119,7 @@ function Deal() {
 		// No query parameters
 		var message = 'No hand Specified!!!';
 		this.messages.push(message);
+		this.showInstructions = true;
 		return;
 	} 	
 };
@@ -1133,12 +1143,7 @@ jQuery(function($) {
 			deal.reDraw();
 		});		
 		
-		$('#undo').click(function() {
-			deal.undoCard();	
-		});
-		$('#redo').click(function() {
-			deal.redoCard();	
-		});	
+
 		
 		$(window).hashchange( function(){
 			if ( ! Parameters.manualHashChange ) {
