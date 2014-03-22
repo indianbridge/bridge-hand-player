@@ -125,6 +125,7 @@ function computeScaledParameters( ) {
 	var style = '<style>';
 	style += 'table.table1 {font-size: ' + Parameters.textSize.fontSize + 'px; line-height: ' + Parameters.textSize.lineHeight + 'em;}';
 	style += '.sexybutton.sexysimple.button-text {font-size: ' + Parameters.textSize.fontSize + 'px !important;}';
+	style += '.text-size {font-size: ' + Parameters.textSize.fontSize + 'px !important;}';
 	style += '</style>';
 	$( style ).appendTo( "head" )	
 	
@@ -156,17 +157,22 @@ for( var direction in Directions ) directionNames[ Directions[ direction ].index
 
 // Suits and utility functions for Suits
 var Suits = { 
-	's' : { name : '<font color="000000">&spades;</font>', 	index : 0 }, 
-	'h' : { name : '<font color="CB0000">&hearts;</font>', 	index : 1 }, 
-	'd' : { name : '<font color="CB0000">&diams;</font>',	index : 2 }, 
-	'c' : { name : '<font color="000000">&clubs;</font>', 	index : 3 }, 
-	'n' : { name : 'No Trump',								index : 4 },
+	'n' : { name : 'NT',									index : 4 },
+	's' : { name : '<font color="000000">&spades;</font>', 	index : 3 }, 
+	'h' : { name : '<font color="CB0000">&hearts;</font>', 	index : 2 }, 
+	'd' : { name : '<font color="CB0000">&diams;</font>',	index : 1 }, 
+	'c' : { name : '<font color="000000">&clubs;</font>', 	index : 0 }, 
 };
 
 function getSuitName( suit ) {
 	if ( suit in Suits ) return Suits[ suit ].name;
 	return 'Unknown';	
 };
+
+function getSuitIndex( suit ) {
+	if ( suit in Suits ) return Suits[ suit ].index;
+	return -1;	
+}
 
 // Ranks and utility functions for Ranks
 var Ranks = { 
@@ -282,6 +288,8 @@ QueryParameters.parse = function() {
 // A single hand
 function Hand( direction ) {
 	this.direction = direction;
+	//this.name = getDirectionName( direction );
+	this.name = null;
 	this.suits = {};	
 	this.numCards = 0;
 	this.width = 0;
@@ -350,7 +358,14 @@ Hand.prototype.getHeight = function() {
 		return Parameters.cardImages.height;	
 	}
 	else if ( layout === 'vertical' ) {
-		return 3 * Parameters.cardImages.heightShowing + Parameters.cardImages.height;
+		var suits = this.suits;
+		var numSuits = 0;
+		for ( var suit in suits ) {
+			if ( suits[ suit ].length > 0) {
+				numSuits++;
+			}
+		}			
+		return ( numSuits - 1 ) * Parameters.cardImages.heightShowing + Parameters.cardImages.height;
 	}
 	else return 0;	
 };
@@ -398,7 +413,7 @@ Hand.prototype.setHandDimensions = function( ) {
  * @param void
  * @return void
  */
-Hand.prototype.show = function() {
+Hand.prototype.show = function( declarer ) {
 	var hand = this;
 	var layout = Directions[ hand.direction ].layout;
 	hand.setHandDimensions();
@@ -411,20 +426,75 @@ Hand.prototype.show = function() {
 			showCard( suit, rank, direction, top, left );
 			left += Parameters.cardImages.widthShowing;
 		}
-		if ( layout === 'horizontal' ) {
+		if ( layout === 'horizontal' && hand.suits[ suit ].length > 0 ) {
 			left += Parameters.cardImages.width;
 		}
-		else if ( layout === 'vertical' ) {
+		else if ( layout === 'vertical' && hand.suits[ suit ].length > 0 ) {
 			top += Parameters.cardImages.heightShowing;
 			left = hand.left;
 		}
-	}		
+	}
+	
+	// Show name
+	var declarerText = '';
+	if ( declarer in Directions ) {
+		if ( hand.direction === declarer ) declarerText = 'Declarer';
+		else if ( ! areOppositeDirections( hand.direction, declarer ) ) declarerText = 'Dummy';
+	}
+	var id = hand.direction + '-name-details';
+	var nameID = hand.direction + '-name';
+	var annotationID = hand.direction + '-annotation';
+	var leadID = hand.direction + '-lead-text';
+	var image = '<img " src="css/SexyButtons/images/icons/silk/user.png" alt="" /> ';
+	var html = '<span id="'+ id + '" class="text-size fixed name-inactive"><span id="' + nameID + '" >' + hand.getName() + '</span> <span id="' + annotationID + '">' + declarerText + '</span> <span id="' + leadID + '"></span></span>';
+	var container = 'body';
+	$( container ).append( html );
+	var nameElement = $( '#' + id);
+	nameElement.css({
+		left: hand.left,
+		bottom: Parameters.viewport.height - hand.top + 5,
+	});
+};
+
+Hand.prototype.getName = function() {
+	var name = getDirectionName( this.direction );
+	if ( this.name ) name += ' (' + this.name + ')';
+	return name;
+}
+
+function setActiveHand( activeDirection ) {
+	for( var direction in Directions ) {
+		var nameID = direction + '-name-details';
+		var leadID = direction + '-lead-text';
+		if ( direction === activeDirection ) {
+			$( '#' + nameID ).removeClass( 'name-inactive' ).addClass( 'name-active' );
+			$( '#' + leadID ).html( '(On Lead)' );
+		}
+		else {
+			$( '#' + nameID ).removeClass( 'name-active' ).addClass( 'name-inactive' );
+			$( '#' + leadID ).empty();
+		}
+	}
 };
 
 Hand.prototype.hasCard = function( suit, rank ) {
 	var suit = this.suits[ suit ];
 	return suit.indexOf( rank ) !== -1;	
 };
+
+Hand.prototype.getHandString = function() {
+	var hand = this;
+	var str = hand.direction + '=';
+	for ( var suit in hand.suits ) {
+		if ( hand.suits[ suit ].length > 0 ) {
+			str += suit;
+			for ( var i = 0; i < hand.suits[ suit ].length; ++i ) {		
+				str += hand.suits[ suit ][ i ];
+			}
+		}
+	}
+	return str;
+}
 
 function getCardID( suit, rank ) {
 	return 'card-' + suit + rank;
@@ -487,6 +557,11 @@ function Position( leader, trumpSuit ) {
 	this.previousPosition = null;
 	this.nextPosition = null;
 	this.annotation = null;
+};
+
+Position.prototype.getCardString = function() {
+	if ( this.playedCard ) return this.playedCard.suit + this.playedCard.rank;
+	else return '';	
 };
 
 // Some increment methods
@@ -582,8 +657,8 @@ Position.prototype.clone = function( suit, rank ) {
 	newPosition.previousPosition = this;
 	this.nextPosition = newPosition;
 	
-	// No new annotation
-	this.annotation = null;
+	// Start with no annotation
+	newPosition.annotation = null;
 	
 	return newPosition;	
 };
@@ -622,7 +697,10 @@ Position.prototype.clickCard = function( suit, rank ) {
 };
 
 Position.prototype.setAnnotation = function() {
-	console.log('Play Number : '+this.playNumber + ' Annotation : '+this.annotation);
+	$( '#status' ).empty().append( getDirectionName( this.nextTurn) + ' to play<br/>' );
+	if ( this.annotation !== null ) {
+		$( '#status' ).append( unescape( this.annotation ) );
+	}
 }
 
 Position.prototype.playCard = function( animate ) {
@@ -713,6 +791,7 @@ Position.prototype.setPlayableCards = function() {
 	$( elements ).addClass( 'img-highlight' ).click(function() { 
 		deal.cardClicked( this );
 	});	
+	setActiveHand( this.nextTurn );
 };
 
 Position.prototype.updatePositionInformation = function() {
@@ -740,10 +819,13 @@ Position.prototype.updateButtonStatus = function() {
 	$('#fast-forward').attr( 'disabled', nextDisabled );	
 };
 
+function updateStatus( message ) {
+	$( '#status' ).html( message );
+};
+
 Position.prototype.undoTrick = function() {
 	if ( this.playNumber === 0 ) {
-		$( '#status' ).html( 'At Play 0. Nothing to Undo!' );
-		console.log('nothing to undo');
+		trace( 'Nothing to Undo' );
 		return this.playNumber;
 	}	
 	
@@ -782,8 +864,7 @@ Position.prototype.changeToPlay = function( playNumber ) {
 Position.prototype.rewind = function( endPlayNumber ) {
 	if ( endPlayNumber === undefined ) endPlayNumber = 0;
 	if ( this.playNumber === 0 ) {
-		$( '#status' ).html( 'At Play 0. Nothing to Undo!' );
-		console.log('nothing to undo');
+		trace( 'At Play 0. Nothing to Undo!' );
 		return this.playNumber;
 	}	
 	
@@ -813,8 +894,7 @@ Position.prototype.fastForward = function( endPlayNumber ) {
 
 Position.prototype.undoCard = function() {
 	if ( this.playNumber === 0 ) {
-		$( '#status' ).html( 'At Play 0. Nothing to Undo!' );
-		console.log('nothing to undo');
+		trace( 'At Play 0. Nothing to Undo!' );
 		return this.playNumber;
 	}
 	var direction = this.direction;
@@ -846,13 +926,46 @@ Position.prototype.undoCard = function() {
 
 Position.prototype.redoCard = function() {
 	if ( this.nextPosition === null ) {
-		$( '#status' ).html( 'At last Play. Nothing to Redo!' );
-		console.log('nothing to redo');
+		trace( 'At last Play. Nothing to Redo!' );
 		return this.playNumber;
 	}
 	this.nextPosition.playCard( false );
 	return this.nextPosition.playNumber;
 };
+
+function Bid( direction, level, suit, annotation ) {
+	if ( annotation === undefined ) annotation = null;
+	this.direction = direction;
+	this.level = level;
+	this.suit = suit;
+	this.annotation = annotation;
+};
+
+Bid.prototype.toString = function() {
+	var bidString = ''
+	if ( this.suit === 'x' ) bidString = '<font color="red">X</font>';
+	else if ( this.suit === 'r' ) bidString = '<font color="blue">XX<font>';
+	else if ( this.suit === 'p' ) bidString = '<font color="green">Pass</font>';
+	else if ( this.suit in Suits ) {
+		bidString = this.level + getSuitName( this.suit );
+	}	
+	else bidString = 'Unknown';
+	if ( this.annotation === null ) return bidString;
+	else return '<span class="bid-highlight tooltip" title="' + unescape( this.annotation ) +'">' + bidString + '</span>';
+};
+
+Bid.prototype.getString = function() {
+	var bidString = ''
+	if ( this.suit === 'x' ) bidString = 'x';
+	else if ( this.suit === 'r' ) bidString = 'r';
+	else if ( this.suit === 'p' ) bidString = 'p';
+	else if ( this.suit in Suits ) {
+		bidString = this.level + this.suit;
+	}	
+	else bidString = 'u';
+	if ( this.annotation ) bidString += '{' + this.annotation + '}';
+	return bidString;
+}
 
 
 
@@ -868,6 +981,7 @@ function Deal( queryParameters ) {
 	this.errors = [];	
 	this.hands = {};
 	this.positions = [];
+	this.auction = [];
 
 	for( var direction in Directions ) {
 		this.hands[ direction ] = new Hand( direction );	
@@ -879,6 +993,11 @@ function Deal( queryParameters ) {
 	// Load other information like dealer, contract etc.
 	this.loadDealInformation( queryParameters );
 	
+	// Load the auction
+	this.loadAuction( queryParameters );
+	
+	// Load names of players
+	this.loadNames( queryParameters );
 	
 	// Load initial position
 	this.currentPositionIndex = 0;
@@ -886,6 +1005,63 @@ function Deal( queryParameters ) {
 	
 	// Load any plays if specified 
 	this.loadPlay( queryParameters );
+};
+
+/**
+ * Dump the deal up to the current position into a handviewer url
+ *
+ * @method createHandViewerURL
+ * @this {Deal}
+ * @param void 
+ * @return void
+ */
+Deal.prototype.createHandViewerURL = function( ) {
+	
+	// URL
+	var url = 'http://www.bridgebase.com/tools/handviewer.html?';
+	
+	// Get the hands and names
+	var hands = [];
+	var names = '';
+	for( var direction in Directions ) {
+		var hand = this.hands[ direction ];
+		if ( hand.name ) {
+			names += '&' + direction + 'n=' + hand.name;
+		}
+		hands.push( this.hands[ direction ].getHandString() );
+	}
+	url += hands.join( '&' );
+	url += names;
+	
+	// Get the auction
+	url += '&a=';
+	if ( this.auction.length >  0 ) {
+		for( var i = 0; i < this.auction.length; ++i ) {
+			url += this.auction[ i ].getString();
+		}	
+	}
+	else {
+		url += this.auctionString;
+	}
+	
+	// Get the vulnerability if it exists
+	if ( this.vulnerability ) url += '&v=' + this.vulnerability;
+	
+	// Get the dealer
+	if ( this.dealer ) url += '&d=' + this.dealer;
+	
+	// Get the board
+	if ( this.board ) url += '&b=' + this.board;
+	
+	// Get the played cards upto current position
+	if ( this.currentPositionIndex > 0 ) {
+		url += '&p=';
+		for( var i = 1; i <= this.currentPositionIndex; ++i ) {
+			url += this.positions[ i ].getCardString();
+		}
+	}
+	
+	return url;
 };
 
 /**
@@ -1111,6 +1287,10 @@ Deal.prototype.loadHand = function( direction, handString) {
 			
 			// Special handing for numeric 10
 			case '1' :
+				if ( currentSuit === '' ) {
+					this.addError( prefix + currentChar + ' was found when a suit was expected!' );
+					continue
+				}			
 				if ( i < handString.length - 1 && handString.charAt( i+1 ) === '0') {
 					currentRank = 't';
 					i++;
@@ -1122,6 +1302,10 @@ Deal.prototype.loadHand = function( direction, handString) {
 			
 			// All other characters
 			default :
+				if ( currentSuit === '' ) {
+					this.addError( prefix + currentChar + ' was found when a suit was expected!' );
+					continue
+				}
 				currentRank = currentChar;
 				if ( currentRank in Ranks ) {
 					// Valid rank
@@ -1148,6 +1332,215 @@ Deal.prototype.loadHand = function( direction, handString) {
 	}	
 };
 
+function getParameterValue( queryParameters, parameterName ) {
+	if ( queryParameters[ parameterName ] !== undefined ) {
+		return queryParameters[ parameterName ];
+	}
+	else if ( queryParameters[ parameterName.toUpperCase() ] !== undefined ) {
+		return queryParameters[ parameterName.toUpperCase() ];
+	}	
+	return null;
+}
+
+/**
+ * Parse query parameters for player names
+ *
+ * @this {Deal}
+ * @param {array} queryParameters an associative array of parsed query parameters 
+ * @return void
+ */
+Deal.prototype.loadNames = function( queryParameters ) {
+	for( var direction in Directions ) {
+		var parameterName = direction + 'n';
+		var name = getParameterValue( queryParameters, parameterName );
+		if ( name ) this.hands[ direction ].name = name;
+	}
+};
+
+function areOppositeDirections( direction1, direction2 ) {
+	return ( (direction1 === 'n' || direction1 === 's') && (direction2 === 'e' || direction2 === 'w') )	|| 
+	( (direction1 === 'e' || direction1 === 'w') && (direction2 === 'n' || direction2 === 's') );
+};
+
+/**
+ * Parse query parameters to load auction
+ *
+ * @this {Deal}
+ * @param {array} queryParameters an associative array of parsed query parameters 
+ * @return void
+ */
+Deal.prototype.loadAuction = function( queryParameters ) {
+	
+	var parameterName = 'a';
+	var contractString = getParameterValue( queryParameters, parameterName );
+	if ( contractString === null ) {
+		this.addError( 'No auction or contract or trumps and leader has been specified!' );
+		return;
+	}
+	var originalString = contractString;
+	contractString = contractString.toLowerCase();
+	if ( contractString.charAt(0) !== '-' ) {
+		// Parse the auction stopping on errors
+		var numPasses = -1;
+		var currentLevel = 0;
+		var currentSuit = '';
+		var firstCalledBy = {};
+		var bids = {};
+		for( var suit in Suits ) {
+			firstCalledBy[ suit ] = '';
+			bids[ suit ] = [];
+		}
+		var lastCall = '';
+		var lastCallBy = '';
+		var currentDirection = 'n';
+		if ( this.dealer !== undefined ) currentDirection = this.dealer;
+		var bid = null;
+		for( var i = 0;i < contractString.length; ++i ) {
+
+			var prefix = 'In auction specified at position ' + (i+1) + ' - ';		
+			if ( numPasses >= 3 ) {
+				this.addError( prefix + '3 passes already but more characters in auction!' );
+				return;
+			}						
+			var currentChar = contractString.charAt( i );
+			if ( currentChar === '{' ) {
+				var endBraces = contractString.indexOf( '}', i+1 );
+				if ( endBraces === -1 ) {
+					this.addError( prefix + ' No closing } found!' );
+					return;
+				}
+				if ( bid !== null ) bid.annotation = originalString.slice( i+1, endBraces );
+				i = endBraces;
+				continue;				
+			}
+			else if ( currentChar === 'd' || currentChar === 'x' ) {
+				if ( lastCall === '' || lastCall === 'd' || lastCall === 'r' || ! areOppositeDirections( lastCallBy, currentDirection ) ) {
+					this.addError( prefix + 'Double is not allowed at this position!' );
+					return;
+				}
+				bid = new Bid( currentDirection, currentLevel, 'x', null );
+				this.auction.push(bid);
+				lastCall = 'd';
+				lastCallBy = currentDirection;
+				numPasses = 0;
+			}
+			else if ( currentChar === 'r' ) {
+				if ( lastCall !== 'd' && ! areOppositeDirections( lastCallBy, currentDirection ) ) {
+					this.addError( 'Redouble not allowed at this position!' );
+					return;
+				}
+				bid = new Bid( currentDirection, currentLevel, 'r', null );
+				this.auction.push(bid);
+				lastCall = 'r';
+				lastCallBy = currentDirection;
+				numPasses = 0;				
+			}
+			else if ( currentChar === 'p' ) {
+				numPasses++;
+				bid = new Bid( currentDirection, currentLevel, 'p', null );
+				this.auction.push(bid);
+			}
+			else {
+				// First should be number
+				var level = parseInt( currentChar );
+				if ( isNaN( level ) || level < 1 || level > 7 ) {
+					this.addError( prefix + currentChar + ' is an Invalid level!');
+					return;
+				}
+				i++;
+				var suit = contractString.charAt( i );
+				if ( ! ( suit in Suits ) ) {
+					this.addError( prefix + suit + ' is an Invalid Suit!');
+					return;
+				}
+				if ( level < currentLevel || ( level === currentLevel && getSuitIndex( suit ) < getSuitIndex( currentSuit ) ) ) {
+					this.addError( prefix + level + suit + ' bid is at lower level than last bid!' );
+					return;
+				}
+				bid = new Bid( currentDirection, level, suit, null );
+				bids[ suit ].push( currentDirection );
+				this.auction.push(bid);
+				lastCall = 'b';
+				lastCallBy = currentDirection;
+				numPasses = 0;	
+				currentLevel = level;
+				currentSuit = suit;
+				if ( firstCalledBy[ suit ] === '' ) firstCalledBy[ suit ] = currentDirection;				
+			}
+			currentDirection = getNextToPlay( currentDirection );
+		}
+		if ( numPasses !== 3 ) {
+			this.addError( prefix + ' auction has not ended with 3 passes!' );
+			return;
+		}
+		this.trumpSuit = currentSuit;
+		var declarer = '';
+		// Deteremine the declarer
+		for( var i = 0; i < bids[ currentSuit ].length; ++i ) {
+			if ( ! areOppositeDirections( lastCallBy, bids[ currentSuit ][ i ] ) ) {
+				declarer = bids[ currentSuit ][ i ];
+				break;
+			}
+		}
+
+		//var declarer = firstCalledBy[ currentSuit ];
+		// Determine the contract
+		this.dealInformation[ 'Contract' ] = currentLevel + getSuitName( this.trumpSuit );	
+		if ( lastCall === 'd' ) this.dealInformation[ 'Contract' ] += 'X';
+		else if ( lastCall === 'r' ) this.dealInformation[ 'Contract' ] += 'XX';
+		this.dealInformation[ 'Declarer' ] = getDirectionName( declarer );		
+		this.declarer = declarer;
+		this.leader = getLeader( declarer );
+	}
+	else {
+		this.auctionString = contractString;
+		var contractLevel = parseInt( contractString.charAt(1) );
+		if ( isNaN( contractLevel ) ) {
+			// What is trump suit
+			this.trumpSuit = contractString.charAt(1);
+			this.dealInformation[ 'Trumps' ] = getSuitName( this.trumpSuit );
+			if ( !( this.trumpSuit in Suits ) ) {
+				this.addError( this.trumpSuit + ' is not a valid trump suit!' );
+			}				
+			
+			// Who is the leader
+			this.leader = contractString.charAt(2);
+			if ( !( this.leader in Directions ) ) {
+				this.addError( this.leader + ' is not a valid leader position' );
+			}	
+			this.declarer = '';			
+		}
+		else {
+			// is contract level valid
+			if ( this.contractLevel < 1 || this.contractLevel > 7 ) {
+				this.addError( this.contractLevel + ' is not a valid contract level!' );
+			}
+			
+			// What is the trump suit
+			this.trumpSuit = contractString.charAt(2);
+			
+			if ( !( this.trumpSuit in Suits ) ) {
+				this.addError( this.trumpSuit + ' is not a valid trump suit!' );
+			}
+			
+			// Who is declarer
+			this.declarer = contractString.charAt(3);
+			
+			if ( !( this.declarer in Directions ) ) {
+				this.addError( this.declarer + ' is not a valid declarer position' );
+			}	
+			
+			// Who is on lead
+			this.leader = getLeader( this.declarer );
+					
+			// Determine the contract
+			this.dealInformation[ 'Contract' ] = contractLevel + ' ' + getSuitName( this.trumpSuit );	
+			this.dealInformation[ 'Declarer' ] = getDirectionName( this.declarer );		
+		}
+	}
+		
+};
+
 /**
  * Parse query parameters for other information like auction, dealer etc.
  *
@@ -1161,89 +1554,24 @@ Deal.prototype.loadDealInformation = function( queryParameters ) {
 	// Optional parameters 
 	
 	// Load Board Number
-	if ( queryParameters['b'] !== undefined ) {
-		this.dealInformation[ 'Board' ] = queryParameters['b'].toLowerCase();
-	}
-	else if ( queryParameters['B'] !== undefined ) {
-		this.dealInformation[ 'Board' ] = queryParameters['B'].toLowerCase();
+	this.board = getParameterValue( queryParameters, 'b' );
+	if ( this.board ) {
+		this.dealInformation[ 'Board' ] = this.board;
 	}
 	
 	// Load dealer
-	if ( queryParameters['d'] !== undefined ) {
-		this.dealInformation[ 'Dealer' ] = getDirectionName( queryParameters['d'].toLowerCase() );
-	}
-	else if ( queryParameters['D'] !== undefined ) {
-		this.dealInformation[ 'Dealer' ] = getDirectionName( queryParameters['D'].toLowerCase() );
+	this.dealer = getParameterValue( queryParameters, 'd' );
+	if ( this.dealer ) {
+		this.dealer = this.dealer.toLowerCase();
+		this.dealInformation[ 'Dealer' ] = getDirectionName( this.dealer );
 	}
 
 	// Load vulnerability
-	if ( queryParameters['v'] !== undefined ) {
-		this.dealInformation[ 'Vulnerability' ] = getVulnerability( queryParameters['v'].toLowerCase() );
-	}
-	else if ( queryParameters['V'] !== undefined ) {
-		this.dealInformation[ 'Vulnerability' ] = getVulnerability( queryParameters['V'].toLowerCase() );
-	}
-	
-	var contractString = '';	
-	// Contract or trumps are required
-	if ( queryParameters['a'] !== undefined ) {
-		var contractString = queryParameters['a'].toLowerCase();
-	}
-	else if ( queryParameters['A'] !== undefined ) {
-		var contractString = queryParameters['A'].toLowerCase();
-	}
-	if ( contractString !== '' ) {
-		if ( contractString.charAt(0) !== '-' ) {
-			this.addError( 'Full auctions are not supported. Specify a final contract or trump suit by setting the first character of the a parameter to a minus sign (-) and then specifying contract (a=-4se sets the contract to 4 spades by East) or specifying trump and leader (a=-sc will put South on lead with clubs as trump). ' );
-		}
-		else {
-			var contractLevel = parseInt( contractString.charAt(1) );
-			if ( isNaN( contractLevel ) ) {
-				// What is trump suit
-				this.trumpSuit = contractString.charAt(1);
-				this.dealInformation[ 'Trumps' ] = getSuitName( this.trumpSuit );
-				if ( !( this.trumpSuit in Suits ) ) {
-					this.addError( this.trumpSuit + ' is not a valid trump suit!' );
-				}				
-				
-				// Who is the leader
-				this.leader = contractString.charAt(2);
-				if ( !( this.leader in Directions ) ) {
-					this.addError( this.leader + ' is not a valid leader position' );
-				}				
-			}
-			else {
-				// is contract level valid
-				if ( this.contractLevel < 1 || this.contractLevel > 7 ) {
-					this.addError( this.contractLevel + ' is not a valid contract level!' );
-				}
-				
-				// What is the trump suit
-				this.trumpSuit = contractString.charAt(2);
-				
-				if ( !( this.trumpSuit in Suits ) ) {
-					this.addError( this.trumpSuit + ' is not a valid trump suit!' );
-				}
-				
-				// Who is declarer
-				var declarer = contractString.charAt(3);
-				
-				if ( !( declarer in Directions ) ) {
-					this.addError( this.declarer + ' is not a valid declarer position' );
-				}	
-				
-				// Who is on lead
-				this.leader = getLeader( declarer );
-						
-				// Determine the contract
-				this.dealInformation[ 'Contract' ] = contractLevel + ' ' + getSuitName( this.trumpSuit );	
-				this.dealInformation[ 'Declarer' ] = getDirectionName( declarer );		
-			}
-		}
+	this.vulnerability = getParameterValue( queryParameters, 'v' );
+	if ( this.vulnerability ) {
+		this.dealInformation[ 'Vulnerability' ] = getVulnerability( this.vulnerability.toLowerCase() );
 	}	
-	else {
-		this.addError( 'No contract has been specified!' );
-	}	
+
 };
 
 /**
@@ -1259,6 +1587,8 @@ Deal.prototype.show = function() {
 	// Calculate sizes of all elements
 	computeScaledParameters();	
 	
+	var instructions = $( '#instructions' ).html();	
+	
 	// empty the container
 	$( container ).empty();
 	
@@ -1267,20 +1597,29 @@ Deal.prototype.show = function() {
 	// Show information about deal
 	this.showDealInformation();
 	
+		
+	// Show the footer
+	this.showFooterBar();
+	
 	// Show information about deal
 	this.showPositionInformation();	
 	
-	// Show the footer
-	this.showFooterBar();
+	// Show the auction
+	this.showAuction();
+	
+	// jQuery UI tooltip
+	$( '.tooltip' ).tooltip();            	
+
 	
 	// Show the hands
 	this.showHands();
 	
+	// The textbox in the bottom right to show text annotations, status etc.
+	this.showStatusInformation();
+	
 	// Show 0th position
 	this.positions[ 0 ].playCard( false );
-	/*for( var i = 0;i <= this.currentPositionIndex; ++i ) {
-		this.positions[ i ].playCard( false );
-	}*/
+	this.currentPositionIndex = 0;
 }
 
 /**
@@ -1340,6 +1679,38 @@ Deal.prototype.showFooterBar = function() {
 };
 
 /**
+ * Show Play annotation and other messages.
+ *
+ * @this {Deal}
+ * @param void
+ * @return void
+ */
+Deal.prototype.showStatusInformation = function() {
+	var id = 'status-information';
+	var html = '<div id="' + id + '" class="fixed">';
+	html += '<div id="status-header" class="name-active">Play Annotations and Other Information</div>';
+	html += '<div id="status" class="fixed status text-annotation">test</div>';
+	html += '</div>';	
+	var container = 'body';
+	$( container ).append( html );
+	var table = $( '#' + id );
+	var width = Parameters.viewport.width - (this.hands[ 's' ].left + this.hands[ 's' ].width) - 10;
+	var height = Parameters.viewport.height - $( '#footer' ).height() + 5 - (this.hands[ 'e' ].top + this.hands[ 'e' ].height) - 15;
+	table.css({
+		bottom: $( '#footer' ).height() + 5,
+		right: 5,
+		width: width,
+		height: height,
+	});
+	var status = $( '#status' );
+	var height = $( '#footer' ).position().top - status.position().top - 5;
+	status.css({
+		height: height,
+		width: width,
+	});
+};
+
+/**
  * Show information about the current position.
  *
  * @this {Deal}
@@ -1357,15 +1728,21 @@ Deal.prototype.showPositionInformation = function() {
 	var html = '<table id="' + tableID + '" class="fixed table1">';
 	html += '<thead><tr><th colspan=2>Play Information</th></tr></thead><tbody>';
 	html += getTableBody( fields );
-	//html += '<tr><td><button id="undo">Undo</button><td><button id="redo">Redo</button></tr>';
+	html += '<tr><td><button id="hand-viewer">HandViewer URL</button><td></td></tr>';
 	html += '<tbody></table>';	
 	var container = 'body';
 	$( container ).append( html );
 	var table = $( '#' + tableID );
 	table.css({
-		top: 10,
-		left: 10,
+		bottom: $( '#footer' ).height() + 5,
+		left: 5,
 	});	
+	var self = this;
+	$( '#hand-viewer' ).click( function() {
+		var url = self.createHandViewerURL();
+		alert( url );
+		$('#status').append(url);
+	});
 
 };
 
@@ -1420,16 +1797,61 @@ Deal.prototype.fastForward = function() {
 Deal.prototype.showDealInformation = function() {
 	var tableID = 'deal-information';
 	var html = '<table id="' + tableID + '" class="fixed table1">'
-	html += '<thead><tr><th colspan=2>Deal Information</th></tr></thead>';
+	html += '<thead><tr><th colspan=2>Deal Information</th></tr></thead><tbody>';
 	html += getTableBody( this.dealInformation );
-	html += '</table>';	
+	html += '</tbody></table>';	
 	var container = 'body';
 	$( container ).append( html );
 	var table = $( '#' + tableID );
 	table.css({
-		top: 10,
-		left: Parameters.viewport.width - table.width() - 10,
+		top: 5,
+		left: 5,
 	});	
+};
+
+Deal.prototype.showAuction = function() {
+	if ( this.auction.length > 0 ) {
+		var tableID = 'auction';
+		var html = '<table id="' + tableID + '" class="fixed table1">'
+		html += '<thead><tr><th colspan=4>Auction</th></tr></thead>';
+		html += '<tbody>';
+		html += '<tr><th>West</th><th>North</th><th>East</th><th>South</th></tr>';
+		var firstBid = this.auction[ 0 ];
+		var currentDirection = 'w';
+		html += '<tr>';
+		var count = 0;
+		while ( firstBid.direction !== currentDirection ) {
+			html += '<td>-</td>';
+			count++;
+			if ( currentDirection === 's' ) html += '</tr>';
+			currentDirection = getNextToPlay( currentDirection );
+		}
+		for ( var i = 0; i < this.auction.length; ++i ) {
+			var bid = this.auction[ i ];
+			if ( bid.direction !== currentDirection ) {
+				alert( 'Something went wrong in setting up auction!' );
+				return;
+			}
+			if ( bid.direction === 'w' ) html += '<tr>';
+			html += '<td>' + bid.toString() + '</td>';
+			if ( currentDirection === 's' ) html += '</tr>';
+			currentDirection = getNextToPlay( currentDirection );
+		}
+		// Fill up with tds for rest
+		while( currentDirection !== 'w' ) {
+			html += '<td></td>';
+			if ( currentDirection === 's' ) html += '</tr>';
+			currentDirection = getNextToPlay( currentDirection );			
+		}
+		html += '</tbody></table>';	
+		var container = 'body';
+		$( container ).append( html );
+		var table = $( '#' + tableID );
+		table.css({
+			top: 5,
+			right: 5,
+		});	
+	}
 };
 
 /**
@@ -1454,6 +1876,15 @@ Deal.prototype.showTable = function() {
 	trace( 'Drawing Table with dimensions ' + JSON.stringify( tableDimensions ) );
 	var table = $( '#' + tableID );
 	table.css( tableDimensions );
+	var vul = this.vulnerability;
+	if ( vul !== null ) {
+		if ( vul === 'b' || vul === 'n' ) {
+			table.addClass( 'ns-vul' );
+		}
+		if ( vul === 'b' || vul === 'e' ) {
+			table.addClass( 'ew-vul' );
+		}
+	}
 	
 	// Show the compass in middle of screen
 	var compassID = Parameters.compassImage.id;
@@ -1467,7 +1898,7 @@ Deal.prototype.showTable = function() {
 		top: Parameters.compassImage.top,
 		left: Parameters.compassImage.left,
 	};
-	trace( 'Drawing compass with src ' + imageName + ' with dimensions ' + JSON.stringify( compassDimensions ) );		
+	//trace( 'Drawing compass with src ' + imageName + ' with dimensions ' + JSON.stringify( compassDimensions ) );		
 	compass.css( compassDimensions );	
 };
 
@@ -1481,7 +1912,7 @@ Deal.prototype.showTable = function() {
 Deal.prototype.showHands = function() {
 	for( var direction in this.hands ) {
 		// Show each hand in turn
-		this.hands[ direction ].show();
+		this.hands[ direction ].show( this.declarer );
 	}
 };
 
@@ -1501,28 +1932,41 @@ jQuery(function($) {
 	
 	// Check if any query parameters specified
 	if ( queryParameters !== undefined && queryParameters.length > 0 ) {
-		// Load the hands into a new deal
-		deal = new Deal( queryParameters );
-		
-		// Check if any errors
-		if ( deal.hasErrors() ) {
-			// Errors - Show the errors
-			deal.showErrors();
-		}
-		else {
+		try  {
+			// Load the hands into a new deal
+			deal = new Deal( queryParameters );
 			
-			// Show deal information
-			deal.show();
-			processHash();
-			
-			// Setup handler to detect window resize and redraw everything
-			$(window).resize(function() {
+			// Check if any errors
+			if ( deal.hasErrors() ) {
+				// Errors - Show the errors
+				deal.showErrors();
+			}
+			else {
+				
+				// Show deal information
 				deal.show();
 				processHash();
-			});		
-			$(window).hashchange( function(){
-				processHash();
-		  	});					
+				
+				// Setup handler to detect window resize and redraw everything
+				$(window).resize(function() {
+					deal.show();
+					processHash();
+				});		
+				$(window).hashchange( function(){
+					processHash();
+			  	});					
+			}
+		}
+		catch(err) {
+			// Unexpected Error
+			var instructions = $( '#instructions' ).html();
+			var container = 'body';
+			$( container ).empty().append( '<h1>Following Unexpected error occurred. Please send a report to <span class="codedirection">moc.oohay@17marirsn</span></h1>' );
+			var html = '<ol class="rounded-list"><li><span class="item">';
+			html += err;
+			html += '</span></li></ol>'
+			$( container ).append( html );	
+			$( container ).append( instructions );				
 		}
 	}
 	else {
