@@ -1,4 +1,4 @@
-.fixed { position:fixed; }
+.fixed { position:fixed !important; }
 .table { 
 	background-image: url('../images/green-felt.jpg');
 	background-size:100% 100%;
@@ -6,21 +6,10 @@
 }
 .img-highlight { 
 	outline: 3px solid green; 
-		-moz-box-shadow: 0 0 5px rgba(0,0,1,0.5);
-	-webkit-box-shadow: 0 0 5px rgba(0,0,1,0.5);
-	box-shadow: 0 0 5px rgba(0,0,1,0.5);
 }
 
 
 span.codedirection { unicode-bidi:bidi-override; direction: rtl; }
-    	
-#footer {
-	left:0;
-bottom: 0;
-/*height: 35px;*/
-position: fixed;
-width: 100%;
-}
 
 .fbar {
     padding:0px;
@@ -39,4 +28,78 @@ width: 100%;
 }
 .pull-left {
 	float: left;
+}
+
+.name-active {
+    padding:0px;
+    color:#fff;
+    text-shadow:1px 1px 1px #568F23;
+    border:1px solid #93CE37;
+    border-bottom:3px solid #9ED929;
+    background-color:#9DD929;
+    background:-webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.02, rgb(123,192,67)),
+        color-stop(0.51, rgb(139,198,66)),
+        color-stop(0.87, rgb(158,217,41))
+        );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(123,192,67) 2%,
+        rgb(139,198,66) 51%,
+        rgb(158,217,41) 87%
+        );
+    -webkit-border-top-left-radius:5px;
+    -webkit-border-top-right-radius:5px;
+    -moz-border-radius:5px 5px 0px 0px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+}
+
+.name-inactive {
+    padding:0px;
+    text-align:center;
+    background-color:#DEF3CA;
+    border: 2px solid #E7EFE0;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+    color:#666;
+    text-shadow:1px 1px 1px #fff;
+}
+
+.text-annotation {
+    padding:0px;
+    background-color:#DEF3CA;
+    border: 2px solid #E7EFE0;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+    color:#666;
+    text-shadow:1px 1px 1px #fff;
+}
+            
+
+.bid-highlight {
+	 background-color: yellow;
+}
+
+.status {
+	 overflow: auto;
+}
+
+.ew-vul {
+	border-left: 3px solid red; 
+	border-right: 3px solid red; 
+}
+
+.ns-vul {
+	border-top: 3px solid red; 
+	border-bottom: 3px solid red; 
+}
+
+.text-size {
+	font-size: 16px;
 }
