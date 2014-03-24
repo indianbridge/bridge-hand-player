@@ -1,11 +1,16 @@
 .fixed { position:fixed !important; }
-.table { 
+.absolute { position: absolute !important;}
+.card-table { 
 	background-image: url('../images/green-felt.jpg');
 	background-size:100% 100%;
 	background-repeat:no-repeat;	
 }
 .img-highlight { 
 	outline: 3px solid green; 
+}
+
+.cursor-not-allowed {
+	cursor:not-allowed;
 }
 
 

@@ -5,8 +5,8 @@ var cardImagePacks = {
 		fullWidth : 76,
 		fullHeight : 92,
 		cardBack: 'b1fv.png',
-		percentageWidthShowing: 1,
-		percentageHeightShowing: 1.25,
+		percentageWidthShowing: 0.5,
+		percentageHeightShowing: 0.5,
 	},
 };
 
@@ -55,6 +55,7 @@ var Directions = {
 	's' : { name : 'South',	layout : 'horizontal',	position : 'bottom',	index: 2 },
 	'w' : { name : 'West',	layout : 'vertical',	position : 'left',		index: 3 },
 };
+var DirectionOrder = [ 'n', 'e', 's', 'w' ];
 
 function getDirectionName( direction ) {
 	if ( direction in Directions ) return Directions[ direction ].name;
@@ -67,12 +68,14 @@ for( var direction in Directions ) directionNames[ Directions[ direction ].index
 
 // Suits and utility functions for Suits
 var Suits = { 
-	'n' : { name : 'NT',									index : 4 },
-	's' : { name : '<font color="000000">&spades;</font>', 	index : 3 }, 
+	'n' : { name : 'NT',									index : 0 },
+	's' : { name : '<font color="000000">&spades;</font>', 	index : 1 }, 
 	'h' : { name : '<font color="CB0000">&hearts;</font>', 	index : 2 }, 
-	'd' : { name : '<font color="CB0000">&diams;</font>',	index : 1 }, 
-	'c' : { name : '<font color="000000">&clubs;</font>', 	index : 0 }, 
+	'd' : { name : '<font color="CB0000">&diams;</font>',	index : 3 }, 
+	'c' : { name : '<font color="000000">&clubs;</font>', 	index : 4 }, 
 };
+var cardSuitOrder = [ 's', 'h', 'd', 'c' ];
+var bidSuitOrder = [ 'n' ];
 
 function getSuitName( suit ) {
 	if ( suit in Suits ) return Suits[ suit ].name;
@@ -111,12 +114,11 @@ var rankNames = [];
 for( var rank in Ranks ) rankNames[ Ranks[ rank ].index ] = rank;
 
 // Show a card on screen at specified location
-function showCard( suit, rank, top, left ) {
-	var container = 'body';	
+function showCard( container, suit, rank, top, left, width, height ) {
 	var imageID = getCardID( suit, rank );
 	var imageName = Parameters.cardImages.folder + '/' + suit + rank + '.png';
 	var src = imageName;
-	$( container ).append( '<img id="' + imageID + '" class="fixed card"></img>' );
+	$( container ).append( '<img id="' + imageID + '" class="absolute card" status="not-assigned"></img>' );
 	var image = $( '#' + imageID );
 	image.attr( 'src', src );
 	image.attr( 'imageName', imageName );
@@ -125,8 +127,8 @@ function showCard( suit, rank, top, left ) {
 	image.attr( 'rank', rank );
 	//image.attr( 'direction', direction );
 	image.css({
-		width: Parameters.cardImages.width,
-		height: Parameters.cardImages.height,
+		width: width,
+		height: height,
 		top: top,
 		left: left,
 	});	
@@ -136,36 +138,94 @@ function getCardID( suit, rank ) {
 	return 'card-' + suit + rank;
 };
 
+function createHandTabs() {
+	var html = '<ul id="hands" class="nav nav-pills">';
+	for( var i = 0; i < DirectionOrder.length; ++i ) {
+		var direction = DirectionOrder[ i ];
+		if ( i == 0 ) html += '<li class="active">';
+		else html += '<li>';
+		html += '<a href="#' + direction + '-hand" data-toggle="tab">' + Directions[ direction ].name + '</a></li>';
+	}
+	html += '</ul>';
+	html += '<div id="myTabContent" class="tab-content">';
+	for( var i = 0; i < DirectionOrder.length; ++i ) {
+		var direction = DirectionOrder[ i ];
+		if ( i == 0 ) html += '<div class="tab-pane fade in active" id="' + direction + '-hand"></div>';
+		else html += '<div class="tab-pane fade" id="' + direction + '-hand"></div>';
+	}
+	html += '</div>';
+	return html;	
+}
 
 
+var activeHand = 'north';
 $(function() {
-	var container = $( 'body' );
-   	var html = '<div id="switcher" class="fixed"></div>';
-   	container.append( html );
-   	var switcher = $( '#switcher' );
-	switcher.themeswitcher({
-		imgpath: "js/images/",
-		loadTheme: "cupertino"
+	//computeScaledParameters();	
+	var headerHeight = $( '#header' ).outerHeight();
+	console.log( 'header height = ' + headerHeight );
+	var footerHeight = $( '#footer' ).outerHeight();
+	console.log( 'footer height = ' + footerHeight );
+	//style = '<style> body { padding-top: ' + (headerHeight + 5) + 'px; }</style>';
+	//$( style ).appendTo( "head" );
+	var viewport = {
+		width: jQuery(window).width(),
+		height: jQuery(window).height(),
+	};
+	var html = '<div id="pile" class="fixed well"></div>';
+	$( 'body' ).append( html );
+	var pile = $( '#pile' );
+	var headerBottom = $( '#header' ).position().top + headerHeight;
+	var footerTop = $( '#footer' ).position().top;
+	var sectionHeight = footerTop - headerBottom - 10;	
+	pile.css({
+		top: headerHeight + 5,
+		left: 5,
+		width: viewport.width / 2 - 10,
+		height: sectionHeight,
 	});
-	switcher.css({
-		top : 5,
-		right : 5,
+	html = '<div id="assigned" class="fixed well"></div>'
+	$( 'body' ).append( html );
+	var assigned = $( '#assigned' );
+	var sectionWidth = viewport.width / 2 - 10;
+	assigned.css({
+		top: headerHeight + 5,
+		left: viewport.width / 2 + 5,
+		width: sectionWidth,
+		height: sectionHeight,
 	});
-	
-	computeScaledParameters();
-	// Draw cards on screen
-	var top = 5;
-	for ( var suit in Suits ) {
-		var left = 5;
-		if ( suit !== 'n' ) {
-			for ( var rank in Ranks ) {
-				showCard( suit, rank, top, left );
-				left += Parameters.cardImages.widthShowing;
-			}
-			top += Parameters.cardImages.heightShowing;
+	assigned.html( createHandTabs() );
+	console.log( 'section height = ' +  sectionHeight );
+	var top = headerHeight + 10;
+	var startingLeft = 10;
+	var cardsWidth = 12 * Parameters.cardImages.fullWidth * Parameters.cardImages.percentageWidthShowing + Parameters.cardImages.fullWidth;
+	var scalingFactor = ( sectionWidth - 10 ) / cardsWidth;
+	var width = Parameters.cardImages.fullWidth * scalingFactor;
+	var height = Parameters.cardImages.fullHeight * scalingFactor;
+	for( var i = 0; i < cardSuitOrder.length; ++i ) {
+		var suit = cardSuitOrder[ i ];
+		var left = startingLeft;
+		for( var j = 0; j < rankNames.length; ++j ) {
+			var rank = rankNames[ j ];
+			showCard( 'body', suit, rank, top, left, width, height );
+			left += width * Parameters.cardImages.percentageWidthShowing
 		}
+		top += height * Parameters.cardImages.percentageHeightShowing;
 	}
 	
+	
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+	var values = e.target.href.split( '#' );
+	activeHand = values[ 1 ];
+	//alert(activeHand);
+})	
+
+$('.card').click(function(){
+	var html = '<h1>' + $( this ).attr('suit') + ' ' + $( this ).attr('rank') + '; </h1>';
+	alert(html);
+	alert($('#'+activeHand).html());
+	$('#'+activeHand).empty().append( html );
+	alert($('#'+activeHand).html());
+});
  });
  
  
