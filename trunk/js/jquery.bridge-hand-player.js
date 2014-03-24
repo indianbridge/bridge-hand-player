@@ -14,6 +14,13 @@ var cardImagePacks = {
 	},
 };
 
+var BootstrapParameters = {
+	tableHeaderClass: 'info',
+	tableRowKeyClass: 'active',
+	tableRowValueClass: '',	
+	flashOnLead: false,
+};
+
 // All the sizing and styling parameters
 var Parameters = {
 	scalingFactor: 1,
@@ -29,7 +36,7 @@ var Parameters = {
 // The center table image properties
 Parameters.tableImage = {
 	id: 'table',
-	class: 'table',
+	class: 'card-table',
 	fullWidth: Parameters.cardImages.fullWidth * 5 + 20,
 	fullHeight: Parameters.cardImages.fullHeight * 3 + 20,	
 };
@@ -123,8 +130,8 @@ function computeScaledParameters( ) {
 	Parameters.textSize.fontSize = Parameters.textSize.actualFontSize * Parameters.scalingFactor;
 	Parameters.textSize.lineHeight = Parameters.textSize.actualLineHeight * Parameters.scalingFactor;
 	var style = '<style>';
-	style += 'table.table1 {font-size: ' + Parameters.textSize.fontSize + 'px; line-height: ' + Parameters.textSize.lineHeight + 'em;}';
-	style += '.sexybutton.sexysimple.button-text {font-size: ' + Parameters.textSize.fontSize + 'px !important;}';
+	style += 'table.table {font-size: ' + Parameters.textSize.fontSize + 'px; line-height: ' + Parameters.textSize.lineHeight + 'em;}';
+	style += '.panel {font-size: ' + Parameters.textSize.fontSize + 'px; line-height: ' + Parameters.textSize.lineHeight + 'em;}';
 	style += '.text-size {font-size: ' + Parameters.textSize.fontSize + 'px !important;}';
 	style += '</style>';
 	$( style ).appendTo( "head" )	
@@ -226,19 +233,20 @@ function getLeader( declarer ) {
 
 function getTableBody( fields ) {
 	var html = ''
+	var rowValueClass = 'class="' + BootstrapParameters.tableRowValueClass + '"';
 	for ( var key in fields ) {
 		var value = fields[ key ];
 		html += '<tr>';
-		html += '<th>' + key + '</th>';
+		html += '<th class="text-right ' + BootstrapParameters.tableRowKeyClass + '">' + key + '</th>';
 		if ( typeof value === 'string' ) {
-			html += '<td>' + value + '</td>';
+			html += '<td ' + rowValueClass + ' >' + value + '</td>';
 		}
 		else {
 			if ( 'id' in value ) {
-				html += '<td id="' + value.id + '">' + value.value + '</td>';
+				html += '<td ' + rowValueClass + ' id="' + value.id + '">' + value.value + '</td>';
 			}
 			else {
-				html += '<td>' + value.value + '</td>';
+				html += '<td ' + rowValueClass + '>' + value.value + '</td>';
 			}
 		}
 		html += '</tr>';
@@ -435,8 +443,32 @@ Hand.prototype.show = function( declarer ) {
 		}
 	}
 	
+	var container = 'body';
+	var id = hand.direction + '-name-details';
+	var headerID = id + '-header';
+	var bodyID = id + '-body';
+	var html = '<div id="'+ id + '" class="fixed panel panel-default">';
+	html += '<div id="' + headerID + '" class="panel-heading">';
+	html += hand.getName();
+	html += '</div>';
+	html += '<div id="' + bodyID + '" class="panel-body">'
+   	html += '</div>';
+   	html += '</div>';
+   	$( container ).append( html );
+   	var headerHeight = $( '#' + headerID ).height();
+	var nameElement = $( '#' + id );
+	nameElement.css({
+		left: hand.left-4,
+		top: hand.top - headerHeight - 25,
+		width: hand.width + 10,
+		zIndex: -1,
+	});   
+	var bodyElement = 	$( '#' + bodyID );
+	bodyElement.css({
+		height: hand.height + 5,
+	});
 	// Show name
-	var declarerText = '';
+	/*var declarerText = '';
 	if ( declarer in Directions ) {
 		if ( hand.direction === declarer ) declarerText = 'Declarer';
 		else if ( ! areOppositeDirections( hand.direction, declarer ) ) declarerText = 'Dummy';
@@ -445,7 +477,6 @@ Hand.prototype.show = function( declarer ) {
 	var nameID = hand.direction + '-name';
 	var annotationID = hand.direction + '-annotation';
 	var leadID = hand.direction + '-lead-text';
-	var image = '<img " src="css/SexyButtons/images/icons/silk/user.png" alt="" /> ';
 	var html = '<span id="'+ id + '" class="text-size fixed name-inactive"><span id="' + nameID + '" >' + hand.getName() + '</span> <span id="' + annotationID + '">' + declarerText + '</span> <span id="' + leadID + '"></span></span>';
 	var container = 'body';
 	$( container ).append( html );
@@ -453,7 +484,7 @@ Hand.prototype.show = function( declarer ) {
 	nameElement.css({
 		left: hand.left,
 		bottom: Parameters.viewport.height - hand.top + 5,
-	});
+	});*/
 };
 
 Hand.prototype.getName = function() {
@@ -462,17 +493,35 @@ Hand.prototype.getName = function() {
 	return name;
 }
 
+var intervalID = null;
 function setActiveHand( activeDirection ) {
 	for( var direction in Directions ) {
 		var nameID = direction + '-name-details';
+		var nameElement = $( '#' + nameID );
 		var leadID = direction + '-lead-text';
 		if ( direction === activeDirection ) {
-			$( '#' + nameID ).removeClass( 'name-inactive' ).addClass( 'name-active' );
-			$( '#' + leadID ).html( '(On Lead)' );
+			if ( BootstrapParameters.flashOnLead ) {
+				if ( intervalID ) clearInterval( intervalID );
+				intervalID = setInterval( function() {
+					var name = $( '#' + activeDirection + '-name-details' );
+					if ( name.hasClass( 'panel-default' ) ) {
+						name.removeClass( 'panel-default' ).addClass( 'panel-info' );
+					}
+					else {
+						name.removeClass( 'panel-info' ).addClass( 'panel-default' );
+					}
+				}, 500 );
+			}
+			else {
+				nameElement.removeClass( 'panel-default' ).addClass( 'panel-info' );
+			}
+			//$( '#' + nameID ).removeClass( 'name-inactive' ).addClass( 'name-active' );
+			//$( '#' + leadID ).html( '(On Lead)' );
 		}
 		else {
-			$( '#' + nameID ).removeClass( 'name-active' ).addClass( 'name-inactive' );
-			$( '#' + leadID ).empty();
+			nameElement.removeClass( 'panel-info' ).addClass( 'panel-default' );
+			//$( '#' + nameID ).removeClass( 'name-active' ).addClass( 'name-inactive' );
+			//$( '#' + leadID ).empty();
 		}
 	}
 };
@@ -779,8 +828,11 @@ Position.prototype.playTableCard = function() {
 };
 
 Position.prototype.setPlayableCards = function() {
+	
+	//var imageHighlightClass = 'thumbnail';
+	var imageHighlightClass = 'img-highlight';
 	// Remove highlight anc click handler on all cards
-	$( '.card' ).unbind( 'click' ).removeClass( 'img-highlight' );
+	$( '.card' ).unbind( 'click' ).removeClass( imageHighlightClass ).addClass( 'cursor-not-allowed' );
 	// Set the playable cards
 	var elements = '[direction='+ this.nextTurn + '][status="not-played"]';	
 	if ( this.leadSuit !== '' && this.playNumber % 4 !== 0 ) {
@@ -788,7 +840,7 @@ Position.prototype.setPlayableCards = function() {
 		var numInSuit = $( extendedElements ).length;
 		if ( numInSuit > 0 ) elements = extendedElements;
 	}
-	$( elements ).addClass( 'img-highlight' ).click(function() { 
+	$( elements ).addClass( imageHighlightClass ).removeClass( 'cursor-not-allowed' ).click(function() { 
 		deal.cardClicked( this );
 	});	
 	setActiveHand( this.nextTurn );
@@ -951,7 +1003,7 @@ Bid.prototype.toString = function() {
 	}	
 	else bidString = 'Unknown';
 	if ( this.annotation === null ) return bidString;
-	else return '<span class="bid-highlight tooltip" title="' + unescape( this.annotation ) +'">' + bidString + '</span>';
+	else return '<span data-toggle="tooltip" class="bg-info bid-annotation" title="' + unescape( this.annotation ) +'">' + bidString + '</span>';
 };
 
 Bid.prototype.getString = function() {
@@ -1173,12 +1225,13 @@ Deal.prototype.addError = function( error ) {
 Deal.prototype.showErrors = function() {
 	var instructions = $( '#instructions' ).html();
 	var container = 'body';
-	$( container ).empty().append( '<h1>Errors Found as noted below</h1>' );
-	var html = '<ol class="rounded-list"><li><span class="item">';
-	html += this.errors.join( '</span></li><li><span class="item">' );
+	var html = '<div class="container"><h1>Errors Found as noted below</h1>';
+	html += '<ol class="list-group"><li class="list-group-item list-group-item-warning"><span class="item">';
+	html += this.errors.join( '</span></li><li class="list-group-item list-group-item-warning"><span class="item">' );
 	html += '</span></li></ol>'
-	$( container ).append( html );	
-	$( container ).append( instructions );	
+	html += instructions;
+	html += '</div>';
+	$( container ).empty().append( html );		
 };
 
 /**
@@ -1607,8 +1660,8 @@ Deal.prototype.show = function() {
 	// Show the auction
 	this.showAuction();
 	
-	// jQuery UI tooltip
-	$( '.tooltip' ).tooltip();            	
+	// Bootstrap tooltip
+	$( '.bid-annotation' ).tooltip();            	
 
 	
 	// Show the hands
@@ -1633,28 +1686,45 @@ Deal.prototype.showFooterBar = function() {
 	var footerID = "footer";
 	var container = 'body';
 	var fields = {
-		'rewind' : 		{ name: 'Rewind',				icon: 'first', },
-		'undo-trick' :	{ name: 'Undo Previous Trick',	icon: 'rewind', },
-		'undo-play' :	{ name: 'Undo Previous Play',	icon: 'prev', },
-		'redo-play' :	{ name: 'Redo Next Play',		icon: 'next', },
-		'redo-trick' :	{ name: 'Redo Next Trick',		icon: 'forward', },
-		'fast-forward' :{ name: 'Fast Forward',			icon: 'last', },		
+		'rewind' : 		{ name: 'Rewind',				icon: 'step-backward', iconAfter: false, },
+		'undo-trick' :	{ name: 'Undo Previous Trick',	icon: 'backward', iconAfter: false, },
+		'undo-play' :	{ name: 'Undo Previous Play',	icon: 'chevron-left', iconAfter: false, },
+		'redo-play' :	{ name: 'Redo Next Play',		icon: 'chevron-right', iconAfter: true, },
+		'redo-trick' :	{ name: 'Redo Next Trick',		icon: 'forward', iconAfter: true, },
+		'fast-forward' :{ name: 'Fast Forward',			icon: 'step-forward', iconAfter: true, },		
 	};
-	var html = '<div id="'+ footerID + '" class=" fixed fbar">';
-	//var sizeClass = 'sexysmall';
-	var sizeClass = 'button-text';
-	//if ( Parameters.scalingFactor < 1 && Parameters.scalingFactor > 0.75 ) sizeClass = 'sexymedium';
-	//else if ( Parameters.scalingFactor <= 0.75 ) sizeClass = 'sexysmall';
+	var sizeClass = 'btn-group-lg';
+	var html = '';
+	html += '<div id="'+ footerID + '" class="fixed btn-group ' + sizeClass + '">';
 	for( var field in fields ) {
-		html += '<button id="' + field + '" class="sexybutton sexysimple ' + sizeClass + ' sexygreen"><span class="'+ fields[ field ].icon + '">'+ fields[ field ].name + '</span></button>';
+		html += '<button type="button" id="' + field + '" class="btn btn-primary">';
+		var iconHtml = '<span class="glyphicon glyphicon-'+ fields[ field ].icon + '"></span>';
+		if ( ! fields[ field ].iconAfter ){
+			html += iconHtml + ' ';
+		}
+		html += fields[ field ].name;
+		if ( fields[ field ].iconAfter ){
+			html += ' ' + iconHtml;
+		}		
+		html += '</button>';
 	}
 	html += '</div>';
 	$( container ).append( html );
 	var footer = $( '#' + footerID );
+	if ( footer.width() >= Parameters.viewport.width ) {
+		footer.removeClass( 'btn-group-lg' );
+	}
+	if ( footer.width() >= Parameters.viewport.width ) {
+		footer.addClass( 'btn-group-sm' );
+	}	
+	if ( footer.width() >= Parameters.viewport.width ) {
+		footer.removeClass( 'btn-group-sm' ).addClass( 'btn-group-xs' );
+	}	
+	//alert(Parameters.viewport.width + ' ' + footer.width());
+	var left = Parameters.viewport.centerX - footer.width() / 2;
 	footer.css({
-		left:0,
+		left: left,
 		bottom:0,
-		width: Parameters.viewport.width,
 	});
 	
 	$('#undo-play').click(function() {
@@ -1686,10 +1756,10 @@ Deal.prototype.showFooterBar = function() {
  * @return void
  */
 Deal.prototype.showStatusInformation = function() {
-	var id = 'status-information';
-	var html = '<div id="' + id + '" class="fixed">';
-	html += '<div id="status-header" class="name-active">Play Annotations and Other Information</div>';
-	html += '<div id="status" class="fixed status text-annotation">test</div>';
+	var id = 'status-information';	
+	var html = '<div id="' + id + '" class="fixed panel panel-info">';
+	html += '<div id="status-header" class="panel-heading"><span class="panel-title1">Play Annotations and Other Information</span></div>';
+	html += '<div id="status" class="fixed status panel-body">test</div>';
 	html += '</div>';	
 	var container = 'body';
 	$( container ).append( html );
@@ -1697,7 +1767,7 @@ Deal.prototype.showStatusInformation = function() {
 	var width = Parameters.viewport.width - (this.hands[ 's' ].left + this.hands[ 's' ].width) - 10;
 	var height = Parameters.viewport.height - $( '#footer' ).height() + 5 - (this.hands[ 'e' ].top + this.hands[ 'e' ].height) - 15;
 	table.css({
-		bottom: $( '#footer' ).height() + 5,
+		bottom: $( '#footer' ).height() - 15,
 		right: 5,
 		width: width,
 		height: height,
@@ -1725,8 +1795,8 @@ Deal.prototype.showPositionInformation = function() {
 		'NS Tricks' : { value: 0, id : 'ns-tricks', },
 		'EW Tricks' : { value: 0, id : 'ew-tricks', },
 	}
-	var html = '<table id="' + tableID + '" class="fixed table1">';
-	html += '<thead><tr><th colspan=2>Play Information</th></tr></thead><tbody>';
+	var html = '<table id="' + tableID + '" class="fixed table table-bordered table-condensed">';
+	html += '<thead><tr class="' + BootstrapParameters.tableHeaderClass + '"><th class="text-center" colspan=2>Play Information</th></tr></thead><tbody>';
 	html += getTableBody( fields );
 	html += '<tr><td><button id="hand-viewer">HandViewer URL</button><td></td></tr>';
 	html += '<tbody></table>';	
@@ -1734,6 +1804,7 @@ Deal.prototype.showPositionInformation = function() {
 	$( container ).append( html );
 	var table = $( '#' + tableID );
 	table.css({
+		width: 'auto',
 		bottom: $( '#footer' ).height() + 5,
 		left: 5,
 	});	
@@ -1796,14 +1867,15 @@ Deal.prototype.fastForward = function() {
  */
 Deal.prototype.showDealInformation = function() {
 	var tableID = 'deal-information';
-	var html = '<table id="' + tableID + '" class="fixed table1">'
-	html += '<thead><tr><th colspan=2>Deal Information</th></tr></thead><tbody>';
+	var html = '<table id="' + tableID + '" class="fixed table table-bordered table-condensed">'
+	html += '<thead><tr class="' + BootstrapParameters.tableHeaderClass + '"><th class="text-center" colspan=2>Deal Information</th></tr></thead><tbody>';
 	html += getTableBody( this.dealInformation );
 	html += '</tbody></table>';	
 	var container = 'body';
 	$( container ).append( html );
 	var table = $( '#' + tableID );
 	table.css({
+		width: 'auto',
 		top: 5,
 		left: 5,
 	});	
@@ -1812,13 +1884,13 @@ Deal.prototype.showDealInformation = function() {
 Deal.prototype.showAuction = function() {
 	if ( this.auction.length > 0 ) {
 		var tableID = 'auction';
-		var html = '<table id="' + tableID + '" class="fixed table1">'
-		html += '<thead><tr><th colspan=4>Auction</th></tr></thead>';
+		var html = '<table id="' + tableID + '" class="fixed table table-bordered table-condensed">'
+		html += '<thead><tr class="' + BootstrapParameters.tableHeaderClass + '"><th class="text-center" colspan=4>Auction</th></tr></thead>';
 		html += '<tbody>';
-		html += '<tr><th>West</th><th>North</th><th>East</th><th>South</th></tr>';
+		html += '<tr class="' + BootstrapParameters.tableHeaderClass + '"><th class="text-center">West</th><th class="text-center">North</th><th class="text-center">East</th><th class="text-center">South</th></tr>';
 		var firstBid = this.auction[ 0 ];
 		var currentDirection = 'w';
-		html += '<tr>';
+		html += '<tr class="text-center ' + BootstrapParameters.tableRowValueClass + '">';
 		var count = 0;
 		while ( firstBid.direction !== currentDirection ) {
 			html += '<td>-</td>';
@@ -1832,7 +1904,7 @@ Deal.prototype.showAuction = function() {
 				alert( 'Something went wrong in setting up auction!' );
 				return;
 			}
-			if ( bid.direction === 'w' ) html += '<tr>';
+			if ( bid.direction === 'w' ) html += '<tr class="text-center ' + BootstrapParameters.tableRowValueClass + '">';
 			html += '<td>' + bid.toString() + '</td>';
 			if ( currentDirection === 's' ) html += '</tr>';
 			currentDirection = getNextToPlay( currentDirection );
@@ -1848,6 +1920,7 @@ Deal.prototype.showAuction = function() {
 		$( container ).append( html );
 		var table = $( '#' + tableID );
 		table.css({
+			width:'auto',
 			top: 5,
 			right: 5,
 		});	
