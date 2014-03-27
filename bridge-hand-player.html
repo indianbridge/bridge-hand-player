@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bridge Hand Player</title>
+    
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootswatch-theme">
+    <link href="css/bridge-hand-player.css" rel="stylesheet">
+    
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>  
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->      
+  </head>
+  <body>
+  	<header>
+		<nav id="header" class="navbar navbar-default navbar-fixed-top" role="navigation">
+		   <div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" 
+		         data-target="#header-bar">
+		         <span class="sr-only">Toggle navigation</span>
+		         <span class="icon-bar"></span>
+		         <span class="icon-bar"></span>
+		         <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="#0">Bridge Hand Viewer/Player</a>
+		   </div>
+		   <div class="collapse navbar-collapse" id="header-bar">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Current Theme : <span id="current-theme">Default</span> (Change)<b class="caret"></b></a>
+					<ul id="themes" class="dropdown-menu">
+					</ul>
+				</li>	
+				<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Load A Line of Play<b class="caret"></b></a>
+					<ul id="lines" class="dropdown-menu">
+					</ul>
+				</li>
+				<li><a id="save-play">Save Play</a></li>												    
+			</ul>		   
+		      <p class="navbar-text navbar-right"><span class="glyphicon glyphicon-envelope"></span> <span style="unicode-bidi:bidi-override; direction: rtl;">moc.liamg@egdirbnaidni</span></a>
+		      </p>
+		   </div>
+		</nav>  
+	</header>
+	<section id="section">
+		<div id="instructions" class="padding-top">
+			<div class="container">
+		  	<h1>Bridge Hand Viewer/Player Instructions</h1>
+		  	<ol class="list-group">
+		  		<li class="list-group-item list-group-item-info">
+		  			<span class="item">This tool lets you play out bridge hands in double dummy fashion to experiment the outcome of different lines of play.</span>
+		  		</li>
+		  		<li class="list-group-item list-group-item-deafult">
+		  			<span class="item">Hands are specified using the format of BridgeBase Hand Viewer. Instructions on that format  and what parameters can be specified with the url can be found at <a href="http://www.bridgebase.com/tools/hvdoc.html">http://www.bridgebase.com/tools/hvdoc.html</a>. While the hand viewer supports several parameters listed at the end of the above link, this tool does not support them all. The following parameters are not supported currently : 
+		  			<ol>
+						<li>c	number of tricks claimed (This is not relevant given the purpose of this tool)</li>
+						<li>k	kibitz (This is not relevant given the purpose of this tool)</li>
+						<li>lin	Contents of actual .lin file to display (need to implement parsing of lin contents)</li>
+						<li>linurl	URL of external .lin file in XML wrapper (need to implement parsing of lin contents)</li>
+						<li>myhand	Identifier of deal stored in myhands (need to implement parsing of lin contents)</li>
+		  			</ol>
+		  			</span>
+		  		</li>
+		  		<li class="list-group-item list-group-item-info">
+		  			<span class="item">After a hand has loaded you can click on cards to play ( cards that can be played are highlighted with a green outline ). The undo and redo buttons can be used to take back and redo plays.</span>
+		  		</li>
+		  		<li class="list-group-item list-group-item-default">
+		  			<span class="item">If you have any comments and suggestions please send me an email at <span class="codedirection">moc.liamg@egdirbnaidni</span></span>
+		  		</li>
+		  	</ol>
+		  	</div>	
+		  </div>	
+	</section>
+	<footer id="footer"></footer>
+  
+  	<script src="js/bootstrap.min.js"></script>   	
+  	<script src="js/bridge-classes.js"></script>  
+  	<script src="js/jquery.cookie.js"></script>
+  	<script src="js/msie-fix.js"></script>
+  	<script src="js/jquery.ba-hashchange.min.js"></script>
+  	<script src="js/bridge-hand-player.js"></script>  
+  </body>
+</html>
