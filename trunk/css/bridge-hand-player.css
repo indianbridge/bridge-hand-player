@@ -1,5 +1,5 @@
 .fixed { position:fixed !important; }
-.absolute { position: absolute !important;}
+
 .card-table { 
 	background-image: url('../images/green-felt.jpg');
 	background-size:100% 100%;
@@ -13,20 +13,12 @@
 	cursor:not-allowed;
 }
 
+.cusrsor-hand {
+	cursor: hand;
+}
 
 span.codedirection { unicode-bidi:bidi-override; direction: rtl; }
 
-.fbar {
-    padding:0px;
-    text-align:center;
-    background-color:#DEF3CA;
-    border: 2px solid #E7EFE0;
-    -moz-border-radius:2px;
-    -webkit-border-radius:2px;
-    border-radius:2px;
-    color:#666;
-    text-shadow:1px 1px 1px #fff;
-}
 
 .pull-right {
 	 float: right;
@@ -35,76 +27,31 @@ span.codedirection { unicode-bidi:bidi-override; direction: rtl; }
 	float: left;
 }
 
-.name-active {
-    padding:0px;
-    color:#fff;
-    text-shadow:1px 1px 1px #568F23;
-    border:1px solid #93CE37;
-    border-bottom:3px solid #9ED929;
-    background-color:#9DD929;
-    background:-webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.02, rgb(123,192,67)),
-        color-stop(0.51, rgb(139,198,66)),
-        color-stop(0.87, rgb(158,217,41))
-        );
-    background: -moz-linear-gradient(
-        center bottom,
-        rgb(123,192,67) 2%,
-        rgb(139,198,66) 51%,
-        rgb(158,217,41) 87%
-        );
-    -webkit-border-top-left-radius:5px;
-    -webkit-border-top-right-radius:5px;
-    -moz-border-radius:5px 5px 0px 0px;
-    border-top-left-radius:5px;
-    border-top-right-radius:5px;
-}
-
-.name-inactive {
-    padding:0px;
-    text-align:center;
-    background-color:#DEF3CA;
-    border: 2px solid #E7EFE0;
-    -moz-border-radius:2px;
-    -webkit-border-radius:2px;
-    border-radius:2px;
-    color:#666;
-    text-shadow:1px 1px 1px #fff;
-}
-
-.text-annotation {
-    padding:0px;
-    background-color:#DEF3CA;
-    border: 2px solid #E7EFE0;
-    -moz-border-radius:2px;
-    -webkit-border-radius:2px;
-    border-radius:2px;
-    color:#666;
-    text-shadow:1px 1px 1px #fff;
-}
-            
-
-.bid-highlight {
-	 background-color: yellow;
-}
-
 .status {
 	 overflow: auto;
 }
-
-.ew-vul {
-	border-left: 3px solid red; 
-	border-right: 3px solid red; 
+.vulnerable {
+	background-color:rgb(203, 0, 0);;
 }
 
-.ns-vul {
-	border-top: 3px solid red; 
-	border-bottom: 3px solid red; 
+.middle {
+	vertical-align: middle !important;
+	text-align: center;
+}
+
+.table-no-border>thead>tr>th, 
+.table-no-border>tbody>tr>th, 
+.table-no-border>tfoot>tr>th, 
+.table-no-border>thead>tr>td, 
+.table-no-border>tbody>tr>td, 
+.table-no-border>tfoot>tr>td {
+  border-top: none; 
+}
+
+.padding-top {
+	padding-top:60px;
 }
 
 .text-size {
-	font-size: 16px;
+	font-size: 14px;
 }
