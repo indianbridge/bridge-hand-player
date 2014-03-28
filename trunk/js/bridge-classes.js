@@ -198,6 +198,8 @@ Bridge.PlayedCard = function( suit, rank, direction, annotation ) {
 	this.playNumber = 0;
 	this.trickWinner = null;
 	this.ledCard = null;
+	this.ewTricks = 0;
+	this.nsTricks = 0;
 };
 
 // Do we beat the trick winner so far
@@ -238,6 +240,14 @@ Bridge.PlayedCard.prototype.getSuitLed = function() {
 
 
 // Getters and Setters
+Bridge.PlayedCard.prototype.incrementNSTricks = function() {
+	this.nsTricks++;	
+};
+
+Bridge.PlayedCard.prototype.incrementEWTricks = function() {
+	this.ewTricks++;	
+};
+
 Bridge.PlayedCard.prototype.getAnnotation = function() {
 	return this.annotation;
 };
@@ -350,6 +360,10 @@ Bridge.Bid.prototype.getDirection = function() {
 	return this.direction;
 };
 
+Bridge.Bid.prototype.getAnnotation = function() {
+	return this.annotation;
+}
+
 Bridge.Bid.prototype.getNextBid = function( bid ) {
 	return this.nextBid
 };
@@ -414,8 +428,7 @@ Bridge.Hand.prototype.setName = function( name ) {
  * Get the name of person holding this hand
  */
 Bridge.Hand.prototype.getName = function() {
-	if ( this.name === null ) return Bridge.getDirectionName( this.direction );
-	else return this.name;	
+	return this.name;	
 };
 
 /**
@@ -477,6 +490,7 @@ Bridge.Deal = function() {
 	this.trumpSuit = null;
 	this.leader = null;
 	this.contract = null;
+	this.notes = null;
 	
 	
 	//play related
@@ -484,6 +498,7 @@ Bridge.Deal = function() {
 	this.lastPlayedCard = null;
 	this.currentPlayedCard = null;
 	this.savedPlays = {};
+	this.loadedPlay = null;
 };
 
 Bridge.Deal.prototype.isAtBeginning = function() {
@@ -577,7 +592,42 @@ Bridge.Deal.prototype.playCard = function( suit, rank, direction, annotation ) {
 		card.setTrickWinner( card );
 	}
 	this.currentPlayedCard = card;
+	if ( this.currentPlayedCard.getPlayNumber() % 4 === 0 ) {
+		var suit = this.currentPlayedCard.getTrickWinner().getDirection();
+		if ( suit === 'n' || suit === 's' ) this.currentPlayedCard.incrementNSTricks();
+		else this.currentPlayedCard.incrementEWTricks();
+	}
+	this.loadedPlay = null;
 };
+
+/** 
+ * Add annotation to play involing specified card
+ */
+Bridge.Deal.prototype.setAnnotationForCard = function( suit, rank, annotation ) {
+	var card = this.firstPlayedCard;
+	while( card !== null ) {
+		if ( card.getSuit() === suit && card.getRank() === rank ) {
+			card.setAnnotation( annotation );
+			return;
+		}
+		card = card.getNextCard();
+	}
+	throw 'Card ' + suit + rank + ' was not found when trying to add annotation!';
+}
+
+/** 
+ * Get annotation for specified card
+ */
+Bridge.Deal.prototype.getAnnotationForCard = function( suit, rank ) {
+	var card = this.firstPlayedCard;
+	while( card !== null ) {
+		if ( card.getSuit() === suit && card.getRank() === rank ) {
+			return card.getAnnotation();
+		}
+		card = card.getNextCard();
+	}
+	throw 'Card ' + suit + rank + ' was not found when trying to add annotation!';
+}
 
 Bridge.Deal.prototype.resetPlayedCardIndex = function() {
 	this.currentPlayedCard = null;
@@ -590,6 +640,9 @@ Bridge.Deal.prototype.resetAll = function() {
 };
 
 Bridge.Deal.prototype.savePlay = function( playName ) {
+	if ( playName in this.savedPlays ) {
+		throw 'There is already a saved play with name ' + playName + '. Please use a different name.';	
+	}
 	var playNumber = 0;
 	if ( this.currentPlayedCard !== null ) playNumber = this.currentPlayedCard.getPlayNumber();
 	this.savedPlays[ playName ] = {
@@ -597,6 +650,7 @@ Bridge.Deal.prototype.savePlay = function( playName ) {
 		currentPlayNumber: playNumber,
 		lastPlayedCard: this.lastPlayedCard,
 	}
+	this.loadedPlay = playName;
 };
 
 Bridge.Deal.prototype.getSavedPlayNumber = function() {
@@ -617,6 +671,7 @@ Bridge.Deal.prototype.loadPlay = function( playName ) {
 	var play = this.savedPlays[ playName ];
 	this.firstPlayedCard = play.firstPlayedCard;
 	this.lastPlayedCard = play.lastPlayedCard;
+	this.loadedPlay = playName;
 	return play.currentPlayNumber;
 };
 
@@ -851,6 +906,20 @@ Bridge.Deal.prototype.getVulnerability = function() {
 };
 
 /**
+ * Set the notes for this deal.
+ */
+Bridge.Deal.prototype.setNotes = function( notes ) {
+	this.notes = notes;
+};
+
+/**
+ * Get the vulnerability for this deal.
+ */
+Bridge.Deal.prototype.getNotes = function() {
+	return this.notes;	
+};
+
+/**
  * Set the trump suit for this deal.
  */
 Bridge.Deal.prototype.setTrumpSuit = function( suit ) {
@@ -910,6 +979,37 @@ Bridge.Deal.prototype.addCard = function( suit, rank, direction ) {
 	};
 	this.hands[ direction ].addCard( suit, rank );
 	card.setDirection( direction );
+};
+
+Bridge.Deal.prototype.getPlayStrings = function( all ) {
+	var output = '';
+	if ( all === undefined ) all = false;
+	if ( ! all || this.loadedPlay === null ) {
+		if ( this.firstPlayedCard === null ) return '';
+		var output = '&p=';
+		var card = this.firstPlayedCard;
+		while( card !== null ) {
+			output += card.getSuit() + card.getRank();
+			var annotation = card.getAnnotation();
+			if ( annotation !== null )
+			output += '{' + annotation + '}';
+			card = card.getNextCard();
+		}
+	}
+	if ( all ) {
+		for( var playName in this.savedPlays ) {
+			output += '&p' + playName + '=';
+			var card = this.savedPlays[ playName ].firstPlayedCard;
+			while( card !== null ) {
+				output += card.getSuit() + card.getRank();
+				var annotation = card.getAnnotation();
+				if ( annotation !== null )
+				output += '{' + annotation + '}';				
+				card = card.getNextCard();
+			}
+		}
+	}
+	return output;
 };
 
 
