@@ -97,7 +97,7 @@ BHP.loadDealInformation = function( ) {
 	}	
 	
 	// General notes 
-	var notes = BHP.getParameterValue( BHP.queryParameters, 'g' );
+	var notes = BHP.getParameterValue( BHP.queryParameters, 't' );
 	if ( notes ) {
 		try {
 			BHP.deal.setNotes( notes );
@@ -293,6 +293,7 @@ BHP.loadAuction = function() {
 	var contractString = BHP.getParameterValue( BHP.queryParameters, parameterName );
 	if ( ! contractString ) {
 		BHP.addError( 'No auction or contract or trumps and leader has been specified!' );
+		return;
 	}
 	var originalString = contractString;
 	contractString = contractString.toLowerCase();
@@ -408,7 +409,9 @@ BHP.drawAuction = function() {
 	}
 	
 	// Bootstrap tooltip
-	$( '.bid-annotation' ).tooltip();   	
+	$( '.bid-annotation' ).tooltip( {
+		placement:'bottom',
+	});	
 };
 
 BHP.drawDealInformation = function() {
@@ -422,20 +425,12 @@ BHP.drawDealInformation = function() {
 	if ( vul === 'e' || vul === 'b' ) {
 		compass.addClass( 'ew-vulnerable' );
 	}	
-	/*
-	
-	// Set Dealer
-	var dealer = BHP.deal.getDealer();
-	if ( dealer != null ) {
-		var dealerID = '#' + dealer + '-vul';
-		$( dealerID ).html( 'D' );
-	}*/
 	
 	// Set board
 	var table = $( '#playing-table' );
 	var board = BHP.deal.getBoard();
 	if ( board === null ) board = 1;
-	html = '<span id="board" class="fixed label label-' + BHP.BootstrapClass + '">Board : ' + board + '</span>';
+	html = '<span id="board" class="text-size fixed label label-' + BHP.BootstrapClass + '">Board : ' + board + '</span>';
 	table.append( html );
 	var board = $( '#board' );
 	board.css({
@@ -447,7 +442,7 @@ BHP.drawDealInformation = function() {
 	var contractString = BHP.deal.getContract();
 	var declarer = BHP.deal.getDeclarer();
 	if ( declarer !== null ) contractString += ' by ' + declarer; 
-	html = '<span id="contract" class="fixed label label-' + BHP.BootstrapClass + '">Contract : ' + contractString + '</span>';
+	html = '<span id="contract" class="text-size fixed label label-' + BHP.BootstrapClass + '">Contract : ' + contractString + '</span>';
 	table.append( html );
 	var contract = $( '#contract' );
 	contract.css({
@@ -455,11 +450,32 @@ BHP.drawDealInformation = function() {
 		left: table.position().left + table.outerWidth() - contract.outerWidth(),
 	});
 	
+	// NS and EW tricks
+	html = '<span id="ns-tricks" class="text-size fixed label label-' + BHP.BootstrapClass + '">NS Tricks : 0</span>';
+	table.append( html );
+	var nsTricks = $( '#ns-tricks' );
+	nsTricks.css({
+		top: table.position().top + table.outerHeight() - nsTricks.outerHeight(),
+		left: table.position().left,
+	});	
+	
+	html = '<span id="ew-tricks" class="text-size fixed label label-' + BHP.BootstrapClass + '">EW Tricks : 0</span>';
+	table.append( html );
+	var ewTricks = $( '#ew-tricks' );
+	ewTricks.css({
+		top: table.position().top + table.outerHeight() - ewTricks.outerHeight(),
+		left: table.position().left + table.outerWidth() - ewTricks.outerWidth(),
+	});		
+	
 	
 	// Add general notes
 	var notes = BHP.deal.getNotes();
-	if ( notes === null ) notes = '';
-	$( '#general-messages' ).empty().append( unescape( notes ) );
+	if ( notes !== null ) {
+		var general = $( '#general-messages' );
+		general.empty().append( unescape( notes ) );
+		general.addClass( 'alert' );
+		general.addClass( 'alert-' + BHP.BootstrapClass );
+	}
 };
 
 /**
@@ -480,7 +496,6 @@ BHP.showErrors = function() {
 	html += BHP.errors.join( '</span></li><li class="list-group-item list-group-item-warning"><span class="item">' );
 	html += '</span></li></ol>';
 	html += '</div>';
-	//html += BHP.instructions;
 	$( container ).empty().append( html );	
 	$( container ).append( BHP.instructions );
 };
@@ -490,6 +505,7 @@ BHP.showErrors = function() {
  */
 BHP.drawFooter = function() {
 	var footerID = "footer-menu-bar";
+	$( '#' + footerID ).remove();
 	var container = 'body';
 	var fields = {
 		'rewind' : 		{ name: 'Rewind',				icon: 'step-backward', iconAfter: false, },
@@ -585,6 +601,7 @@ BHP.redoTrick = function() {
 
 BHP.redoCard = function() {
 	var redoneCard = BHP.deal.redoCard();	
+	if ( redoneCard == null ) return;
 	var card = '#' + BHP.getCardID( redoneCard.suit, redoneCard.rank );
 	var image = $( card );
 	var suit = image.attr( 'suit' );
@@ -602,6 +619,7 @@ BHP.redoCard = function() {
 
 BHP.undoCard = function() {
 	var card = BHP.deal.undoCard();	
+	if ( card === null ) return;
 	var cardID = '#card-' + card.suit + card.rank;
 	var tableCardID = '#played-' + cardID;
 	$( cardID ).attr( 'src', $( cardID). attr( 'imageName' ) );
@@ -784,6 +802,8 @@ BHP.setPlayableCards = function() {
 	BHP.setActiveHand( nextTurn );
 	BHP.updateButtonStatus();
 	BHP.updateAnnotation();
+	$( '#ns-tricks' ).html( 'NS Tricks : ' + BHP.deal.getNSTricks() );
+	$( '#ew-tricks' ).html( 'EW Tricks : ' + BHP.deal.getEWTricks() );
 };
 
 
@@ -1027,7 +1047,7 @@ BHP.clearTableCards = function() {
 // Draw the main sections
 BHP.drawMainSection = function() {
 	var cells = [
-		{ id: 'general-messages',name: 'Cell 0 0', height: 3, width: 3, class: 'status alert alert-' + BHP.BootstrapClass, left: 0, top: 0, widthGutters: 1, heightGutters: 1, },
+		{ id: 'general-messages',name: 'Cell 0 0', height: 3, width: 3, class: 'status', left: 0, top: 0, widthGutters: 1, heightGutters: 1, },
 		{ id: 'n-hand',name: 'Cell 0 0', height: 3, width: 6, class: 'alert', left: 3, top: 0, widthGutters: 2, heightGutters: 1, },
 		{ id: 'auction',name: 'Cell 0 0', height: 3, width: 3, class: 'status', left: 9, top: 0, widthGutters: 3, heightGutters: 1, },
 		{ id: 'w-hand',name: 'Cell 0 0', height: 6, width: 4, class: 'alert', left: 0, top: 3, widthGutters: 1, heightGutters: 2, },
@@ -1042,8 +1062,6 @@ BHP.drawMainSection = function() {
 	var totalWidth = BHP.viewport.width;
 	var unitHeight = ( totalHeight - 4 * BHP.gutter ) / 12;
 	var unitWidth = ( totalWidth - 4 * BHP.gutter ) / 12;
-	//var sectionHeight = ( totalHeight - 20 ) / 4;
-	//var sectionWidth = ( totalWidth - 20 ) / 4;
 	var container = '#section';
 	var top = BHP.header.position().top + BHP.header.height();
 	var left = 0;
@@ -1078,17 +1096,6 @@ BHP.drawTitles = function() {
 		top: $( area ).position().top - nameObject.outerHeight(),
 		left: $( area ).position().left,
 	});	
-	
-	/*var name = 'General Notes'
-	var nameID = 'general-messages-title';
-	var html = '<span id="' + nameID + '"  class="text-size fixed label label-' + BHP.BootstrapClass + '">' + name + '</span>';
-	var area = '#general-messages';
-	$( container ).append( html ); 
-	var nameObject = $( '#' + nameID );
-	nameObject.css({
-		top: $( area ).position().top - nameObject.outerHeight(),
-		left: $( area ).position().left,
-	});	*/
 };
 
 /**
@@ -1128,6 +1135,9 @@ BHP.drawAll = function() {
 	
 	BHP.processHash();
 	
+};
+
+BHP.loadClickHandlers = function() {
 	// Handle save play button click.
 	$( '#save-play' ).click( function() {
 		$('#save-play-modal').modal('show');
@@ -1138,6 +1148,7 @@ BHP.drawAll = function() {
 			alert( 'Play name cannot be empty!' );
 		}
 		else {
+			playName = unescape( playName );
 			try {	
 				BHP.deal.savePlay( playName );
 				$( '#current-line' ).html( playName );
@@ -1203,10 +1214,8 @@ BHP.drawAll = function() {
 			return;
 		}
 		$( '#generate-url-modal' ).modal('show');
-	});
-	
-	
-};
+	});	
+}
 
 BHP.loadPlayByName = function( playString, playName ) {
 	BHP.deal.resetAll();
@@ -1238,7 +1247,7 @@ BHP.loadPlayByName = function( playString, playName ) {
 	var index = BHP.savedPlayCount;
 	BHP.savedPlayCount++;
 	var lineID = 'line-' + index;
-	var html = '<li><a class="btn" id="' + lineID +'">' + playName + '</a></li>';
+	var html = '<li><a class="btn" id="' + lineID +'">' + unescape( playName ) + '</a></li>';
 	list.append(html);
 	$( '#' + lineID ).click(function(){
 		BHP.loadSavedPlay( this );
@@ -1265,10 +1274,12 @@ BHP.loadPlay = function() {
 				if ( !name ) name = 'Default';
 				if ( firstName === null ) firstName = name;
 				var playString = BHP.queryParameters[ parameterName ];
+				name = unescape( name );
 				BHP.loadPlayByName( playString, name );
 			}
 		}
 		if ( firstName !== null ) {
+			firstName = unescape( firstName );
 			BHP.deal.loadPlay( firstName );
 			$( '#current-line' ).html( firstName );
 		}
@@ -1380,7 +1391,7 @@ BHP.createURLQueryParameters = function( allPlays ) {
 	
 	// General notes if any
 	var notes = BHP.deal.getNotes();
-	if ( notes !== null ) url += '&g=' + notes;
+	if ( notes !== null ) url += '&t=' + notes;
 		
 	return url;
 };
@@ -1460,6 +1471,7 @@ $(function() {
 		}
 		else {
 			BHP.drawAll();
+			BHP.loadClickHandlers();
 			// Setup handler to detect window resize and redraw everything
 			$(window).resize(function() {
 				BHP.drawAll();
