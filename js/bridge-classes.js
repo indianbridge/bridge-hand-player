@@ -240,6 +240,23 @@ Bridge.PlayedCard.prototype.getSuitLed = function() {
 
 
 // Getters and Setters
+
+Bridge.PlayedCard.prototype.setNSTricks = function( nsTricks ) {
+	this.nsTricks = nsTricks;	
+};
+
+Bridge.PlayedCard.prototype.setEWTricks = function( ewTricks ) {
+	this.ewTricks = ewTricks;	
+};
+
+Bridge.PlayedCard.prototype.getNSTricks = function() {
+	return this.nsTricks;
+};
+
+Bridge.PlayedCard.prototype.getEWTricks = function() {
+	return this.ewTricks;	
+};
+
 Bridge.PlayedCard.prototype.incrementNSTricks = function() {
 	this.nsTricks++;	
 };
@@ -584,6 +601,8 @@ Bridge.Deal.prototype.playCard = function( suit, rank, direction, annotation ) {
 		if ( card.winTrick( this.trumpSuit ) ) {
 			card.setTrickWinner( card );
 		}
+		card.setEWTricks( this.currentPlayedCard.getEWTricks() );
+		card.setNSTricks( this.currentPlayedCard.getNSTricks() );
 	}
 	else {	
 		this.firstPlayedCard = card;
@@ -677,7 +696,8 @@ Bridge.Deal.prototype.loadPlay = function( playName ) {
 
 Bridge.Deal.prototype.undoCard = function() {
 	if ( this.currentPlayedCard === null ) {
-		throw 'No Plays to Undo!';
+		//throw 'No Plays to Undo!';
+		return null;
 	}
 	else {
 		var card = {
@@ -693,14 +713,16 @@ Bridge.Deal.prototype.undoCard = function() {
 Bridge.Deal.prototype.redoCard = function() {
 	if ( this.currentPlayedCard === null ) {
 		if ( this.firstPlayedCard === null ) {
-			throw 'No plays made yet. Nothing to Redo!';
+			//throw 'No plays made yet. Nothing to Redo!';
+			return null;
 		}
 		else this.currentPlayedCard = this.firstPlayedCard;
 	}
 	else {
 		var nextCard = this.currentPlayedCard.getNextCard();
 		if ( nextCard === null ) {
-			throw 'Nothing to Redo!';
+			//throw 'Nothing to Redo!';
+			return null;
 		}
 		else {
 			this.currentPlayedCard = nextCard;
@@ -827,7 +849,7 @@ Bridge.Deal.prototype.addBid = function( level, suit, annotation ) {
 	}
 	if ( suit !== 'p' && suit !== 'x' && suit !== 'r' ) {
 		if ( this.currentLevels !== null ) {
-			if ( level < this.currentLevels.level || ( level === this.currentLevels.level && Bridge.Suits.indexOf(suit) < Bridge.Suits.indexOf( this.currentLevels.suit ) ) ) {
+			if ( level < this.currentLevels.level || ( level === this.currentLevels.level && Bridge.BidSuitOrder.indexOf(suit) > Bridge.BidSuitOrder.indexOf( this.currentLevels.suit ) ) ) {
 				throw 'Invalid Bid ' + level + suit + '!';
 			}
 		}
@@ -1040,6 +1062,16 @@ Bridge.Deal.prototype.getHand = function( direction ) {
 Bridge.Deal.prototype.setName = function( name, direction ) {
 	Bridge.checkDirection( direction );	
 	this.hands[ direction ].setName( name );
+};
+
+Bridge.Deal.prototype.getNSTricks = function() {
+	if ( this.currentPlayedCard === null ) return 0;
+	else return this.currentPlayedCard.getNSTricks();	
+};
+
+Bridge.Deal.prototype.getEWTricks = function() {
+	if ( this.currentPlayedCard === null ) return 0;
+	else return this.currentPlayedCard.getEWTricks();	
 };
 
 /**
