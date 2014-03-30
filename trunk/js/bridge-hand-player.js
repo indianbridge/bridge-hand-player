@@ -387,13 +387,13 @@ BHP.drawAuction = function() {
 			if ( bid.direction === 'w' ) html += '<tr class="text-center">';
 			var bidString = bid.getString();
 			var bidHTML = '';
-			if ( bidString.annotation === null ) {
-				bidHTML = bidString.bid;
+			if ( bidString.annotation === null || ! ( bidString.annotation.trim() ) ) {
+				bidHTML = '<span id="bid-' + i + '">' + bidString.bid + '</span>';
 			}
 			else {
-					bidHTML = '<span data-toggle="tooltip" class="bg-' + BHP.BootstrapClass + ' bid-annotation" title="' + unescape( bidString.annotation ) +'">' + bidString.bid + '</span>';
+					bidHTML = '<span id="bid-' + i + '" data-toggle="tooltip" class="bg-' + BHP.BootstrapClass + ' bid-annotation" title="' + unescape( bidString.annotation ) +'">' + bidString.bid + '</span>';
 			}
-			html += '<td>' + bidHTML + '</td>';
+			html += '<td class="annotatable-bid" bidnumber="' + i + '">' + bidHTML + '</td>';
 			if ( currentDirection === 's' ) html += '</tr>';
 			currentDirection = Bridge.getLHO( currentDirection );
 		}
@@ -406,6 +406,9 @@ BHP.drawAuction = function() {
 		html += '</tbody></table>';	
 		var container = '#auction';
 		$( container ).empty().append( html );
+		$( '.annotatable-bid' ).click(function() {
+			BHP.editBidAnnotation( this );
+		});		
 	}
 	
 	// Bootstrap tooltip
@@ -570,6 +573,20 @@ BHP.drawFooter = function() {
 BHP.updateAnnotation = function() {
 	var annotationArea = '#annotation-area';
 	$( annotationArea ).html( BHP.deal.getAnnotation() );
+};
+
+BHP.updateBidAnnotation = function( bidNumber, annotation ) {
+	var bid = $( '#bid-' + bidNumber );
+	var className = 'bg-' + BHP.BootstrapClass;
+	if ( annotation === null || ! ( annotation.trim() ) ) {
+		bid.removeClass( className ).attr( 'title', '' ).attr( 'data-toggle', '' ).tooltip( 'disable' );
+	}
+	else {
+		bid.addClass( className ).attr( 'title', escape( annotation.trim() ) ).attr( 'data-toggle', 'tooltip' );
+	}
+	bid.tooltip({
+		placement: 'bottom',
+	});
 }
 
 BHP.rewind = function() {
@@ -720,14 +737,24 @@ BHP.playTableCard = function( card ) {
 	});
 };
 
+BHP.editBidAnnotation = function( bid ) {
+	var bidNumber = $( bid ).attr( 'bidnumber' );
+	bidNumber = parseInt( bidNumber );
+	$('#annotation-title').html( 'Edit/Add Annotation for Bid' );
+	var annotation = BHP.deal.getAnnotationForBid( bidNumber );
+	if ( annotation === null ) annotation = '';
+	$('#annotation-text').val( annotation ).attr( 'bidnumber', bidNumber );
+	$('#annotation-modal').modal('show');
+};
+
 BHP.editAnnotation = function( card ) {
 	var suit = $( card ).attr( 'suit' );
 	var rank = $( card ).attr( 'rank' );
-	$('#add-card-annotation-title').html('Edit/Add Annotation for ' + Bridge.getSuitName( suit ) + Bridge.getRankName( rank ) );
+	$('#annotation-title').html('Edit/Add Annotation for ' + Bridge.getSuitName( suit ) + Bridge.getRankName( rank ) );
 	var annotation = BHP.deal.getAnnotationForCard( suit, rank );
 	if ( annotation === null ) annotation = '';
-	$('#add-card-annotation-text').val( annotation ).attr( 'suit', suit ).attr( 'rank', rank );
-	$('#add-card-annotation-modal').modal('show');
+	$('#annotation-text').val( annotation ).attr( 'suit', suit ).attr( 'rank', rank );
+	$('#annotation-modal').modal('show');
 };
 
 /**
@@ -1112,7 +1139,7 @@ BHP.drawAll = function() {
 	var container = '#section';
 	$( container ).empty();
 	$( '#save-play-modal' ).modal('hide');
-	$( '#add-card-annotation-modal' ).modal('hide');
+	$( '#annotation-modal' ).modal('hide');
 	$( '#generate-url-modal' ).modal('hide');
 
 	// First draw footer.
@@ -1173,14 +1200,23 @@ BHP.loadClickHandlers = function() {
 	});
 	
 	// Handle edit annotation popup save button click
-	$('#save-card-annotation-ok').click( function() {
-		var field = $( '#add-card-annotation-text' );
-		var suit = field.attr( 'suit' );
-		var rank = field.attr( 'rank' );
-		var annotation = field.val();
-		BHP.deal.setAnnotationForCard( suit, rank, annotation );
-		BHP.updateAnnotation();		
-		$('#add-card-annotation-modal').modal('hide');
+	$('#save-annotation-ok').click( function() {
+		var field = $( '#annotation-text' );
+		var bidNumber = field.attr( 'bidnumber' );
+		if ( bidNumber === undefined ) {
+			var suit = field.attr( 'suit' );
+			var rank = field.attr( 'rank' );
+			var annotation = field.val();
+			BHP.deal.setAnnotationForCard( suit, rank, annotation );
+			BHP.updateAnnotation();		
+		}
+		else {
+			bidNumber = parseInt( bidNumber );
+			var annotation = field.val();
+			BHP.deal.setAnnotationForBid( bidNumber, annotation );
+			BHP.updateBidAnnotation( bidNumber, annotation );				
+		}
+		$('#annotation-modal').modal('hide');
 	});	
 	
 	// Create buttons

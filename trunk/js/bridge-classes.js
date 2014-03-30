@@ -397,7 +397,11 @@ Bridge.Bid.prototype.getDirection = function() {
 
 Bridge.Bid.prototype.getAnnotation = function() {
 	return this.annotation;
-}
+};
+
+Bridge.Bid.prototype.setAnnotation = function( annotation ) {
+	this.annotation = annotation;
+};
 
 Bridge.Bid.prototype.getNextBid = function( bid ) {
 	return this.nextBid
@@ -651,6 +655,19 @@ Bridge.Deal.prototype.setAnnotationForCard = function( suit, rank, annotation ) 
 		card = card.getNextCard();
 	}
 	throw 'Card ' + suit + rank + ' was not found when trying to add annotation!';
+};
+
+Bridge.Deal.prototype.setAnnotationForBid = function( bidNumber, annotation ) {
+	var bid = this.firstBid;
+	var count = 0;
+	while( bid !== null && count !== bidNumber ) {
+		bid = bid.getNextBid();
+		count++;
+	}
+	if ( bid !== null ) bid.setAnnotation( annotation );
+	else {
+		throw 'Bid was not found when trying to add annotation!';
+	}
 }
 
 /** 
@@ -665,7 +682,23 @@ Bridge.Deal.prototype.getAnnotationForCard = function( suit, rank ) {
 		card = card.getNextCard();
 	}
 	throw 'Card ' + suit + rank + ' was not found when trying to add annotation!';
-}
+};
+
+/** 
+ * Get annotation for specified bid
+ */
+Bridge.Deal.prototype.getAnnotationForBid = function( bidNumber ) {
+	var bid = this.firstBid;
+	var count = 0;
+	while( bid !== null && count !== bidNumber ) {
+		bid = bid.getNextBid();
+		count++;
+	}
+	if ( bid !== null ) return bid.getAnnotation();
+	else {
+		throw 'Bid was not found when trying to add annotation!';
+	}
+};
 
 Bridge.Deal.prototype.resetPlayedCardIndex = function() {
 	this.currentPlayedCard = null;
