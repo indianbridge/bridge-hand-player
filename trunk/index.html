@@ -3,165 +3,173 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bridge Hand Player</title>
-
-    <!-- Bootstrap -->
-    <link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/lumen/bootstrap.min.css" rel="stylesheet" id="bootswatch-theme">
-	<style>
-		body, html {
-		  height: 100%;
-		  width:100%;
-		}    
-    	.fill {   height: 100%; }
-    	table.auto { width:auto; }	
-    	.card { position: relative; }
-    	.card-absolute { position: absolute; }
-    </style>
+    <link rel="icon" type="image/ico" href="favicon.ico"/>
     
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootswatch-theme">
+    <link href="css/bridge-hand-player.css" rel="stylesheet">
+    
+    <!-- jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <![endif]-->      
   </head>
   <body>
   	<header>
-		<nav class="navbar navbar-default navbar-static-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand">Bridge Hand Player</a>
-				</div>
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Current Theme : <span id="current-theme">Default</span> (Change)<b class="caret"></b></a>
-							<ul id="themes" class="dropdown-menu">
-							</ul>
-						</li>					    
+		<nav id="header" class="navbar navbar-default navbar-fixed-top" role="navigation">
+		   <div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" 
+		         data-target="#header-bar">
+		         <span class="sr-only">Toggle navigation</span>
+		         <span class="icon-bar"></span>
+		         <span class="icon-bar"></span>
+		         <span class="icon-bar"></span>
+		      </button>
+		   </div>
+		   <div class="collapse navbar-collapse" id="header-bar">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+				<a class="bid-annotation" title="Change Color Scheme" href="#" class="dropdown-toggle" data-toggle="dropdown">Skin : <span id="current-theme">Default</span> (Change)<b class="caret"></b></a>
+					<ul id="themes" class="dropdown-menu">
 					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<p class="navbar-text"><span class="glyphicon glyphicon-copyright-mark"></span> Sriram Narasimhan</p>
+				</li>	
+				<li class="dropdown">
+				<a class="bid-annotation" title="Load a Saved Line" href="#" class="dropdown-toggle" data-toggle="dropdown">Line : <span id="current-line">Unsaved</span> (Change)<b class="caret"></b></a>
+					<ul id="lines" class="dropdown-menu">
 					</ul>
-				</div><!--/.nav-collapse -->
-			</div>
-		</nav>  	  		
-  	</header>
-  	<section>
-		<div id="main" class="container-fluid">
-			<!-- Example row of columns -->
-			<div class="row">
-				<div id="hand-information" class="col-xs-4">
-					<div class="cell panel panel-info">
-						<div class="panel-heading fill">				
-						</div>
-					</div>									
-				</div>
-				<div id="north" class="col-xs-4">
-					<div class="cell panel panel-primary">
-					<div class="panel-heading">
-					<h3 class="panel-title">North</h3>
-					</div>
-					<div id="north-hand" class="panel-body">
-					<div id="north-s"></div>
-					<div id="north-h"></div>
-					<div id="north-d"></div>
-					<div id="north-c"></div>
-					</div>
-					</div>
-				</div>
-				<div class="col-xs-4 empty">
-					<button id="toggle-north-button" type="button" class="btn btn-primary">Toggle North</button>	
-				</div>
-			</div>  
-			<div class="row">
-				<div id="west" class="col-xs-4">
-					<div class="cell panel panel-primary">
-					<div class="panel-heading">
-					<h3 class="panel-title">West</h3>
-					</div>
-					<div id="west-hand" class="panel-body">				
-					<div id="west-s"></div>
-					<div id="west-h"></div>
-					<div id="west-d"></div>
-					<div id="west-c"></div>		
-					</div>
-					</div>								
-				</div>
-				<div id="table" class="col-xs-4">
-					<div class="cell panel panel-success">
-							<table>
-								<tr>
-									<td class="col-xs-4"></td>
-									<td align="center" class="col-xs-4" id="north-played-card"></td>
-									<td class="col-xs-4"></td>
-								</tr>
-								<tr>
-									<td align="left" id="west-played-card"></td>
-									<td></td>
-									<td align="right" id="east-played-card"></td>
-								</tr>							
-								<tr>
-									<td></td>
-									<td align="center" id="south-played-card"></td>
-									<td></td>
-								</tr>													
-							</table>	
-					</div>				
-				</div>
-				<div id="east" class="col-xs-4">
-					<div class="cell panel panel-primary">
-					<div class="panel-heading">
-					<h3 class="panel-title">East</h3>
-					</div>
-					<div id="east-hand" class="panel-body">				
-					<div id="east-s"></div>
-					<div id="east-h"></div>
-					<div id="east-d"></div>
-					<div id="east-c"></div>			
-					</div>
-					</div>							
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-4 empty"></div>
-				<div id="south" class="col-xs-4">
-					<div class="cell panel panel-primary">
-					<div class="panel-heading">
-					<h3 class="panel-title">South</h3>
-					</div>
-					<div id="south-hand" class="panel-body">				
-					<div id="south-s"></div>
-					<div id="south-h"></div>
-					<div id="south-d"></div>
-					<div id="south-c"></div>		
-					</div>
-					</div>							
-				</div>
-				<div class="col-xs-4 empty"></div>		
-			</div>		  
-		</div>	
-    </section>
-    <footer>
- 		<div id="dealer" class=""></div>
-	</footer> 
+				</li>
+				<li><a class="bid-annotation" title="Save current line of play" href="javascript:void(0);" id="save-play">Save Line</a></li>											
+		         <li class="dropdown">
+		            <a class="bid-annotation" title="Share with others" href="#" class="dropdown-toggle" data-toggle="dropdown">
+		               Generate URL
+		               <b class="caret"></b>
+		            </a>
+		            <ul class="dropdown-menu">
+		               <li><a id="bbo_url" all="false" class="btn generate-url" title="This will only include currently active line of play and not any saved line of plays"><img src="images/bbo_logo.png" height="30"></img> Bridge Base Hand Viewer URL</a></li>
+		               <li><a id="bw_url" all="false" class="btn generate-url" title="This will only include currently active line of play and not any saved line of plays"><img src="images/bw_logo.png" height="30"></img> Bridge Winners Embed Code</a></li>
+		               <li class="divider"></li>
+		               <li><a id="bhp_url" all="true" class="btn generate-url" title="This will include all saved line of plays and the current line of play if it is not saved">This Site's Extended Format URL</a></li>
+		            </ul>
+		         </li>					    
+			</ul>		   
+		      <p class="navbar-text">
+		      	<a class="bid-annotation" target="_blank" title="How to use this tool" href="instructions.html"><span class="glyphicon glyphicon-question-sign"></span></a>
+		      	<a class="bid-annotation" target="_blank" title="Send feedback" href="contact.html"><span class="glyphicon glyphicon-envelope"></span></a>
+		      </p>
+		   </div>
+		</nav>  
+	</header>
+	<section id="section">
+	</section>
+	<footer id="footer"></footer>
+	
+	<div class="modal fade" id="save-play-modal" tabindex="-1" role="dialog" 
+	   aria-labelledby="myModalLabel" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" 
+	               aria-hidden="true">×
+	            </button>
+	            <h4 class="modal-title" id="myModalLabel">
+	              Provide a name to save current line of play as
+	            </h4>
+	         </div>
+	         <div class="modal-body">
+				<form role="form">
+				  <div class="form-group">
+				    <label for="playname">Line Name</label>
+				    <input type="text" autofocus class="form-control" id="save-play-name" placeholder="Enter Line Name">
+				  </div>
+				</form>	
+	         </div>
+	         <div class="modal-footer">
+	            <button id="save-play-ok" type="button" class="btn btn-primary">
+	               Save Line
+	            </button>         
+	            <button type="button" class="btn btn-default" 
+	               data-dismiss="modal">
+	               Cancel
+	            </button>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <!-- Include the hand player javascript -->
-    <script src="js/jquery.cookie.js"></script>
-    <script src="js/display_bridge_hand.js"></script>    
-    <script src="js/grids.js"></script>
-  	<script src="js/jquery.config.js"></script>
-  	<script src="js/jquery.fittext.js"></script>
-  	<script>$('.cell').fitText();</script>
+	         </div>
+	      </div><!-- /.modal-content -->
+	   </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->	
+	
+	<div class="modal fade" id="add-card-annotation-modal" tabindex="-2" role="dialog" 
+	   aria-labelledby="add-card-annotation-title" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" 
+	               aria-hidden="true">×
+	            </button>
+	            <h4 id="add-card-annotation-title" class="modal-title">
+	              Enter the annotation
+	            </h4>
+	         </div>
+	         <div class="modal-body">
+				<form role="form">
+				  <div class="form-group">
+				    <label for="playname">Annotation</label>
+				    <input type="text" autofocus class="form-control" id="add-card-annotation-text" placeholder="Enter Annotation">
+				  </div>
+				</form>	
+	         </div>
+	         <div class="modal-footer">
+	            <button id="save-card-annotation-ok" type="button" class="btn btn-primary">
+	               Save Annotation
+	            </button>         
+	            <button type="button" class="btn btn-default" 
+	               data-dismiss="modal">
+	               Cancel
+	            </button>
+
+	         </div>
+	      </div><!-- /.modal-content -->
+	   </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->	
+	
+	<div class="modal fade" id="generate-url-modal" tabindex="-1" role="dialog" 
+	   aria-labelledby="generate-url-title" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" 
+	               aria-hidden="true">×
+	            </button>
+	            <h4 id="generate-url-title" class="modal-title">
+	              Link and/or Link text can be seen below
+	            </h4>
+	         </div>
+	         <div class="modal-body">
+				<form role="form">
+				  <div id="generate-url-content" class="form-group">
+				  	<div id="generate-url-href"></div>
+				  	Copy the following text:
+				  	<textarea rows="4" cols="50" autofocus readonly id="generate-url-text" name="generate-url-text" form="form"></textarea>
+				  </div>
+				</form>	
+	         </div>
+	         <div class="modal-footer">     
+	            <button type="button" class="btn btn-default" 
+	               data-dismiss="modal">
+	               OK
+	            </button>
+
+	         </div>
+	      </div><!-- /.modal-content -->
+	   </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->		
+  
+  	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>	
+  	<script src="js/bridge-hand-player-min.js"></script>  
   </body>
 </html>

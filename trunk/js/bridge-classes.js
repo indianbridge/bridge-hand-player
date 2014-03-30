@@ -129,12 +129,6 @@ Bridge.Vulnerability = {
 
 /**
  * Creates an instance of a Playing Card.
- *
- * @constructor
- * @this {Bridge.Card}
- * @param {string} suit a character representing the suit of this card
- * @param {string} rank a character representing the rank of this card
- * @param {string} direction a character representing the direction this card is assigned to (optional)
  */
 Bridge.Card = function( suit, rank, direction ) {
 	Bridge.checkCardSuit( suit );
@@ -148,26 +142,41 @@ Bridge.Card = function( suit, rank, direction ) {
 		Bridge.checkDirection( direction );
 		this.direction = direction;
 	}
+	this.played = false;
+};
+
+/**
+ * Set the status of this card to played.
+ */
+Bridge.Card.prototype.play = function() {
+	if ( this.played ) throw Bridge.getSuitName( this.suit ) + Bridge.getRankName( this.rank ) + ' has already been played!';
+	this.played = true;
+};
+
+/**
+ * Reset the status of this card to unplayed.
+ */
+Bridge.Card.prototype.reset = function() {
+	this.played = false;
+};
+
+/**
+ * Set the status of this card to unplayed.
+ */
+Bridge.Card.prototype.undo = function() {
+	if ( ! this.played ) throw Bridge.getSuitName( this.suit ) + Bridge.getRankName( this.rank ) + ' has not been played!';
+	this.played = false;
 };
 
 /**
  * Who is this card assigned To?
- *
- * @this {Bridge.Card}
- * @param void
- * @return {string} direction the direction this card is assigned to
- *				   this will be null if card is unassigned
  */
 Bridge.Card.prototype.getDirection = function() {
 	return this.direction;
-}
+};
 
 /**
  * Assign this card to a direction.
- *
- * @this {Bridge.Card}
- * @param {string} direction the direction this card should be assigned to
- *				   making the direction null will unassign the card
  */
 Bridge.Card.prototype.setDirection = function( direction ) {
 	this.direction = direction;	
@@ -181,7 +190,16 @@ for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
 	for ( var rank in Bridge.Ranks ) {
 		Bridge.Cards[ suit ][ rank ] = new Bridge.Card( suit, rank );
 	}
-}
+};
+
+Bridge.Cards.reset = function() {
+	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
+		var suit = Bridge.CardSuitOrder[ i ];
+		for ( var rank in Bridge.Ranks ) {
+			Bridge.Cards[ suit ][ rank ].reset();
+		}
+	}	
+};
 
 // The set of played cards on this Deal
 Bridge.PlayedCard = function( suit, rank, direction, annotation ) {
@@ -612,11 +630,12 @@ Bridge.Deal.prototype.playCard = function( suit, rank, direction, annotation ) {
 	}
 	this.currentPlayedCard = card;
 	if ( this.currentPlayedCard.getPlayNumber() % 4 === 0 ) {
-		var suit = this.currentPlayedCard.getTrickWinner().getDirection();
-		if ( suit === 'n' || suit === 's' ) this.currentPlayedCard.incrementNSTricks();
+		var winner = this.currentPlayedCard.getTrickWinner().getDirection();
+		if ( winner === 'n' || winner === 's' ) this.currentPlayedCard.incrementNSTricks();
 		else this.currentPlayedCard.incrementEWTricks();
 	}
 	this.loadedPlay = null;
+	Bridge.Cards[ suit ][ rank ].play();
 };
 
 /** 
@@ -650,12 +669,14 @@ Bridge.Deal.prototype.getAnnotationForCard = function( suit, rank ) {
 
 Bridge.Deal.prototype.resetPlayedCardIndex = function() {
 	this.currentPlayedCard = null;
+	Bridge.Cards.reset();
 };
 
 Bridge.Deal.prototype.resetAll = function() {
 	this.currentPlayedCard = null;
 	this.firstPlayedCard = null;
 	this.lastPlayedCard = null;
+	Bridge.Cards.reset();
 };
 
 Bridge.Deal.prototype.savePlay = function( playName ) {
@@ -706,6 +727,7 @@ Bridge.Deal.prototype.undoCard = function() {
 			direction: this.currentPlayedCard.getDirection(),
 		}
 		this.currentPlayedCard = this.currentPlayedCard.getPreviousCard();
+		Bridge.Cards[ card.suit ][ card.rank ].undo();
 		return card;
 	}
 };
@@ -733,6 +755,7 @@ Bridge.Deal.prototype.redoCard = function() {
 		rank: this.currentPlayedCard.getRank(),
 		direction: this.currentPlayedCard.getDirection(),
 	}	
+	Bridge.Cards[ card.suit ][ card.rank ].play();
 	return card;	
 };
 

@@ -159,7 +159,7 @@ BHP.loadHands = function( ) {
 	}	
 	else if ( unspecifiedHands.length > 1 ) {
 		var hands = [];
-		for( var i = 0;i < unspecifiedHands.length; ++i ) hands.push( getDirectionName( unspecifiedHands[ i ]) );
+		for( var i = 0;i < unspecifiedHands.length; ++i ) hands.push( Bridge.getDirectionName( unspecifiedHands[ i ]) );
 		var message = hands.join(' and ');
 		message += ' hands have not been specified!';
 		BHP.addError( message );
@@ -497,7 +497,9 @@ BHP.showErrors = function() {
 	html += '</span></li></ol>';
 	html += '</div>';
 	$( container ).empty().append( html );	
-	$( container ).append( BHP.instructions );
+	html = '<div id="postamble"></div>';
+	$( container ).append( html );
+	$( '#postamble' ).load( 'instructions.html' );
 };
 
 /**
@@ -1449,7 +1451,7 @@ $(function() {
 	if ( BHP.queryParameters ) {
 		BHP.instructions = $( '#instructions' ).html();
 		$( '#instructions' ).remove();
-		
+		try {
 		// Load Deal Information
 		BHP.loadDealInformation();
 		
@@ -1464,6 +1466,10 @@ $(function() {
 		
 		// Load the play
 		BHP.loadPlay();
+		}
+		catch ( err ) {
+			BHP.addError( err );
+		}
 		
 		if ( BHP.errors.length > 0 ) {
 			BHP.showErrors();
@@ -1482,6 +1488,12 @@ $(function() {
 		  	});						
 		}
 		
+	}
+	else {
+		var container = '#section';
+		html = '<div id="postamble" class="padding-top"></div>';
+		$( container ).append( html );
+		$( '#postamble' ).load( 'instructions.html' );		
 	}
 });
 
