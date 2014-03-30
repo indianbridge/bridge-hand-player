@@ -34,18 +34,18 @@
 		   <div class="collapse navbar-collapse" id="header-bar">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Theme : <span id="current-theme">Default</span> (Change)<b class="caret"></b></a>
+				<a class="bid-annotation" title="Change Color Scheme" href="#" class="dropdown-toggle" data-toggle="dropdown">Skin : <span id="current-theme">Default</span> (Change)<b class="caret"></b></a>
 					<ul id="themes" class="dropdown-menu">
 					</ul>
 				</li>	
 				<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Line : <span id="current-line">Unsaved</span> (Change)<b class="caret"></b></a>
+				<a class="bid-annotation" title="Load a Saved Line" href="#" class="dropdown-toggle" data-toggle="dropdown">Line : <span id="current-line">Unsaved</span> (Change)<b class="caret"></b></a>
 					<ul id="lines" class="dropdown-menu">
 					</ul>
 				</li>
-				<li><a href="javascript:void(0);" id="save-play">Save Line</a></li>											
+				<li><a class="bid-annotation" title="Save current line of play" href="javascript:void(0);" id="save-play">Save Line</a></li>											
 		         <li class="dropdown">
-		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		            <a class="bid-annotation" title="Share with others" href="#" class="dropdown-toggle" data-toggle="dropdown">
 		               Generate URL
 		               <b class="caret"></b>
 		            </a>
@@ -57,7 +57,9 @@
 		            </ul>
 		         </li>					    
 			</ul>		   
-		      <p class="navbar-text navbar-right"><span class="glyphicon glyphicon-envelope"></span> <span style="unicode-bidi:bidi-override; direction: rtl;">moc.liamg@egdirbnaidni</span></a>
+		      <p class="navbar-text">
+		      	<a class="bid-annotation" target="_blank" title="How to use this tool" href="instructions.html"><span class="glyphicon glyphicon-question-sign"></span></a>
+		      	<a class="bid-annotation" target="_blank" title="Send feedback" href="contact.html"><span class="glyphicon glyphicon-envelope"></span></a>
 		      </p>
 		   </div>
 		</nav>  
@@ -65,31 +67,66 @@
 	<section id="section">
 		<div id="instructions" class="padding-top">
 			<div class="container">
-		  	<h1>Bridge Hand Viewer/Player Instructions</h1>
+		  	<h1>Bridge Hand Player (BHP) Instructions</h1>
 		  	<ol class="list-group">
 		  		<li class="list-group-item list-group-item-info">
-		  			<span class="item">This tool tries to extend the capabilities of the <a href="http://www.bridgebase.com/tools/handviewer.html">Bridge Base Online's Hand Viewer tool </a>.</span>
+					The Bridge Hand Player (BHP) Tool tries to extend the functionality of the <a href="http://www.bridgebase.com/tools/handviewer.html">Bridge Base Online's Hand Viewer tool </a>. The key additions are ability to visually play out different lines, add a line of play to the handviewer url, save multiple lines of play to be shared with others.		  		
 		  		</li>
 		  		<li class="list-group-item list-group-item-deafult">
-		  			<span class="item">Hands are specified in the url using the format of BridgeBase Hand Viewer. Instructions on that format  and what parameters can be specified with the url can be found at <a href="http://www.bridgebase.com/tools/hvdoc.html">http://www.bridgebase.com/tools/hvdoc.html</a>. While the hand viewer supports several parameters listed at the end of the above link, this tool does not support them all. The following parameters are not supported currently : 
-		  			<ol>
-						<li>c	number of tricks claimed (This is not relevant given the purpose of this tool)</li>
-						<li>k	kibitz (This is not relevant given the purpose of this tool)</li>
-						<li>lin	Contents of actual .lin file to display (need to implement parsing of lin contents)</li>
-						<li>linurl	URL of external .lin file in XML wrapper (need to implement parsing of lin contents)</li>
-						<li>myhand	Identifier of deal stored in myhands (need to implement parsing of lin contents)</li>
-		  			</ol>
-		  			</span>
+					BHP hands are specified using the same format as the BBO Handviewer i.e., parameters are appended to the URL. BHP supports all but the following parameters of the BBO Hand Viewer : c - number of tricks claimed, k -kibitz, lin - Contents of actual .lin file to display, linurl - URL of external .lin file in XML wrapper, myhand - Identifier of deal stored in myhands. For details of all the parameters go to the <a href="http://www.bridgebase.com/tools/hvdoc.html">hvdoc page</a>.		  		
 		  		</li>
 		  		<li class="list-group-item list-group-item-info">
-		  			<span class="item">After a hand has loaded you can click on cards to play ( cards that can be played are highlighted with a green outline ). The undo and redo buttons can be used to take back and redo plays.</span>
+					BHP supports one additional parameter and extends the p (line of play) parameter. A t parameter can be used to add some text (maybe a title and an author or some other general commentary) that is shown at all times. HTML is supported, so for example "t=&lt;h4&gt;Relay Double&lt;/h4&gt; by Kit Woolsey" can be used to add a title and author. BHP also supports specification of multiple lines of play. While the HandViewer p parameter can be specified as usual additional lines of play can be specified by using the parameter p and the name of the play  immediately after and the play specified in the usual way. For example "pLine1=c2c3cacqhah3h2hk&pLine2=c2c3cacqc5ckc7c4" can be used to specify 2 alternate lines of play.		  		
 		  		</li>
 		  		<li class="list-group-item list-group-item-default">
-		  			<span class="item">If you have any comments and suggestions please send me an email at <span class="codedirection">moc.liamg@egdirbnaidni</span></span>
+					Once the hand and auction and play has been loaded, the play can be stepped through using the buttons on the bottom just like the hand viewer. However at any point you can explore your own line of play by clicking on playable cards (highlighted by green outline). The original lines of play can be restored at any time by using the Line drop down at the top menu bar. When you have explored a different line of play, that line can be saved and then you can generate a new url ( see next step) with the new line appended.		  		
 		  		</li>
+		  		<li class="list-group-item list-group-item-info">
+					At any point, you can generate a BBO hand viewer url to share with others or embed in some webpage. Note that this will only include the currently active line of play. A Bridge Winners embed code can also be generated to be included when posting articles on the <a href="http://bridgewinners.com/">Bridge Winners Page</a>. A BHP url can also be generated which will include all saved lines of play as well the current line of play (if it is not saved).		  		
+		  		</li>
+		  		<li class="list-group-item list-group-item-deafult">
+					You can link directly to any point in the play by adding # followed by a number indicating the play. For example adding #8 at the end would link to the end of trick 2 directly.		  		
+		  		</li>		  		
 		  	</ol>
 		  	</div>	
 		  </div>	
+		  <div id="examples">
+		  	<div class="container">
+		  	<h1>Some Examples</h1>
+		  	<ol>
+<li><a href="http://bridgewinners.com/article/view/born-yesterday/">Bridge Winners Article Born Yesterday Hand 2 by Sartaj Hans</a><br/>
+<a href="bridge-hand-player.html?n=saq65h875dkq5ck62&e=s932hqt9dj3cq7543&s=sj4hk32dA87642ca9&d=e&v=b&a=p1dp1sp2dp3cp3nppp&p=cjckc3c9dkd3d2d9dqdjd4dtd5s2das7d8s8c2c4d7c8h5c5d6cth7c7sjsksas3sqs9s4sts6h9h2h4s5cqh3h6c6htcahj&t=<h4>Born Yesterday Hand 2</h4> by Sartaj Hans">BHP Link</a>
+
+<li><a href="http://bridgewinners.com/article/view/born-yesterday/">Bridge Winners Article Born Yesterday Hand 1 by Sartaj Hans</a><br/>
+<a href="bridge-hand-player.html?n=saq63hqt642da9cq6&w=skj854hj93d82cjt5&s=st2hk5dq743cak932&d=w&v=b&a=p1hp2cp2hp2np3nppp&p=s5s3s9sthkh3h2h7h5h9hth8h4had3hjc4c2cjcqhqs7c3s4h6d5d4d2c6c7c9ctd8dad6d7d9dkdqc5djs2s8s6dtcksjsq&t=<h4>Born Yesterday Hand 1</h4> by Sartaj Hans">BHP Link</a>
+
+<li><a href="http://bridgewinners.com/article/view/overly-committal/">Overly Committal</a><br/>
+<a href="index.html?n=s2h843dak875ckq62&w=sj43hkq6dqt632c83&s=saqt8hjt952dj9ca4&d=e&v=b&a=p1hp2d2hp2s4hppp&pLine 1=c8ckctc4s2sksas4s8s3h3s5h4h7hjhqc3c2c5cah9hkh8hac7sth6t=<h4>Overly Committal</h4> by Kit Woolsey">BHP Link</a>
+
+<li><a href="http://bridgewinners.com/article/view/relay-double/">Bridge Winners Article Relay Double</a><br/>
+<a href="index.html?n=sk8432hk86dqt96c3&e=st9hqtdkj752cqt72&s=sj6haj9742d4cj954&d=e&v=e&a=p2hx3hppp&p=cac3c2c4h3h6hqhac5c6h8c7dtdjd4d8hth2h5hkd6d2h4d3s6s5sk&t=<h4>Relay Double</h4> by Kit Woolsey">BHP Link</a></li>
+
+<li><a href="http://bridgewinners.com/article/view/final-entry/">Bridge Winners Article Final Entry </a><br/>
+<a href="index.html?index.html?n=st974hat73cak976&e=sj86h9862dqt5ct52&s=saq3hkqj54dk863c4&d=e&v=b&a=p1h2d4dp4sp6cp6hppp&p=dah3d5d3cac2c4c3ckc5s3c8s4s8sqskcqc6cth4d6d2htdth7h2hjd4&t=<h4>Final Entry</h4> by Kit Woolsey">BHP Link</a></li>
+
+<li><a href="http://bridgewinners.com/article/view/what-to-cash/">Bridge Winners Article What to Cash </a><br/>
+<a href="index.html?index.html?n=sa976432h84d3c942&e=s8hq97652da42ca85&s=sjthkjtdkqj65ckq7&d=s&v=-&a=1n{15-17}p4d{Transfer to sp}p4sppp&p=cjc2cac7h7hjhah4h3h8hqhkhtd7d3h2sjs5s2&t=<h4>What to Cash</h4> by Kit Woolsey">BHP Link</a></li>
+
+<li><a href="http://bridgewinners.com/article/view/crash/">Bridge Winners Article CRASH</a><br/>
+<a href="index.html?index.html?n=sk64hkt82dt65ckt8&e=sqjt9732h6dkq4cj4&s=s85ha974daj97caq5&d=s&v=-&a=1c{16+}1h{CRASH}1n{9-14 bal}p2c{ask}p2d{9-11 4 hearts}p4hppp&p=c3c8cjcah4h5hth6dtdqdad3h7hjhks7d5d4djd2hah3h2s3c5c2ckc4d6dkd7d8sqs5sas4hqh8s2h9&t=<h4>CRASH</h4> by Kit Woolsey">BHP Link</a></li>
+
+<li><a href="http://bridgewinners.com/article/view/daily-bridge-blunders-1/">Bridge Winners Article Daily Bridge Blunders</a><br/>
+<a href="index.html?index.html?n=skqt76ha84d76ck54&e=s2hqjt72dakq98c96&s=sa543hk93dj3ca872&d=n&b=e&a=1s{Major suit opening -- 5+ S; 11-21 HCP; 12-22 total points}2s{Michaels -- 5+ H; 12+ total points; forcing}4s{3+ S; 13-18 total points}ppp&p=dkd3d4d6dadjd5d7hqh3h5has6s2sas9s3s8sqh7skd8s4sjckc9c2c3c4c6cacqc7ctc5h2h6h4hthkc8cjs7d9h8hjh9dtdqs5d2st&t=Daily Bridge Blunders">BHP Link</a></li>
+
+<li><a href="http://bridgewinners.com/article/view/calculating-the-odds/">Bridge Winners Article Calculating the Odds</a><br/>
+<a href="index.html?index.html?n=saqt97h6dak73ct72&e=s52hjt9754dj2cq96&s=sj43hakq2dt654ca3&a=-6sn&v=-&d=n&t=Calculating The Odds">BHP Link</a></li>
+
+<li><a href="http://bridgewinners.com/article/view/can-this-3nt-be-defeated/">Bridge Winners Article Can this 3NT be defeated?</a><br/>
+<a href="index.html?index.html?n=s3469aqhkdkc3468t&e=s578jh67ajd79tc5a&s=sth359qtd25aqjckq&w=s2kh248d3468c279j&d=s&v=-&a=1hp1sp2dp3sp3nppp&pLine%201=c2c3cacqhah3h2hkd7d2d3dkc4c5ckc7dad4s3d9dqd6s4dtdjd8c6h6d5h4s6s5hqh8s9h7h9c9c8hj&pLine%202=c2c3cacqc5ckc7c4stsks3s5h2hkhah3h6h9h4c6dad3dkd7dqd4s4d9djd6c8dthqh8cth7h5s2s6hj&t=Can This 3NT Be Defeated">BHP Link</a></li>		  	  	
+
+		  	</ol>		  		
+		  	</div>
+		  </div>		  
 	</section>
 	<footer id="footer"></footer>
 	
