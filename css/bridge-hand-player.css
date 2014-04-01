@@ -1,5 +1,9 @@
 .fixed { position:fixed !important; }
 
+.absolute {
+	 position: absolute;
+}
+
 .card-table { 
 	background-image: url('../images/green-felt.jpg');
 	background-size:100% 100%;

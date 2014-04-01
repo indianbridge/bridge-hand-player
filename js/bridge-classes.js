@@ -192,6 +192,12 @@ for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
 	}
 };
 
+Bridge.Cards.isAssigned = function( suit, rank ) {
+	Bridge.checkCardSuit( suit );
+	Bridge.checkRank( rank );
+	return Bridge.Cards[ suit ][ rank ].getDirection() !== null;	
+};
+
 Bridge.Cards.reset = function() {
 	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
 		var suit = Bridge.CardSuitOrder[ i ];
@@ -491,7 +497,7 @@ Bridge.Hand.prototype.getNumCards = function() {
  * Remove a card from this hand.
  */
  Bridge.Hand.prototype.removeCard = function( suit, rank ) {
- 	Bridge.checkSuit( suit );
+ 	Bridge.checkCardSuit( suit );
  	Bridge.checkRank( rank );
 	if ( this.cards[ suit ][ rank ] === undefined ) {
 		throw 'In Bridge.Hand.removeCard ' + Bridge.getSuitName( suit ) + Bridge.getRankName( rank ) + ' is not found!';
@@ -523,7 +529,7 @@ Bridge.Deal = function() {
 	};
 	
 	// Deal information
-	this.board = null;
+	this.board = 1;
 	this.dealer = 'n';
 	this.vulnerability = '-';
 	this.trumpSuit = null;
@@ -1053,7 +1059,7 @@ Bridge.Deal.prototype.addCard = function( suit, rank, direction ) {
 	var card = Bridge.Cards[ suit ][ rank ];
 	var assignedTo = card.getDirection();
 	if ( assignedTo !== null ) {
-		throw 'In Bridge.Deal.addCard ' + Bridge.getSuitName( suit ) + Bridge.getRankName( rank ) + ' is already assigned to ' + Bridge.getDirectionName( assignedTo ) + '!';
+		throw Bridge.getSuitName( suit ) + Bridge.getRankName( rank ) + ' is already assigned to ' + Bridge.getDirectionName( assignedTo ) + '!';
 	};
 	this.hands[ direction ].addCard( suit, rank );
 	card.setDirection( direction );
@@ -1098,7 +1104,7 @@ Bridge.Deal.prototype.removeCard = function( suit, rank ) {
 	var card = Bridge.Cards[ suit ][ rank ];
 	var assignedTo = card.getDirection();
 	if ( assignedTo === null ) {
-		throw 'In Bridge.Deal.addCard ' + Bridge.getSuitName( suit ) + Bridge.getRankName( rank ) + ' is not assigned to anyone!';
+		throw Bridge.getSuitName( suit ) + Bridge.getRankName( rank ) + ' is not assigned to anyone!';
 	};
 	this.hands[ assignedTo ].removeCard( suit, rank );
 	card.setDirection( null );
@@ -1153,6 +1159,21 @@ Bridge.Deal.prototype.assignRest = function() {
 						break;
 					}
 				}
+			}
+		}
+	}		
+};
+
+/**
+ * Unassign all assigned cards
+ */
+Bridge.Deal.prototype.unAssignAll = function() {
+	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
+		var suit = Bridge.CardSuitOrder[ i ];
+		for ( var rank in Bridge.Ranks ) {
+			var card = Bridge.Cards[ suit ][ rank ];
+			if ( card.getDirection() !== null ) {
+				this.removeCard( suit, rank );
 			}
 		}
 	}		
