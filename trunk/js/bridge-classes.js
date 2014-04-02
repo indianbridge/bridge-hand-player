@@ -648,6 +648,10 @@ Bridge.Deal.prototype.playCard = function( suit, rank, direction, annotation ) {
 	Bridge.Cards[ suit ][ rank ].play();
 };
 
+Bridge.Deal.prototype.hasUnsavedPlay = function() {
+	return this.loadedPlay === null;	
+};
+
 /** 
  * Add annotation to play involing specified card
  */
@@ -814,6 +818,10 @@ Bridge.Deal.prototype.getSuitLed = function() {
 	else return null;	
 };
 
+Bridge.Deal.prototype.hasBids = function() {
+	return this.lastBid !== null;
+};
+
 /**
  * From the auciton determine what is contract and who is declarer
  */
@@ -894,6 +902,7 @@ Bridge.Deal.prototype.numPasses = function() {
  * Add a bid to the auction at the end.
  */ 
 Bridge.Deal.prototype.addBid = function( level, suit, annotation ) {
+	if ( annotation === undefined ) annotation = null;
 	var direction = this.dealer;
 	if ( this.lastBid !== null ) {
 		direction = Bridge.getLHO( this.lastBid.getDirection() );
@@ -943,7 +952,71 @@ Bridge.Deal.prototype.addBid = function( level, suit, annotation ) {
 		bid.setPreviousBid( this.lastBid );
 		this.lastBid = bid;
 	}
+};
+
+Bridge.Deal.prototype.isDoubleAllowed = function() {
+	if ( this.lastBid === null ) return false;
+	var direction = Bridge.getLHO( this.lastBid.getDirection() );
+	if ( this.currentLevels.suits === '' || this.currentLevels.doubled || this.currentLevels.redoubled || ! Bridge.areOppositeDirections( direction, this.currentLevels.direction  ) ) return false;
+	return true;	
+};
+
+Bridge.Deal.prototype.isRedoubleAllowed = function() {
+	if ( this.lastBid === null ) return false;
+	var direction = Bridge.getLHO( this.lastBid.getDirection() );
+	if ( this.currentLevels.suits === '' || ! this.currentLevels.doubled || ! Bridge.areOppositeDirections( direction, this.currentLevels.direction ) ) return false;
+	return true;	
+};
+
+Bridge.Deal.prototype.undoAllBids = function() {
+	this.firstBid = null;
+	this.lastBid = null;
+	this.resetCurrentLevels();
+};
+
+/**
+ * Remove the last bid
+ */ 
+Bridge.Deal.prototype.undoLastBid = function() {
+	if ( this.lastBid === null ) return;
+	var previousBid = this.lastBid.getPreviousBid();
+	if ( previousBid === null ) {
+		this.lastBid = null;
+		this.firstBid = null;
+	}
+	else {
+		this.lastBid = previousBid;
+		this.lastBid.setNextBid( null );
+	}
+	this.resetCurrentLevels();
+};
+
+Bridge.Deal.prototype.getCurrentLevels = function() {
+	return this.currentLevels;
 }
+
+Bridge.Deal.prototype.resetCurrentLevels = function() {
+	this.currentLevels = {
+		level: 0,
+		suit: '',
+		direction: '',
+		doubled: false,
+		redoubled: false,
+	};	
+	var bid = this.lastBid;
+	while ( bid !== null ) {
+		var suit = bid.getSuit();
+		if ( suit === 'r' ) this.currentLevels.redoubled = true;
+		else if ( suit === 'x' ) this.currentLevels.doubled = true;
+		else if ( suit !== 'p' ) {
+			this.currentLevels.level = bid.getLevel();
+			this.currentLevels.suit = suit;
+			this.currentLevels.direction = bid.getDirection();
+			return;
+		}
+		bid = bid.getPreviousBid();
+	}
+};
 
 /**
  * Set the board number for this deal.
@@ -963,8 +1036,14 @@ Bridge.Deal.prototype.getBoard = function() {
  * Set the dealer for this deal.
  */
 Bridge.Deal.prototype.setDealer = function( dealer ) {
-	Bridge.checkDirection( dealer );
-	this.dealer = dealer;
+	if ( dealer !== this.dealer ) {
+		Bridge.checkDirection( dealer );
+		this.dealer = dealer;
+		// Clear out the auction
+		this.lastBid = null;
+		this.firstBid = null;
+		this.resetCurrentLevels();
+	}
 };
 
 /**
@@ -1009,6 +1088,19 @@ Bridge.Deal.prototype.getNotes = function() {
 Bridge.Deal.prototype.setTrumpSuit = function( suit ) {
 	Bridge.checkBidSuit( suit );	
 	this.trumpSuit = suit;
+};
+
+Bridge.Deal.prototype.areHandsValid = function() {
+	for( var direction in Bridge.Directions ) {
+		if ( this.hands[ direction ].getNumCards() !== 13 ) {
+			return false;
+		}
+	}	
+	return true;
+};
+
+Bridge.Deal.prototype.isAuctionValid = function() {
+	return this.numPasses() === 3;	
 };
 
 /**
@@ -1063,6 +1155,12 @@ Bridge.Deal.prototype.addCard = function( suit, rank, direction ) {
 	};
 	this.hands[ direction ].addCard( suit, rank );
 	card.setDirection( direction );
+};
+
+Bridge.Deal.prototype.getSavedPlaysList = function() {
+	var playNames = [];
+	for( var playName in this.savedPlays ) playNames.push( playName );
+	return playNames;
 };
 
 Bridge.Deal.prototype.getPlayStrings = function( all ) {
