@@ -5,12 +5,12 @@
 var Bridge = {};
 
 // The suits for cards as well as bidding
-Bridge.Suits = { 
+Bridge.Suits = {
 	'n' : { name : 'NT'},
 	's' : { name : '<font color="000000">&spades;</font>' }, 
 	'h' : { name : '<font color="CB0000">&hearts;</font>' }, 
 	'd' : { name : '<font color="CB0000">&diams;</font>' }, 
-	'c' : { name : '<font color="000000">&clubs;</font>' }, 
+	'c' : { name : '<font color="000000">&clubs;</font>' }
 };
 Bridge.getSuitName = function( suit ) { 
 	return Bridge.Suits[ suit ].name; 
@@ -33,24 +33,24 @@ Bridge.checkBidSuit = function( suit ) {
 
 // The bridge ranks
 Bridge.Ranks = { 
-	'a' : { name : 'A', 	index : 0 }, 
-	'k' : { name : 'K', 	index : 1 }, 
-	'q' : { name : 'Q',		index : 2 }, 
-	'j' : { name : 'J', 	index : 3 }, 
-	't' : { name : 'T', 	index : 4 }, 
-	'9' : { name : '9', 	index : 5 }, 
-	'8' : { name : '8', 	index : 6 }, 
-	'7' : { name : '7', 	index : 7 }, 
-	'6' : { name : '6', 	index : 8 }, 
-	'5' : { name : '5', 	index : 9 }, 
-	'4' : { name : '4', 	index : 10 }, 
-	'3' : { name : '3', 	index : 11 }, 
-	'2' : { name : '2', 	index : 12 }, 
+	'a' : { name : 'A',	index : 0 }, 
+	'k' : { name : 'K',	index : 1 }, 
+	'q' : { name : 'Q',	index : 2 }, 
+	'j' : { name : 'J',	index : 3 }, 
+	't' : { name : 'T',	index : 4 }, 
+	'9' : { name : '9',	index : 5 }, 
+	'8' : { name : '8',	index : 6 }, 
+	'7' : { name : '7',	index : 7 }, 
+	'6' : { name : '6',	index : 8 }, 
+	'5' : { name : '5',	index : 9 }, 
+	'4' : { name : '4',	index : 10 }, 
+	'3' : { name : '3',	index : 11 }, 
+	'2' : { name : '2',	index : 12 }
 };
 
 Bridge.getRankName = function( rank ) {
 	return Bridge.Ranks[ rank ].name;
-}
+};
 
 // The order of ranks
 Bridge.RankOrder = [ 'a', 'k', 'q', 'j', 't', '9', '8', '7', '6', '5', '4', '3', '2' ];
@@ -62,16 +62,16 @@ Bridge.checkRank = function( rank ) {
 };
 Bridge.isGreaterRank = function( rank1, rank2 ) {
 	var index1 = Bridge.RankOrder.indexOf( rank1 );
-	var index2 = Bridge.RankOrder.indexOf( rank2 )
+	var index2 = Bridge.RankOrder.indexOf( rank2 );
 	return  index1 < index2;
-}
+};
 
 // The compass directions
 Bridge.Directions = { 
-	'n' : { name : 'North',	layout : 'horizontal',	position : 'top',		lho: 'e', rho: 'w', },
-	'e' : { name : 'East',	layout : 'vertical',	position : 'right', 	lho: 's', rho: 'n', },
-	's' : { name : 'South',	layout : 'horizontal',	position : 'bottom',	lho: 'w', rho: 'e', },
-	'w' : { name : 'West',	layout : 'vertical',	position : 'left',		lho: 'n', rho: 's', },
+	'n' : { name : 'North', layout : 'horizontal', position : 'top', lho: 'e', rho: 'w' },
+	'e' : { name : 'East', layout : 'vertical', position : 'right', lho: 's', rho: 'n' },
+	's' : { name : 'South', layout : 'horizontal', position : 'bottom', lho: 'w', rho: 'e' },
+	'w' : { name : 'West', layout : 'vertical', position : 'left', lho: 'n', rho: 's' }
 };
 
 Bridge.getDirectionName = function( direction ) {
@@ -81,9 +81,8 @@ Bridge.getDirectionName = function( direction ) {
 // The order of Directions
 Bridge.DirectionOrder = [ 'n', 'e', 's', 'w' ];
 Bridge.checkDirection = function( direction ) {
-	var callerFunction = arguments.callee.caller.name;
 	if ( ! ( direction in Bridge.Directions ) ) {
-		throw 'In ' +  callerFunction + ' ' + direction + ' is not a valid direction!';
+		throw direction + ' is not a valid direction!';
 	}
 	return true;
 };
@@ -121,10 +120,10 @@ Bridge.getRHO = function( direction ) {
 
 // vulnerability
 Bridge.Vulnerability = {
-	'-' : { name : 'None', },
-	'n' : { name : 'North-South', },
-	'e' : { name : 'East-West', },
-	'b' : { name : 'Both', },
+	'-' : { name : 'None' },
+	'n' : { name : 'North-South' },
+	'e' : { name : 'East-West' },
+	'b' : { name : 'Both' }
 };
 
 Bridge.getVulnerabilityName = function( vul ) {
@@ -192,9 +191,11 @@ for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
 	var suit = Bridge.CardSuitOrder[ i ];
 	Bridge.Cards[ suit ] = {};
 	for ( var rank in Bridge.Ranks ) {
-		Bridge.Cards[ suit ][ rank ] = new Bridge.Card( suit, rank );
+		if ( Bridge.Ranks.hasOwnProperty( rank ) ) {
+			Bridge.Cards[ suit ][ rank ] = new Bridge.Card( suit, rank );
+		}
 	}
-};
+}
 
 Bridge.Cards.isAssigned = function( suit, rank ) {
 	Bridge.checkCardSuit( suit );
@@ -206,7 +207,9 @@ Bridge.Cards.reset = function() {
 	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
 		var suit = Bridge.CardSuitOrder[ i ];
 		for ( var rank in Bridge.Ranks ) {
-			Bridge.Cards[ suit ][ rank ].reset();
+			if ( Bridge.Ranks.hasOwnProperty( rank ) ) {
+				Bridge.Cards[ suit ][ rank ].reset();
+			}
 		}
 	}	
 };
@@ -245,7 +248,6 @@ Bridge.PlayedCard.prototype.winTrick = function( trumpSuit ) {
 		if ( suit2 !== trumpSuit || Bridge.isGreaterRank( this.rank, rank2 ) ) return true;
 		return false;
 	}
-	return false;
 };
 
 // Who plays next
@@ -258,9 +260,9 @@ Bridge.PlayedCard.prototype.getNextToPlay = function() {
 
 // Which suit was led
 Bridge.PlayedCard.prototype.getSuitLed = function() {
-	if ( this.playNumber % 4 == 0 ) return null;
+	if ( this.playNumber % 4 === 0 ) return null;
 	else {
-		play = this;
+		var play = this;
 		while ( play.getPlayNumber() % 4 !== 1 ) play = play.getPreviousCard();
 		return play.getSuit();
 	}	
@@ -378,7 +380,7 @@ Bridge.Bid = function( level, suit, direction, annotation ) {
 
 //Get the string representation of this bid
 Bridge.Bid.prototype.getString = function() {
-	var bidString = ''
+	var bidString = '';
 	if ( this.suit === 'x' ) bidString = '<font color="red">X</font>';
 	else if ( this.suit === 'r' ) bidString = '<font color="blue">XX<font>';
 	else if ( this.suit === 'p' ) bidString = '<font color="green">P</font>';
@@ -388,7 +390,7 @@ Bridge.Bid.prototype.getString = function() {
 	else bidString = 'Unknown';
 	return {
 		bid: bidString,
-		annotation: this.annotation,	
+		annotation: this.annotation
 	};
 };
 
@@ -413,21 +415,21 @@ Bridge.Bid.prototype.setAnnotation = function( annotation ) {
 	this.annotation = annotation;
 };
 
-Bridge.Bid.prototype.getNextBid = function( bid ) {
-	return this.nextBid
+Bridge.Bid.prototype.getNextBid = function() {
+	return this.nextBid;
 };
 
 Bridge.Bid.prototype.setNextBid = function( bid ) {
 	this.nextBid = bid;
 };
 
-Bridge.Bid.prototype.getPreviousBid = function( bid ) {
+Bridge.Bid.prototype.getPreviousBid = function() {
 	return this.previousBid;
 };
 
 Bridge.Bid.prototype.setPreviousBid = function( bid ) {
 	this.previousBid = bid;
-}
+};
 
 // Count number of consecutive passed before this bid including this bid
 Bridge.Bid.prototype.countPasses = function() {
@@ -490,25 +492,25 @@ Bridge.Hand.prototype.getNumCards = function() {
 /**
  * Add a card to this hand.
  */
- Bridge.Hand.prototype.addCard = function( suit, rank ) {
- 	Bridge.checkCardSuit( suit );
- 	Bridge.checkRank( rank );
+Bridge.Hand.prototype.addCard = function( suit, rank ) {
+	Bridge.checkCardSuit( suit );
+	Bridge.checkRank( rank );
 	this.cards[ suit ][ rank ] = Bridge.Cards[ suit ][ rank ];
 	this.numCards++;
- };
+};
  
  /**
  * Remove a card from this hand.
  */
- Bridge.Hand.prototype.removeCard = function( suit, rank ) {
- 	Bridge.checkCardSuit( suit );
- 	Bridge.checkRank( rank );
+Bridge.Hand.prototype.removeCard = function( suit, rank ) {
+	Bridge.checkCardSuit( suit );
+	Bridge.checkRank( rank );
 	if ( this.cards[ suit ][ rank ] === undefined ) {
 		throw 'In Bridge.Hand.removeCard ' + Bridge.getSuitName( suit ) + Bridge.getRankName( rank ) + ' is not found!';
 	}
 	delete this.cards[ suit ][ rank ];
 	this.numCards--;
- };
+};
 
 
 /**
@@ -518,7 +520,9 @@ Bridge.Deal = function() {
 	// hand related
 	this.hands = {};
 	for( var direction in Bridge.Directions ) {
-		this.hands[ direction ] = new Bridge.Hand( direction );
+		if ( Bridge.Directions.hasOwnProperty( direction ) ) {
+			this.hands[ direction ] = new Bridge.Hand( direction );
+		}
 	}
 	
 	// auction related
@@ -529,7 +533,7 @@ Bridge.Deal = function() {
 		suit: '',
 		direction: '',
 		doubled: false,
-		redoubled: false,
+		redoubled: false
 	};
 	
 	// Deal information
@@ -556,7 +560,7 @@ Bridge.Deal.prototype.isAtBeginning = function() {
 
 Bridge.Deal.prototype.isAtEnd = function() {
 	return this.currentPlayedCard === this.lastPlayedCard;
-}
+};
 
 /**
  * Is this a valid play number?
@@ -569,7 +573,7 @@ Bridge.Deal.prototype.isValidPlayNumber = function( playNumber ) {
 	else {
 		return playNumber <= this.lastPlayedCard.getPlayNumber();
 	}
-}
+};
 
 /**
  * Get the play number of the currently played card
@@ -585,7 +589,7 @@ Bridge.Deal.prototype.getPlayNumber = function() {
 Bridge.Deal.prototype.isAtPlayNumber = function( playNumber ) {
 	if ( this.currentPlayedCard === null ) return false; 
 	else return this.currentPlayedCard.getPlayNumber() === playNumber;
-}
+};
 
 Bridge.Deal.prototype.isNewTrick = function() {
 	if ( this.currentPlayedCard === null || this.currentPlayedCard.getPlayNumber() % 4 === 1 ) return true;
@@ -682,7 +686,7 @@ Bridge.Deal.prototype.setAnnotationForBid = function( bidNumber, annotation ) {
 	else {
 		throw 'Bid was not found when trying to add annotation!';
 	}
-}
+};
 
 /** 
  * Get annotation for specified card
@@ -735,20 +739,24 @@ Bridge.Deal.prototype.savePlay = function( playName ) {
 	this.savedPlays[ playName ] = {
 		firstPlayedCard: this.firstPlayedCard,
 		currentPlayNumber: playNumber,
-		lastPlayedCard: this.lastPlayedCard,
-	}
+		lastPlayedCard: this.lastPlayedCard
+	};
 	this.loadedPlay = playName;
 };
 
 Bridge.Deal.prototype.getSavedPlayNumber = function() {
 	return this.savedPlays.length;
-}
+};
 
 Bridge.Deal.prototype.getSavedPlayNames = function() {
 	var playNames = [];
-	for( var playName in this.savedPlays ) playNames.push(playName);
+	for( var playName in this.savedPlays ) {
+		if ( this.savedPlays.hasOwnProperty( playName ) ) {
+			playNames.push(playName);
+		}
+	}
 	return playNames;
-}
+};
 
 Bridge.Deal.prototype.loadPlay = function( playName ) {
 	if ( ! ( playName in this.savedPlays) ) {
@@ -771,8 +779,8 @@ Bridge.Deal.prototype.undoCard = function() {
 		var card = {
 			suit: this.currentPlayedCard.getSuit(),
 			rank: this.currentPlayedCard.getRank(),
-			direction: this.currentPlayedCard.getDirection(),
-		}
+			direction: this.currentPlayedCard.getDirection()
+		};
 		this.currentPlayedCard = this.currentPlayedCard.getPreviousCard();
 		Bridge.Cards[ card.suit ][ card.rank ].undo();
 		return card;
@@ -800,8 +808,8 @@ Bridge.Deal.prototype.redoCard = function() {
 	var card = {
 		suit: this.currentPlayedCard.getSuit(),
 		rank: this.currentPlayedCard.getRank(),
-		direction: this.currentPlayedCard.getDirection(),
-	}	
+		direction: this.currentPlayedCard.getDirection()
+	};
 	Bridge.Cards[ card.suit ][ card.rank ].play();
 	return card;	
 };
@@ -835,8 +843,8 @@ Bridge.Deal.prototype.determineDeclarer = function() {
 		suit: '',
 		doubled: false,
 		redoubled: false,
-		declarer: '',
-	}
+		declarer: ''
+	};
 	
 	// Check if three passes
 	var numPasses = this.numPasses();
@@ -913,11 +921,9 @@ Bridge.Deal.prototype.addBid = function( level, suit, annotation ) {
 	}
 	if ( suit === 'r' && ( this.currentLevels.suits === '' || ! this.currentLevels.doubled || ! Bridge.areOppositeDirections( direction, this.currentLevels.direction ) ) ) {
 		throw 'Invalid Redouble!';
-		return;
 	}
 	if ( suit === 'x' && ( this.currentLevels.suits === '' || this.currentLevels.doubled || this.currentLevels.redoubled || ! Bridge.areOppositeDirections( direction, this.currentLevels.direction  ) ) ) {
 		throw 'Invalid Double!';
-		return;
 	}	
 	if ( suit === 'p' && this.lastBid !== null && this.lastBid.countPasses() > 2 ) {
 		throw 'Invalid Pass!';
@@ -997,7 +1003,7 @@ Bridge.Deal.prototype.undoLastBid = function() {
 
 Bridge.Deal.prototype.getCurrentLevels = function() {
 	return this.currentLevels;
-}
+};
 
 Bridge.Deal.prototype.resetCurrentLevels = function() {
 	this.currentLevels = {
@@ -1005,7 +1011,7 @@ Bridge.Deal.prototype.resetCurrentLevels = function() {
 		suit: '',
 		direction: '',
 		doubled: false,
-		redoubled: false,
+		redoubled: false
 	};	
 	var bid = this.lastBid;
 	while ( bid !== null ) {
@@ -1137,7 +1143,7 @@ Bridge.Deal.prototype.setContract = function( level, suit, declarer, doubled, re
 		trumpSuit: suit,
 		declarer: declarer,
 		doubled: doubled,
-		redoubled: redoubled,
+		redoubled: redoubled
 	};
 	this.setTrumpSuit( suit );
 	this.setLeader( Bridge.getLHO( declarer ) );
@@ -1145,7 +1151,7 @@ Bridge.Deal.prototype.setContract = function( level, suit, declarer, doubled, re
 
 Bridge.Deal.prototype.getContract = function() {
 	var html = this.contract.level + Bridge.getSuitName( this.contract.trumpSuit );
-	if ( this.contract.redoubled ) html += 	'<font color="blue">XX<font>';
+	if ( this.contract.redoubled ) html += '<font color="blue">XX<font>';
 	else if ( this.contract.doubled ) html += '<font color="red">X</font>';
 	return html;		
 };
@@ -1165,27 +1171,31 @@ Bridge.Deal.prototype.addCard = function( suit, rank, direction ) {
 	var assignedTo = card.getDirection();
 	if ( assignedTo !== null ) {
 		throw Bridge.getSuitName( suit ) + Bridge.getRankName( rank ) + ' is already assigned to ' + Bridge.getDirectionName( assignedTo ) + '!';
-	};
+	}
 	this.hands[ direction ].addCard( suit, rank );
 	card.setDirection( direction );
 };
 
 Bridge.Deal.prototype.getSavedPlaysList = function() {
 	var playNames = [];
-	for( var playName in this.savedPlays ) playNames.push( playName );
+	for( var playName in this.savedPlays ) {
+		if ( this.savedPlays.hasOwnProperty( playName ) ) {
+			playNames.push( playName );
+		}
+	}
 	return playNames;
 };
 
 Bridge.Deal.prototype.getPlayStrings = function( all ) {
-	var output = '';
+	var output, card, annotation;
 	if ( all === undefined ) all = false;
 	if ( ! all || this.loadedPlay === null ) {
 		if ( this.firstPlayedCard === null ) return '';
-		var output = '&p=';
-		var card = this.firstPlayedCard;
+		output = '&p=';
+		card = this.firstPlayedCard;
 		while( card !== null ) {
 			output += card.getSuit() + card.getRank();
-			var annotation = card.getAnnotation();
+			annotation = card.getAnnotation();
 			if ( annotation !== null )
 			output += '{' + annotation + '}';
 			card = card.getNextCard();
@@ -1193,14 +1203,16 @@ Bridge.Deal.prototype.getPlayStrings = function( all ) {
 	}
 	if ( all ) {
 		for( var playName in this.savedPlays ) {
-			output += '&p' + playName + '=';
-			var card = this.savedPlays[ playName ].firstPlayedCard;
-			while( card !== null ) {
-				output += card.getSuit() + card.getRank();
-				var annotation = card.getAnnotation();
-				if ( annotation !== null )
-				output += '{' + annotation + '}';				
-				card = card.getNextCard();
+			if( this.savedPlays.hasOwnProperty( playName ) ) {
+				output += '&p' + playName + '=';
+				card = this.savedPlays[ playName ].firstPlayedCard;
+				while( card !== null ) {
+					output += card.getSuit() + card.getRank();
+					annotation = card.getAnnotation();
+					if ( annotation !== null )
+					output += '{' + annotation + '}';				
+					card = card.getNextCard();
+				}
 			}
 		}
 	}
@@ -1216,7 +1228,7 @@ Bridge.Deal.prototype.removeCard = function( suit, rank ) {
 	var assignedTo = card.getDirection();
 	if ( assignedTo === null ) {
 		throw Bridge.getSuitName( suit ) + Bridge.getRankName( rank ) + ' is not assigned to anyone!';
-	};
+	}
 	this.hands[ assignedTo ].removeCard( suit, rank );
 	card.setDirection( null );
 };
@@ -1253,7 +1265,7 @@ Bridge.Deal.prototype.getEWTricks = function() {
 Bridge.Deal.prototype.getName = function( direction ) {
 	Bridge.checkDirection( direction );
 	return this.hands[ direction ].getName();
-}
+};
  
 /**
  * Assign rest of the cards randomly.
@@ -1262,12 +1274,14 @@ Bridge.Deal.prototype.assignRest = function() {
 	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
 		var suit = Bridge.CardSuitOrder[ i ];
 		for ( var rank in Bridge.Ranks ) {
-			var card = Bridge.Cards[ suit ][ rank ];
-			if ( card.getDirection() === null ) {
-				for( var direction in Bridge.Directions ) {
-					if ( this.hands[ direction ].getNumCards() < 13 ) {
-						this.addCard( suit, rank, direction );
-						break;
+			if ( Bridge.Ranks.hasOwnProperty( rank ) ) {
+				var card = Bridge.Cards[ suit ][ rank ];
+				if ( card.getDirection() === null ) {
+					for( var direction in Bridge.Directions ) {
+						if ( this.hands[ direction ].getNumCards() < 13 ) {
+							this.addCard( suit, rank, direction );
+							break;
+						}
 					}
 				}
 			}
@@ -1282,9 +1296,11 @@ Bridge.Deal.prototype.unAssignAll = function() {
 	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
 		var suit = Bridge.CardSuitOrder[ i ];
 		for ( var rank in Bridge.Ranks ) {
-			var card = Bridge.Cards[ suit ][ rank ];
-			if ( card.getDirection() !== null ) {
-				this.removeCard( suit, rank );
+			if ( Bridge.Ranks.hasOwnProperty( rank ) ) {
+				var card = Bridge.Cards[ suit ][ rank ];
+				if ( card.getDirection() !== null ) {
+					this.removeCard( suit, rank );
+				}
 			}
 		}
 	}		
@@ -1298,9 +1314,11 @@ Bridge.Deal.prototype.assignFourthHand = function( direction ) {
 	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
 		var suit = Bridge.CardSuitOrder[ i ];
 		for ( var rank in Bridge.Ranks ) {
-			var card = Bridge.Cards[ suit ][ rank ];
-			if ( card.getDirection() === null ) {
-				this.addCard( suit, rank, direction );
+			if ( Bridge.Ranks.hasOwnProperty( rank ) ) {
+				var card = Bridge.Cards[ suit ][ rank ];
+				if ( card.getDirection() === null ) {
+					this.addCard( suit, rank, direction );
+				}
 			}
 		}
 	}		
@@ -1311,7 +1329,7 @@ Bridge.Deal.prototype.assignFourthHand = function( direction ) {
  */
 Bridge.Deal.prototype.getNumCards = function( direction ) {
 	return this.hands[ direction ].getNumCards();
-}
+};
 
 /**
  * Retreive the auction as a an Array.
