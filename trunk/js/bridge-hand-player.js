@@ -540,7 +540,8 @@ BHP.saveBoard = function() {
 	var board = $( '#modal-popup-save-content' ).val();
 	BHP.deal.setBoard( board );
 	$( '#board' ).html( 'Board : ' + board );	
-	$( '#modal-popup-save' ).modal( 'hide' );
+	BHP.hideModalSaveDialog();
+	//$( '#modal-popup-save' ).modal( 'hide' );
 };
 
 /**
@@ -1101,7 +1102,8 @@ BHP.saveVulnerability = function() {
 	var vul = $( '#modal-popup-confirm-content' ).attr( 'vulnerability');
 	BHP.deal.setVulnerability( vul );
 	BHP.setVulnerability( vul );
-	$( '#modal-popup-confirm' ).modal( 'hide' );
+	BHP.hideModalConfirmDialog();
+	//$( '#modal-popup-confirm' ).modal( 'hide' );
 };
 
 // Draw the playing table
@@ -1371,8 +1373,9 @@ BHP.savePlayAnnotation = function() {
 	var rank = field.attr( 'rank' );
 	var annotation = field.val();
 	BHP.deal.setAnnotationForCard( suit, rank, annotation );
-	BHP.updateAnnotation();		
-	$( '#modal-popup-save' ).modal( 'hide' );	
+	BHP.updateAnnotation();	
+	BHP.hideModalSaveDialog();	
+	//$( '#modal-popup-save' ).modal( 'hide' );	
 };
 
 BHP.saveBidAnnotation = function() {
@@ -1384,7 +1387,8 @@ BHP.saveBidAnnotation = function() {
 		BHP.deal.setAnnotationForBid( bidNumber, annotation );
 		BHP.drawAuction( '#auction' );				
 	}
-	$( '#modal-popup-save' ).modal( 'hide' );	
+	BHP.hideModalSaveDialog();
+	//$( '#modal-popup-save' ).modal( 'hide' );	
 };
 
 BHP.makeIdentifier = function(text) {
@@ -1407,7 +1411,8 @@ BHP.savePlay = function() {
 			alert(err);
 			return;
 		}
-		$( '#modal-popup-save' ).modal( 'hide' );
+		BHP.hideModalSaveDialog();
+		//$( '#modal-popup-save' ).modal( 'hide' );
 		var list = $( '#lines' );
 		var lineID = BHP.makeIdentifier( playName );
 		var html = '<li><a class="btn" id="' + lineID +'">' + playName + '</a></li>';
@@ -1467,7 +1472,8 @@ BHP.loadSavedPlay = function( list ) {
 			var name = $( list ).html();
 			BHP.rewind();
 			BHP.deal.loadPlay( name );
-			$( '#modal-popup-confirm' ).modal( 'hide' );
+			BHP.hideModalConfirmDialog();
+			//$( '#modal-popup-confirm' ).modal( 'hide' );
 		} );		
 	}
 	else {
@@ -1507,48 +1513,6 @@ BHP.loadPlay = function() {
 		BHP.addError( err );
 	}
 };
-
-
-BHP.manageColorThemes = function() {
-	// Retreive theme cookie if it exists and set the stylesheet accordingly
-	var themeCookie = $.cookie( 'bootswatch_theme' );
-	if ( themeCookie !== undefined ) {
-		var theme = JSON.parse( themeCookie );
-		$('#bootswatch-theme').attr({href : theme.cssCdn});
-		$('#current-theme').html( theme.name );
-	}
-	// Populate dropdown with bootswatch themes
-	$.get( "http://api.bootswatch.com/3/", function( data ) {
-		// Add the default bootstrap theme first
-		var options = '<li><a class="theme-name" href="javascript:void(0);" id="default">Default</a></li>';
-		BHP.bootswatchThemes['default'] = {
-			'name' : 'Default',
-			'cssCdn' : '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'
-		};
-		
-		// Add the retreived bootswatches next
-		var themes = data.themes;
-		for ( var i = 0; i < themes.length; i++) {
-			var themeID = themes[i].name.toLowerCase();
-			BHP.bootswatchThemes[themeID] = themes[i];
-			options += '<li><a class="theme-name" href="javascript:void(0);" id="' + themeID + '">';
-			options += '<img width="25" height="25" src="' + themes[i].thumbnail + '" alt="' + themes[i].name + '"></img> ' + themes[i].name;
-			options += '</a></li>';
-		}		
-		// Set the dropdown
-		$('#themes').html(options);	
-		
-		// Add click handler to switch themes
-		$('.theme-name').click(function() {
-			var themeID = $(this).attr('id');
-			var stylesheet = 'http:' + BHP.bootswatchThemes[themeID].cssCdn;
-			$.cookie( 'bootswatch_theme', JSON.stringify( BHP.bootswatchThemes[themeID]) );
-			$('#bootswatch-theme').attr({href : stylesheet});
-			$('#current-theme').html( BHP.bootswatchThemes[themeID].name );
-		});		
-	});	
-};
-
 
 /**
  * Dump the deal up to the current position into a handviewer url
@@ -1709,6 +1673,10 @@ BHP.HA.drawHandAssignment = function() {
 	$( container ).append( html );
 	var cell = $( '#card-pile' );
 	var height = totalHeight - 2 * BHP.gutter;
+	console.log('height = '+height);
+	console.log('totalheight = '+totalHeight);
+	console.log('header height = '+headerHeight);
+	console.log('footer top = '+BHP.footer.position().top);
 	
 	cell.css({
 		top: titleHeight + headerHeight + BHP.gutter,
@@ -1809,7 +1777,8 @@ BHP.saveName = function() {
 	var nameID = direction + '-name';
 	BHP.deal.setName( name, direction );
 	$( '#' + nameID ).html( name );	
-	$( '#modal-popup-save' ).modal( 'hide' );
+	BHP.hideModalSaveDialog();
+	//$( '#modal-popup-save' ).modal( 'hide' );
 };
 
 BHP.HA.drawUnassignedCards = function() {
@@ -2006,10 +1975,23 @@ BHP.setModalContent = function( content, save ) {
 	$( id ).html( content );	
 };
 
+BHP.showModal = function( content ) {
+	$( '#modal-dialog-content' ).html( content );
+	$( '#modal-dialog' ).modal( 'show' );	
+};
+
+BHP.hideModal = function() {
+	$( '#modal-dialog' ).modal( 'hide' );	
+};
+
 BHP.showModalDialog = function( title, html ) {
 	BHP.setModalTitle( title, false );
 	BHP.setModalContent( html, false );
 	$( '#modal-popup' ).modal( 'show' );	
+};
+
+BHP.hideModalDialog = function() {
+	$( '#modal-popup' ).modal( 'hide' );
 };
 
 BHP.showModalConfirmDialog = function( title, content, callBack, type ) {
@@ -2028,12 +2010,27 @@ BHP.showModalConfirmDialog = function( title, content, callBack, type ) {
 	$( '#modal-popup-confirm' ).modal( 'show' );	
 };
 
+BHP.hideModalConfirmDialog = function() {
+	$( '#modal-popup-confirm' ).modal( 'hide' );
+};
+
 BHP.showModalSaveDialog = function( title, callBack ) {
 	BHP.setModalTitle( title, true );
 	var buttonID = '#modal-popup-save-ok';
 	$( buttonID ).unbind( 'click' );
 	$( buttonID ).click( callBack );
 	$( '#modal-popup-save' ).modal( 'show' );	
+};
+
+BHP.hideModalSaveDialog = function() {
+	$( '#modal-popup-save' ).modal( 'hide' );
+};
+
+BHP.hideAllModals = function() {
+	BHP.hideModal();
+	BHP.hideModalDialog();
+	BHP.hideModalConfirmDialog();
+	BHP.hideModalSaveDialog();	
 };
 
 BHP.showContactInformation = function() {
@@ -2152,7 +2149,8 @@ BHP.HA.unassignAllCards = function() {
 	}
 	$( '#check-hands' ).attr( 'disabled', ! BHP.HA.isValid() );	
 	BHP.AA.undoAllBids();
-	$( '#modal-popup-confirm' ).modal( 'hide' );
+	BHP.hideModalConfirmDialog();
+	//$( '#modal-popup-confirm' ).modal( 'hide' );
 };
 
 BHP.AA.drawAuctionAssignment = function() {
@@ -2280,7 +2278,8 @@ BHP.AA.setDealer = function() {
 	var direction = $( this ).attr( 'direction' );
 	BHP.deal.setDealer( direction );
 	BHP.AA.updateDealer();	
-	$( '#modal-popup-confirm' ).modal( 'hide' );
+	BHP.hideModalConfirmDialog();
+	//$( '#modal-popup-confirm' ).modal( 'hide' );
 };
 
 BHP.AA.updateDealer = function() {
@@ -2498,7 +2497,8 @@ BHP.AA.undoAllBids = function() {
 	BHP.drawAuction( '#auction' );
 	BHP.AA.setBiddingBoxStatus();	
 	BHP.deal.deletePlays();
-	$( '#modal-popup-confirm' ).modal( 'hide' );
+	BHP.hideModalConfirmDialog();
+	//$( '#modal-popup-confirm' ).modal( 'hide' );
 };
 
 BHP.generateURL = function() {
@@ -2578,13 +2578,99 @@ BHP.handleAuction = function( show ) {
 	}
 };
 
+BHP.loadBootswatchThemes = function() {
+	// Populate dropdown with bootswatch themes
+	$.get( 'http://api.bootswatch.com/3/', function( data ) {
+		// Add the default bootstrap theme first
+		var options = '<li><a class="theme-name" href="javascript:void(0);" id="default">Default</a></li>';
+		BHP.bootswatchThemes['default'] = {
+			'name' : 'Default',
+			'cssCdn' : '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'
+		};
+		
+		// Add the retreived bootswatches next
+		var themes = data.themes;
+		for ( var i = 0; i < themes.length; i++) {
+			var themeID = themes[i].name.toLowerCase();
+			BHP.bootswatchThemes[themeID] = themes[i];
+			options += '<li><a class="theme-name" href="javascript:void(0);" id="' + themeID + '">';
+			options += '<img width="25" height="25" src="' + themes[i].thumbnail + '" alt="' + themes[i].name + '"></img> ' + themes[i].name;
+			options += '</a></li>';
+		}		
+		// Set the dropdown
+		$( '#themes' ).html(options);	
+		
+		// Add click handler to switch themes
+		$( '.theme-name' ).click(function() {
+			var themeID = $(this).attr('id');
+			$.cookie( 'bootswatch_theme', JSON.stringify( BHP.bootswatchThemes[themeID]) );
+			var name = BHP.bootswatchThemes[themeID].name;
+			var stylesheet = 'http:' + BHP.bootswatchThemes[themeID].cssCdn;
+			BHP.loadStylesheet( name, stylesheet );		
+		});		
+	});	
+};
+
+BHP.themeChanged = function( name ) {
+	$( '#current-theme' ).html( name );
+	BHP.resizeHandler();
+	BHP.hideModal();
+};
+
+BHP.drawPage = function( name ) {
+	$( '#current-theme' ).html( name );	
+	if ( BHP.deal.areHandsValid() ) {
+		if ( BHP.deal.isAuctionValid() ) {
+			BHP.handlePlay();
+		}
+		else {
+			BHP.handleAuction();
+		}
+	}
+	else {
+		BHP.handleHands();
+	}
+	BHP.hideModal();
+};
+
+BHP.loadStylesheet = function( name, stylesheet ) {
+	var themeName, themeStylesheet;
+	// If nothing specified use cookie or default
+	if ( name === undefined ) {
+		themeName = 'Default';
+		themeStylesheet = 'http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css';
+		var themeCookie = $.cookie( 'bootswatch_theme' );
+		if ( themeCookie !== undefined ) {
+			var theme = JSON.parse( themeCookie );
+			themeName = theme.name;
+			themeStylesheet = 'http:' + theme.cssCdn;
+		}	
+	}
+	else {
+		themeName = name;
+		themeStylesheet = stylesheet;
+	}
+	var content  = 'Loading ' + themeName + ' theme';
+	BHP.showModal( content );
+	$( '#bootswatch-theme' ).remove();
+	var html = '<link id="bootswatch-theme" href="' + themeStylesheet + '" rel="stylesheet">';
+	$( 'head' ).append( html );
+	$( '#bootswatch-theme' ).on( 'load', function() {
+		if ( name === undefined ) { 
+			BHP.drawPage( themeName );	
+		}
+		else {
+			BHP.themeChanged( themeName );
+		}
+	});		
+};
+
 
 $(function() {
+	
 	BHP.state = 'init';
 	// Hide all modals
-	$( '#modal-popup' ).modal( 'hide' );
-	$( '#modal-popup-save' ).modal( 'hide' );
-	$( '#modal-popup-confirm' ).modal( 'hide' );	
+	BHP.hideAllModals();
 	
 	// Activate tooltips
 	$( '.tooltip-bottom' ).tooltip({
@@ -2599,9 +2685,6 @@ $(function() {
 	
 	// A new bridge deal
 	BHP.deal = new Bridge.Deal();	
-	
-	// Setup the skins
-	BHP.manageColorThemes();
 	
 	// Setup an errors array
 	BHP.errors = [];
@@ -2622,17 +2705,11 @@ $(function() {
 		BHP.loadAuction();
 		BHP.loadPlay();
 	}
-	if ( BHP.deal.areHandsValid() ) {
-		if ( BHP.deal.isAuctionValid() ) {
-			BHP.handlePlay();
-		}
-		else {
-			BHP.handleAuction();
-		}
-	}
-	else {
-		BHP.handleHands();
-	}
+
+	// Setup the skins
+	BHP.loadBootswatchThemes();
+	BHP.loadStylesheet();
+		
 });
 
 
