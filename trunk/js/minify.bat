@@ -1,1 +1,1 @@
-java -jar compiler.jar --js=bridge-classes.js --js=jquery.cookie.js --js=jquery.ba-hashchange.min.js --js=bridge-hand-player.js --js_output_file=bridge-hand-player-min.js
+java -jar compiler.jar --js=msie-fix.js --js=bridge-classes.js --js=jquery.cookie.js --js=jquery.ba-hashchange.min.js --js=bridge-hand-player.js --js_output_file=bridge-hand-player-min.js
