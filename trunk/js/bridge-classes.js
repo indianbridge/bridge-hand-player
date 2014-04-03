@@ -127,6 +127,10 @@ Bridge.Vulnerability = {
 	'b' : { name : 'Both', },
 };
 
+Bridge.getVulnerabilityName = function( vul ) {
+	return Bridge.Vulnerability[ vul ].name;
+};
+
 /**
  * Creates an instance of a Playing Card.
  */
@@ -1100,7 +1104,16 @@ Bridge.Deal.prototype.areHandsValid = function() {
 };
 
 Bridge.Deal.prototype.isAuctionValid = function() {
-	return this.numPasses() === 3;	
+	var bid = this.lastBid;
+	if (bid === null || bid.getSuit() !== 'p' ) return false;
+	bid = bid.getPreviousBid();
+	if (bid === null || bid.getSuit() !== 'p' ) return false;
+	bid = bid.getPreviousBid();
+	if (bid === null || bid.getSuit() !== 'p' ) return false;
+	bid = bid.getPreviousBid();
+	if (bid === null) return false;
+	if ( bid.getSuit() === 'p' && bid.getPreviousBid() !== null ) return false;
+	return true;
 };
 
 /**
