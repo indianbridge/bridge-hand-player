@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bridge Hand Player</title>
     
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootswatch-theme">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootswatch-theme"> -->
     <link href="css/bridge-hand-player.css" rel="stylesheet">
     
     <!-- jQuery -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>  
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -29,8 +30,7 @@
 		         <span class="icon-bar"></span>
 		         <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand tooltip-bottom" title="Bridge Hand Player"><img src="images/bhp_logo.png"></img>BHP</a>
-		      <a id="header-title" class="navbar-brand"></a>
+		      <a class="navbar-brand tooltip-bottom" title="Bridge Hand Player"><img src="images/bhp_logo.png"></img>BHP <span id="header-title"></span></a>
 		   </div>
 		   <div class="collapse navbar-collapse" id="header-bar">
 			<ul class="nav navbar-nav">
@@ -61,6 +61,23 @@
 	</header>
 	<section id="section"></section>
 	<footer id="footer"></footer>
+	
+	<div class="modal fade" id="modal-dialog" tabindex="-1" role="dialog" aria-labelledby="modal-dialog-title" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header"></div>
+	            <h4 id="modal-dialog-title" class="modal-title">Loading</h4>
+	         </div>
+	         <div class="modal-body">
+				<form role="form" onsubmit="return false;">
+				  <div id="modal-dialog-content" class="form-group">Content</div>
+				</form>	
+	         </div>
+	         <div class="modal-footer">     
+	         </div>	      
+	      </div><!-- /.modal-content -->
+	   </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->		
 	
 	<div class="modal fade" id="modal-popup" tabindex="-1" role="dialog" aria-labelledby="modal-popup-title" aria-hidden="true">
 	   <div class="modal-dialog">
@@ -122,7 +139,7 @@
 	         </div>
 	      </div><!-- /.modal-content -->
 	   </div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->				
+	</div><!-- /.modal -->					
   
   	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> 	
   	<script src="js/msie-fix.js"></script>
