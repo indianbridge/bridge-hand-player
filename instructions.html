@@ -1,76 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bridge Hand Player</title>
-    <link rel="icon" type="image/ico" href="favicon.ico"/>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootswatch-theme">     
-  </head>
-  <body>
-		<div id="instructions">
-			<div class="container">
-		  	<h1>Bridge Hand Player (BHP) Instructions</h1>
-		  	<ol class="list-group">
-		  		<li class="list-group-item list-group-item-info">
-					The Bridge Hand Player (BHP) Tool tries to extend the functionality of the <a href="http://www.bridgebase.com/tools/handviewer.html">Bridge Base Online's Hand Viewer tool </a>. The key additions are ability to visually play out different lines, add a line of play to the handviewer url, save multiple lines of play to be shared with others.		  		
-		  		</li>
-		  		<li class="list-group-item list-group-item-deafult">
-					BHP hands are specified using the same format as the BBO Handviewer i.e., parameters are appended to the URL. BHP supports all but the following parameters of the BBO Hand Viewer : c - number of tricks claimed, k -kibitz, lin - Contents of actual .lin file to display, linurl - URL of external .lin file in XML wrapper, myhand - Identifier of deal stored in myhands. For details of all the parameters go to the <a href="http://www.bridgebase.com/tools/hvdoc.html">hvdoc page</a>.		  		
-		  		</li>
-		  		<li class="list-group-item list-group-item-info">
-					BHP supports one additional parameter and extends the p (line of play) parameter. A t parameter can be used to add some text (maybe a title and an author or some other general commentary) that is shown at all times. HTML is supported, so for example "t=&lt;h4&gt;Relay Double&lt;/h4&gt; by Kit Woolsey" can be used to add a title and author. BHP also supports specification of multiple lines of play. While the HandViewer p parameter can be specified as usual additional lines of play can be specified by using the parameter p and the name of the play  immediately after and the play specified in the usual way. For example "pLine1=c2c3cacqhah3h2hk&pLine2=c2c3cacqc5ckc7c4" can be used to specify 2 alternate lines of play.		  		
-		  		</li>
-		  		<li class="list-group-item list-group-item-default">
-					Once the hand and auction and play has been loaded, the play can be stepped through using the buttons on the bottom just like the hand viewer. However at any point you can explore your own line of play by clicking on playable cards (highlighted by green outline). The original lines of play can be restored at any time by using the Line drop down at the top menu bar. When you have explored a different line of play, that line can be saved and then you can generate a new url ( see next step) with the new line appended.		  		
-		  		</li>
-		  		<li class="list-group-item list-group-item-info">
-					At any point, you can generate a BBO hand viewer url to share with others or embed in some webpage. Note that this will only include the currently active line of play. A Bridge Winners embed code can also be generated to be included when posting articles on the <a href="http://bridgewinners.com/">Bridge Winners Page</a>. A BHP url can also be generated which will include all saved lines of play as well the current line of play (if it is not saved).		  		
-		  		</li>
-		  		<li class="list-group-item list-group-item-deafult">
-					You can link directly to any point in the play by adding # followed by a number indicating the play. For example adding #8 at the end would link to the end of trick 2 directly.		  		
-		  		</li>		  		
-		  	</ol>
-		  	</div>	
-		  </div>	
-		  
-		  <div id="examples">
-		  	<div class="container">
-		  	<h1>Some Examples</h1>
-		  	<ol>
-				<li><a href="http://bridgewinners.com/article/view/born-yesterday/">Bridge Winners Article Born Yesterday Hand 2 by Sartaj Hans</a><br/>
-				<a href="index.html?n=saq65h875dkq5ck62&e=s932hqt9dj3cq7543&s=sj4hk32dA87642ca9&d=e&v=b&a=p1dp1sp2dp3cp3nppp&p=cjckc3c9dkd3d2d9dqdjd4dtd5s2das7d8s8c2c4d7c8h5c5d6cth7c7sjsksas3sqs9s4sts6h9h2h4s5cqh3h6c6htcahj&t=<h4>Born Yesterday Hand 2</h4> by Sartaj Hans">BHP Link</a>
-
-				<li><a href="http://bridgewinners.com/article/view/born-yesterday/">Bridge Winners Article Born Yesterday Hand 1 by Sartaj Hans</a><br/>
-				<a href="index.html?n=saq63hqt642da9cq6&w=skj854hj93d82cjt5&s=st2hk5dq743cak932&d=w&v=b&a=p1hp2cp2hp2np3nppp&p=s5s3s9sthkh3h2h7h5h9hth8h4had3hjc4c2cjcqhqs7c3s4h6d5d4d2c6c7c9ctd8dad6d7d9dkdqc5djs2s8s6dtcksjsq&t=<h4>Born Yesterday Hand 1</h4> by Sartaj Hans">BHP Link</a>
-
-				<li><a href="http://bridgewinners.com/article/view/overly-committal/">Overly Committal</a><br/>
-				<a href="index.html?n=s2h843dak875ckq62&w=sj43hkq6dqt632c83&s=saqt8hjt952dj9ca4&d=e&v=b&a=p1hp2d2hp2s4hppp&pLine 1=c8ckctc4s2sksas4s8s3h3s5h4h7hjhqc3c2c5cah9hkh8hac7sth6t=<h4>Overly Committal</h4> by Kit Woolsey">BHP Link</a>
-
-				<li><a href="http://bridgewinners.com/article/view/relay-double/">Bridge Winners Article Relay Double</a><br/>
-				<a href="index.html?n=sk8432hk86dqt96c3&e=st9hqtdkj752cqt72&s=sj6haj9742d4cj954&d=e&v=e&a=p2hx3hppp&p=cac3c2c4h3h6hqhac5c6h8c7dtdjd4d8hth2h5hkd6d2h4d3s6s5sk&t=<h4>Relay Double</h4> by Kit Woolsey">BHP Link</a></li>
-
-				<li><a href="http://bridgewinners.com/article/view/final-entry/">Bridge Winners Article Final Entry </a><br/>
-				<a href="index.html?n=st974hat73cak976&e=sj86h9862dqt5ct52&s=saq3hkqj54dk863c4&d=e&v=b&a=p1h2d4dp4sp6cp6hppp&p=dah3d5d3cac2c4c3ckc5s3c8s4s8sqskcqc6cth4d6d2htdth7h2hjd4&t=<h4>Final Entry</h4> by Kit Woolsey">BHP Link</a></li>
-
-				<li><a href="http://bridgewinners.com/article/view/what-to-cash/">Bridge Winners Article What to Cash </a><br/>
-				<a href="index.html?n=sa976432h84d3c942&e=s8hq97652da42ca85&s=sjthkjtdkqj65ckq7&d=s&v=-&a=1n{15-17}p4d{Transfer to sp}p4sppp&p=cjc2cac7h7hjhah4h3h8hqhkhtd7d3h2sjs5s2&t=<h4>What to Cash</h4> by Kit Woolsey">BHP Link</a></li>
-
-				<li><a href="http://bridgewinners.com/article/view/crash/">Bridge Winners Article CRASH</a><br/>
-				<a href="index.html?n=sk64hkt82dt65ckt8&e=sqjt9732h6dkq4cj4&s=s85ha974daj97caq5&d=s&v=-&a=1c{16+}1h{CRASH}1n{9-14 bal}p2c{ask}p2d{9-11 4 hearts}p4hppp&p=c3c8cjcah4h5hth6dtdqdad3h7hjhks7d5d4djd2hah3h2s3c5c2ckc4d6dkd7d8sqs5sas4hqh8s2h9&t=<h4>CRASH</h4> by Kit Woolsey">BHP Link</a></li>
-
-				<li><a href="http://bridgewinners.com/article/view/daily-bridge-blunders-1/">Bridge Winners Article Daily Bridge Blunders</a><br/>
-				<a href="index.html?n=skqt76ha84d76ck54&e=s2hqjt72dakq98c96&s=sa543hk93dj3ca872&d=n&b=e&a=1s{Major suit opening -- 5+ S; 11-21 HCP; 12-22 total points}2s{Michaels -- 5+ H; 12+ total points; forcing}4s{3+ S; 13-18 total points}ppp&p=dkd3d4d6dadjd5d7hqh3h5has6s2sas9s3s8sqh7skd8s4sjckc9c2c3c4c6cacqc7ctc5h2h6h4hthkc8cjs7d9h8hjh9dtdqs5d2st&t=Daily Bridge Blunders">BHP Link</a></li>
-
-				<li><a href="http://bridgewinners.com/article/view/calculating-the-odds/">Bridge Winners Article Calculating the Odds</a><br/>
-				<a href="index.html?n=saqt97h6dak73ct72&e=s52hjt9754dj2cq96&s=sj43hakq2dt654ca3&a=-6sn&v=-&d=n&t=Calculating The Odds">BHP Link</a></li>
-
-				<li><a href="http://bridgewinners.com/article/view/can-this-3nt-be-defeated/">Bridge Winners Article Can this 3NT be defeated?</a><br/>
-				<a href="index.html?n=s3469aqhkdkc3468t&e=s578jh67ajd79tc5a&s=sth359qtd25aqjckq&w=s2kh248d3468c279j&d=s&v=-&a=1hp1sp2dp3sp3nppp&pLine%201=c2c3cacqhah3h2hkd7d2d3dkc4c5ckc7dad4s3d9dqd6s4dtdjd8c6h6d5h4s6s5hqh8s9h7h9c9c8hj&pLine%202=c2c3cacqc5ckc7c4stsks3s5h2hkhah3h6h9h4c6dad3dkd7dqd4s4d9djd6c8dthqh8cth7h5s2s6hj&t=Can This 3NT Be Defeated">BHP Link</a></li>		  	  	
-
-		  	</ol>		  		
-		  	</div>
-		  </div>
-  </body>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Bridge Hand Player</title>
+		<link rel="icon" type="image/ico" href="favicon.ico"/>
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootswatch-theme">     
+		<style>
+			body {
+				padding-top: 55px;
+			}
+		</style>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script>
+		$(function() {
+			var offset = 80;
+			$('.navbar li a').click(function(event) {
+			    event.preventDefault();
+			    $($(this).attr('href'))[0].scrollIntoView();
+			    scrollBy(0, -offset);
+			});	
+		});		
+		</script>
+	</head>
+	<body  data-spy="scroll" data-target="#navbar-example" data-offset="55">
+                        <nav id="navbar-example" class="navbar navbar-default navbar-fixed-top" role="navigation">
+                                <div class="navbar-header">
+                                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-js-navbar-scrollspy">
+                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                        </button>
+                                        <a class="navbar-brand" href="#">Instructions</a>
+                                </div>
+                                <div class="collapse navbar-collapse bs-js-navbar-scrollspy">
+                                        <ul class="nav navbar-nav">
+                                                <li><a href="#general">General</a></li>
+                                                <li><a href="#additional">Additional Features</a></li>
+                                                <li><a href="#hand">Hands</a></li>
+                                                <li><a href="#auction">Auction</a></li>
+                                                <li><a href="#play">Play</a></li>
+                                                <li><a href="#examples">Examples</a></li>
+                                        </ul>
+                                </div>
+                        </nav>
+                        <div class="container-fluid">
+                                <div id="general" class="page-header"><h1>General Instructions</h1></div>
+                                <ul class="list-group">
+                                        <li class="list-group-item list-group-item-success"><a href="http://bridge-hand-player.appspot.com/" target="_blank">Start with a clean slate to enter the hands graphically.</a> After entering a full deal ( 13 cards to everyone ) you will be taken to auction area.</li>
+                                        <li class="list-group-item ">Or provide the hands in the URL using <a href="http://www.bridgebase.com/tools/hvdoc.html">handviewer format</a> and <a href="http://bridge-hand-player.appspot.com?n=s29h58ktd69qc37kj&e=s35qh479qjd4c249q&s=s67akh36ad378jc8a&w=s48jth2d25aktc56t" target="_blank">proceed directly to auction area.</a> After you have entered a valid auction you will be taken to play area.</li>
+                                        <li class="list-group-item list-group-item-success">Or provide hands and auction and <a href="http://bridge-hand-player.appspot.com?n=s29h58ktd69qc37kj&e=s35qh479qjd4c249q&s=s67akh36ad378jc8a&w=s48jth2d25aktc56t&b=1&d=w&v=-&a=ppp1n(15-17)p2cp2sp2np3nppp" target="_blank">proceed directly to play area.</a> You can create a line of play by clicking on cards.</li>
+                                        <li class="list-group-item ">At any point you can create a BBO handviewer url or BW embed code which will include everything setup so far.</li>
+                                        <li class="list-group-item list-group-item-success">Or you can provide hands, auction and play and <a href="http://bridge-hand-player.appspot.com?n=s29h58ktd69qc37kj&e=s35qh479qjd4c249q&s=s67akh36ad378jc8a&w=s48jth2d25aktc56t&b=1&d=w&v=-&a=ppp1n(15-17)p2cp2sp2np3nppp&p=d2d6d4d8d3dkd9c2s4s2sqskd7dadqh4sjs9s5s6stc3s3sas7s8h5h7h2hkh9h3h8hqhad5djdthtc4cac5c7c9c8c6ck" target="_blank">proceed to viewer/player area.</a> You can either follow the play using control buttons in the bottom or choose to click on cards at any point in the play to branch out to form your own line of play to test the outcome.</li>
+                                        <li class="list-group-item ">You can change things like dealer, player names, board number, vulnerability as well as add annotations to bids and plays by clicking in appropriate places.</li>
+                                        <li class="list-group-item list-group-item-success">You should be able to take any handviewer url that includes 4 full hands and plug it in here. If you don't have 4 full hands then you will be shown the hand screen to specify the full hand.</li>
+                                </ul>
+                                <div id="additional" class="page-header"><h1>Additional Features</h1></div>
+                                <ul class="list-group">
+                                        <li class="list-group-item list-group-item-success">You can specify more than one line of play by adding more p parameters in the url. Each additional p parameter should have a name immediately following like <a href="http://bridge-hand-player.appspot.com?n=s3469aqhkdkc3468t&e=s578jh67ajd79tc5a&s=sth359qtd25aqjckq&w=s2kh248d3468c279j&d=s&v=-&a=1hp1sp2dp3sp3nppp&pLine%201=c2c3cacqhah3h2hkd7d2d3dkc4c5ckc7dad4s3d9dqd6s4dtdjd8c6h6d5h4s6s5hqh8s9h7h9c9c8hj&pLine%202=c2c3cacqc5ckc7c4stsks3s5h2hkhah3h6h9h4c6dad3dkd7dqd4s4d9djd6c8dthqh8cth7h5s2s6hj&t=Can%20This%203NT%20Be%20Defeated" target="_blank">this example.</a></li>
+                                        <li class="list-group-item ">You can load any of the lines of play using the Load Play button in the bottom.</li>
+                                        <li class="list-group-item list-group-item-success">You can also create your own line of play and and save it using the Save Play button.</li>
+                                        <li class="list-group-item ">Multiple lines of play can only be exported to the BHP (this tool) extended format URL. When you export to BBO or BW only the currently active play will be included since that format only supports one line if play.</li>
+                                        <li class="list-group-item list-group-item-success">You can provide a direct link to a specific point in the play by adding a #play_number at the end of the URL where play_number will be replaced by the actual point in the play you want a direct link to. Each card played increments the play number by 1. So 4 indicated the end of trick 1, 10 indicates 2 cards played to trick 3 etc. If you are loading a deal for the first time the play number will refer to the first listed line of play. If a deal has already been loaded and you change the play number then it will refer to the currently active line of play. For example <a href="http://bridge-hand-player.appspot.com?n=st974hat73cak976&e=sj86h9862dqt5ct52&s=saq3hkqj54dk863c4&d=e&v=b&a=p1h2d4dp4sp6cp6hppp&p=dah3d5d3cac2c4c3ckc5s3c8s4s8sqskcqc6cth4d6d2htdth7h2hjd4#12" target="_blank">this link</a> will load hands, auction and play and take you directly to end of trick 3 (play number 12).</li>
+                                        <li class="list-group-item ">A t parameter can be used to specify a title and general description for the entire deal like <a href="http://bridge-hand-player.appspot.com?n=saq65h875dkq5ck62&e=s932hqt9dj3cq7543&s=sj4hk32dA87642ca9&d=e&v=b&a=p1dp1sp2dp3cp3nppp&p=cjckc3c9dkd3d2d9dqdjd4dtd5s2das7d8s8c2c4d7c8h5c5d6cth7c7sjsksas3sqs9s4sts6h9h2h4s5cqh3h6c6htcahj&t=<h4>Born%20Yesterday%20Hand%202</h4>%20by%20Sartaj%20Hans">this example</a>. This will displayed in the top left area.</li>
+                                </ul>
+                                <div id="hand" class="page-header"><h1>Create Hand Instructions</h1></div>
+                                <ul class="list-group">
+                                        <li class="list-group-item list-group-item-success">The left pane contains unassigned cards. Assigned cards will be face down while unassigned cards will be face up. </li>
+                                        <li class="list-group-item ">The right pane shows the currently active hand. Click on another hand to make that active.</li>
+                                        <li class="list-group-item list-group-item-success">Click on unassigned cards in the left pane to assign it to the currently active hand.</li>
+                                        <li class="list-group-item ">Click on any card in left pane to remove it from the active hand and add it to the unassigned cards.</li>
+                                        <li class="list-group-item list-group-item-success">Click Assign Rest Automatically to assign the remaining unassigned cards to hands with space available. Note that this is not a random assignment. This button is useful when three hands have been assigned and you want to assign the remaining cards to the fourth hand.</li>
+                                        <li class="list-group-item ">Click Unassign All Cards to move all assigned cards to unassigned status and start fresh.</li>
+                                        <li class="list-group-item list-group-item-success">When the hands form a valid deal (13 cards each) the Accept Hands button will be enabled and can be clicked to go to the next area.</li>
+                                        <li class="list-group-item ">At any point you can use the Generate URL (top) button to generate BBO or BW or BHP url/embed code that would include all of the currently saved information</li>
+                                </ul>
+                                <div id="auction" class="page-header"><h1>Create Auction Instructions</h1></div>
+                                <ul class="list-group">
+                                        <li class="list-group-item list-group-item-success">The left pane contains the dealer and the bidding box. Bids that are not valid in the current context will be hidden.</li>
+                                        <li class="list-group-item ">The right pane contains the auction so far.</li>
+                                        <li class="list-group-item list-group-item-success">Click on the directions next to Dealer to change the dealer. Note that if you have a developing auction then the entire auction will be wiped out ( you will be asked to confirm change of dealer if an auction exists )</li>
+                                        <li class="list-group-item ">Click on any bid in the bidding box to add it to the current position in the auction.</li>
+                                        <li class="list-group-item list-group-item-success">Click on Undo Last Bid to remove the last bud in the auction.</li>
+                                        <li class="list-group-item ">Click on any bid in the auction (right pane) to add an explanation/description.</li>
+                                        <li class="list-group-item list-group-item-success">Click on Edit Hands button (bottom) to go back to editting hands. The current auction will be stored to be restored when you return to the auction area.</li>
+                                        <li class="list-group-item ">Click on Add All Pass button (bottom) to automatically fill in passes to complete the auction.</li>
+                                        <li class="list-group-item list-group-item-success">Click on Undo All Bids button (bottom) to clear out all bids and start from scratch.</li>
+                                        <li class="list-group-item ">When a valid auction has been created ( ending in 3 passes ), the Accept Auction button (bottom) will be enabled and can be clicked to proceed to the next area</li>
+                                        <li class="list-group-item list-group-item-success">At any point you can use the Generate URL (top) button to generate BBO or BW or BHP url/embed code that would include all of the currently saved information</li>
+                                </ul>
+                                <div id="play" class="page-header"><h1>Create Play Instructions</h1></div>
+                                <ul class="list-group">
+                                        <li class="list-group-item list-group-item-success">If a play has been specified in the URL then you can use the undo and redo play control buttons (bottom) to step through the plays. You can also add a #n to the end of the URL where n is the numeric index of the play you want to move to.</li>
+                                        <li class="list-group-item ">At any point while following the play or if no play has been specified you can start creating your own line of play by clicking on cards. Playable cards will be highlighted in green outline.</li>
+                                        <li class="list-group-item list-group-item-success">Clicking on a played card ( cards shown on the table ) lets you enter a play annotation.</li>
+                                        <li class="list-group-item ">You can also add an annotation to the auction by clicking on any bid.</li>
+                                        <li class="list-group-item list-group-item-success">Plays can be saved and loaded using the Save play and Load play buttons (bottom)</li>
+                                        <li class="list-group-item ">You can go back and edit the hands or the auction using the Edit Hands and Edit Auction buttons (bottom)</li>
+                                        <li class="list-group-item list-group-item-success">Click on player names to change the names, click on Board to change the board number, click on compass to change the vulnerability.</li>
+                                        <li class="list-group-item ">At any point you can use the Generate URL (top) button to generate BBO or BW or BHP url/embed code that would include all of the currently saved information. Note that for BBO and BW only the currently active play will be included.</li>
+                                </ul>
+                                <div id="examples" class="page-header"><h1>Examples</h1></div>
+                                <ul class="list-group">
+                                        <li class="list-group-item list-group-item-success"><a href="http://bridgewinners.com/article/view/born-yesterday/" target="_blank">Born Yesterday Hand 2 by Sartaj Hans</a><br/><a href="http://bridge-hand-player.appspot.com?n=saq65h875dkq5ck62&e=s932hqt9dj3cq7543&s=sj4hk32dA87642ca9&d=e&v=b&a=p1dp1sp2dp3cp3nppp&p=cjckc3c9dkd3d2d9dqdjd4dtd5s2das7d8s8c2c4d7c8h5c5d6cth7c7sjsksas3sqs9s4sts6h9h2h4s5cqh3h6c6htcahj&t=<h4>Born%20Yesterday%20Hand%202</h4>%20by%20Sartaj%20Hans" target="_blank">BHP Link</a></li>
+                                        <li class="list-group-item "><a href="http://bridgewinners.com/article/view/born-yesterday/" target="_blank">Born Yesterday Hand 1 by Sartaj Hans</a><br/><a href="http://bridge-hand-player.appspot.com?n=saq63hqt642da9cq6&w=skj854hj93d82cjt5&s=st2hk5dq743cak932&d=w&v=b&a=p1hp2cp2hp2np3nppp&p=s5s3s9sthkh3h2h7h5h9hth8h4had3hjc4c2cjcqhqs7c3s4h6d5d4d2c6c7c9ctd8dad6d7d9dkdqc5djs2s8s6dtcksjsq&t=<" target="_blank">BHP Link</a></li>
+                                        <li class="list-group-item list-group-item-success"><a href="http://bridgewinners.com/article/view/overly-committal/" target="_blank">Overly Committal by Kit Woolsey</a><br/><a href="http://bridge-hand-player.appspot.com?n=s2h843dak875ckq62&w=sj43hkq6dqt632c83&s=saqt8hjt952dj9ca4&d=e&v=b&a=p1hp2d2hp2s4hppp&p=c8ckctc4s2sksas4s8s3h3s5h4h7hjhqc3c2c5cah9hkh8hac7sth6&t=<h4>Overly%20Committal</h4>%20by%20Kit%20Woolsey" target="_blank">BHP Link</a></li>
+                                        <li class="list-group-item "><a href="http://bridgewinners.com/article/view/relay-double/" target="_blank">Relay Double by Kit Woolsey</a><br/><a href="http://bridge-hand-player.appspot.com?n=sk8432hk86dqt96c3&e=st9hqtdkj752cqt72&s=sj6haj9742d4cj954&d=e&v=e&a=p2hx3hppp&p=cac3c2c4h3h6hqhac5c6h8c7dtdjd4d8hth2h5hkd6d2h4d3s6s5sk&t=<h4>Relay%20Double</h4>%20by%20Kit%20Woolsey" target="_blank">BHP Link</a></li>
+                                        <li class="list-group-item list-group-item-success"><a href="http://bridgewinners.com/article/view/final-entry/" target="_blank">Final Entry by Kit Woolsey</a><br/><a href="http://bridge-hand-player.appspot.com?n=st974hat73cak976&e=sj86h9862dqt5ct52&s=saq3hkqj54dk863c4&d=e&v=b&a=p1h2d4dp4sp6cp6hppp&p=dah3d5d3cac2c4c3ckc5s3c8s4s8sqskcqc6cth4d6d2htdth7h2hjd4&t=<h4>Final%20Entry</h4>%20by%20Kit%20Woolsey" target="_blank">BHP Link</a></li>
+                                        <li class="list-group-item "><a href="http://bridgewinners.com/article/view/what-to-cash/" target="_blank">What to Cash by Kit Woolsey</a><br/><a href="http://bridge-hand-player.appspot.com?n=sa976432h84d3c942&e=s8hq97652da42ca85&s=sjthkjtdkqj65ckq7&d=s&v=-&a=1n(15-17)p4d(Transfer%20to%20sp)p4sppp&p=cjc2cac7h7hjhah4h3h8hqhkhtd7d3h2sjs5s2&t=<h4>What%20to%20Cash</h4>%20by%20Kit%20Woolsey" target="_blank">BHP Link</a></li>
+                                        <li class="list-group-item list-group-item-success"><a href="http://bridgewinners.com/article/view/crash/" target="_blank">CRASH by Kit Woolsey</a><br/><a href="http://bridge-hand-player.appspot.com?n=sk64hkt82dt65ckt8&e=sqjt9732h6dkq4cj4&s=s85ha974daj97caq5&d=s&v=-&a=1c(16+)1h(CRASH)1n(9-14%20bal)p2c(ask)p2d(9-11%204%20hearts)p4hppp&p=c3c8cjcah4h5hth6dtdqdad3h7hjhks7d5d4djd2hah3h2s3c5c2ckc4d6dkd7d8sqs5sas4hqh8s2h9&t=<h4>CRASH</h4>%20by%20Kit%20Woolsey" target="_blank">BHP Link</a></li>
+                                        <li class="list-group-item "><a href="http://bridgewinners.com/article/view/daily-bridge-blunders-1/" target="_blank">Daily Bridge Blunders by Ben Kompa</a><br/><a href="http://bridge-hand-player.appspot.com?n=skqt76ha84d76ck54&e=s2hqjt72dakq98c96&s=sa543hk93dj3ca872&d=n&b=e&a=1s(Major%20suit%20opening%20--%205+%20S;%2011-21%20HCP;%2012-22%20total%20points)2s(Michaels%20--%205+%20H;%2012+%20total%20points;%20forcing)4s(3+%20S;%2013-18%20total%20points)ppp&p=dkd3d4d6dadjd5d7hqh3h5has6s2sas9s3s8sqh7skd8s4sjckc9c2c3c4c6cacqc7ctc5h2h6h4hthkc8cjs7d9h8hjh9dtdqs5d2st&t=Daily%20Bridge%20Blunders" target="_blank">BHP Link</a></li>
+                                        <li class="list-group-item list-group-item-success"><a href="http://bridgewinners.com/article/view/calculating-the-odds/" target="_blank">Calculating the Odds by Nuno Pereira</a><br/><a href="http://bridge-hand-player.appspot.com?n=saqt97h6dak73ct72&e=s52hjt9754dj2cq96&s=sj43hakq2dt654ca3&a=-6sn&v=-&d=n&t=Calculating%20The%20Odds" target="_blank">BHP Link</a></li>
+                                        <li class="list-group-item "><a href="http://bridgewinners.com/article/view/can-this-3nt-be-defeated/" target="_blank">Can this 3NT be defeated? by Ian Wilson</a><br/><a href="http://bridge-hand-player.appspot.com?n=s3469aqhkdkc3468t&e=s578jh67ajd79tc5a&s=sth359qtd25aqjckq&w=s2kh248d3468c279j&d=s&v=-&a=1hp1sp2dp3sp3nppp&pLine%201=c2c3cacqhah3h2hkd7d2d3dkc4c5ckc7dad4s3d9dqd6s4dtdjd8c6h6d5h4s6s5hqh8s9h7h9c9c8hj&pLine%202=c2c3cacqc5ckc7c4stsks3s5h2hkhah3h6h9h4c6dad3dkd7dqd4s4d9djd6c8dthqh8cth7h5s2s6hj&t=Can%20This%203NT%20Be%20Defeated" target="_blank">BHP Link</a></li>
+                                </ul>
+                        </div>
+                      
+	</body>
 </html>
