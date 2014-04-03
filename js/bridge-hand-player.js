@@ -784,8 +784,7 @@ BHP.drawNames = function( direction, bottom, left ) {
 		top: bottom - nameObject.outerHeight(),
 		left: left
 	});	
-	nameObject.attr( 'title', 'Click to change Name' );
-	nameObject.tooltip();	
+	nameObject.attr( 'title', 'Click to change Name' ).tooltip();
 };
 
 /**
@@ -964,12 +963,10 @@ BHP.drawVertical = function( direction ) {
 
 BHP.getHorizontalWidth = function( direction ) {
 	var hand = BHP.hands[ direction ];
-	//var firstSuit = true;
 	var width = 0;
 	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
 		var suit = Bridge.CardSuitOrder[ i ];
 		if ( hand.cards[ suit ].length > 0 ) {
-			//if ( ! firstSuit ) width += BHP.gutter;
 			width += ( hand.cards[ suit ].length - 1 ) * BHP.cardImageDimensions.width * BHP.cardImageDimensions.percentageWidthShowing + BHP.cardImageDimensions.width;
 		}
 	}
@@ -986,13 +983,7 @@ BHP.getHorizontalHeight = function( direction ) {
 };
 
 BHP.getVerticalHeight = function( direction ) {
-	var hand = BHP.hands[ direction ];
-	var numSuits = 0;
-	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
-		var suit = Bridge.CardSuitOrder[ i ];
-		if ( hand.cards[ suit ].length > 0 ) numSuits++;
-	}
-	return ( numSuits - 1 ) * BHP.cardImageDimensions.height * BHP.cardImageDimensions.percentageHeightShowing + BHP.cardImageDimensions.height;
+	return ( 3 ) * BHP.cardImageDimensions.height * BHP.cardImageDimensions.percentageHeightShowing + BHP.cardImageDimensions.height;
 };
 
 BHP.getHands = function() {
@@ -1130,9 +1121,7 @@ BHP.drawPlayingTable = function() {
 		top: top,
 		left: left
 	};
-	compass.click( BHP.changeVulnerabilityDialog );
-	
-	//trace( 'Drawing compass with src ' + imageName + ' with dimensions ' + JSON.stringify( compassDimensions ) );		
+	compass.click( BHP.changeVulnerabilityDialog );		
 	compass.css( compassDimensions );		
 	// Add regions for played cards
 	var id = 'n-played-card';
@@ -1673,10 +1662,6 @@ BHP.HA.drawHandAssignment = function() {
 	$( container ).append( html );
 	var cell = $( '#card-pile' );
 	var height = totalHeight - 2 * BHP.gutter;
-	console.log('height = '+height);
-	console.log('totalheight = '+totalHeight);
-	console.log('header height = '+headerHeight);
-	console.log('footer top = '+BHP.footer.position().top);
 	
 	cell.css({
 		top: titleHeight + headerHeight + BHP.gutter,
@@ -1752,7 +1737,9 @@ BHP.HA.drawHandAssignment = function() {
 	$( '.change-name' ).click(function() {
 		var direction = $( this ).attr( 'direction' );
 		BHP.changeNameDialog( direction );
-	});		
+	});	
+	$( '.change-name' ).attr( 'title', 'Click to change Name' ).tooltip();	
+	$( '.hand-switcher' ).attr( 'title', 'Click make this the Active Hand' ).tooltip();
 	
 	BHP.HA.computeScalingFactor( width );
 	BHP.HA.drawUnassignedCards();
@@ -1812,6 +1799,7 @@ BHP.HA.unAssignedCardClick = function( card ) {
 	$( card ).attr( 'src', BHP.cardImageDimensions.cardBackImage );
 	$( card ).unbind('click');
 	$( card ).addClass('cursor-not-allowed');
+	$( card ).tooltip( 'destroy' );
 	BHP.HA.drawAssignedCards( BHP.HA.shownHand );	
 	$( '#check-hands' ).attr( 'disabled', ! BHP.HA.isValid() );	
 };
@@ -1852,7 +1840,7 @@ BHP.HA.drawAssignedCards = function( direction ) {
 	}
 	var countID = direction + '-assigned-cards-count'; 
 	$( '#' + countID ).html( numCards );
-	$( '.assigned-card' ).click( function() {
+	$( '.assigned-card' ).tooltip().click( function() {
 		var suit = $( this ).attr( 'suit' );
 		var rank = $( this ).attr( 'rank' );
 		var direction = BHP.HA.shownHand;
@@ -1861,6 +1849,7 @@ BHP.HA.drawAssignedCards = function( direction ) {
 		var card = $( '#' + imageID );
 		card.attr( 'src', card.attr( 'imageName' ) );
 		card.removeClass('cursor-not-allowed');
+		card.tooltip();
 		card.click( function() {
 			BHP.HA.unAssignedCardClick( this );
 		});
@@ -1886,7 +1875,13 @@ BHP.HA.updateUnassignedCardStatus = function() {
 			var isAssigned = Bridge.Cards.isAssigned( suit, rank );
 			var status = isAssigned ? 'assigned' : 'unassigned';
 			var cursorClass = isAssigned ? 'cursor-not-allowed' : '';
-			var src = isAssigned ? BHP.cardImageDimensions.cardBackImage : card.attr( 'imageName' );	
+			var src = isAssigned ? BHP.cardImageDimensions.cardBackImage : card.attr( 'imageName' );
+			if ( isAssigned ) {
+				card.tooltip( 'destroy' );
+			}
+			else {
+				card.tooltip();
+			}
 			card.attr( 'status', status );
 			card.attr( 'src', src );
 			card.removeClass( 'cursor-not-allowed' ).addClass( cursorClass );		
@@ -1914,7 +1909,9 @@ BHP.HA.showUnassignedCard = function( container, suit, rank, top, left, width, h
 		top: top,
 		left: left
 	});	
-
+	if ( ! isAssigned ) {
+		image.attr( 'title', 'Click to Assign to Active Hand' ).tooltip();
+	}
 };
 
 
@@ -1929,6 +1926,7 @@ BHP.HA.showCard = function( container, suit, rank, top, left, width, height, ima
 	image.attr( 'status', status );
 	image.attr( 'suit', suit );
 	image.attr( 'rank', rank );
+	image.attr( 'title', 'Click to Unassign Card' );
 	image.css({
 		width: width,
 		height: height,
@@ -2272,6 +2270,9 @@ BHP.AA.showDealInformation = function( container ) {
 		}
 		BHP.AA.updateDealer();		
 	});
+	$( '.change-dealer' ).attr( 'title', 'Click to Make this hand Dealer' ).tooltip({
+		placement: 'bottom'	
+	});
 };
 
 BHP.AA.setDealer = function() {
@@ -2387,6 +2388,8 @@ BHP.AA.createBiddingBox = function( container ) {
 		BHP.drawAuction( '#auction' );
 		BHP.AA.setBiddingBoxStatus();
 	});
+	$( '.bid' ).attr( 'title', 'Click to make this bid' ).tooltip();
+	$( '#undo-bid' ).attr( 'title', 'Click to remove last bid' ).tooltip();
 };
 
 BHP.AA.showInstructions = function() {

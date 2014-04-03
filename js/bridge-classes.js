@@ -1156,6 +1156,23 @@ Bridge.Deal.prototype.setContract = function( level, suit, declarer, doubled, re
 	};
 	this.setTrumpSuit( suit );
 	this.setLeader( Bridge.getLHO( declarer ) );
+	var currentBidder = this.dealer;
+	while ( currentBidder !== declarer ) {
+		this.addBid( 1, 'p' );
+		currentBidder = Bridge.getLHO( currentBidder );
+	}
+	this.addBid( level, suit );
+	if ( doubled ) {
+		this.addBid( level, 'x' );
+	}
+	else if ( redoubled ) {
+		this.addBid( level, 'x' );
+		this.addBid( level, 'r' );
+	}
+	// 3 passes
+	this.addBid( level, 'p' );
+	this.addBid( level, 'p' );
+	this.addBid( level, 'p' );
 };
 
 Bridge.Deal.prototype.getContract = function() {
