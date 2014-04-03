@@ -267,13 +267,7 @@ BHP.loadContract = function( contractString ) {
 			leader = contractString.charAt(3);
 		}
 		declarer = Bridge.getRHO( leader );
-		try {
-			BHP.deal.setContract( 1, trumpSuit, declarer, doubled, redoubled );
-		}
-		catch ( err ) {
-			BHP.addError( err );
-			return false;
-		}			
+		contractLevel = 1;			
 	}
 	else {
 		trumpSuit = contractString.charAt(2);
@@ -285,14 +279,15 @@ BHP.loadContract = function( contractString ) {
 			doubled = !redoubled;
 			declarer = contractString.charAt(4);
 		}			
-		try {
-			BHP.deal.setContract( contractLevel, trumpSuit, declarer, doubled, redoubled );
-		}
-		catch ( err ) {
-			BHP.addError( err );
-			return false;
-		}			
-	}	
+	}
+	try {
+		BHP.deal.setContract( contractLevel, trumpSuit, declarer, doubled, redoubled );
+		BHP.deal.getAuctionFromContract();
+	}
+	catch ( err ) {
+		BHP.addError( err );
+		return false;
+	}		
 	return true;
 };
 
@@ -2282,9 +2277,9 @@ BHP.AA.showDealInformation = function( container ) {
 		}
 		BHP.AA.updateDealer();		
 	});
-	$( '.change-dealer' ).attr( 'title', 'Click to Make this hand Dealer' ).tooltip({
+	/*$( '.change-dealer' ).attr( 'title', 'Click to Make this hand Dealer' ).tooltip({
 		placement: 'bottom'	
-	});
+	});*/
 };
 
 BHP.AA.setDealer = function() {
@@ -2400,7 +2395,7 @@ BHP.AA.createBiddingBox = function( container ) {
 		BHP.drawAuction( '#auction' );
 		BHP.AA.setBiddingBoxStatus();
 	});
-	$( '.bid' ).attr( 'title', 'Click to make this bid' ).tooltip();
+	//$( '.bid' ).attr( 'title', 'Click to make this bid' ).tooltip();
 	$( '#undo-bid' ).attr( 'title', 'Click to remove last bid' ).tooltip();
 };
 

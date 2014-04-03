@@ -1139,6 +1139,31 @@ Bridge.Deal.prototype.setLeader = function( leader ) {
 	this.leader = leader;
 };
 
+Bridge.Deal.prototype.getAuctionFromContract = function() {
+	var currentBidder = this.dealer;
+	var declarer = this.contract.declarer;
+	var level = this.contract.level;
+	var suit = this.contract.trumpSuit;
+	var doubled = this.contract.doubled;
+	var redoubled = this.contract.redoubled;
+	while ( currentBidder !== declarer ) {
+		this.addBid( 1, 'p' );
+		currentBidder = Bridge.getLHO( currentBidder );
+	}
+	this.addBid( level, suit );
+	if ( doubled ) {
+		this.addBid( level, 'x' );
+	}
+	else if ( redoubled ) {
+		this.addBid( level, 'x' );
+		this.addBid( level, 'r' );
+	}
+	// 3 passes
+	this.addBid( level, 'p' );
+	this.addBid( level, 'p' );
+	this.addBid( level, 'p' );	
+};
+
 
 /**
  * Set the contract for this deal.
@@ -1156,28 +1181,11 @@ Bridge.Deal.prototype.setContract = function( level, suit, declarer, doubled, re
 	};
 	this.setTrumpSuit( suit );
 	this.setLeader( Bridge.getLHO( declarer ) );
-	var currentBidder = this.dealer;
-	while ( currentBidder !== declarer ) {
-		this.addBid( 1, 'p' );
-		currentBidder = Bridge.getLHO( currentBidder );
-	}
-	this.addBid( level, suit );
-	if ( doubled ) {
-		this.addBid( level, 'x' );
-	}
-	else if ( redoubled ) {
-		this.addBid( level, 'x' );
-		this.addBid( level, 'r' );
-	}
-	// 3 passes
-	this.addBid( level, 'p' );
-	this.addBid( level, 'p' );
-	this.addBid( level, 'p' );
 };
 
 Bridge.Deal.prototype.getContract = function() {
 	var html = this.contract.level + Bridge.getSuitName( this.contract.trumpSuit );
-	if ( this.contract.redoubled ) html += '<font color="blue">XX<font>';
+	if ( this.contract.redoubled ) html += '<font color="blue">XX</font>';
 	else if ( this.contract.doubled ) html += '<font color="red">X</font>';
 	return html;		
 };
