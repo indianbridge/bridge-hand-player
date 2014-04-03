@@ -504,59 +504,41 @@ BHP.drawDealInformation = function() {
 	board.tooltip( {
 		placement : 'bottom'
 	});			
-	// Set board
-	/*var table = $( '#playing-table' );
-	var board = BHP.deal.getBoard();
-	if ( board === null ) board = 1;
-	var html = '<span id="board" class="cursor-pointer text-size fixed label label-' + BHP.BootstrapClass + '">Board : ' + board + '</span>';
-	table.append( html );
-	board = $( '#board' );
-	board.css({
-		top: table.position().top,
-		left: table.position().left
-	});
-	board.click( BHP.changeBoardDialog );
-	board.attr( 'title', 'Click to change Board Number' );
-	board.tooltip();	 
-	
-	// Set contract
-	var contractString = BHP.deal.getContract();
-	var declarer = BHP.deal.getDeclarer();
-	if ( declarer !== null ) contractString += ' by ' + declarer; 
-	html = '<span id="contract" class="text-size fixed label label-' + BHP.BootstrapClass + '">Contract : ' + contractString + '</span>';
-	table.append( html );
-	var contract = $( '#contract' );
-	contract.css({
-		top: table.position().top,
-		left: table.position().left + table.outerWidth() - contract.outerWidth()
-	});
-	
-	// NS and EW tricks
-	html = '<span id="ns-tricks" class="text-size fixed label label-' + BHP.BootstrapClass + '">NS Tricks : 0</span>';
-	table.append( html );
-	var nsTricks = $( '#ns-tricks' );
-	nsTricks.css({
-		top: table.position().top + table.outerHeight() - nsTricks.outerHeight(),
-		left: table.position().left
-	});	
-	
-	html = '<span id="ew-tricks" class="text-size fixed label label-' + BHP.BootstrapClass + '">EW Tricks : 0</span>';
-	table.append( html );
-	var ewTricks = $( '#ew-tricks' );
-	ewTricks.css({
-		top: table.position().top + table.outerHeight() - ewTricks.outerHeight(),
-		left: table.position().left + table.outerWidth() - ewTricks.outerWidth()
-	});		*/
 	
 	
 	// Add general notes
 	var notes = BHP.deal.getNotes();
-	if ( notes !== null ) {
-		var general = $( '#general-messages' );
-		general.empty().append( unescape( notes ) );
-		general.addClass( 'alert' );
-		general.addClass( 'alert-' + BHP.BootstrapClass );
+	if ( notes === null ) {
+		notes = 'Untitled';
 	}
+
+	var general = $( '#general-messages' );
+	general.empty().append( unescape( notes ) );
+	general.addClass( 'alert' );
+	general.addClass( 'alert-' + BHP.BootstrapClass );	
+	general.addClass( 'cursor-pointer' );
+	general.click( BHP.changeNotesDialog );
+	general.attr( 'title', 'Click to change Title/Notes' );
+	general.tooltip( {
+		placement : 'bottom'
+	});
+};
+
+BHP.changeNotesDialog = function() {
+	var title = 'Change Title/Notes';
+	var notes = BHP.deal.getNotes();
+	if ( notes === null ) {
+		notes = 'Untitled';
+	}
+	$( '#modal-popup-save-content' ).val( unescape( notes ) );
+	BHP.showModalSaveDialog( title, BHP.saveNotes );	
+};
+
+BHP.saveNotes = function() {
+	var notes = $( '#modal-popup-save-content' ).val();
+	BHP.deal.setNotes( notes );
+	$( '#general-messages' ).html( notes );	
+	BHP.hideModalSaveDialog();
 };
 
 BHP.changeBoardDialog = function() {
@@ -572,7 +554,6 @@ BHP.saveBoard = function() {
 	BHP.deal.setBoard( board );
 	$( '#board' ).html( board );	
 	BHP.hideModalSaveDialog();
-	//$( '#modal-popup-save' ).modal( 'hide' );
 };
 
 /**
@@ -719,7 +700,7 @@ BHP.redoCard = function() {
 	var card = '#' + BHP.getCardID( redoneCard.suit, redoneCard.rank );
 	var image = $( card );
 	image.attr( 'status', 'played' );
-	image.addClass( 'cursor-not-allowed' );
+	image.removeClass( 'cursor-pointer').addClass( 'cursor-not-allowed' );
 	image.attr( 'src', BHP.cardImageDimensions.cardBackImage );
 	if ( BHP.deal.isNewTrick() ) {
 		BHP.clearTableCards();
@@ -915,7 +896,7 @@ BHP.updateButtonStatus = function() {
 BHP.setPlayableCards = function() {
 	var imageHighlightClass = 'img-highlight';
 	// Remove highlight anc click handler on all cards
-	$( '.card' ).unbind( 'click' ).removeClass( imageHighlightClass ).addClass( 'cursor-not-allowed' ).tooltip( 'destroy' );
+	$( '.card' ).unbind( 'click' ).removeClass( imageHighlightClass ).removeClass('cursor-pointer').addClass( 'cursor-not-allowed' ).tooltip( 'destroy' );
 	// Set the playable cards
 	var nextTurn = BHP.deal.getNextToPlay();
 	var elements = '[direction='+ nextTurn + '][status="not-played"]';	

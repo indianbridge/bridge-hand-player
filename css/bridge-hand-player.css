@@ -18,7 +18,8 @@
 }
 
 .cursor-pointer {
-	cursor: pointer !important;
+	cursor: pointer;
+	cursor: hand;
 }
 
 span.codedirection { unicode-bidi:bidi-override; direction: rtl; }
