@@ -5,14 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bridge Hand Player</title>
-    <link rel="icon" type="image/ico" href="favicon.ico"/>
     
-    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootswatch-theme">
     <link href="css/bridge-hand-player.css" rel="stylesheet">
     
     <!-- jQuery -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -31,145 +29,102 @@
 		         <span class="icon-bar"></span>
 		         <span class="icon-bar"></span>
 		      </button>
+		      <a id="header-title" class="navbar-brand">Title</a>
 		   </div>
 		   <div class="collapse navbar-collapse" id="header-bar">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
-				<a class="bid-annotation" title="Change Color Scheme" href="#" class="dropdown-toggle" data-toggle="dropdown">Skin : <span id="current-theme">Default</span> (Change)<b class="caret"></b></a>
+					<a class="tooltip-bottom" title="Change Color Scheme" href="#" class="dropdown-toggle" data-toggle="dropdown">Skin : <span id="current-theme">Default</span> (Change)<b class="caret"></b></a>
 					<ul id="themes" class="dropdown-menu">
 					</ul>
 				</li>	
-				<li class="dropdown">
-				<a class="bid-annotation" title="Load a Saved Line" href="#" class="dropdown-toggle" data-toggle="dropdown">Line : <span id="current-line">Unsaved</span> (Change)<b class="caret"></b></a>
-					<ul id="lines" class="dropdown-menu">
-					</ul>
-				</li>
-				<li><a class="bid-annotation" title="Save current line of play" href="javascript:void(0);" id="save-play">Save Line</a></li>											
 		         <li class="dropdown">
-		            <a class="bid-annotation" title="Share with others" href="#" class="dropdown-toggle" data-toggle="dropdown">
-		               Generate URL
+		            <a class="tooltip-bottom" title="Share with others" href="#" class="dropdown-toggle" data-toggle="dropdown">
+		               Generate URL/Embed Code
 		               <b class="caret"></b>
 		            </a>
 		            <ul class="dropdown-menu">
-		               <li><a id="bbo_url" all="false" class="btn generate-url" title="This will only include currently active line of play and not any saved line of plays"><img src="images/bbo_logo.png" height="30"></img> Bridge Base Hand Viewer URL</a></li>
-		               <li><a id="bw_url" all="false" class="btn generate-url" title="This will only include currently active line of play and not any saved line of plays"><img src="images/bw_logo.png" height="30"></img> Bridge Winners Embed Code</a></li>
+		               <li><a id="bbo_url" all="false" class="tooltip-bottom btn generate-url" title="This will only include currently active line of play and not any saved line of plays"><img src="images/bbo_logo.png" height="30"></img> Bridge Base Hand Viewer URL</a></li>
+		               <li><a id="bw_url" all="false" class="tooltip-bottom btn generate-url" title="This will only include currently active line of play and not any saved line of plays"><img src="images/bw_logo.png" height="30"></img> Bridge Winners Embed Code</a></li>
 		               <li class="divider"></li>
-		               <li><a id="bhp_url" all="true" class="btn generate-url" title="This will include all saved line of plays and the current line of play if it is not saved">This Site's Extended Format URL</a></li>
+		               <li><a id="bhp_url" all="true" class="tooltip-bottom btn generate-url" title="This will include all saved line of plays and the current line of play if it is not saved"><img src="images/bhp_logo.png"></img> BHP (this tool) Extended Format URL</a></li>
 		            </ul>
-		         </li>					    
+		         </li>										    
 			</ul>		   
 		      <p class="navbar-text">
-		      	<a class="bid-annotation" target="_blank" title="How to use this tool" href="instructions.html"><span class="glyphicon glyphicon-question-sign"></span></a>
-		      	<a class="bid-annotation" target="_blank" title="Send feedback" href="contact.html"><span class="glyphicon glyphicon-envelope"></span></a>
+		      	<a id="show-instructions" class="tooltip-bottom" href="javascript:void(0);" title="Instructions"><span class="glyphicon glyphicon-question-sign"></span></a>
+		      	<a id="show-contact" class="tooltip-bottom" href="javascript:void(0);" title="Send Feedback/Suggestions/Bug Reports"><span class="glyphicon glyphicon-envelope"></span></a>
 		      </p>
 		   </div>
 		</nav>  
 	</header>
-	<section id="section">
-	</section>
+	<section id="section"></section>
 	<footer id="footer"></footer>
 	
-	<div class="modal fade" id="save-play-modal" tabindex="-1" role="dialog" 
-	   aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="modal-popup" tabindex="-1" role="dialog" aria-labelledby="modal-popup-title" aria-hidden="true">
 	   <div class="modal-dialog">
 	      <div class="modal-content">
 	         <div class="modal-header">
-	            <button type="button" class="close" data-dismiss="modal" 
-	               aria-hidden="true">×
-	            </button>
-	            <h4 class="modal-title" id="myModalLabel">
-	              Provide a name to save current line of play as
-	            </h4>
+	            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	            <h4 id="modal-popup-title" class="modal-title">Title</h4>
 	         </div>
 	         <div class="modal-body">
-				<form role="form">
-				  <div class="form-group">
-				    <label for="playname">Line Name</label>
-				    <input type="text" autofocus class="form-control" id="save-play-name" placeholder="Enter Line Name">
-				  </div>
-				</form>	
-	         </div>
-	         <div class="modal-footer">
-	            <button id="save-play-ok" type="button" class="btn btn-primary">
-	               Save Line
-	            </button>         
-	            <button type="button" class="btn btn-default" 
-	               data-dismiss="modal">
-	               Cancel
-	            </button>
-
-	         </div>
-	      </div><!-- /.modal-content -->
-	   </div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->	
-	
-	<div class="modal fade" id="add-card-annotation-modal" tabindex="-2" role="dialog" 
-	   aria-labelledby="add-card-annotation-title" aria-hidden="true">
-	   <div class="modal-dialog">
-	      <div class="modal-content">
-	         <div class="modal-header">
-	            <button type="button" class="close" data-dismiss="modal" 
-	               aria-hidden="true">×
-	            </button>
-	            <h4 id="add-card-annotation-title" class="modal-title">
-	              Enter the annotation
-	            </h4>
-	         </div>
-	         <div class="modal-body">
-				<form role="form">
-				  <div class="form-group">
-				    <label for="playname">Annotation</label>
-				    <input type="text" autofocus class="form-control" id="add-card-annotation-text" placeholder="Enter Annotation">
-				  </div>
-				</form>	
-	         </div>
-	         <div class="modal-footer">
-	            <button id="save-card-annotation-ok" type="button" class="btn btn-primary">
-	               Save Annotation
-	            </button>         
-	            <button type="button" class="btn btn-default" 
-	               data-dismiss="modal">
-	               Cancel
-	            </button>
-
-	         </div>
-	      </div><!-- /.modal-content -->
-	   </div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->	
-	
-	<div class="modal fade" id="generate-url-modal" tabindex="-1" role="dialog" 
-	   aria-labelledby="generate-url-title" aria-hidden="true">
-	   <div class="modal-dialog">
-	      <div class="modal-content">
-	         <div class="modal-header">
-	            <button type="button" class="close" data-dismiss="modal" 
-	               aria-hidden="true">×
-	            </button>
-	            <h4 id="generate-url-title" class="modal-title">
-	              Link and/or Link text can be seen below
-	            </h4>
-	         </div>
-	         <div class="modal-body">
-				<form role="form">
-				  <div id="generate-url-content" class="form-group">
-				  	<div id="generate-url-href"></div>
-				  	Copy the following text:
-				  	<textarea rows="4" cols="50" autofocus readonly id="generate-url-text" name="generate-url-text" form="form"></textarea>
-				  </div>
+				<form role="form" onsubmit="return false;">
+				  <div id="modal-popup-content" class="form-group">Content</div>
 				</form>	
 	         </div>
 	         <div class="modal-footer">     
-	            <button type="button" class="btn btn-default" 
-	               data-dismiss="modal">
-	               OK
-	            </button>
-
+	            <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+	         </div>
+	      </div><!-- /.modal-content -->
+	   </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->	
+	
+	<div class="modal fade" id="modal-popup-confirm" tabindex="-1" role="dialog" aria-labelledby="modal-popup-title" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	            <h4 id="modal-popup-confirm-title" class="modal-title">Title</h4>
+	         </div>
+	         <div class="modal-body">
+				<form role="form" onsubmit="return false;">
+				  <div id="modal-popup-confirm-content" class="form-group">Content</div>
+				</form>	
+	         </div>
+	         <div class="modal-footer">     
+	         	<button id="modal-popup-confirm-ok" type="button" class="btn btn-primary">OK</button>
+	            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 	         </div>
 	      </div><!-- /.modal-content -->
 	   </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->		
+	
+	<div class="modal fade" id="modal-popup-save" tabindex="-1" role="dialog" aria-labelledby="modal-popup-title" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	            <h4 id="modal-popup-save-title" class="modal-title">Title</h4>
+	         </div>
+	         <div class="modal-body">
+				<form role="form" onsubmit="return false;">
+				  <div class="form-group">
+				    <label for="text-field">Type/Edit Value</label>
+				    <input type="text" autofocus class="form-control" id="modal-popup-save-content" placeholder="Enter/Edit Value">
+				  </div>
+				</form>		         
+	         </div>
+	         <div class="modal-footer">     
+	            <button id="modal-popup-save-ok" type="button" class="btn btn-primary">Save Value</button>         
+	            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	         </div>
+	      </div><!-- /.modal-content -->
+	   </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->				
   
-  	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>	
+  	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> 	
+  	<script src="js/msie-fix.js"></script>
   	<script src="js/bridge-hand-player-min.js"></script>  
   </body>
 </html>
