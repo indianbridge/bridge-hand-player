@@ -23,14 +23,6 @@
 
 span.codedirection { unicode-bidi:bidi-override; direction: rtl; }
 
-
-.pull-right {
-	 float: right;
-}
-.pull-left {
-	float: left;
-}
-
 .status {
 	 overflow: auto;
 }
@@ -45,6 +37,10 @@ span.codedirection { unicode-bidi:bidi-override; direction: rtl; }
 .ns-vulnerable {
 	border-top:5px solid rgb(203, 0, 0) !important;
 	border-bottom:5px solid rgb(203, 0, 0) !important;
+}
+
+.right {
+	text-align: right;
 }
 
 .middle {

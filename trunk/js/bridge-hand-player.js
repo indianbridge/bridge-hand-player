@@ -473,8 +473,39 @@ BHP.drawDealInformation = function() {
 	var vul = BHP.deal.getVulnerability();
 	BHP.setVulnerability( vul );
 	
+	var tableID = 'deal-information-table';
+	var html = '<table id="' + tableID + '" class="table table-bordered table-condensed table-striped">';
+	html += '<thead><tr class="' + BHP.BootstrapClass + '"><th class="middle" colspan="2">Deal Information</th></tr></thead>';
+	html += '<tbody>';
+	// board
+	var board = BHP.deal.getBoard();
+	if ( board === null ) board = 1;
+	html += '<tr><td class="right">Board</td><td>';
+	html += '<span id="board" class="cursor-pointer label label-' + BHP.BootstrapClass + '">' + board + '</span>';		
+	html += '</td></tr>';
+	html += '<tr><td class="right">Contract</td><td>';
+	var contractString = BHP.deal.getContract();
+	var declarer = BHP.deal.getDeclarer();
+	if ( declarer !== null ) contractString += ' by ' + declarer; 
+	html += '<span id="contract" class="label label-default">' + contractString + '</span>';
+	html += '</td></tr>';	
+	html += '<tr><td class="right">NS Tricks</td><td>';
+	html += '<span id="ns-tricks" class="label label-default">0</span>';	
+	html += '</td></tr>';	
+	html += '<tr><td class="right">EW Tricks</td><td>';
+	html += '<span id="ew-tricks" class="label label-default">0</span>';
+	html += '</td></tr>';		
+	html += '</tbody></table>';	
+	var container = '#deal-information';
+	$( container ).append( html );	
+	board = $( '#board' );
+	board.click( BHP.changeBoardDialog );
+	board.attr( 'title', 'Click to change Board Number' );
+	board.tooltip( {
+		placement : 'bottom'
+	});			
 	// Set board
-	var table = $( '#playing-table' );
+	/*var table = $( '#playing-table' );
 	var board = BHP.deal.getBoard();
 	if ( board === null ) board = 1;
 	var html = '<span id="board" class="cursor-pointer text-size fixed label label-' + BHP.BootstrapClass + '">Board : ' + board + '</span>';
@@ -515,7 +546,7 @@ BHP.drawDealInformation = function() {
 	ewTricks.css({
 		top: table.position().top + table.outerHeight() - ewTricks.outerHeight(),
 		left: table.position().left + table.outerWidth() - ewTricks.outerWidth()
-	});		
+	});		*/
 	
 	
 	// Add general notes
@@ -539,7 +570,7 @@ BHP.changeBoardDialog = function() {
 BHP.saveBoard = function() {
 	var board = $( '#modal-popup-save-content' ).val();
 	BHP.deal.setBoard( board );
-	$( '#board' ).html( 'Board : ' + board );	
+	$( '#board' ).html( board );	
 	BHP.hideModalSaveDialog();
 	//$( '#modal-popup-save' ).modal( 'hide' );
 };
@@ -902,8 +933,8 @@ BHP.setPlayableCards = function() {
 	BHP.setActiveHand( nextTurn );
 	BHP.updateButtonStatus();
 	BHP.updateAnnotation();
-	$( '#ns-tricks' ).html( 'NS Tricks : ' + BHP.deal.getNSTricks() );
-	$( '#ew-tricks' ).html( 'EW Tricks : ' + BHP.deal.getEWTricks() );
+	$( '#ns-tricks' ).html( BHP.deal.getNSTricks() );
+	$( '#ew-tricks' ).html( BHP.deal.getEWTricks() );
 };
 
 
@@ -1301,7 +1332,7 @@ BHP.drawTitles = function() {
 	var container = '#section';
 	var name = 'Play Annotations';
 	var nameID = 'annotation-area-title';
-	var html = '<span id="' + nameID + '"  class="text-size fixed label label-' + BHP.BootstrapClass + '">' + name + '</span>';
+	var html = '<span id="' + nameID + '"  class="text-size fixed label label-default">' + name + '</span>';
 	var area = '#annotation-area';
 	$( container ).append( html ); 
 	var nameObject = $( '#' + nameID );
