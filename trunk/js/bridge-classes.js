@@ -730,6 +730,15 @@ Bridge.Deal.prototype.resetAll = function() {
 	Bridge.Cards.reset();
 };
 
+Bridge.Deal.prototype.deletePlays = function() {
+	this.currentPlayedCard = null;
+	this.firstPlayedCard = null;
+	this.lastPlayedCard = null;
+	this.loadedPlay = null;
+	this.savedPlays = [];
+	Bridge.Cards.reset();
+};
+
 Bridge.Deal.prototype.savePlay = function( playName ) {
 	if ( playName in this.savedPlays ) {
 		throw 'There is already a saved play with name ' + playName + '. Please use a different name.';	

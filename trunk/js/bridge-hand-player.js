@@ -1035,15 +1035,15 @@ BHP.calculateHandDimensionsAndLayout = function( direction ) {
 	var vwScalingFactor = cWidth / vWidth;
 	var vhScalingFactor = cHeight / vHeight;	
 	var vScalingfactor = Math.min( vwScalingFactor, vhScalingFactor );
-	if ( hScalingFactor > vScalingfactor ) {
+	if ( hScalingFactor < vScalingfactor ) {
+		hand.height = vHeight;
+		hand.width = vWidth;
+		hand.layout = 'vertical';		
+	}
+	else {
 		hand.height = hHeight;
 		hand.width = hWidth;
 		hand.layout = 'horizontal';
-	}
-	else {
-		hand.height = vHeight;
-		hand.width = vWidth;
-		hand.layout = 'vertical';
 	}
 };
 
@@ -1572,7 +1572,7 @@ BHP.createURLQueryParameters = function( allPlays ) {
 				if ( hand.cards.hasOwnProperty( s ) ) {
 					var ranks = '';
 					for( var rank in hand.cards[ s ] ) {
-						if ( ranks.hasOwnProperty( rank ) ) {
+						if ( hand.cards[ s ].hasOwnProperty( rank ) ) {
 							ranks += rank;
 						}
 					}
@@ -1617,8 +1617,10 @@ BHP.createURLQueryParameters = function( allPlays ) {
 	url += BHP.deal.getPlayStrings( allPlays );
 	
 	// General notes if any
-	var notes = BHP.deal.getNotes();
-	if ( notes !== null ) url += '&t=' + notes;
+	if ( allPlays ) {
+		var notes = BHP.deal.getNotes();
+		if ( notes !== null ) url += '&t=' + notes;
+	}
 		
 	return url;
 };
@@ -2041,7 +2043,7 @@ BHP.showContactInformation = function() {
 };
 
 BHP.PA.showInstructions = function() {
-	var title = 'Instructions for Playing Hands';
+	var title = 'Play Area Instructions ( <a target="_blank" href="instructions.html">Click here for detailed instrutions in new page</a> )';
 	var html='';
 	html += '<ul class="list-group">';
 	html += '<li class="list-group-item list-group-item-success">If a play has been specified in the URL then you can use the undo and redo play control buttons (bottom) to step through the plays. You can also add a #n to the end of the URL where n is the numeric index of the play you want to move to.</li>';
@@ -2057,7 +2059,7 @@ BHP.PA.showInstructions = function() {
 };
 
 BHP.HA.showInstructions = function() {
-	var title = 'Instructions for generating hands';
+	var title = 'Create Hands Instructions ( <a target="_blank" href="instructions.html">Click here for detailed instrutions in new page</a> )';
 	var html='';
 	html += '<ul class="list-group">';
 	html += '<li class="list-group-item list-group-item-success">The left pane contains unassigned cards. Assigned cards will be face down while unassigned cards will be face up. </li>';
@@ -2128,7 +2130,7 @@ BHP.HA.drawFooter = function() {
 	});
 	$( '#unassign-all' ).click( function() {
 		var title = 'Unassign All Cards Confirm';
-		var content = 'Are you sure that you want to unassign all cards?';
+		var content = 'Are you sure that you want to unassign all cards? This will also delete the auction and all plays.';
 		BHP.showModalConfirmDialog( title, content, BHP.HA.unassignAllCards );		
 
 	});		
@@ -2149,6 +2151,7 @@ BHP.HA.unassignAllCards = function() {
 		}
 	}
 	$( '#check-hands' ).attr( 'disabled', ! BHP.HA.isValid() );	
+	BHP.AA.undoAllBids();
 	$( '#modal-popup-confirm' ).modal( 'hide' );
 };
 
@@ -2388,7 +2391,7 @@ BHP.AA.createBiddingBox = function( container ) {
 };
 
 BHP.AA.showInstructions = function() {
-	var title = 'Instructions for creating an auction';
+	var title = 'Create Auction Instructions ( <a target="_blank" href="instructions.html">Click here for detailed instrutions in new page</a> )';
 	var html='';
 	html += '<ul class="list-group">';
 	html += '<li class="list-group-item list-group-item-success">The left pane contains the dealer and the bidding box. Bids that are not valid in the current context will be hidden.</li>';
@@ -2485,7 +2488,7 @@ BHP.AA.drawFooter = function() {
 	
 	$( '#undo-all-bids' ).click(function() {
 		var title = 'Undo All Bids Confirm';
-		var content = 'Are you sure that you want to undo all bids?';
+		var content = 'Are you sure that you want to undo all bids? This will also delete all plays.';
 		BHP.showModalConfirmDialog( title, content, BHP.AA.undoAllBids );
 	});
 };
@@ -2494,6 +2497,7 @@ BHP.AA.undoAllBids = function() {
 	BHP.deal.undoAllBids();
 	BHP.drawAuction( '#auction' );
 	BHP.AA.setBiddingBoxStatus();	
+	BHP.deal.deletePlays();
 	$( '#modal-popup-confirm' ).modal( 'hide' );
 };
 
