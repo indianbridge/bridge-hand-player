@@ -605,8 +605,8 @@ BHP.drawFooter = function() {
 	html = BHP.getButtonGroupHTML( 'controls', fields );
 	BHP.footer.append( html );		
 	html = '<div class="btn-group btn-group-sm dropup">';
-	html += '<button id="save-play" type="button" class="btn btn-' + BHP.BootstrapClass + '"><span class="glyphicon glyphicon-floppy-save"></span> Save Play</button>';
-	html += '<button type="button" class="btn btn-' + BHP.BootstrapClass + ' dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-floppy-open"></span> Load Play <span class="caret"></span></button>';
+	html += '<button id="save-play" type="button" class="btn btn-' + BHP.BootstrapClass + '"><span class="glyphicon glyphicon-floppy-save"></span> <span class="text-highlight">Save Play</span></button>';
+	html += '<button type="button" class="btn btn-' + BHP.BootstrapClass + ' dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-floppy-open"></span> <span class="text-highlight">Load Play</span> <span class="caret"></span></button>';
 	html += '<ul id="lines" class="dropdown-menu" role="menu">';
 	html += '</ul>';
 	html += '</div>';
@@ -1738,7 +1738,7 @@ BHP.HA.drawHandAssignment = function() {
 		$( this ).parent().removeClass( 'panel-default' ).addClass( 'panel-' + BHP.BootstrapClass );
 		BHP.HA.drawAssignedCards( BHP.HA.shownHand );
 	});		
-	$('.panel-collapse').on('hidden.bs.collapse', function () {
+	$('.panel-collapse').on('hide.bs.collapse', function () {
 		$( this ).parent().addClass( 'panel-default' ).removeClass( 'panel-' + BHP.BootstrapClass );
 	});
 	$( '.change-name' ).click(function() {
@@ -1839,6 +1839,7 @@ BHP.HA.drawAssignedCards = function( direction ) {
 			var rank = Bridge.RankOrder[ j ];
 			if ( rank in hand.cards[ suit ] ) {
 				var imageID = BHP.HA.getAssignedCardID( suit, rank );
+				$( '#' + imageID ).remove();
 				BHP.HA.showCard( container, suit, rank, top, left, width, height, imageID, 'assigned-card' );
 				left += BHP.cardImageDimensions.width * BHP.cardImageDimensions.percentageWidthShowing * BHP.HA.scalingFactor;	
 				numCards++;			
@@ -2197,10 +2198,8 @@ BHP.AA.drawAuctionAssignment = function() {
 		left: width + 2 * BHP.gutter
 	});	
 	var title2Height = title.outerHeight();
-	titleHeight = Math.max( titleHeight, title2Height );
-		
+	titleHeight = Math.max( titleHeight, title2Height );	
 	var totalHeight = BHP.footer.position().top - headerHeight - titleHeight;
-	
 	id = 'bidding-box';
 	html = '<div id="' + id +'" class="well fixed status"></div>';
 	$( container ).append( html );
@@ -2439,7 +2438,7 @@ BHP.getButtonGroupHTML = function( containerID, fields ) {
 			if ( ! fields[ field ].iconAfter ){
 				html += iconHtml + ' ';
 			}
-			html += fields[ field ].name;
+			html += '<span class="text-highlight">' + fields[ field ].name + '</span>';
 			if ( fields[ field ].iconAfter ){
 				html += ' ' + iconHtml;
 			}		

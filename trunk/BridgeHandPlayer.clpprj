@@ -28,6 +28,304 @@
 			</treenode>
 			<treenode node="BHP.PA;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f0;10;11;10;;;;vpos;;v;;r;;d9,10;;b0,0;;m">
 			</treenode>
+			<treenode node="Bid;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;362;1;378;;;;vpos;;v;;r;;d60,362;;b0,0;;mlevel;;psuit;;pdirection;;pannotation;;p">
+				<treenode node="annotation;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f47;362;57;362;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;368;8;368;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="countPasses;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;434;32;434;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f36;362;45;362;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getAnnotation;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;409;34;409;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getDirection;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;405;33;405;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getLevel;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;397;29;397;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getNextBid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;417;31;417;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getPreviousBid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;425;35;425;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getString;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;381;30;381;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getSuit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;401;28;401;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="level;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f23;362;28;362;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="nextBid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;377;13;377;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="previousBid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;376;17;376;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setAnnotation;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;413;34;413;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setNextBid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;421;31;421;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setPreviousBid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;429;35;429;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f30;362;34;362;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="undefined;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;363;30;363;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="Bridge;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f4;4;15;4;;;;vpos;;v;;r;;d13,4;;b0,0;;m">
+			</treenode>
+			<treenode node="Bridge.Cards;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f0;188;17;188;;;;vpos;;v;;r;;d15,188;;b0,0;;m">
+			</treenode>
+			<treenode node="Bridge.Directions;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f0;69;1;74;;;;vpos;;v;;r;;d20,69;;b0,0;;m">
+				<treenode node="layout;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f25;70;31;70;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="lho;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f66;70;69;70;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f9;70;13;70;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="position;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f48;70;56;70;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="rho;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f76;70;79;70;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="Bridge.Ranks;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f0;34;1;48;;;;vpos;;v;;r;;d15,34;;b0,0;;m">
+				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f9;35;13;35;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="Bridge.Suits;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f0;7;1;13;;;;vpos;;v;;r;;d15,7;;b0,0;;m">
+				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f9;8;13;8;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="Bridge.Vulnerability;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f0;121;1;126;;;;vpos;;v;;r;;d23,121;;b0,0;;m">
+				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f9;122;13;122;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="card;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;787;2;820;;;;vpos;;v;;r;;d12,816;;b0,0;;m">
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f3;790;12;790;;;;vposcard;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f3;789;7;789;;;;vposcard;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f3;788;7;788;;;;vposcard;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="Card;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;135;1;148;;;;vpos;;v;;r;;d48,135;;b0,0;;msuit;;prank;;pdirection;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;136;7;136;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f36;135;45;135;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getDirection;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;176;34;176;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="play;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;153;26;153;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="played;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;147;12;147;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f30;135;34;135;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="reset;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;161;27;161;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setDirection;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;183;34;183;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f24;135;28;135;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="undefined;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f20;140;29;140;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="undo;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;168;26;168;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="contract;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f5;849;2;855;;;;vpos;;v;;r;;d16,849;;b0,0;;m">
+				<treenode node="declarer;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;854;10;854;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="doubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;852;9;852;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="level;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;850;7;850;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="redoubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;853;11;853;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;851;6;851;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="Deal;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;518;1;554;;;;vpos;;v;;r;;d25,518;;b0,0;;m">
+				<treenode node="this.currentLevels;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;530;2;536;;;;vpos;;v;;r;;d22,530;;b0,0;;m">
+					<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;533;11;533;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="doubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;534;9;534;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="level;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;531;7;531;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="redoubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;535;11;535;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;532;6;532;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+				</treenode>
+				<treenode node="this.hands;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;520;16;520;;;;vpos;;v;;r;;d14,520;;b0,0;;m">
+				</treenode>
+				<treenode node="this.savedPlays;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;552;21;552;;;;vpos;;v;;r;;d19,552;;b0,0;;m">
+				</treenode>
+				<treenode node="addBid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;924;28;924;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="addCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1199;29;1199;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="areHandsValid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1111;35;1111;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="assignFourthHand;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1363;38;1363;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="assignRest;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1306;32;1306;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="board;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;539;11;539;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f23;521;29;521;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="contract;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;544;14;544;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="currentLevels;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;530;19;530;;;;vposthis.currentLevels;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="currentPlayedCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;551;23;551;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="dealer;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;540;12;540;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="deletePlays;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;732;33;732;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="determineDeclarer;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;848;39;848;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f10;521;19;521;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="firstBid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;528;14;528;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="firstPlayedCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;549;21;549;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getAnnotation;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1401;35;1401;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getAnnotationForBid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;707;41;707;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getAnnotationForCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;693;42;693;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getAuction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1388;32;1388;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getAuctionFromContract;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1141;44;1141;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getBoard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1049;30;1049;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getContract;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1185;33;1185;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getCurrentLevels;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1012;38;1012;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getDealer;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1070;31;1070;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getDeclarer;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1192;33;1192;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getEWTricks;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1290;33;1290;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getHand;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1272;29;1272;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getName;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1298;29;1298;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getNextToPlay;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;828;35;828;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getNotes;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1099;30;1099;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getNSTricks;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1285;33;1285;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getNumCards;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1381;33;1381;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getPlayNumber;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;580;35;580;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getPlayStrings;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1222;36;1222;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getSavedPlayNames;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;759;39;759;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getSavedPlayNumber;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;755;40;755;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getSavedPlaysList;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1212;39;1212;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getSuitLed;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;836;32;836;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getTableCards;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;603;35;603;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getVulnerability;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1085;38;1085;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="hands;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;520;11;520;;;;vposthis.hands;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="hasBids;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;841;29;841;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="hasUnsavedPlay;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;658;36;658;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="isAtBeginning;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;556;35;556;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="isAtEnd;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;560;29;560;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="isAtPlayNumber;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;588;36;588;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="isAuctionValid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1120;36;1120;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="isDoubleAllowed;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;975;37;975;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="isEndOfTrick;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;598;34;598;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="isNewTrick;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;593;32;593;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="isRedoubleAllowed;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;982;39;982;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="isValidPlayNumber;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;567;39;567;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="lastBid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;529;13;529;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="lastPlayedCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;550;20;550;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="leader;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;543;12;543;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="loadedPlay;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;553;16;553;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="loadPlay;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;769;30;769;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="notes;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;545;11;545;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="numPasses;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;911;31;911;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="playCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;616;30;616;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="redoCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;798;30;798;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="removeCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1259;32;1259;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="resetAll;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;725;30;725;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="resetCurrentLevels;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1016;40;1016;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="resetPlayedCardIndex;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;720;42;720;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="savedPlays;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;552;16;552;;;;vposthis.savedPlays;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="savePlay;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;741;30;741;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setAnnotationForBid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;677;41;677;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setAnnotationForCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;665;42;665;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setBoard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1042;30;1042;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setContract;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1170;33;1170;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setDealer;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1056;31;1056;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setLeader;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1136;31;1136;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setName;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1280;29;1280;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setNotes;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1092;30;1092;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setTrumpSuit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1106;34;1106;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setVulnerability;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1077;38;1077;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="trumpSuit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;542;15;542;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="unAssignAll;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;1346;33;1346;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="undoAllBids;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;989;33;989;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="undoCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;781;30;781;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="undoLastBid;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;998;33;998;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="vulnerability;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;541;19;541;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
 			<treenode node="drawAuction;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;395;1;451;;;;vpos;;v;;r;;d52,395;;b0,0;;mcontainer;;ptableClass;;p">
 				<treenode node="auction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;397;12;397;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -110,6 +408,36 @@
 				<treenode node="widthGutters;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f104;1218;116;1218;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
+			<treenode node="Hand;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;448;1;457;;;;vpos;;v;;r;;d36,448;;b0,0;;mdirection;;p">
+				<treenode node="this.cards;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;449;16;449;;;;vpos;;v;;r;;d14,449;;b0,0;;m">
+				</treenode>
+				<treenode node="addCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;494;29;494;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;453;27;453;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="cards;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;449;11;449;;;;vposthis.cards;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f24;448;33;448;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getName;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;480;29;480;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="getNumCards;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;487;33;487;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="hasCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;462;29;462;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="i;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f10;453;11;453;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;450;10;450;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="numCards;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;452;14;452;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="removeCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;504;32;504;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setName;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f22;473;29;473;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;454;10;454;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
 			<treenode node="parseAnnotation;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;296;1;307;;;;vpos;;v;;r;;d88,296;;b0,0;;moriginalString;;pstartBracePosition;;pendBraceCharacter;;p">
 				<treenode node="annotation;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;302;15;302;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -124,64 +452,164 @@
 				<treenode node="undefined;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f28;297;37;297;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="showUnassignedCard;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1898;1;1921;;;;vpos;;v;;r;;d88,1898;;b0,0;;mcontainer;;psuit;;prank;;ptop;;pleft;;pwidth;;pheight;;p">
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f15;1899;18;1899;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="PlayedCard;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;217;1;233;;;;vpos;;v;;r;;d66,217;;b0,0;;msuit;;prank;;pdirection;;pannotation;;p">
+				<treenode node="annotation;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f53;217;63;217;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f18;1900;24;1900;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;219;7;219;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f38;1898;47;1898;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f42;217;51;217;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="cursorClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1903;16;1903;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="ewTricks;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;231;14;231;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f79;1898;85;1898;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="getAnnotation;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;297;41;297;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="image;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1906;10;1906;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="getDirection;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;305;40;305;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="imageID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1899;12;1899;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="getEWTricks;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;285;39;285;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="imageName;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1901;14;1901;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="getNextCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;333;39;333;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="isAssigned;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1900;15;1900;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="getNextToPlay;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;253;41;253;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="left;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f66;1898;70;1898;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="getNSTricks;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;281;39;281;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f55;1898;59;1898;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="getPlayNumber;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;321;41;321;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="src;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1904;8;1904;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="getPreviousCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;329;43;329;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="status;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1902;11;1902;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="getRank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;341;35;341;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f49;1898;53;1898;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="getSuit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;337;35;337;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="top;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f61;1898;64;1898;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="getSuitLed;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;261;38;261;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f72;1898;77;1898;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="getTrickWinner;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;313;42;313;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="incrementEWTricks;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;293;45;293;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="incrementNSTricks;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;289;45;289;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="ledCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;230;13;230;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="nextPlayedCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;226;20;226;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="nsTricks;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;232;14;232;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="playNumber;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;228;16;228;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="previousPlayedCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;227;24;227;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f36;217;40;217;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setAnnotation;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;301;41;301;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setDirection;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;309;40;309;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setEWTricks;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;277;39;277;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setNextCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;345;39;345;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setNSTricks;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;273;39;273;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setPlayNumber;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;325;41;325;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setPreviousCard;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;349;43;349;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="setTrickWinner;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;317;42;317;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f30;217;34;217;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="trickWinner;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;229;17;229;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="undefined;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;218;30;218;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="winTrick;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f28;236;36;236;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="updateUnassignedCardStatus;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1874;1;1896;;;;vpos;;v;;r;;d47,1874;;b0,0;;m">
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f17;1879;20;1879;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="showUnassignedCard;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1899;1;1922;;;;vpos;;v;;r;;d88,1899;;b0,0;;mcontainer;;psuit;;prank;;ptop;;pleft;;pwidth;;pheight;;p">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f15;1900;18;1900;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f21;1875;27;1875;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f18;1901;24;1901;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="card;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1880;11;1880;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f38;1899;47;1899;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="cursorClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1883;18;1883;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="cursorClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1904;16;1904;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="i;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;1875;11;1875;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f79;1899;85;1899;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="imageID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1879;14;1879;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="image;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1907;10;1907;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="isAssigned;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1881;17;1881;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="imageID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1900;12;1900;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="j;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f11;1877;12;1877;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="imageName;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1902;14;1902;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1878;11;1878;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="isAssigned;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1901;15;1901;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="src;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1884;10;1884;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="left;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f66;1899;70;1899;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="status;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1882;13;1882;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f55;1899;59;1899;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;1876;10;1876;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="src;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1905;8;1905;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="status;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1903;11;1903;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f49;1899;53;1899;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="top;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f61;1899;64;1899;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f72;1899;77;1899;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="this.contract;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;1174;2;1180;;;;vpos;;v;;r;;d17,1174;;b0,0;;m">
+				<treenode node="declarer;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1177;10;1177;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="doubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1178;9;1178;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="level;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1175;7;1175;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="redoubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1179;11;1179;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f13;1176;17;1176;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="trumpSuit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1176;11;1176;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="this.currentLevels;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;1017;2;1023;;;;vpos;;v;;r;;d22,1017;;b0,0;;m">
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1020;11;1020;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="doubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1021;9;1021;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="level;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1018;7;1018;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="redoubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1022;11;1022;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1019;6;1019;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="updateUnassignedCardStatus;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1875;1;1897;;;;vpos;;v;;r;;d47,1875;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f17;1880;20;1880;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f21;1876;27;1876;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="card;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1881;11;1881;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="cursorClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1884;18;1884;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="i;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;1876;11;1876;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="imageID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1880;14;1880;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="isAssigned;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1882;17;1882;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="j;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f11;1878;12;1878;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1879;11;1879;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="src;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1885;10;1885;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="status;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1883;13;1883;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;1877;10;1877;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node=".cards;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f512;92;2;93;;;;vpos;;v;;r;;d0,93;;b0,0;;m">
@@ -222,6 +650,12 @@
 				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1259;10;1259;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
+			<treenode node="areOppositeDirections;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;89;1;92;;;;vpos;;v;;r;;d66,89;;b0,0;;mdirection1;;pdirection2;;p">
+				<treenode node="direction1;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f41;89;51;89;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="direction2;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f53;89;63;89;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
 			<treenode node="b;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f310;56;398;56;;;;vpos;;v;;r;;d323,56;;b0,0;;ma;;p">
 				<treenode node="a;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f321;56;322;56;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -230,7 +664,7 @@
 				<treenode node="JSON;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f333;56;337;56;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="Bid;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f165;13;412;13;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;362;1;378;;;;vpos;;v;;r;;d186,13;;b0,0;;ma;;pb;;pc;;pd;;p">
+			<treenode node="Bid;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f165;13;412;13;;;;vpos;;v;;r;;d186,13;;b0,0;;ma;;pb;;pc;;pd;;p">
 				<treenode node="a;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f178;13;179;13;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="annotation;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f364;13;374;13;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f47;362;57;362;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f47;362;57;362;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
@@ -278,34 +712,6 @@
 				<treenode node="undefined;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;363;30;363;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;363;30;363;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="void;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f187;13;191;13;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="Bridge;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f4;4;15;4;;;;vpos;;v;;r;;d13,4;;b0,0;;m">
-			</treenode>
-			<treenode node="Bridge.Cards;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f0;188;17;188;;;;vpos;;v;;r;;d15,188;;b0,0;;m">
-			</treenode>
-			<treenode node="Bridge.Directions;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f0;69;1;74;;;;vpos;;v;;r;;d20,69;;b0,0;;m">
-				<treenode node="layout;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f25;70;31;70;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="lho;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f66;70;69;70;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f9;70;13;70;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="position;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f48;70;56;70;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="rho;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f76;70;79;70;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="Bridge.Ranks;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f0;34;1;48;;;;vpos;;v;;r;;d15,34;;b0,0;;m">
-				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f9;35;13;35;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="Bridge.Suits;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f0;7;1;13;;;;vpos;;v;;r;;d15,7;;b0,0;;m">
-				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f9;8;13;8;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="Bridge.Vulnerability;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f0;121;1;126;;;;vpos;;v;;r;;d23,121;;b0,0;;m">
-				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f9;122;13;122;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="c;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f398;56;654;56;;;;vpos;;v;;r;;d413,56;;b0,0;;mb;;pc;;p">
@@ -374,15 +780,7 @@
 				<treenode node="vwScalingFactor;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1033;20;1033;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="card;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;787;2;820;;;;vpos;;v;;r;;d12,816;;b0,0;;m">
-				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f3;790;12;790;;;;vposcard;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f3;789;7;789;;;;vposcard;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f3;788;7;788;;;;vposcard;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="Card;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f0;159;1;164;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;135;1;148;;;;vpos;;v;;r;;d27,159;;b0,0;;mcardIndex;;p">
+			<treenode node="Card;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f0;159;1;164;;;;vpos;;v;;r;;d27,159;;b0,0;;mcardIndex;;p">
 				<treenode node="belongsTo;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f6;162;15;162;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;136;7;136;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;136;7;136;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
@@ -488,6 +886,40 @@
 				<treenode node="vul;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1070;8;1070;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
+			<treenode node="checkBidSuit;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;27;1;31;;;;vpos;;v;;r;;d39,27;;b0,0;;msuit;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;28;12;28;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f32;27;36;27;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="checkCardSuit;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;20;1;24;;;;vpos;;v;;r;;d40,20;;b0,0;;msuit;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;21;12;21;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f33;20;37;20;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="checkDirection;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;82;1;87;;;;vpos;;v;;r;;d46,82;;b0,0;;mdirection;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f23;83;29;83;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f34;82;43;82;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="checkLevel;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;95;1;99;;;;vpos;;v;;r;;d38,95;;b0,0;;mlevel;;p">
+				<treenode node="level;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f30;95;35;95;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="checkRank;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;56;1;61;;;;vpos;;v;;r;;d36,56;;b0,0;;mrank;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f17;57;23;57;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f29;56;33;56;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="checkVulnerability;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;102;1;106;;;;vpos;;v;;r;;d44,102;;b0,0;;mvul;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f17;103;23;103;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="vul;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f38;102;41;102;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
 			<treenode node="clearTableCards;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1206;1;1213;;;;vpos;;v;;r;;d33,1206;;b0,0;;m">
 				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;1207;29;1207;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -508,12 +940,12 @@
 				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f3;864;8;864;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="computeScalingFactor;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1048;1;1968;;;;vpos;;v;;r;;d48,1961;;b0,0;;mheight;;pwidth;;pwidth;;p">
+			<treenode node="computeScalingFactor;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1048;1;1969;;;;vpos;;v;;r;;d48,1962;;b0,0;;mheight;;pwidth;;pwidth;;p">
 				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;1049;4;1049;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;1050;29;1050;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="cell;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1962;9;1962;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="cell;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1963;9;1963;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="cHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1055;14;1055;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -525,35 +957,23 @@
 				</treenode>
 				<treenode node="hand;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1053;11;1053;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="handHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1963;15;1963;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="handHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1964;15;1964;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="handWidth;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1964;14;1964;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="handWidth;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1965;14;1965;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f40;1945;46;1945;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f40;1946;46;1946;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="heightScalingFactor;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1946;24;1946;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="heightScalingFactor;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1947;24;1947;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="hScalingFactor;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1057;21;1057;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="style;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1061;10;1061;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f48;1945;53;1945;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f48;1946;53;1946;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="widthScalingFactor;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1947;23;1947;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="widthScalingFactor;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1948;23;1948;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="wScalingFactor;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1056;21;1056;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="contract;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f5;849;2;855;;;;vpos;;v;;r;;d16,849;;b0,0;;m">
-				<treenode node="declarer;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;854;10;854;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="doubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;852;9;852;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="level;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;850;7;850;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="redoubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;853;11;853;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;851;6;851;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="cookie;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f2;57;126;58;;;;vpos;;v;;r;;d24,57;;b0,0;;md;;pg;;ph;;p">
@@ -589,17 +1009,17 @@
 				</treenode>
 				<treenode node="b;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f44;158;45;158;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f320;158;323;158;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f106;2370;109;2370;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f106;2370;109;2370;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f320;158;323;158;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f106;2383;109;2383;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f106;2376;109;2376;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f106;2370;109;2370;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="bidName;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2369;14;2369;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2369;14;2369;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="bidName;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2382;14;2382;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2375;14;2375;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2369;14;2369;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="bidNumber;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2367;16;2367;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2367;16;2367;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="bidNumber;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2380;16;2380;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2373;16;2373;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2367;16;2367;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f155;158;161;158;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f16;2365;22;2365;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f16;2365;22;2365;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f155;158;161;158;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f16;2378;22;2378;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f16;2371;22;2371;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f16;2365;22;2365;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="c;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f116;158;117;158;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f36;2360;45;2360;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f36;2360;45;2360;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f36;2373;45;2373;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f36;2366;45;2366;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f36;2360;45;2360;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="d;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f149;158;150;158;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -609,19 +1029,19 @@
 				</treenode>
 				<treenode node="g;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f223;158;224;158;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2361;9;2361;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2361;9;2361;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2374;9;2374;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2367;9;2367;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2361;9;2361;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="i;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2362;11;2362;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2362;11;2362;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="i;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2375;11;2375;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2368;11;2368;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2362;11;2362;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="index;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2364;11;2364;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2364;11;2364;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="index;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2377;11;2377;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2370;11;2370;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2364;11;2364;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="j;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f12;2365;13;2365;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f12;2365;13;2365;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="j;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f12;2378;13;2378;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f12;2371;13;2371;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f12;2365;13;2365;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="level;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2385;11;2385;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2385;11;2385;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="level;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2398;11;2398;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2391;11;2391;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2385;11;2385;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2366;11;2366;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2366;11;2366;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2379;11;2379;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2372;11;2372;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2366;11;2366;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="table;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2379;10;2379;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2379;10;2379;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="table;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2392;10;2392;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2385;10;2385;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2379;10;2379;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f44;160;49;160;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -676,7 +1096,7 @@
 			</treenode>
 			<treenode node="currentPosition.tableCards;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f26;712;57;712;;;;vpos;;v;;r;;d55,712;;b0,0;;m">
 			</treenode>
-			<treenode node="Deal;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f7;19;459;19;;C:\wamp\www\bridge-hand-player\js\bridge.js;f0;1074;1;1124;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;518;1;554;;;;vpos;;v;;r;;d22,19;;b0,0;;m">
+			<treenode node="Deal;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f7;19;459;19;;C:\wamp\www\bridge-hand-player\js\bridge.js;f0;1074;1;1124;;;;vpos;;v;;r;;d22,19;;b0,0;;m">
 				<treenode node="this.currentLevels;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;530;2;536;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;530;2;536;;;;vpos;;v;;r;;d22,530;;b0,0;;m">
 					<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;533;11;533;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;533;11;533;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
@@ -908,18 +1328,18 @@
 				<treenode node="window;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1359;10;1359;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="drawAssignedCards;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1821;1;1865;;;;vpos;;v;;r;;d49,1821;;b0,0;;mdirection;;p">
+			<treenode node="drawAssignedCards;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1821;1;1866;;;;vpos;;v;;r;;d49,1821;;b0,0;;mdirection;;p">
 				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f12;1822;15;1822;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f21;1832;27;1832;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="card;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;1855;10;1855;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="card;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;1856;10;1856;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="cell;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1823;9;1823;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1825;14;1825;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="countID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1847;12;1847;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="countID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1848;12;1848;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f37;1821;46;1821;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -948,26 +1368,26 @@
 				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1830;10;1830;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="drawAuctionAssignment;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f7;148;188;150;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2160;1;2233;;;;vpos;;v;;r;;d42,2160;;b0,0;;m">
-				<treenode node="BHP.viewport;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2161;2;2164;;;;vpos;;v;;r;;d16,2161;;b0,0;;m">
-					<treenode node="height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2163;8;2163;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="drawAuctionAssignment;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f7;148;188;150;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2161;1;2233;;;;vpos;;v;;r;;d42,2161;;b0,0;;m">
+				<treenode node="BHP.viewport;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2162;2;2165;;;;vpos;;v;;r;;d16,2162;;b0,0;;m">
+					<treenode node="height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2164;8;2164;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2162;7;2162;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2163;7;2163;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="window;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f11;2162;17;2162;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="window;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f11;2163;17;2163;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
 				<treenode node="a;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f109;148;110;148;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="b;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f137;148;138;148;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f40;148;43;148;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2161;4;2161;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f40;148;43;148;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2162;4;2162;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2162;4;2162;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="c;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f190;148;191;148;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="cell;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2206;9;2206;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="cell;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2212;9;2212;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2206;9;2206;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2166;14;2166;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2167;14;2167;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2167;14;2167;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="d;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f245;148;246;148;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -977,27 +1397,27 @@
 				</treenode>
 				<treenode node="g;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f155;149;156;149;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="headerHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2169;17;2169;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="headerHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2170;17;2170;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2170;17;2170;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f78;148;84;148;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2207;11;2207;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f78;148;84;148;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2213;11;2213;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2207;11;2207;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2180;9;2180;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2181;9;2181;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2181;9;2181;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2178;7;2178;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2179;7;2179;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2179;7;2179;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2182;10;2182;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2183;10;2183;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2183;10;2183;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="title2Height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2198;17;2198;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="title2Height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2199;17;2199;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2199;17;2199;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="titleHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2187;16;2187;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="titleHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2188;16;2188;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2188;16;2188;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="titleID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2179;12;2179;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="titleID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2180;12;2180;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2180;12;2180;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="totalHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2201;16;2201;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="totalHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2202;16;2202;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2202;16;2202;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="totalWidth;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2174;15;2174;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="totalWidth;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2175;15;2175;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2175;15;2175;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f54;148;59;148;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2175;10;2175;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f54;148;59;148;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2176;10;2176;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2176;10;2176;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="window;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f62;148;68;148;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -1035,27 +1455,27 @@
 				</treenode>
 				<treenode node="a;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f64;145;65;145;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f64;166;65;166;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f162;145;165;145;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f162;166;165;166;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;589;4;589;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f162;145;165;145;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f162;166;165;166;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;589;4;589;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;589;4;589;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;586;14;586;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;586;14;586;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;586;14;586;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="content;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2134;13;2134;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="content;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2135;13;2135;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2135;13;2135;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="fields;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;590;11;590;;;;vposfields;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="fields;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;590;11;590;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;590;11;590;;;;vposfields;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="footerID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;584;13;584;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="footerID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;584;13;584;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;584;13;584;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;587;9;587;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;587;9;587;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;587;9;587;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="icon;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f250;145;254;145;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f230;166;234;166;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="iconAfter;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f266;145;275;145;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f244;166;253;166;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="left;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;614;9;614;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="left;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;614;9;614;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;614;9;614;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f217;145;221;145;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f212;166;216;166;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;652;11;652;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;652;11;652;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;652;11;652;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="drawHandAssignment;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f7;115;386;120;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1627;1;1755;;;;vpos;;v;;r;;d39,1627;;b0,0;;m">
@@ -1071,19 +1491,19 @@
 				</treenode>
 				<treenode node="b;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f134;115;135;115;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f37;115;40;115;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;1628;4;1628;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f37;115;40;115;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;1628;4;1628;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;1628;4;1628;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f72;117;78;117;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;1691;29;1691;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f72;117;78;117;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;1691;29;1691;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;1691;29;1691;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="c;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f187;115;188;115;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="cell;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1669;9;1669;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="cell;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1669;9;1669;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1669;9;1669;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1633;14;1633;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1633;14;1633;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1633;14;1633;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="d;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f242;115;243;115;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;1724;11;1724;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="d;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f242;115;243;115;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;1724;11;1724;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;1724;11;1724;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;1691;19;1691;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;1691;19;1691;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;1691;19;1691;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="e;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f262;115;263;115;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -1093,43 +1513,43 @@
 				</treenode>
 				<treenode node="h;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f61;117;62;117;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="handID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1693;13;1693;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="handID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1693;13;1693;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1693;13;1693;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="headerHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1636;17;1636;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="headerHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1636;17;1636;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1636;17;1636;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f75;115;81;115;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1670;11;1670;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f75;115;81;115;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1670;11;1670;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1670;11;1670;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1646;9;1646;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1646;9;1646;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1646;9;1646;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1645;7;1645;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1645;7;1645;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1645;7;1645;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="inClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1696;14;1696;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="inClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1696;14;1696;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1696;14;1696;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="k;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f195;117;196;117;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="l;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f452;118;453;118;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1709;11;1709;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1709;11;1709;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1709;11;1709;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="nameID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1695;13;1695;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="nameID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1695;13;1695;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1695;13;1695;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="panelBody;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1727;16;1727;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="panelBody;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1727;16;1727;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1727;16;1727;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="panelClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f16;1696;26;1696;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="panelClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f16;1696;26;1696;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f16;1696;26;1696;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="panelID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1689;12;1689;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="panelID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1689;12;1689;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1689;12;1689;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1648;10;1648;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1648;10;1648;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1648;10;1648;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="title2Height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1663;17;1663;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="title2Height;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1663;17;1663;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1663;17;1663;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="titleHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1653;16;1653;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="titleHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1653;16;1653;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1653;16;1653;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="totalHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1666;16;1666;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="totalHeight;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1666;16;1666;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1666;16;1666;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="totalWidth;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1641;15;1641;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="totalWidth;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1641;15;1641;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1641;15;1641;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f51;115;56;115;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1642;10;1642;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f51;115;56;115;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1642;10;1642;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1642;10;1642;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="window;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f59;115;65;115;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -1396,6 +1816,12 @@
 				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f26;727;30;727;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
+			<treenode node="getDirectionName;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;76;1;78;;;;vpos;;v;;r;;d48,76;;b0,0;;mdirection;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f8;77;14;77;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f36;76;45;76;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
 			<treenode node="getHands;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;995;1;1019;;;;vpos;;v;;r;;d26,995;;b0,0;;m">
 				<treenode node=".cards;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f25;1002;36;1002;;;;vpos;;v;;r;;d34,1002;;b0,0;;m">
 				</treenode>
@@ -1442,12 +1868,36 @@
 				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;972;10;972;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
+			<treenode node="getLHO;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;109;1;112;;;;vpos;;v;;r;;d38,109;;b0,0;;mdirection;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;110;7;110;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f26;109;35;109;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
 			<treenode node="getParameterValue;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;58;1;66;;;;vpos;;v;;r;;d67,58;;b0,0;;mqueryParameters;;pparameterName;;p">
 				<treenode node="parameterName;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f51;58;64;58;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="queryParameters;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f34;58;49;58;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="undefined;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f43;59;52;59;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="getRankName;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;50;1;52;;;;vpos;;v;;r;;d38,50;;b0,0;;mrank;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f8;51;14;51;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f31;50;35;50;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="getRHO;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;115;1;118;;;;vpos;;v;;r;;d38,115;;b0,0;;mdirection;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;116;7;116;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f26;115;35;115;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="getSuitName;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;14;1;16;;;;vpos;;v;;r;;d38,14;;b0,0;;msuit;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f8;15;14;15;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f31;14;35;14;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="getUnassignedCardID;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1817;1;1819;;;;vpos;;v;;r;;d52,1817;;b0,0;;msuit;;prank;;p">
@@ -1470,6 +1920,12 @@
 				<treenode node="hand;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;983;9;983;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
+			<treenode node="getVulnerabilityName;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;128;1;130;;;;vpos;;v;;r;;d46,128;;b0,0;;mvul;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f8;129;14;129;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="vul;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f40;128;43;128;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
 			<treenode node="hand;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f5;223;2;226;;;;vpos;;v;;r;;d12,223;;b0,0;;m">
 				<treenode node="suits;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f2;225;12;225;;;;vpos;;v;;r;;d10,225;;b0,0;;m">
 				</treenode>
@@ -1478,7 +1934,7 @@
 				<treenode node="suits;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f2;225;7;225;;;;vpossuits;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="Hand;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f193;16;351;16;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;448;1;457;;;;vpos;;v;;r;;d209,16;;b0,0;;ma;;p">
+			<treenode node="Hand;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f193;16;351;16;;;;vpos;;v;;r;;d209,16;;b0,0;;ma;;p">
 				<treenode node="this.cards;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;449;16;449;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;449;16;449;;;;vpos;;v;;r;;d14,449;;b0,0;;m">
 				</treenode>
 				<treenode node="a;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f207;16;208;16;;;;vposHand;;v;;r;;d-1,-1;;b0,0;;m">
@@ -1530,24 +1986,44 @@
 				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2562;4;2562;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="hideAllModals;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;2033;1;2038;;;;vpos;;v;;r;;d31,2033;;b0,0;;m">
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2034;4;2034;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="hideAllModals;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;2034;1;2039;;;;vpos;;v;;r;;d31,2034;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2035;4;2035;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="hideModal;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1987;1;1989;;;;vpos;;v;;r;;d27,1987;;b0,0;;m">
+			<treenode node="hideModal;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1988;1;1990;;;;vpos;;v;;r;;d27,1988;;b0,0;;m">
 			</treenode>
-			<treenode node="hideModalConfirmDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;2017;1;2019;;;;vpos;;v;;r;;d40,2017;;b0,0;;m">
+			<treenode node="hideModalConfirmDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;2018;1;2020;;;;vpos;;v;;r;;d40,2018;;b0,0;;m">
 			</treenode>
-			<treenode node="hideModalDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1997;1;1999;;;;vpos;;v;;r;;d33,1997;;b0,0;;m">
+			<treenode node="hideModalDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1998;1;2000;;;;vpos;;v;;r;;d33,1998;;b0,0;;m">
 			</treenode>
-			<treenode node="hideModalSaveDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;2029;1;2031;;;;vpos;;v;;r;;d37,2029;;b0,0;;m">
+			<treenode node="hideModalSaveDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;2030;1;2032;;;;vpos;;v;;r;;d37,2030;;b0,0;;m">
 			</treenode>
-			<treenode node="isValid;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1867;1;1872;;;;vpos;;v;;r;;d28,1867;;b0,0;;m">
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1869;10;1869;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="isAssigned;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f13;199;1;203;;;;vpos;;v;;r;;d49,199;;b0,0;;msuit;;prank;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;200;7;200;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;1868;29;1868;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f42;199;46;199;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;1868;19;1868;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f36;199;40;199;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="isGreaterRank;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;62;1;66;;;;vpos;;v;;r;;d48,62;;b0,0;;mrank1;;prank2;;p">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f14;63;20;63;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="index1;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f5;63;11;63;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="index2;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f5;64;11;64;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="rank1;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f33;62;38;62;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="rank2;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f40;62;45;62;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="isValid;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1868;1;1873;;;;vpos;;v;;r;;d28,1868;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1870;10;1870;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;1869;29;1869;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;1869;19;1869;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="loadAuction;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;312;1;392;;;;vpos;;v;;r;;d29,312;;b0,0;;m">
@@ -1585,7 +2061,7 @@
 				</treenode>
 				<treenode node="b;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f89;173;90;173;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f176;173;179;173;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2595;5;2595;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2595;5;2595;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f176;173;179;173;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2608;5;2608;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2601;5;2601;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2595;5;2595;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="c;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f317;173;318;173;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -1593,21 +2069,21 @@
 				</treenode>
 				<treenode node="d;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f341;173;342;173;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="data;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f50;2592;54;2592;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f50;2592;54;2592;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="data;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f50;2605;54;2605;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f50;2598;54;2598;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f50;2592;54;2592;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="i;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f12;2602;13;2602;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f12;2602;13;2602;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="i;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f12;2615;13;2615;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f12;2608;13;2608;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f12;2602;13;2602;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="JSON;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f180;174;184;174;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f33;2615;37;2615;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f33;2615;37;2615;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="JSON;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f180;174;184;174;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f33;2628;37;2628;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f33;2621;37;2621;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f33;2615;37;2615;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f209;173;213;173;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2616;11;2616;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2616;11;2616;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f209;173;213;173;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2629;11;2629;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2622;11;2622;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2616;11;2616;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="options;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2594;13;2594;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2594;13;2594;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="options;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2607;13;2607;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2600;13;2600;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2594;13;2594;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="stylesheet;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2617;17;2617;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2617;17;2617;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="stylesheet;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2630;17;2630;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2623;17;2623;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2617;17;2617;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="themeID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2603;14;2603;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2603;14;2603;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="themeID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2616;14;2616;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2609;14;2609;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2603;14;2603;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="themes;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2601;12;2601;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2601;12;2601;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="themes;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2614;12;2614;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2607;12;2607;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2601;12;2601;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="loadContract;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;252;1;291;;;;vpos;;v;;r;;d46,252;;b0,0;;mcontractString;;p">
@@ -1810,7 +2286,7 @@
 				<treenode node="showTraceMessages;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f1;5;18;5;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="PlayedCard;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f7;8;317;8;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;217;1;233;;;;vpos;;v;;r;;d35,8;;b0,0;;ma;;pb;;pc;;pd;;p">
+			<treenode node="PlayedCard;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f7;8;317;8;;;;vpos;;v;;r;;d35,8;;b0,0;;ma;;pb;;pc;;pd;;p">
 				<treenode node="a;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f27;8;28;8;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="annotation;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f172;8;182;8;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f53;217;63;217;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f53;217;63;217;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
@@ -2016,6 +2492,16 @@
 				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;685;4;685;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
+			<treenode node="reset;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f13;205;1;214;;;;vpos;;v;;r;;d32,205;;b0,0;;m">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f21;206;27;206;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="i;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f10;206;11;206;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f12;208;16;208;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;207;10;207;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
 			<treenode node="resizeHandler;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;2549;1;2559;;;;vpos;;v;;r;;d31,2549;;b0,0;;m">
 				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f6;2550;9;2550;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -2094,8 +2580,8 @@
 				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f34;2423;37;2423;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="selectHands;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2078;1;2086;;;;vpos;;v;;r;;d32,2078;;b0,0;;m">
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f34;2081;37;2081;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="selectHands;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2079;1;2087;;;;vpos;;v;;r;;d32,2079;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f34;2082;37;2082;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="setActiveHand;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;858;1;871;;;;vpos;;v;;r;;d48,858;;b0,0;;mactiveDirection;;p">
@@ -2146,24 +2632,24 @@
 				<treenode node="window;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;1622;7;1622;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="setModalContent;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1976;1;1980;;;;vpos;;v;;r;;d48,1976;;b0,0;;mcontent;;psave;;p">
-				<treenode node="content;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;1976;39;1976;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="setModalContent;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1977;1;1981;;;;vpos;;v;;r;;d48,1977;;b0,0;;mcontent;;psave;;p">
+				<treenode node="content;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;1977;39;1977;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1978;7;1978;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1979;7;1979;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="save;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f41;1976;45;1976;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="save;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f41;1977;45;1977;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="undefined;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f15;1977;24;1977;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="undefined;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f15;1978;24;1978;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="setModalTitle;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1970;1;1974;;;;vpos;;v;;r;;d44,1970;;b0,0;;mtitle;;psave;;p">
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1972;7;1972;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="setModalTitle;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1971;1;1975;;;;vpos;;v;;r;;d44,1971;;b0,0;;mtitle;;psave;;p">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1973;7;1973;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="save;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f37;1970;41;1970;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="save;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f37;1971;41;1971;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f30;1970;35;1970;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f30;1971;35;1971;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="undefined;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f15;1971;24;1971;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="undefined;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f15;1972;24;1972;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="setPlayableCards;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;890;1;913;;;;vpos;;v;;r;;d34,890;;b0,0;;m">
@@ -2188,10 +2674,10 @@
 				<treenode node="vul;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f33;453;36;453;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="showCard;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;734;1;1943;;;;vpos;;v;;r;;d98,1924;;b0,0;;mcontainer;;psuit;;prank;;pdirection;;ptop;;pleft;;pwidth;;pheight;;pcontainer;;psuit;;prank;;ptop;;pleft;;pwidth;;pheight;;pimageID;;pcardClass;;p">
+			<treenode node="showCard;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;734;1;1944;;;;vpos;;v;;r;;d98,1925;;b0,0;;mcontainer;;psuit;;prank;;pdirection;;ptop;;pleft;;pwidth;;pheight;;pcontainer;;psuit;;prank;;ptop;;pleft;;pwidth;;pheight;;pimageID;;pcardClass;;p">
 				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f15;735;18;735;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="cardClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f86;1924;95;1924;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="cardClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f86;1925;95;1925;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f25;734;34;734;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -2220,40 +2706,38 @@
 				<treenode node="width;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f70;734;75;734;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="showContactInformation;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;2040;1;2044;;;;vpos;;v;;r;;d40,2040;;b0,0;;m">
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2043;4;2043;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="showContactInformation;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;2041;1;2045;;;;vpos;;v;;r;;d40,2041;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2044;4;2044;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2042;9;2042;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2043;9;2043;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2041;10;2041;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2042;10;2042;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="showDealInformation;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f7;151;162;153;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2235;1;2282;;;;vpos;;v;;r;;d38,151;;b0,0;;ma;;p">
+			<treenode node="showDealInformation;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f7;151;162;153;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2235;1;2282;;;;vpos;;v;;r;;d51,2235;;b0,0;;mcontainer;;p">
 				<treenode node="icons;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;2;2243;;;;vpos;;v;;r;;d13,2238;;b0,0;;m">
-				</treenode>
-				<treenode node="icons;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;2;2243;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;2;2243;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;2;2243;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;2;2243;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;2;2243;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;2;2243;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;2;2243;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;2;2243;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;2;2243;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;2;2243;;;;vpos;;v;;r;;d13,2238;;b0,0;;m">
 				</treenode>
 				<treenode node="a;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f36;151;37;151;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="b;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f43;151;44;151;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f252;151;255;151;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2245;35;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2245;35;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2245;35;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2245;35;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2245;35;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2245;35;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2245;35;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2245;35;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2245;35;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2245;35;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2245;35;2245;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f252;151;255;151;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2257;35;2257;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2257;35;2257;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2257;35;2257;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2257;35;2257;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2256;35;2256;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2257;35;2257;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2257;35;2257;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2258;35;2258;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2258;35;2258;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2258;35;2258;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2251;35;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;2245;35;2245;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f314;151;320;151;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2248;29;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2248;29;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2248;29;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2248;29;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2248;29;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2248;29;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2248;29;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2248;29;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2248;29;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2248;29;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2248;29;2248;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f314;151;320;151;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2260;29;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2260;29;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2260;29;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2260;29;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2259;29;2259;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2260;29;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2260;29;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2261;29;2261;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2261;29;2261;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2261;29;2261;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2254;29;2254;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2248;29;2248;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="btnClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2251;15;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2251;15;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2251;15;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2251;15;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2251;15;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2251;15;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2251;15;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2251;15;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2251;15;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2251;15;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2251;15;2251;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="btnClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2263;15;2263;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2263;15;2263;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2263;15;2263;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2263;15;2263;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2262;15;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2263;15;2263;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2263;15;2263;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2264;15;2264;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2264;15;2264;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2264;15;2264;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2257;15;2257;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2251;15;2251;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="c;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f45;151;46;151;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2235;48;2235;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2235;48;2235;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2235;48;2235;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2235;48;2235;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2235;48;2235;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2235;48;2235;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2235;48;2235;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2235;48;2235;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2235;48;2235;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2235;48;2235;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2235;48;2235;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="container;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2247;48;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2247;48;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2247;48;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2247;48;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2246;48;2246;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2247;48;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2247;48;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2248;48;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2248;48;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2248;48;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2241;48;2241;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2235;48;2235;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="content;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2270;14;2270;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2270;14;2270;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2270;14;2270;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2270;14;2270;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2270;14;2270;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2270;14;2270;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2270;14;2270;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2270;14;2270;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2270;14;2270;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2270;14;2270;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2270;14;2270;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="content;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2282;14;2282;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2282;14;2282;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2282;14;2282;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2282;14;2282;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2281;14;2281;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2282;14;2282;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2282;14;2282;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2283;14;2283;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2283;14;2283;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2283;14;2283;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2276;14;2276;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2270;14;2270;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="d;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f280;151;281;151;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="dealer;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2247;11;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2247;11;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2247;11;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2247;11;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2247;11;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2247;11;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2247;11;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2247;11;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2247;11;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2247;11;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2247;11;2247;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="dealer;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2259;11;2259;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2259;11;2259;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2259;11;2259;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2259;11;2259;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2258;11;2258;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2259;11;2259;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2259;11;2259;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2260;11;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2260;11;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2260;11;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2253;11;2253;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2247;11;2247;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2248;19;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2248;19;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2248;19;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2248;19;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2248;19;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2248;19;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2248;19;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2248;19;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2248;19;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2248;19;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2248;19;2248;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2260;19;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2260;19;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2260;19;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2260;19;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2259;19;2259;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2260;19;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2260;19;2260;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2261;19;2261;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2261;19;2261;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2261;19;2261;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2254;19;2254;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2248;19;2248;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="e;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f74;151;75;151;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -2261,23 +2745,23 @@
 				</treenode>
 				<treenode node="g;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f397;151;398;151;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2236;9;2236;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2236;9;2236;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2236;9;2236;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2236;9;2236;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2236;9;2236;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2236;9;2236;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2236;9;2236;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2236;9;2236;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2236;9;2236;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2236;9;2236;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2236;9;2236;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2248;9;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2248;9;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2248;9;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2248;9;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2247;9;2247;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2248;9;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2248;9;2248;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2249;9;2249;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2249;9;2249;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2249;9;2249;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2242;9;2242;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2236;9;2236;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="icons;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;10;2238;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;10;2238;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;10;2238;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;10;2238;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;10;2238;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;10;2238;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;10;2238;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;10;2238;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;10;2238;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;10;2238;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;10;2238;;;;vposicons;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="icons;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2250;10;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2250;10;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2250;10;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2250;10;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2249;10;2249;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2250;10;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2250;10;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2251;10;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2251;10;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2251;10;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2244;10;2244;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2238;10;2238;;;;vposicons;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2250;9;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2250;9;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2250;9;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2250;9;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2250;9;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2250;9;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2250;9;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2250;9;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2250;9;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2250;9;2250;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2250;9;2250;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2262;9;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2262;9;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2262;9;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2262;9;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2261;9;2261;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2262;9;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2262;9;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2263;9;2263;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2263;9;2263;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2263;9;2263;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2256;9;2256;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2250;9;2250;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="n;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f48;151;49;151;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="placement;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f141;153;150;153;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2280;11;2280;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2280;11;2280;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2280;11;2280;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2280;11;2280;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2280;11;2280;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2280;11;2280;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2280;11;2280;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2280;11;2280;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2280;11;2280;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f2;2280;11;2280;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="placement;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f141;153;150;153;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="s;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f60;151;61;151;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="sizeClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2245;14;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2245;14;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2245;14;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2245;14;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2245;14;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2245;14;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2245;14;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2245;14;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2245;14;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2245;14;2245;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2245;14;2245;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="sizeClass;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2257;14;2257;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2257;14;2257;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2257;14;2257;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2257;14;2257;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2256;14;2256;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2257;14;2257;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2257;14;2257;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2258;14;2258;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2258;14;2258;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2258;14;2258;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2251;14;2251;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2245;14;2245;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="table;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2262;10;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2262;10;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2262;10;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2262;10;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2262;10;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2262;10;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2262;10;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2262;10;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2262;10;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2262;10;2262;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2262;10;2262;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="table;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2274;10;2274;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2274;10;2274;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2274;10;2274;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2274;10;2274;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2273;10;2273;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2274;10;2274;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2274;10;2274;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2275;10;2275;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2275;10;2275;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2275;10;2275;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2268;10;2268;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2262;10;2262;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2269;12;2269;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2269;12;2269;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2269;12;2269;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2269;12;2269;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2269;12;2269;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2269;12;2269;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2269;12;2269;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2269;12;2269;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2269;12;2269;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2269;12;2269;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2269;12;2269;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2281;12;2281;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2281;12;2281;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2281;12;2281;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2281;12;2281;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2280;12;2280;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2281;12;2281;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2281;12;2281;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2282;12;2282;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2282;12;2282;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2282;12;2282;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2275;12;2275;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2269;12;2269;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="w;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f89;151;90;151;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -2292,48 +2776,48 @@
 				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;566;9;566;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="showInstructions;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2046;1;2418;;;;vpos;;v;;r;;d37,2401;;b0,0;;m">
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2059;4;2059;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="showInstructions;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2047;1;2418;;;;vpos;;v;;r;;d37,2401;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2060;4;2060;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2048;9;2048;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2049;9;2049;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2047;10;2047;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="showModal;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1982;1;1985;;;;vpos;;v;;r;;d36,1982;;b0,0;;mcontent;;p">
-				<treenode node="content;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f26;1982;33;1982;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2048;10;2048;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="showModalConfirmDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;2001;1;2015;;;;vpos;;v;;r;;d72,2001;;b0,0;;mtitle;;pcontent;;pcallBack;;ptype;;p">
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f54;2007;57;2007;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="buttonID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2011;13;2011;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="callBack;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f55;2001;63;2001;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="content;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f46;2001;53;2001;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2001;44;2001;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="type;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f65;2001;69;2001;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="showModal;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1983;1;1986;;;;vpos;;v;;r;;d36,1983;;b0,0;;mcontent;;p">
+				<treenode node="content;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f26;1983;33;1983;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="showModalDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1991;1;1995;;;;vpos;;v;;r;;d46,1991;;b0,0;;mtitle;;phtml;;p">
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;1992;4;1992;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="showModalConfirmDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;2002;1;2016;;;;vpos;;v;;r;;d72,2002;;b0,0;;mtitle;;pcontent;;pcallBack;;ptype;;p">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f54;2008;57;2008;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;1991;43;1991;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="buttonID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2012;13;2012;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;1991;37;1991;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="callBack;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f55;2002;63;2002;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="content;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f46;2002;53;2002;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;2002;44;2002;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="type;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f65;2002;69;2002;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="showModalSaveDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;2021;1;2027;;;;vpos;;v;;r;;d54,2021;;b0,0;;mtitle;;pcallBack;;p">
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2022;4;2022;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="showModalDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;1992;1;1996;;;;vpos;;v;;r;;d46,1992;;b0,0;;mtitle;;phtml;;p">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;1993;4;1993;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="buttonID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2023;13;2023;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="html;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f39;1992;43;1992;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="callBack;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f43;2021;51;2021;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f32;1992;37;1992;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f36;2021;41;2021;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="showModalSaveDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f4;2022;1;2028;;;;vpos;;v;;r;;d54,2022;;b0,0;;mtitle;;pcallBack;;p">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2023;4;2023;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="buttonID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;2024;13;2024;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="callBack;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f43;2022;51;2022;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f36;2022;41;2022;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="showUnassignedCard;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f7;129;544;129;;;;vpos;;v;;r;;d49,129;;b0,0;;ma;;pb;;pc;;pd;;pe;;pf;;pg;;p">
@@ -2418,42 +2902,16 @@
 				<treenode node="name;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f29;2623;33;2623;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="this.contract;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;1174;2;1180;;;;vpos;;v;;r;;d17,1174;;b0,0;;m">
-				<treenode node="declarer;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1177;10;1177;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="unassignAllCards;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2144;1;2159;;;;vpos;;v;;r;;d37,2144;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2145;4;2145;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="doubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1178;9;1178;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2148;29;2148;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="level;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1175;7;1175;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="countID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2151;14;2151;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="redoubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1179;11;1179;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2148;19;2148;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f13;1176;17;1176;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="trumpSuit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1176;11;1176;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="this.currentLevels;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;1017;2;1023;;;;vpos;;v;;r;;d22,1017;;b0,0;;m">
-				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1020;11;1020;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="doubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1021;9;1021;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="level;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1018;7;1018;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="redoubled;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1022;11;1022;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f2;1019;6;1019;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="unassignAllCards;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2143;1;2158;;;;vpos;;v;;r;;d37,2143;;b0,0;;m">
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f1;2144;4;2144;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2147;29;2147;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="countID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2150;14;2150;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2147;19;2147;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="numCards;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2149;15;2149;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="numCards;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2150;15;2150;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="unAssignedCardClick;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;1800;1;1811;;;;vpos;;v;;r;;d46,1800;;b0,0;;mcard;;p">
@@ -2522,16 +2980,16 @@
 				<treenode node="id;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2296;9;2296;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="updateHandCount;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2088;1;2097;;;;vpos;;v;;r;;d36,2088;;b0,0;;m">
-				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f21;2090;24;2090;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="updateHandCount;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2089;1;2098;;;;vpos;;v;;r;;d36,2089;;b0,0;;m">
+				<treenode node="BHP;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f21;2091;24;2091;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2089;29;2089;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f23;2090;29;2090;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="countID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2092;14;2092;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="countID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2093;14;2093;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2089;19;2089;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f10;2090;19;2090;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="numCards;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2091;15;2091;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="numCards;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f7;2092;15;2092;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="updateUnassignedCardStatus;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f7;128;499;128;;;;vpos;;v;;r;;d44,128;;b0,0;;m">
@@ -2666,12 +3124,6 @@
 				<treenode node="Parameters;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f4;16;14;16;;;;vposParameters;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="areOppositeDirections;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;89;1;92;;;;vpos;;v;;r;;d66,89;;b0,0;;mdirection1;;pdirection2;;p">
-				<treenode node="direction1;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f41;89;51;89;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="direction2;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f53;89;63;89;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
 			<treenode node="changeNameDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f4;121;285;121;;;;vpos;;v;;r;;d45,1757;;b0,0;;mdirection;;p">
 				<treenode node="a;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f30;121;31;121;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -2692,40 +3144,6 @@
 				<treenode node="nameID;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1759;11;1759;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="title;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js;f5;1758;10;1758;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="checkBidSuit;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;27;1;31;;;;vpos;;v;;r;;d39,27;;b0,0;;msuit;;p">
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;28;12;28;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f32;27;36;27;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="checkCardSuit;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;20;1;24;;;;vpos;;v;;r;;d40,20;;b0,0;;msuit;;p">
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f6;21;12;21;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f33;20;37;20;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="checkDirection;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;82;1;87;;;;vpos;;v;;r;;d46,82;;b0,0;;mdirection;;p">
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f23;83;29;83;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f34;82;43;82;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="checkLevel;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;95;1;99;;;;vpos;;v;;r;;d38,95;;b0,0;;mlevel;;p">
-				<treenode node="level;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f30;95;35;95;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="checkRank;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;56;1;61;;;;vpos;;v;;r;;d36,56;;b0,0;;mrank;;p">
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f17;57;23;57;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f29;56;33;56;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="checkVulnerability;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;102;1;106;;;;vpos;;v;;r;;d44,102;;b0,0;;mvul;;p">
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f17;103;23;103;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="vul;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f38;102;41;102;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="computeScalingFactor;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f7;131;384;132;;;;vpos;;v;;r;;d48,1961;;b0,0;;mheight;;pwidth;;pwidth;;p">
@@ -3060,12 +3478,6 @@
 				<treenode node="Suits;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f8;156;13;156;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="getDirectionName;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;76;1;78;;;;vpos;;v;;r;;d48,76;;b0,0;;mdirection;;p">
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f8;77;14;77;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f36;76;45;76;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
 			<treenode node="getDisplayName;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f0;143;1;145;;;;vpos;;v;;r;;d37,143;;b0,0;;mcardIndex;;p">
 				<treenode node="cardIndex;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f25;143;34;143;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -3104,28 +3516,10 @@
 				<treenode node="index;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f5;447;10;447;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="getLHO;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;109;1;112;;;;vpos;;v;;r;;d38,109;;b0,0;;mdirection;;p">
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;110;7;110;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f26;109;35;109;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
 			<treenode node="getRank;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f0;151;1;153;;;;vpos;;v;;r;;d31,151;;b0,0;;mcardIndex;;p">
 				<treenode node="cardIndex;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f19;151;28;151;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="rankNames;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f8;152;17;152;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="getRankName;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;50;1;52;;;;vpos;;v;;r;;d38,50;;b0,0;;mrank;;p">
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f8;51;14;51;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f31;50;35;50;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="getRHO;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;115;1;118;;;;vpos;;v;;r;;d38,115;;b0,0;;mdirection;;p">
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f1;116;7;116;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="direction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f26;115;35;115;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="getSuit;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f0;147;1;149;;;;vpos;;v;;r;;d30,147;;b0,0;;mcardIndex;;p">
@@ -3134,7 +3528,7 @@
 				<treenode node="suitNames;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f8;148;17;148;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="getSuitName;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f0;104;1;107;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;14;1;16;;;;vpos;;v;;r;;d38,14;;b0,0;;msuit;;p">
+			<treenode node="getSuitName;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f0;104;1;107;;;;vpos;;v;;r;;d38,14;;b0,0;;msuit;;p">
 				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f8;15;14;15;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f22;104;26;104;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f31;14;35;14;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
@@ -3192,12 +3586,6 @@
 				<treenode node="Vulnerability;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f13;139;26;139;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="getVulnerabilityName;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;128;1;130;;;;vpos;;v;;r;;d46,128;;b0,0;;mvul;;p">
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f8;129;14;129;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="vul;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f40;128;43;128;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
 			<treenode node="handleAuction;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f4;172;151;172;;;;vpos;;v;;r;;d37,2578;;b0,0;;mshow;;p">
 				<treenode node="a;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f27;172;28;172;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
@@ -3242,7 +3630,7 @@
 			</treenode>
 			<treenode node="hideModalSaveDialog;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f260;135;328;135;;;;vpos;;v;;r;;d37,2029;;b0,0;;m">
 			</treenode>
-			<treenode node="isAssigned;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f314;6;431;6;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f13;199;1;203;;;;vpos;;v;;r;;d49,199;;b0,0;;msuit;;prank;;p">
+			<treenode node="isAssigned;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f314;6;431;6;;;;vpos;;v;;r;;d49,199;;b0,0;;msuit;;prank;;p">
 				<treenode node="a;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f334;6;335;6;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="b;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f336;6;337;6;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
@@ -3252,18 +3640,6 @@
 				<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f42;199;46;199;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="suit;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f36;199;40;199;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="isGreaterRank;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f7;62;1;66;;;;vpos;;v;;r;;d48,62;;b0,0;;mrank1;;prank2;;p">
-				<treenode node="Bridge;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f14;63;20;63;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="index1;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f5;63;11;63;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="index2;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f5;64;11;64;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="rank1;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f33;62;38;62;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="rank2;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f40;62;45;62;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="isValid;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f245;127;345;127;;;;vpos;;v;;r;;d28,1867;;b0,0;;m">
@@ -3322,7 +3698,7 @@
 				<treenode node="void;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f173;58;177;58;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="reset;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f13;7;191;7;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f13;205;1;214;;;;vpos;;v;;r;;d32,205;;b0,0;;m">
+			<treenode node="reset;JS:Function Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f13;7;191;7;;;;vpos;;v;;r;;d32,205;;b0,0;;m">
 				<treenode node="a;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f38;7;39;7;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 				<treenode node="b;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f81;7;82;7;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
@@ -11740,7 +12116,7 @@
 			</treenode>
 			<treenode node="assignedTo;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f5;1204;15;1204;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
-			<treenode node="auction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f5;1371;12;1371;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="auction;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f5;1389;12;1389;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
 			<treenode node="b;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\jquery.min.js;f12;1;13;1;;C:\wamp\www\bridge-hand-player\js\jquery.ba-hashchange.min.js;f14;8;15;8;;C:\wamp\www\bridge-hand-player\js\bootstrap.min.js;f654;5;655;5;;C:\wamp\www\bridge-hand-player\js\Codelobster0.js;f2388;0;2389;0;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f0;2;1;2;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
@@ -11975,6 +12351,8 @@
 			<treenode node="directionName;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\jquery.bridge-hand-player.js;f5;1323;18;1323;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
 			<treenode node="directionNames;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge.js;f4;125;18;125;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="directionNotAssigned;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f5;1307;25;1307;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
 			<treenode node="DirectionOrder;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f427;2;441;2;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
@@ -12580,6 +12958,8 @@
 			</treenode>
 			<treenode node="r;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\jquery.min.js;f4536;2;4537;2;;C:\wamp\www\bridge-hand-player\js\jquery.ba-hashchange.min.js;f714;8;715;8;;C:\wamp\www\bridge-hand-player\js\jquery-ui.min.js;f7730;4;7731;4;;C:\wamp\www\bridge-hand-player\js\jquery-ui-1.10.4.custom.min.js;f7731;5;7732;5;;C:\wamp\www\bridge-hand-player\js\Codelobster0.js;f3959;0;3960;0;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
+			<treenode node="randomDirection;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f10;1330;25;1330;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
 			<treenode node="rank;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\jquery.bridge-hand-player.js;f27;318;31;318;;C:\wamp\www\bridge-hand-player\js\Codelobster0.js;f3251;0;3255;0;;C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js;f191;6;195;6;;C:\wamp\www\bridge-hand-player\js\bridge.js;f9;130;13;130;;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f11;192;15;192;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
 			<treenode node="rank2;JS:JS Var Name;C:\wamp\www\bridge-hand-player\js\bridge-classes.js;f5;240;10;240;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
@@ -12926,17 +13306,17 @@
 		<file name="C:\wamp\www\bridge-hand-player\js\grids.js" crc="825745114"/>
 		<file name="C:\wamp\www\bridge-hand-player\js\display_bridge_hand.js" crc="-1331038639"/>
 		<file name="C:\wamp\www\bridge-hand-player\js\bridge.js" crc="-52841068"/>
-		<file name="C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js" crc="-73465100"/>
+		<file name="C:\wamp\www\bridge-hand-player\js\bridge-hand-player.js" crc="1499314544"/>
 		<file name="C:\wamp\www\bridge-hand-player\js\bridge-hand-player-min.js" crc="-1751386325"/>
 		<file name="C:\wamp\www\bridge-hand-player\js\bridge-hand-generator.js" crc="-873878964"/>
-		<file name="C:\wamp\www\bridge-hand-player\js\bridge-classes.js" crc="-1735634934"/>
+		<file name="C:\wamp\www\bridge-hand-player\js\bridge-classes.js" crc="2095526368"/>
 		<file name="C:\wamp\www\bridge-hand-player\js\bootstrap.min.js" crc="1494511983"/>
 		<file name="C:\wamp\www\bridge-hand-player\css\SexyButtons\sexybuttons.css" crc="2003218316"/>
 		<file name="C:\wamp\www\bridge-hand-player\css\SexyButtons\changelog.txt" crc="-386875200"/>
 		<file name="C:\wamp\www\bridge-hand-player\css\table-styles.css" crc="2101734941"/>
 		<file name="C:\wamp\www\bridge-hand-player\css\jquery-ui.min.css" crc="-1503068185"/>
 		<file name="C:\wamp\www\bridge-hand-player\css\buttons.css" crc="-1899998200"/>
-		<file name="C:\wamp\www\bridge-hand-player\css\bridge-hand-player.css" crc="-936246796"/>
+		<file name="C:\wamp\www\bridge-hand-player\css\bridge-hand-player.css" crc="-1769642059"/>
 		<file name="C:\wamp\www\bridge-hand-player\css\bridge-hand-generator.css" crc="1300635387"/>
 		<file name="C:\wamp\www\bridge-hand-player\css\bootstrap.min.css" crc="868573211"/>
 		<file name="C:\wamp\www\bridge-hand-player\samples.txt" crc="582986655"/>
