@@ -1305,13 +1305,31 @@ Bridge.Deal.prototype.getName = function( direction ) {
  * Assign rest of the cards randomly.
  */
 Bridge.Deal.prototype.assignRest = function() {
+	var directionNotAssigned = null;
+	for( var direction in Bridge.Directions ) {
+		if ( this.hands[ direction ].getNumCards() < 13 ) {
+			if ( directionNotAssigned !== null ) {
+				directionNotAssigned = null;
+				break;
+			}
+			else {
+				directionNotAssigned = direction;
+			}
+		}
+	}
+	if ( directionNotAssigned !== null ) {
+		this.assignFourthHand( directionNotAssigned );
+		return;
+	}
 	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
 		var suit = Bridge.CardSuitOrder[ i ];
 		for ( var rank in Bridge.Ranks ) {
 			if ( Bridge.Ranks.hasOwnProperty( rank ) ) {
 				var card = Bridge.Cards[ suit ][ rank ];
 				if ( card.getDirection() === null ) {
-					for( var direction in Bridge.Directions ) {
+					while( true ) {
+						var randomDirection = Math.floor( Math.random() * 4 );
+						var direction = Bridge.DirectionOrder[ randomDirection ];
 						if ( this.hands[ direction ].getNumCards() < 13 ) {
 							this.addCard( suit, rank, direction );
 							break;
