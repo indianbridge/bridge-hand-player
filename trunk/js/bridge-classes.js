@@ -451,9 +451,11 @@ Bridge.Hand = function( direction ) {
 	this.name = null;
 	this.direction = direction;
 	this.numCards = 0;
+	this.cardCount = {};
 	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
 		var suit = Bridge.CardSuitOrder[ i ];
 		this.cards[ suit ] = {};
+		this.cardCount[ suit ] = 0;
 	}
 };
 
@@ -497,6 +499,7 @@ Bridge.Hand.prototype.addCard = function( suit, rank ) {
 	Bridge.checkRank( rank );
 	this.cards[ suit ][ rank ] = Bridge.Cards[ suit ][ rank ];
 	this.numCards++;
+	this.cardCount[ suit ]++;
 };
  
  /**
@@ -509,7 +512,17 @@ Bridge.Hand.prototype.removeCard = function( suit, rank ) {
 		throw 'In Bridge.Hand.removeCard ' + Bridge.getSuitName( suit ) + Bridge.getRankName( rank ) + ' is not found!';
 	}
 	delete this.cards[ suit ][ rank ];
+	this.cardCount[ suit ]--;
 	this.numCards--;
+};
+
+Bridge.Hand.prototype.getLongestSuit = function( ) {
+	var longest = 0;	
+	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
+		var suit = Bridge.CardSuitOrder[ i ];
+		longest = Math.max( longest, this.cardCount[ suit ] );
+	}
+	return longest;
 };
 
 
@@ -939,7 +952,7 @@ Bridge.Deal.prototype.addBid = function( level, suit, annotation ) {
 	}
 	if ( suit !== 'p' && suit !== 'x' && suit !== 'r' ) {
 		if ( this.currentLevels !== null ) {
-			if ( level < this.currentLevels.level || ( level === this.currentLevels.level && Bridge.BidSuitOrder.indexOf(suit) > Bridge.BidSuitOrder.indexOf( this.currentLevels.suit ) ) ) {
+			if ( isNaN( level ) || level < this.currentLevels.level || ( level === this.currentLevels.level && Bridge.BidSuitOrder.indexOf(suit) > Bridge.BidSuitOrder.indexOf( this.currentLevels.suit ) ) ) {
 				throw 'Invalid Bid ' + level + suit + '!';
 			}
 		}
@@ -958,7 +971,7 @@ Bridge.Deal.prototype.addBid = function( level, suit, annotation ) {
 	else if ( suit !== 'p' ) {
 		this.currentLevels.doubled = false;
 		this.currentLevels.redoubled = false;
-		this.currentLevels.direction = direction;	
+		this.currentLevels.direction = direction;
 		this.currentLevels.level = level;
 		this.currentLevels.suit = suit;	
 	}
@@ -971,6 +984,16 @@ Bridge.Deal.prototype.addBid = function( level, suit, annotation ) {
 		bid.setPreviousBid( this.lastBid );
 		this.lastBid = bid;
 	}
+};
+
+Bridge.Deal.prototype.getLongestSuit = function() {
+	var longest = 0;
+	for( var direction in Bridge.Directions ) {
+		if ( Bridge.Directions.hasOwnProperty( direction ) ) {
+			longest = Math.max( longest, this.hands[ direction ].getLongestSuit() );
+		}
+	}
+	return longest;
 };
 
 Bridge.Deal.prototype.isDoubleAllowed = function() {
@@ -1221,11 +1244,11 @@ Bridge.Deal.prototype.getSavedPlaysList = function() {
 };
 
 Bridge.Deal.prototype.getPlayStrings = function( all ) {
-	var output, card, annotation;
+	var output = '', card, annotation;
 	if ( all === undefined ) all = false;
 	if ( ! all || this.loadedPlay === null ) {
 		if ( this.firstPlayedCard === null ) return '';
-		output = '&p=';
+		output += '&p=';
 		card = this.firstPlayedCard;
 		while( card !== null ) {
 			output += card.getSuit() + card.getRank();
@@ -1375,6 +1398,11 @@ Bridge.Deal.prototype.assignFourthHand = function( direction ) {
 		}
 	}		
 };
+
+Bridge.Deal.prototype.getCurrentBiddingTurn = function() {
+	if ( this.lastBid === null ) return this.dealer;
+	else return Bridge.getLHO( this.lastBid.getDirection() );
+}
 
 /**
  * Get number of cards in specified hand.
