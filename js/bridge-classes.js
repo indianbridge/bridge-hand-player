@@ -1296,7 +1296,43 @@ Bridge.Deal.prototype.removeCard = function( suit, rank ) {
 Bridge.Deal.prototype.getHand = function( direction ) {
 	Bridge.checkDirection( direction );	
 	return this.hands[ direction ];
- };
+};
+ 
+Bridge.Deal.prototype.getSuitOrder = function( direction ) {
+	var hand = this.hands[ direction ];
+	var assignedSuits = [
+		{ name : 's', color : 'b', assigned : false },
+		{ name : 'h', color : 'r', assigned : false },
+		{ name : 'd', color : 'r', assigned : false },
+		{ name : 'c', color : 'b', assigned : false }
+	];
+	var colorCount = {
+		'b' : 0,
+		'r' : 0
+	}
+	for( var i = 0; i < assignedSuits.length; ++i ) {
+		if  ( hand.cardCount[ assignedSuits[ i ].name ] > 0 ) colorCount[ assignedSuits[ i ].color ]++;
+	}
+	var suits = [];
+	var currentColor = '';
+	if ( colorCount[ 'r' ] > colorCount[ 'b' ] ) currentColor = 'b';
+	else if ( colorCount[ 'r' ] < colorCount[ 'b' ] ) currentColor = 'r';
+	for( var i = 0; i < assignedSuits.length; ++i ) {
+		if ( ! assignedSuits[ i ].assigned && hand.cardCount[ assignedSuits[ i ].name ] > 0 ) {
+			var j = i;
+			while ( assignedSuits[ j ].color === currentColor && j < assignedSuits.length ) {
+				j++;
+			}
+			if ( j >= assignedSuits.length ) break;
+			suits.push( assignedSuits[ j ].name );
+			assignedSuits[ j ].assigned = true;
+			currentColor = assignedSuits[ j ].color;
+			if ( j !== i ) i--;
+		}
+	}
+	for( ; i < assignedSuits.length; ++i ) suits.push( assignedSuits[ i ].name );
+	return suits;
+};
  
 /**
  * Set the name for a specific hand.
