@@ -54,6 +54,7 @@
 		         </li>										    
 			</ul>		   
 		      <p class="navbar-text">
+		      	<a id="show-options" class="tooltip-bottom" href="javascript:void(0);" title="Change Settings"><span class="glyphicon glyphicon-cog"></span></a>		      
 		      	<a id="show-instructions" class="tooltip-bottom" href="javascript:void(0);" title="Instructions"><span class="glyphicon glyphicon-question-sign"></span></a>
 		      	<a id="show-contact" class="tooltip-bottom" href="javascript:void(0);" title="Send Feedback/Suggestions/Bug Reports"><span class="glyphicon glyphicon-envelope"></span></a>
 		      </p>
@@ -99,7 +100,7 @@
 	   </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->	
 	
-	<div class="modal fade" id="modal-popup-confirm" tabindex="-1" role="dialog" aria-labelledby="modal-popup-title" aria-hidden="true">
+	<div class="modal fade" id="modal-popup-confirm" tabindex="-1" role="dialog" aria-labelledby="modal-popup-confirm-title" aria-hidden="true">
 	   <div class="modal-dialog">
 	      <div class="modal-content">
 	         <div class="modal-header">
@@ -119,7 +120,7 @@
 	   </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->		
 	
-	<div class="modal fade" id="modal-popup-save" tabindex="-1" role="dialog" aria-labelledby="modal-popup-title" aria-hidden="true">
+	<div class="modal fade" id="modal-popup-save" tabindex="-1" role="dialog" aria-labelledby="modal-popup-save-title" aria-hidden="true">
 	   <div class="modal-dialog">
 	      <div class="modal-content">
 	         <div class="modal-header">
@@ -136,6 +137,40 @@
 	         </div>
 	         <div class="modal-footer">     
 	            <button id="modal-popup-save-ok" type="button" class="btn btn-primary">Save Value</button>         
+	            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	         </div>
+	      </div><!-- /.modal-content -->
+	   </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->		
+	
+	<div class="modal fade" id="modal-popup-options" tabindex="-1" role="dialog" aria-labelledby="modal-popup-options-title" aria-hidden="true">
+	   <div class="modal-dialog">
+	      <div class="modal-content">
+	         <div class="modal-header">
+	            <button class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	            <h4 id="modal-popup-options-title" class="modal-title">Change Settings/Options</h4>
+	         </div>
+	         <div class="modal-body">
+				<form role="form" onsubmit="return false;">
+				  <div class="form-group">
+				  	<label for="bootstrap-class">Base Color</label>
+					<select id="bootstrap-class" class="form-control">
+					  <option value="success">Success (Usually Green)</option>
+					  <option value="info">Info (Usually Blue)</option>
+					  <option value="warning">Warning (Usually Warning)</option>
+					  <option value="danger">Danger (Usually Red)</option>
+					</select>		
+					<div class="checkbox">
+					  <label>
+					    <input id="alternate-suit-color" type="checkbox" value="">
+					    Try to alternate suit colors in horizontal card layout
+					  </label>
+					</div>							  
+				  </div>
+				</form>		         
+	         </div>
+	         <div class="modal-footer">     
+	            <button id="modal-popup-options-ok" type="button" class="btn btn-primary">Save Options</button>         
 	            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 	         </div>
 	      </div><!-- /.modal-content -->
