@@ -360,8 +360,9 @@ Bridge.PlayedCard.prototype.setPreviousCard = function( card ) {
  * @param {string} suit a character representing the suit of this bid
  * @param {string} annotation any annotation added to this bid
  */
-Bridge.Bid = function( level, suit, direction, annotation ) {
+Bridge.Bid = function( level, suit, direction, explanation, annotation ) {
 	if ( annotation === undefined ) annotation = null;
+	if ( explanation === undefined ) explanation = null;
 	if ( suit === 'p' || suit === 'x' || suit === 'r' ) {
 		this.suit = suit;
 	}
@@ -374,6 +375,7 @@ Bridge.Bid = function( level, suit, direction, annotation ) {
 	Bridge.checkDirection( direction );
 	this.direction = direction;
 	this.annotation = annotation;
+	this.explanation = explanation;
 	this.previousBid = null;
 	this.nextBid = null;
 };
@@ -389,8 +391,9 @@ Bridge.Bid.prototype.getString = function() {
 	}	
 	else bidString = 'Unknown';
 	return {
-		bid: bidString,
-		annotation: this.annotation
+		bid : bidString,
+		annotation : this.annotation,
+		explanation : this.explanation
 	};
 };
 
@@ -405,6 +408,14 @@ Bridge.Bid.prototype.getSuit = function() {
 
 Bridge.Bid.prototype.getDirection = function() {
 	return this.direction;
+};
+
+Bridge.Bid.prototype.getExplanation = function() {
+	return this.explanation;
+};
+
+Bridge.Bid.prototype.setExplanation = function( explanation ) {
+	this.explanation = explanation;
 };
 
 Bridge.Bid.prototype.getAnnotation = function() {
@@ -548,6 +559,8 @@ Bridge.Deal = function() {
 		doubled: false,
 		redoubled: false
 	};
+	this.savedAuctions = {};
+	this.loadedAuction = null;
 	
 	// Deal information
 	this.board = 1;
@@ -701,6 +714,19 @@ Bridge.Deal.prototype.setAnnotationForBid = function( bidNumber, annotation ) {
 	}
 };
 
+Bridge.Deal.prototype.setExplanationForBid = function( bidNumber, explanation ) {
+	var bid = this.firstBid;
+	var count = 0;
+	while( bid !== null && count !== bidNumber ) {
+		bid = bid.getNextBid();
+		count++;
+	}
+	if ( bid !== null ) bid.setExplanation( explanation );
+	else {
+		throw 'Bid was not found when trying to add explanation!';
+	}
+};
+
 /** 
  * Get annotation for specified card
  */
@@ -728,6 +754,19 @@ Bridge.Deal.prototype.getAnnotationForBid = function( bidNumber ) {
 	if ( bid !== null ) return bid.getAnnotation();
 	else {
 		throw 'Bid was not found when trying to add annotation!';
+	}
+};
+
+Bridge.Deal.prototype.getExplanationForBid = function( bidNumber ) {
+	var bid = this.firstBid;
+	var count = 0;
+	while( bid !== null && count !== bidNumber ) {
+		bid = bid.getNextBid();
+		count++;
+	}
+	if ( bid !== null ) return bid.getExplanation();
+	else {
+		throw 'Bid was not found when trying to get explanation!';
 	}
 };
 
@@ -935,7 +974,8 @@ Bridge.Deal.prototype.numPasses = function() {
 /**
  * Add a bid to the auction at the end.
  */ 
-Bridge.Deal.prototype.addBid = function( level, suit, annotation ) {
+Bridge.Deal.prototype.addBid = function( level, suit, explanation, annotation ) {
+	if (explanation === undefined ) explanation = null;
 	if ( annotation === undefined ) annotation = null;
 	var direction = this.dealer;
 	if ( this.lastBid !== null ) {
@@ -957,7 +997,7 @@ Bridge.Deal.prototype.addBid = function( level, suit, annotation ) {
 			}
 		}
 	}
-	var bid = new Bridge.Bid( level, suit, direction, annotation );
+	var bid = new Bridge.Bid( level, suit, direction, explanation, annotation );
 	if ( suit === 'x' ) {
 		this.currentLevels.doubled = true;
 		this.currentLevels.redoubled = false;
@@ -1468,6 +1508,11 @@ Bridge.Deal.prototype.getAnnotation = function() {
 	var annotation = this.currentPlayedCard.getAnnotation();
 	return annotation === null ? '' : unescape( annotation );
 };
+
+Bridge.Deal.prototype.setAnnotation = function( annotation ) {
+	if( this.currentPlayedCard === null ) return;
+	this.currentPlayedCard.setAnnotation( annotation );
+}
 
 
 

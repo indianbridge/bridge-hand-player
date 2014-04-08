@@ -20,12 +20,39 @@ BHP.cardImageDimensions = {
 	percentageHeightShowing: 0.5
 };
 
-BHP.Options = {
-	bootstrapClass : 'success',
-	alternateSuitColor : false
+BHP.OptionSet = {
+	bootstrapClass : {
+		id : 'bootstrap-class',
+		value : 'success',
+		type : 'select',
+		label : 'Base Color for Elements on Page' ,
+		values : [
+			{ name : 'Success (Usually Green)', value : 'success' },
+			{ name : 'Info (Usually Blue)', value : 'info' },
+			{ name : 'Warning (Usually Orange)', value : 'warning' },
+			{ name : 'Danger (Usually Red)', value : 'danger' }
+		]
+	},
+	alternateSuitColor : {
+		id : 'alternate-suit-color',
+		value : true,
+		type : 'checkbox',
+		label : 'Try to Alternate Suit Colors in Horizontal Layout' 
+	},
+	useIconsOnly : {
+		id : 'use-icons-only',
+		value : false,
+		type : 'checkbox',
+		label : 'Use Icons only in Footer Bar' 
+	},
+	animateCards : {
+		id : 'animate-cards',
+		value : true,
+		type : 'checkbox',
+		label : 'Animate Cards when playing to the Table' 
+	}	
 };
 
-BHP.Options.bootstrapClass = 'success';
 BHP.bootswatchThemes = {};
 BHP.gutter = 5;
 BHP.fontSize = 12;
@@ -34,13 +61,19 @@ BHP.savePlayCount = 0;
 BHP.state = 'load';
 BHP.contractString = null;
 
+BHP.getQueryString = function( url ) {
+	var questionMarkIndex = url.indexOf( '?' );
+	if ( questionMarkIndex === -1 || questionMarkIndex === url.length - 1 ) return null;
+	else return url.slice( questionMarkIndex + 1 );
+};
+
 // Read the query parameters
 BHP.readQueryParameters = function() {
 	BHP.queryParameters = null;
 	var vars, hash;
 	// Retrieve the part after the ? in url
-	var q = document.URL.split( '?' )[1];
-	if( q !== undefined ){
+	var q = BHP.getQueryString( document.URL );
+	if( q !== undefined && q !== null && q ){
 		vars = [];
 		// Remove the part after # if it exists
 		q = q.split( '#' )[0];
@@ -332,7 +365,7 @@ BHP.loadAuction = function() {
 				var currentChar = contractString.charAt( i );
 				var level = 1;
 				var suit = '';
-				var annotation = null;			
+				var annotation = null, explanation = null;			
 				if ( currentChar === 'd' || currentChar === 'x'  ) {
 					suit = 'x';
 				}
@@ -357,6 +390,9 @@ BHP.loadAuction = function() {
 						return false;
 					}
 					if ( nextChar === '(' ) {	
+						explanation = value.annotation;
+					}
+					else {
 						annotation = value.annotation;
 					}
 					i = value.endBracePosition;			
@@ -371,11 +407,14 @@ BHP.loadAuction = function() {
 						return false;
 					}
 					if ( nextChar === '(' ) {	
+						explanation = value.annotation;
+					}
+					else {
 						annotation = value.annotation;
 					}
 					i = value.endBracePosition;			
 				}		
-				BHP.deal.addBid( level, suit, annotation );
+				BHP.deal.addBid( level, suit, explanation, annotation );
 			}
 		}
 		catch ( err ) {
@@ -401,7 +440,7 @@ BHP.drawAuction = function( container, tableClass ) {
 		var tableID = 'auction-table';
 		var html = '<table id="' + tableID + '" class="' + tableClass + ' table table-bordered table-condensed table-striped">';
 		html += '<tbody>';
-		html += '<tr class="' + BHP.Options.bootstrapClass + '"><th class="text-center">W</th><th class="text-center">N</th><th class="text-center">E</th><th class="text-center">S</th></tr>';
+		html += '<tr class="' + BHP.getOption( 'bootstrapClass' ) + '"><th class="text-center">W</th><th class="text-center">N</th><th class="text-center">E</th><th class="text-center">S</th></tr>';
 		var firstBid = auction[ 0 ];
 		var currentDirection = 'w';
 		html += '<tr class="text-center">';
@@ -421,11 +460,11 @@ BHP.drawAuction = function( container, tableClass ) {
 			if ( bid.direction === 'w' ) html += '<tr class="text-center">';
 			var bidString = bid.getString();
 			var bidHTML = '';
-			if ( bidString.annotation === null || ! ( bidString.annotation.trim() ) ) {
+			if ( bidString.explanation === null || ! ( bidString.explanation.trim() ) ) {
 				bidHTML = '<span title="Click to add explanation/description" class="bid-annotation cursor-pointer" id="bid-' + i + '">' + bidString.bid + '</span>';
 			}
 			else {
-					bidHTML = '<span id="bid-' + i + '" data-toggle="tooltip" class="cursor-pointer bg-' + BHP.Options.bootstrapClass + ' bid-annotation" title="' + unescape( bidString.annotation ) +'">' + bidString.bid + '</span>';
+					bidHTML = '<span id="bid-' + i + '" data-toggle="tooltip" class="cursor-pointer bg-' + BHP.getOption( 'bootstrapClass' ) + ' bid-annotation" title="' + unescape( bidString.explanation ) +'">' + bidString.bid + '</span>';
 			}
 			html += '<td class="annotatable-bid" bidnumber="' + i + '">' + bidHTML + '</td>';
 			if ( currentDirection === 's' ) html += '</tr>';
@@ -438,16 +477,16 @@ BHP.drawAuction = function( container, tableClass ) {
 			currentDirection = Bridge.getLHO( currentDirection );			
 		}
 		html += '</tbody></table>';	
-		//var container = '#auction';
 		$( container ).append( html );
 		$( '.annotatable-bid' ).click(function() {
-			BHP.editBidAnnotation( this );
+			BHP.editBidExplanation( this );
 		});		
 	}
 	
 	// Bootstrap tooltip
 	$( '.bid-annotation' ).tooltip( {
-		placement:'bottom'
+		placement:'bottom',
+		container: 'body'
 	});	
 };
 
@@ -470,13 +509,13 @@ BHP.drawDealInformation = function() {
 	
 	var tableID = 'deal-information-table';
 	var html = '<table id="' + tableID + '" class="table table-bordered table-condensed table-striped">';
-	html += '<thead><tr class="' + BHP.Options.bootstrapClass + '"><th class="middle" colspan="2">Deal Information</th></tr></thead>';
+	html += '<thead><tr class="' + BHP.getOption( 'bootstrapClass' ) + '"><th class="middle" colspan="2">Deal Information</th></tr></thead>';
 	html += '<tbody>';
 	// board
 	var board = BHP.deal.getBoard();
 	if ( board === null ) board = 1;
 	html += '<tr><td class="right">Board</td><td>';
-	html += '<span id="board" class="cursor-pointer label label-' + BHP.Options.bootstrapClass + '">' + board + '</span>';		
+	html += '<span id="board" class="cursor-pointer label label-' + BHP.getOption( 'bootstrapClass' ) + '">' + board + '</span>';		
 	html += '</td></tr>';
 	html += '<tr><td class="right">Contract</td><td>';
 	var contractString = BHP.deal.getContract();
@@ -497,7 +536,8 @@ BHP.drawDealInformation = function() {
 	board.click( BHP.changeBoardDialog );
 	board.attr( 'title', 'Click to change Board Number' );
 	board.tooltip( {
-		placement : 'bottom'
+		placement : 'bottom',
+		container: 'body'
 	});			
 	
 	
@@ -510,12 +550,13 @@ BHP.drawDealInformation = function() {
 	var general = $( '#general-messages' );
 	general.empty().append( unescape( notes ) );
 	general.addClass( 'alert' );
-	general.addClass( 'alert-' + BHP.Options.bootstrapClass );	
+	general.addClass( 'alert-' + BHP.getOption( 'bootstrapClass' ) );	
 	general.addClass( 'cursor-pointer' );
 	general.click( BHP.changeNotesDialog );
 	general.attr( 'title', 'Click to change Title/Notes' );
 	general.tooltip( {
-		placement : 'bottom'
+		placement : 'bottom',
+		container: 'body'
 	});
 };
 
@@ -605,8 +646,10 @@ BHP.drawFooter = function() {
 	html = BHP.getButtonGroupHTML( 'controls', fields );
 	BHP.footer.append( html );		
 	html = '<div class="btn-group btn-group-sm dropup">';
-	html += '<button id="save-play" type="button" class="btn btn-' + BHP.Options.bootstrapClass + '"><span class="glyphicon glyphicon-floppy-save"></span> <span class="text-highlight">Save Play</span></button>';
-	html += '<button type="button" class="btn btn-' + BHP.Options.bootstrapClass + ' dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-floppy-open"></span> <span class="text-highlight">Load Play</span> <span class="caret"></span></button>';
+	var fieldName = ( BHP.getOption( 'useIconsOnly' ) ? '' : '<span class="text-highlight">Save Play</span>' );
+	html += '<button title = "Save Play " id="save-play" type="button" class="toolbar btn btn-' + BHP.getOption( 'bootstrapClass' ) + '"><span class="glyphicon glyphicon-floppy-save"></span> ' + fieldName + '</button>';
+	fieldName = ( BHP.getOption( 'useIconsOnly' ) ? '' : '<span class="text-highlight">Load Play</span>' );
+	html += '<button title="Load Play" type="button" class="toolbar btn btn-' + BHP.getOption( 'bootstrapClass' ) + ' dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-floppy-open"></span> ' + fieldName + ' <span class="caret"></span></button>';
 	html += '<ul id="lines" class="dropdown-menu" role="menu">';
 	html += '</ul>';
 	html += '</div>';
@@ -618,8 +661,14 @@ BHP.drawFooter = function() {
 		bottom:0
 	});		
 	
-	$( '#edit-hands' ).click( BHP.handleHands );
-	$( '#edit-auction' ).click( BHP.handleAuction );
+	$( '#edit-hands' ).click( function() {
+		$( this ).tooltip( 'hide' );
+		BHP.handleHands( true );
+	});
+	$( '#edit-auction' ).click( function() {
+		$( this ).tooltip( 'hide' );
+		BHP.handleAuction( true );
+	});
 	
 	$('#undo-play').click(function() {
 		BHP.undoCard();
@@ -653,6 +702,11 @@ BHP.drawFooter = function() {
 		var title = 'Save Current Play';
 		BHP.showModalSaveDialog( title, BHP.savePlay );
 	});	
+	
+	$( '.toolbar' ).tooltip({
+		placement : 'top',
+		container : 'body'
+	});
 };
 
 BHP.updateAnnotation = function() {
@@ -737,6 +791,7 @@ BHP.showCard = function( container, suit, rank, direction, top, left, width, hei
 	var imageName = BHP.cardImageDimensions.folder + '/' + suit + rank + '.png';
 	var status = 'not-played';
 	var src = imageName;
+	//$( container ).append( '<button id="' + imageID + '" class="fixed btn btn-primary card">' + Bridge.getRankName( rank ) + '</button>' );
 	$( container ).append( '<img id="' + imageID + '" class="fixed card"></img>' );
 	var image = $( '#' + imageID );
 	image.attr( 'src', src );
@@ -751,7 +806,6 @@ BHP.showCard = function( container, suit, rank, direction, top, left, width, hei
 		top: top,
 		left: left
 	});	
-
 };
 
 // Draw the four hands
@@ -783,7 +837,7 @@ BHP.drawNames = function( direction, bottom, left ) {
 	var name = BHP.deal.getName( direction );
 	if ( name === null ) name = Bridge.getDirectionName( direction );
 	var nameID = direction + '-name';
-	var html = '<span direction="' + direction +'" id="' + nameID + '"  class="cursor-pointer change-name text-size fixed label label-' + BHP.Options.bootstrapClass + '">' + name + '</span>';
+	var html = '<span direction="' + direction +'" id="' + nameID + '"  class="cursor-pointer change-name text-size fixed label label-' + BHP.getOption( 'bootstrapClass' ) + '">' + name + '</span>';
 	var container = '#' + direction + '-hand';
 	$( container ).append( html ); 
 	var nameObject = $( '#' + nameID );
@@ -791,25 +845,49 @@ BHP.drawNames = function( direction, bottom, left ) {
 		top: bottom - nameObject.outerHeight(),
 		left: left
 	});	
-	nameObject.attr( 'title', 'Click to change Name' ).tooltip();
+	nameObject.attr( 'title', 'Click to change Name' ).tooltip({
+		container : 'body'
+	});
 };
 
 /**
  * Show a played card on the table.
  */
 BHP.playTableCard = function( card ) {
-	var image = card.clone();
-	var id = 'played-' + image.attr( 'id' );
-	image.attr( 'id' , id);
-	image.attr( 'src', image.attr( 'imageName' ) );
-	image.attr( 'z-index', 100000 );
-	var direction = image.attr( 'direction' );
+	var direction = card.attr( 'direction' );
 	var playedCardID = direction + '-played-card';
-	image.removeClass( 'fixed' ).removeClass( 'card' ).removeClass('img-highlight').removeClass('cursor-not-allowed').addClass('cursor-pointer').attr( 'title', 'Click to add play annotation' ).tooltip();
-	$( '#' + playedCardID ).empty().append(image);
-	$( image ).click(function() {
+	var imageID = 'played-' + card.attr( 'id' );
+	var html = '<img class="fixed" id="' + imageID + '" src="' + card.attr( 'imageName' ) + '"></img>'
+	$( '#' + playedCardID ).empty().append(html);
+	var image = $( '#' + imageID );
+	image.width( card.width() );
+	image.height( card.height() );
+	image.attr( 'suit', card.attr( 'suit' ) );
+	image.attr( 'rank', card.attr( 'rank' ) );
+	image.attr( 'direction', direction );
+	image.attr( 'title', 'Click to add play annotation' );	
+	if ( BHP.getOption( 'animateCards' ) ) {
+		var position = card.position();
+		var currentPosition = $( '#' + playedCardID ).position();
+		image.css({
+			top : position.top,
+			left : position.left
+		});
+		image.animate({ top : currentPosition.top, left : currentPosition.left }, 300, function() {});
+	}
+	image.click(function() {
 		BHP.editAnnotation( this );
 	});
+};
+
+BHP.editBidExplanation = function( bid ) {
+	var bidNumber = $( bid ).attr( 'bidnumber' );
+	bidNumber = parseInt( bidNumber );
+	var title = 'Edit/Add Explanation for Bid';
+	var explanation = BHP.deal.getExplanationForBid( bidNumber );
+	if ( explanation === null ) explanation = '';
+	$( '#modal-popup-save-content' ).val( explanation ).attr( 'bidnumber', bidNumber );
+	BHP.showModalSaveDialog( title, BHP.saveBidExplanation );	
 };
 
 BHP.editBidAnnotation = function( bid ) {
@@ -825,8 +903,15 @@ BHP.editBidAnnotation = function( bid ) {
 BHP.editAnnotation = function( card ) {
 	var suit = $( card ).attr( 'suit' );
 	var rank = $( card ).attr( 'rank' );
-	var title = 'Edit/Add Annotation for ' + Bridge.getSuitName( suit ) + Bridge.getRankName( rank );
-	var annotation = BHP.deal.getAnnotationForCard( suit, rank );
+	var title, annotation;
+	if ( suit !== undefined ) {
+		title = 'Edit/Add Annotation for ' + Bridge.getSuitName( suit ) + Bridge.getRankName( rank );
+		annotation = BHP.deal.getAnnotationForCard( suit, rank );
+	}
+	else {
+		title = 'Edit/Add Annotation for last played card';
+		annotation = BHP.deal.getAnnotation();		
+	}
 	if ( annotation === null ) annotation = '';
 	$( '#modal-popup-save-content' ).val( annotation ).attr( 'suit', suit ).attr( 'rank', rank );
 	BHP.showModalSaveDialog( title, BHP.savePlayAnnotation );	
@@ -862,10 +947,10 @@ BHP.setActiveHand = function( activeDirection ) {
 			var nameID = direction + '-name';
 			var nameObject = $( '#' + nameID );
 			if ( direction === activeDirection ) {
-				nameObject.removeClass( 'label-' + BHP.Options.bootstrapClass ).addClass( 'label-primary' );	
+				nameObject.removeClass( 'label-' + BHP.getOption( 'bootstrapClass' ) ).addClass( 'label-primary' );	
 			}	
 			else {
-				nameObject.addClass( 'label-' + BHP.Options.bootstrapClass ).removeClass( 'label-primary' );
+				nameObject.addClass( 'label-' + BHP.getOption( 'bootstrapClass' ) ).removeClass( 'label-primary' );
 			}
 		}
 	}
@@ -928,7 +1013,7 @@ BHP.drawHorizontal = function( direction ) {
 	var top = $( container ).position().top + $( container ).outerHeight() / 2 - fullHeight / 2;
 	var left = $( container ).position().left + $( container ).outerWidth() / 2 - fullWidth / 2;
 	BHP.drawNames( direction, top, left );	
-	if ( BHP.Options.alternateSuitColor ) {
+	if ( BHP.getOption( 'alternateSuitColor' ) ) {
 		var suitOrder = BHP.deal.getSuitOrder( direction );
 	}
 	else {
@@ -1090,7 +1175,7 @@ BHP.changeVulnerabilityDialog = function() {
 		if ( icons.hasOwnProperty( icon ) ) {
 			var id = 'vulnerability-' + icon;
 			var btnClass = 'btn-default';
-			if ( vul === icon ) btnClass = 'btn-' + BHP.Options.bootstrapClass;
+			if ( vul === icon ) btnClass = 'btn-' + BHP.getOption( 'bootstrapClass' );
 			html += '<button type="button" id="' + id + '" vulnerability="' + icon + '" class="change-vulnerability btn ' + btnClass + '">';	
 			html += '<span class="glyphicon glyphicon-'+ icons[ icon ] + '"></span>';	
 			html += Bridge.getVulnerabilityName( icon );
@@ -1230,7 +1315,7 @@ BHP.drawMainSection = function() {
 		{ id: 'e-hand',name: 'Cell 0 0', height: 6, width: 4, cellClass: '', left: 8, top: 3, widthGutters: 3, heightGutters: 2 },
 		{ id: 'deal-information',name: 'Cell 0 0', height: 3, width: 3, cellClass: 'status', left: 0, top: 9, widthGutters: 1, heightGutters: 3 },
 		{ id: 's-hand',name: 'Cell 0 0', height: 3, width: 6, cellClass: '', left: 3, top: 9, widthGutters: 2, heightGutters: 3 },
-		{ id: 'annotation-area',name: 'Cell 0 0', height: 3, width: 3, cellClass: 'status alert alert-' + BHP.Options.bootstrapClass, left: 9, top: 9, widthGutters: 3, heightGutters: 3 }
+		{ id: 'annotation-area',name: 'Cell 0 0', height: 3, width: 3, cellClass: 'status alert alert-' + BHP.getOption( 'bootstrapClass' ), left: 9, top: 9, widthGutters: 3, heightGutters: 3 }
 	];
 	BHP.header = $('#header');
 	var totalHeight = BHP.footer.position().top - BHP.header.position().top - BHP.header.height();
@@ -1258,7 +1343,20 @@ BHP.drawMainSection = function() {
 	}
 	
 	BHP.adjustCardTable();
-	
+	$( '#annotation-area' ).addClass( 'cursor-pointer' ).attr( 'title', 'Click to add play annotation' ).tooltip({
+		placement : 'top',
+		container : 'body'
+	});
+	$( '#annotation-area' ).click( function() {
+		if ( BHP.deal.isAtBeginning() ) {
+			var title = 'No Play Made Yet!';
+			var html = '<h4>There is no card played to the table yet and so a play annotation cannot be added!</h4>';
+			BHP.showModalDialog( title, html );				
+		}
+		else {
+			BHP.editAnnotation( this );
+		}
+	});
 };
 
 BHP.adjustCardTable = function() {
@@ -1374,10 +1472,26 @@ BHP.savePlayAnnotation = function() {
 	var suit = field.attr( 'suit' );
 	var rank = field.attr( 'rank' );
 	var annotation = field.val();
-	BHP.deal.setAnnotationForCard( suit, rank, annotation );
+	if ( suit === undefined ) {
+		BHP.deal.setAnnotation( annotation );
+	}
+	else {
+		BHP.deal.setAnnotationForCard( suit, rank, annotation );
+	}
 	BHP.updateAnnotation();	
 	BHP.hideModalSaveDialog();	
-	//$( '#modal-popup-save' ).modal( 'hide' );	
+};
+
+BHP.saveBidExplanation = function() {
+	var field = $( '#modal-popup-save-content' );
+	var bidNumber = field.attr( 'bidnumber' );
+	if ( bidNumber !== undefined ) {
+		bidNumber = parseInt( bidNumber );
+		var explanation = field.val();
+		BHP.deal.setExplanationForBid( bidNumber, explanation );
+		BHP.drawAuction( '#auction' );				
+	}
+	BHP.hideModalSaveDialog();
 };
 
 BHP.saveBidAnnotation = function() {
@@ -1390,7 +1504,6 @@ BHP.saveBidAnnotation = function() {
 		BHP.drawAuction( '#auction' );				
 	}
 	BHP.hideModalSaveDialog();
-	//$( '#modal-popup-save' ).modal( 'hide' );	
 };
 
 BHP.makeIdentifier = function(text) {
@@ -1449,8 +1562,8 @@ BHP.loadPlayByName = function( playString, playName ) {
 		}	
 		BHP.deal.playCard( suit, rank, null, annotation );	
 	}
-	BHP.rewind();
 	BHP.deal.savePlay( playName );
+	BHP.deal.resetAll();
 };
 
 BHP.loadSavedPlaysList = function() {
@@ -1575,7 +1688,10 @@ BHP.createURLQueryParameters = function( allPlays ) {
 			else url += bid.getLevel() + suit;
 			var annotation = bid.getAnnotation();
 			if ( annotation !== null )
-			url += '(' + annotation + ')';			
+			url += '{' + annotation + '}';		
+			var explanation = bid.getExplanation();
+			if ( explanation !== null )
+			url += '(' + explanation + ')';
 		}
 	}
 	
@@ -1650,7 +1766,7 @@ BHP.HA.drawHandAssignment = function() {
 	container = '#section';
 	// Draw titles
 	var id = 'card-pile-title';
-	var html = '<span id="' + id + '"  class="text-size fixed label label-' + BHP.Options.bootstrapClass + '">Unassigned Cards</span>';
+	var html = '<span id="' + id + '"  class="text-size fixed label label-' + BHP.getOption( 'bootstrapClass' ) + '">Unassigned Cards</span>';
 	$( container ).append( html ); 
 	var title = $( '#' + id );
 	title.css({
@@ -1660,7 +1776,7 @@ BHP.HA.drawHandAssignment = function() {
 	var titleHeight = title.outerHeight();
 	
 	id = 'assigned-cards-title';
-	html = '<span id="' + id + '"  class="text-size fixed label label-' + BHP.Options.bootstrapClass + '">Assigned Cards</span>';
+	html = '<span id="' + id + '"  class="text-size fixed label label-' + BHP.getOption( 'bootstrapClass' ) + '">Assigned Cards</span>';
 	$( container ).append( html ); 
 	title = $( '#' + id );
 	title.css({
@@ -1703,7 +1819,7 @@ BHP.HA.drawHandAssignment = function() {
 			var inClass, panelClass;
 			if ( direction === BHP.HA.shownHand ) {
 				inClass = 'in';
-				panelClass = 'panel panel-' + BHP.Options.bootstrapClass;
+				panelClass = 'panel panel-' + BHP.getOption( 'bootstrapClass' );
 			}
 			else {
 				inClass = '';
@@ -1741,11 +1857,11 @@ BHP.HA.drawHandAssignment = function() {
 	});
 	$('.panel-collapse').on('shown.bs.collapse', function () {
 		BHP.HA.shownHand = $( this ).attr('direction');
-		$( this ).parent().removeClass( 'panel-default' ).addClass( 'panel-' + BHP.Options.bootstrapClass );
+		$( this ).parent().removeClass( 'panel-default' ).addClass( 'panel-' + BHP.getOption( 'bootstrapClass' ) );
 		BHP.HA.drawAssignedCards( BHP.HA.shownHand );
 	});		
 	$('.panel-collapse').on('hide.bs.collapse', function () {
-		$( this ).parent().addClass( 'panel-default' ).removeClass( 'panel-' + BHP.Options.bootstrapClass );
+		$( this ).parent().addClass( 'panel-default' ).removeClass( 'panel-' + BHP.getOption( 'bootstrapClass' ) );
 	});
 	$( '.change-name' ).click(function() {
 		var direction = $( this ).attr( 'direction' );
@@ -1877,7 +1993,7 @@ BHP.HA.drawHorizontal = function( direction ) {
 	var height = BHP.cardImageDimensions.height * BHP.HA.assignedCardLayout.scalingFactor;
 	var startingLeft = cell.position().left + container.position().left + BHP.gutter;
 	var left = startingLeft;
-	if ( BHP.Options.alternateSuitColor ) {
+	if ( BHP.getOption( 'alternateSuitColor' ) ) {
 		var suitOrder = BHP.deal.getSuitOrder( direction );
 	}
 	else {
@@ -2053,8 +2169,8 @@ BHP.showModalConfirmDialog = function( title, content, callBack, type ) {
 	if ( type === 'vulnerability' ) {
 		$( '.change-vulnerability' ).click( function() {
 			$( '#modal-popup-confirm-content' ).attr( 'vulnerability', $( this ).attr( 'vulnerability' ) );
-			$( '.change-vulnerability' ).removeClass( 'btn-' + BHP.Options.bootstrapClass ).addClass( 'btn-default' );
-			$( this ).addClass( 'btn-' + BHP.Options.bootstrapClass );
+			$( '.change-vulnerability' ).removeClass( 'btn-' + BHP.getOption( 'bootstrapClass' ) ).addClass( 'btn-default' );
+			$( this ).addClass( 'btn-' + BHP.getOption( 'bootstrapClass' ) );
 		});		
 	}	
 	var buttonID = '#modal-popup-confirm-ok';
@@ -2093,23 +2209,65 @@ BHP.showContactInformation = function() {
 };
 
 BHP.showOptions = function() {
-	$( '#bootstrap-class' ).val( BHP.Options.bootstrapClass );
-	$( '#alternate-suit-color' ).prop( 'checked', BHP.Options.alternateSuitColor );
+	var html = '<table class="table table-condensed table-striped">';
+	html += '<thead><tr><th>Option Name</th><th>Option Value</th></tr></thead>';
+	html += '<tbody>';
+	for( var optionKey in BHP.OptionSet ) {
+		var option = BHP.OptionSet[ optionKey ];
+		html += '<tr><td>';
+		html += option.label;
+		html += '</td><td>';
+		switch ( option.type.toLowerCase() ) {
+			case 'checkbox' :
+				var checkedString = option.value ? 'checked' : '';
+				html += '<input id="' + option.id + '" type="checkbox" ' + checkedString + '>';
+				break;
+			case 'select' :
+				html += '<select id="' + option.id + '" class="form-control">';
+				for( var i =0; i < option.values.length; ++i ) {
+					var selectedString = ( option.values[ i ].value === option.value ? 'selected' : '' );
+					html += '<option ' + selectedString + ' value="' + option.values[ i ].value + '">' + option.values[ i ].name + '</option>';
+				}
+				html += '</select>';
+				break;
+			default:
+				break;
+		}
+		html += '</td>'
+	}					  
+	html += '</tbody></table>';	
+	$( '#modal-popup-options-body' ).empty().append( html );
 	$( '#modal-popup-options' ).modal( 'show' );
+};
+
+BHP.getOption = function( optionName ) {
+	if ( optionName in BHP.OptionSet ) {
+		return BHP.OptionSet[ optionName ].value;	
+	}
+	else return null;
 };
 
 BHP.processOptions = function() {
 	var changed = false;
-	var bootstrapClass = $( '#bootstrap-class' ).val();
-	if ( bootstrapClass !== BHP.Options.bootstrapClass ) {
-		changed = true;
-		BHP.Options.bootstrapClass = bootstrapClass;
-	}
-	var alternate = $( '#alternate-suit-color' ).is( ':checked' );
-	if ( alternate !== BHP.Options.alternateSuitColor ) {
-		BHP.Options.alternateSuitColor = alternate;
-		changed = true;
-	}
+	var value = null;
+	for( var optionKey in BHP.OptionSet ) {
+		var option = BHP.OptionSet[ optionKey ];
+		var element = $( '#' + option.id );
+		switch ( option.type.toLowerCase() ) {
+			case 'checkbox' :
+				value = element.is( ':checked' );
+				break;
+			case 'select' :
+				value = element.val();
+				break;
+			default:
+				break;
+		}
+		if ( option.value !== value ) {
+			option.value = value;
+			changed = true;
+		}		
+	}	
 	$( '#modal-popup-options' ).modal( 'hide' );
 	if ( changed ) BHP.resizeHandler()
 };
@@ -2121,7 +2279,7 @@ BHP.PA.showInstructions = function() {
 	html += '<li class="list-group-item list-group-item-success">If a play has been specified in the URL then you can use the undo and redo play control buttons (bottom) to step through the plays. You can also add a #n to the end of the URL where n is the numeric index of the play you want to move to.</li>';
 	html += '<li class="list-group-item ">At any point while following the play or if no play has been specified you can start creating your own line of play by clicking on cards. Playable cards will be highlighted in green outline.</li>';
 	html += '<li class="list-group-item list-group-item-success">Clicking on a played card ( cards shown on the table ) lets you enter a play annotation.</li>';
-	html += '<li class="list-group-item ">You can also add an annotation to the auction by clicking on any bid.</li>';
+	html += '<li class="list-group-item ">You can also add an explanation to the auction by clicking on any bid.</li>';
 	html += '<li class="list-group-item list-group-item-success">Plays can be saved and loaded using the Save play and Load play buttons (bottom)</li>';
 	html += '<li class="list-group-item ">You can go back and edit the hands or the auction using the Edit Hands and Edit Auction buttons (bottom)</li>';
 	html += '<li class="list-group-item list-group-item-success">Click on player names to change the names, click on Board to change the board number, click on compass to change the vulnerability.</li>';
@@ -2214,8 +2372,13 @@ BHP.HA.drawFooter = function() {
 
 	});		
 	$( '#check-hands' ).click( function() {
+		$( this ).tooltip( 'hide' );
 		BHP.handleAuction();		
 	});	
+	$( '.toolbar' ).tooltip({
+		placement : 'top',
+		container : 'body'
+	});
 };
 
 BHP.HA.redealCards = function() {
@@ -2324,7 +2487,7 @@ BHP.AA.drawHorizontal = function( direction ) {
 	var height = BHP.cardImageDimensions.height * BHP.AA.scalingFactor;
 	var startingLeft = cell.position().left + BHP.gutter;
 	var left = startingLeft;
-	if ( BHP.Options.alternateSuitColor ) {
+	if ( BHP.getOption( 'alternateSuitColor' ) ) {
 		var suitOrder = BHP.deal.getSuitOrder( direction );
 	}
 	else {
@@ -2352,26 +2515,9 @@ BHP.AA.drawAssignedCards = function( direction ) {
 	}
 	if ( BHP.AA.handLayout === 'vertical' ) BHP.AA.drawVertical( direction );
 	else BHP.AA.drawHorizontal( direction );
-	/*var hand = BHP.deal.getHand( direction );
-	var top = cell.position().top + BHP.gutter;
-	var width = BHP.cardImageDimensions.width * BHP.AA.scalingFactor;
-	var height = BHP.cardImageDimensions.height * BHP.AA.scalingFactor;
-	var startingLeft = cell.position().left + BHP.gutter;
-	var left = startingLeft;
-	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
-		var suit = Bridge.CardSuitOrder[ i ];
-		if ( BHP.AA.handLayout === 'vertical' ) left = startingLeft;
-		if ( i !== 0 && BHP.AA.handLayout === 'vertical' ) top += BHP.cardImageDimensions.height * BHP.cardImageDimensions.percentageHeightShowing * BHP.AA.scalingFactor;
-		for( var j = 0; j < Bridge.RankOrder.length; ++j ) {
-			var rank = Bridge.RankOrder[ j ];
-			if ( rank in hand.cards[ suit ] ) {
-				var imageID = BHP.HA.getAssignedCardID( suit, rank );
-				$( '#' + imageID ).remove();
-				BHP.HA.showCard( cell, suit, rank, top, left, width, height, imageID, 'assigned-card' );
-				left += BHP.cardImageDimensions.width * BHP.cardImageDimensions.percentageWidthShowing * BHP.AA.scalingFactor;		
-			}
-		}
-	}*/
+	var name = BHP.deal.getName( direction );
+	if ( name === null ) name = Bridge.getDirectionName( direction );	
+	$( '#current-hand-name' ).html( name );
 };
 
 BHP.AA.drawAuctionAssignment = function() {
@@ -2394,7 +2540,7 @@ BHP.AA.drawAuctionAssignment = function() {
 	// Draw titles
 	var id = 'bidding-box';
 	var titleID = id + '-title';
-	var html = '<span id="' + titleID + '" class="text-size fixed label label-' + BHP.Options.bootstrapClass + '">Bidding Box</span>';
+	var html = '<span id="' + titleID + '" class="text-size fixed label label-' + BHP.getOption( 'bootstrapClass' ) + '">Bidding Box</span>';
 	$( container ).append( html ); 
 	var title = $( '#' + titleID );
 	title.css({
@@ -2405,7 +2551,7 @@ BHP.AA.drawAuctionAssignment = function() {
 	
 	id = 'auction';
 	titleID = id + '-title';
-	html = '<span id="' + titleID + '" class="text-size fixed label label-' + BHP.Options.bootstrapClass + '">Auction So Far</span>';
+	html = '<span id="' + titleID + '" class="text-size fixed label label-' + BHP.getOption( 'bootstrapClass' ) + '">Auction So Far</span>';
 	$( container ).append( html ); 
 	title = $( '#' + titleID );
 	title.css({
@@ -2429,7 +2575,7 @@ BHP.AA.drawAuctionAssignment = function() {
 	
 	id = 'current-hand';
 	titleID = id + '-title';
-	html = '<span id="' + titleID + '" class="text-size fixed label label-' + BHP.Options.bootstrapClass + '">Current Hand</span>';
+	html = '<span id="' + titleID + '" class="text-size fixed label label-' + BHP.getOption( 'bootstrapClass' ) + '">Current Hand (<span id="current-hand-name"></span>)</span>';
 	$( container ).append( html ); 
 	title = $( '#' + titleID );
 	var title3Height = title.outerHeight();	
@@ -2486,7 +2632,7 @@ BHP.AA.showDealInformation = function( container ) {
 		if ( Bridge.Directions.hasOwnProperty( direction ) ) {
 			var id = direction + '-dealer-button';
 			var btnClass = 'btn-default';
-			if ( dealer === direction ) btnClass = 'btn-' + BHP.Options.bootstrapClass;
+			if ( dealer === direction ) btnClass = 'btn-' + BHP.getOption( 'bootstrapClass' );
 			html += '<button type="button" id="' + id + '" direction="' + direction + '" class="text-size change-dealer btn ' + btnClass + '">';	
 			html += '<span class="glyphicon glyphicon-'+ icons[ direction ] + '"></span>';	
 			html += Bridge.getDirectionName( direction );
@@ -2513,9 +2659,6 @@ BHP.AA.showDealInformation = function( container ) {
 		}
 		BHP.AA.updateDealer();		
 	});
-	/*$( '.change-dealer' ).attr( 'title', 'Click to Make this hand Dealer' ).tooltip({
-		placement: 'bottom'	
-	});*/
 };
 
 BHP.AA.setDealer = function() {
@@ -2533,10 +2676,10 @@ BHP.AA.updateDealer = function() {
 			var id = direction + '-dealer-button';
 			var button = $( '#' + id );
 			if ( dealer === direction ) {
-				button.removeClass( 'btn-default' ).addClass( 'btn-' + BHP.Options.bootstrapClass ).attr( 'disabled', true);
+				button.removeClass( 'btn-default' ).addClass( 'btn-' + BHP.getOption( 'bootstrapClass' ) ).attr( 'disabled', true);
 			}
 			else {
-				button.addClass( 'btn-default' ).removeClass( 'btn-' + BHP.Options.bootstrapClass ).attr( 'disabled', false);
+				button.addClass( 'btn-default' ).removeClass( 'btn-' + BHP.getOption( 'bootstrapClass' ) ).attr( 'disabled', false);
 			}
 		}
 	}	
@@ -2547,6 +2690,7 @@ BHP.AA.updateDealer = function() {
 BHP.AA.setBiddingBoxStatus = function() {
 	$( '#undo-bid' ).attr( 'disabled', ! BHP.deal.hasBids() );
 	if ( BHP.deal.isAuctionValid() ) {
+		BHP.deal.determineDeclarer();
 		$( '.bid' ).attr( 'disabled', true).addClass( 'cursor-not-allowed' ).hide();
 		$( '#check-auction' ).attr( 'disabled', false );
 		$( '#all-pass' ).attr( 'disabled', true );
@@ -2672,12 +2816,14 @@ BHP.getButtonGroupHTML = function( containerID, fields ) {
 	html += '<div id="'+ containerID + '" class="btn-group ' + sizeClass + '">';
 	for( var field in fields ) {
 		if ( fields.hasOwnProperty( field ) ) {
-			html += '<button type="button" id="' + field + '" class="btn btn-' + BHP.Options.bootstrapClass + '">';
+			html += '<button title="' + fields[ field ].name + '" type="button" id="' + field + '" class="toolbar btn btn-' + BHP.getOption( 'bootstrapClass' ) + '">';
 			var iconHtml = '<span class="glyphicon glyphicon-'+ fields[ field ].icon + '"></span>';
 			if ( ! fields[ field ].iconAfter ){
 				html += iconHtml + ' ';
 			}
-			html += '<span class="text-highlight">' + fields[ field ].name + '</span>';
+			if ( ! BHP.getOption( 'useIconsOnly' ) ) {
+				html += '<span class="text-highlight">' + fields[ field ].name + '</span>';
+			}
 			if ( fields[ field ].iconAfter ){
 				html += ' ' + iconHtml;
 			}		
@@ -2720,7 +2866,10 @@ BHP.AA.drawFooter = function() {
 		left: left,
 		bottom:0
 	});	
-	$( '#edit-hands' ).click( BHP.handleHands );
+	$( '#edit-hands' ).click( function() {
+		$( this ).tooltip( 'hide' );
+		BHP.handleHands( true ); 
+	});
 	$( '#all-pass' ).click( function() {
 		while( BHP.deal.numPasses() < 3 ) {
 			BHP.deal.addBid( 0, 'p' );
@@ -2729,6 +2878,7 @@ BHP.AA.drawFooter = function() {
 		BHP.AA.setBiddingBoxStatus();		
 	});
 	$( '#check-auction' ).click(function() {
+		$( this ).tooltip( 'hide' );
 		BHP.deal.determineDeclarer();
 		BHP.handlePlay();
 	});	
@@ -2738,6 +2888,11 @@ BHP.AA.drawFooter = function() {
 		var content = 'Are you sure that you want to undo all bids? This will also delete all plays.';
 		BHP.showModalConfirmDialog( title, content, BHP.AA.undoAllBids );
 	});
+	
+	$( '.toolbar' ).tooltip({
+		placement : 'top',
+		container : 'body'
+	});
 };
 
 BHP.AA.undoAllBids = function() {
@@ -2746,7 +2901,6 @@ BHP.AA.undoAllBids = function() {
 	BHP.AA.setBiddingBoxStatus();	
 	BHP.deal.deletePlays();
 	BHP.hideModalConfirmDialog();
-	//$( '#modal-popup-confirm' ).modal( 'hide' );
 };
 
 BHP.generateURL = function() {
@@ -2922,7 +3076,8 @@ $(function() {
 	
 	// Activate tooltips
 	$( '.tooltip-bottom' ).tooltip({
-		placement : 'bottom'
+		placement : 'bottom',
+		container: 'body'
 	});
 
 	// Click handlers for generate url
@@ -2960,11 +3115,6 @@ $(function() {
 	// Setup the skins
 	BHP.loadBootswatchThemes();
 	BHP.loadStylesheet();
+	//BHP.drawPage( 'Default' );	
 		
 });
-
-
-
-
- 
- 
