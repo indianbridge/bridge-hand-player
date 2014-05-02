@@ -24,6 +24,10 @@ Bridge.Hands.prototype.isValid = function() {
 	return true;
 };
 
+Bridge.Hands.hasCard = function( direction, suit, rank ) {
+	return this.hands[ direction ].hasCard( suit, rank );
+};
+
 Bridge.Hands.prototype.unAssignAll = function() {
 	var suitLen = Bridge.CardSuitOrder.length;
 	var rankLen = Bridge.RankOrder.length;
