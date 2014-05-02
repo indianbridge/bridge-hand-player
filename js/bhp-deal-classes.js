@@ -18,7 +18,7 @@ Bridge.Play.prototype.toString = function() {
 	return outputString;	
 };
 
-Bridge.Play.prototype.parsePlayString( playString ) {
+Bridge.Play.prototype.parsePlayString = function( playString ) {
 	var play = playString.toLowerCase();
 	for( var i = 0;i < play.length; ++i ) {
 		var annotation = null;
@@ -39,8 +39,12 @@ Bridge.Play.prototype.parsePlayString( playString ) {
 			annotation = value.annotation;
 			i = value.endBracePosition;		
 		}	
-		this.playCard( suit, rank, null, annotation );	
+		this.addPlayedCard( suit, rank, annotation );	
 	}	
+};
+
+Bridge.Play.addPlayedCard = function( suit, rank, annotation ) {
+	
 };
 
 /**
