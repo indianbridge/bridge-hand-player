@@ -1,0 +1,1 @@
+This is a Bridge Hand Player similar to Hand Viewer from Bridge Base Online
