@@ -37,20 +37,20 @@ BHP.OptionSet = {
 		id : 'alternate-suit-color',
 		value : true,
 		type : 'checkbox',
-		label : 'Try to Alternate Suit Colors in Horizontal Layout' 
+		label : 'Try to Alternate Suit Colors in Horizontal Layout'
 	},
 	useIconsOnly : {
 		id : 'use-icons-only',
 		value : false,
 		type : 'checkbox',
-		label : 'Use Icons only in Footer Bar' 
+		label : 'Use Icons only in Footer Bar'
 	},
 	animateCards : {
 		id : 'animate-cards',
 		value : true,
 		type : 'checkbox',
-		label : 'Animate Cards when playing to the Table' 
-	}	
+		label : 'Animate Cards when playing to the Table'
+	}
 };
 
 BHP.bootswatchThemes = {};
@@ -77,10 +77,10 @@ BHP.readQueryParameters = function() {
 		vars = [];
 		// Remove the part after # if it exists
 		q = q.split( '#' )[0];
-		
+
 		// trim the string
 		q = q.trim();
-		if ( q ) {		
+		if ( q ) {
 			// Get all the different components
 			q = q.split('&');
 			for(var i = 0; i < q.length; i++){
@@ -90,7 +90,7 @@ BHP.readQueryParameters = function() {
 			}
 		}
 	}
-	BHP.queryParameters = vars;	
+	BHP.queryParameters = vars;
 };
 
 // Retreive a query parameter
@@ -100,27 +100,27 @@ BHP.getParameterValue = function( queryParameters, parameterName ) {
 	}
 	else if ( queryParameters[ parameterName.toUpperCase() ] !== undefined ) {
 		return queryParameters[ parameterName.toUpperCase() ];
-	}	
+	}
 	return null;
 };
 
 /**
  * Parse query parameters for other information like board, dealer etc.
  *
- * @param {array} queryParameters an associative array of parsed query parameters 
+ * @param {array} queryParameters an associative array of parsed query parameters
  * @return void
  */
 BHP.loadDealInformation = function( ) {
-	
+
 	if ( ! BHP.queryParameters ) return;
-	// Optional parameters 
-	
+	// Optional parameters
+
 	// Load Board Number
 	var board = BHP.getParameterValue( BHP.queryParameters, 'b' );
 	if ( board ) {
 		BHP.deal.setBoard( board );
 	}
-	
+
 	// Load dealer
 	var dealer = BHP.getParameterValue( BHP.queryParameters, 'd' );
 	if ( dealer ) {
@@ -131,7 +131,7 @@ BHP.loadDealInformation = function( ) {
 			BHP.addError( err );
 		}
 	}
-	
+
 	// Load vulnerability
 	var vulnerability = BHP.getParameterValue( BHP.queryParameters, 'v' );
 	if ( vulnerability ) {
@@ -140,10 +140,10 @@ BHP.loadDealInformation = function( ) {
 		}
 		catch ( err ) {
 			BHP.addError( err );
-		}		
-	}	
-	
-	// General notes 
+		}
+	}
+
+	// General notes
 	var notes = BHP.getParameterValue( BHP.queryParameters, 't' );
 	if ( notes ) {
 		try {
@@ -151,8 +151,8 @@ BHP.loadDealInformation = function( ) {
 		}
 		catch ( err ) {
 			BHP.addError( err );
-		}		
-	}		
+		}
+	}
 
 };
 
@@ -174,7 +174,7 @@ BHP.loadNames = function() {
  * Load the hands specified in the query parameters
  *
  * @method loadHands
- * @param void 
+ * @param void
  * @return void
  */
 BHP.loadHands = function( ) {
@@ -182,8 +182,8 @@ BHP.loadHands = function( ) {
 		return false;
 	}
 	// A tally of which hands are not specified in the query Parameters
-	var unspecifiedHands = [];	
-	
+	var unspecifiedHands = [];
+
 	try {
 		// Look for hands specified for each direction
 		for( var direction in Bridge.Directions ) {
@@ -199,7 +199,7 @@ BHP.loadHands = function( ) {
 				}
 			}
 		}
-		
+
 		// If 3 hands specified then load fourth hand automatically
 		if ( unspecifiedHands.length === 1 ) {
 			BHP.deal.assignFourthHand( unspecifiedHands[ 0 ] );
@@ -211,7 +211,7 @@ BHP.loadHands = function( ) {
 					}
 				}
 			}
-		}	
+		}
 		else if ( unspecifiedHands.length > 1 ) {
 			var hands = [];
 			for( var i = 0;i < unspecifiedHands.length; ++i ) hands.push( Bridge.getDirectionName( unspecifiedHands[ i ]) );
@@ -224,7 +224,7 @@ BHP.loadHands = function( ) {
 		BHP.addError( err );
 	}
 	return BHP.errors.length < 1;
-	
+
 };
 
 /**
@@ -243,24 +243,34 @@ BHP.loadHand = function( direction, handString) {
 		var prefix = 'In hand for ' + directionName + ' at position ' + (i+1) + ' - ';
 		// Read the next character specified in hand
 		var currentChar = handString.charAt( i );
+		console.log('current char ' + currentChar);
 		switch( currentChar ) {
 			// Check if it specifies suit
-			case 'c' :				
+			case 'c' :
 			case 'd' :
 			case 'h' :
-			case 's' :	
+			case 's' :
 				currentSuit = currentChar;
-				break;	
-			
+				console.log(currentSuit);
+				break;
+
 			// Special handing for numeric 10
 			case '1' :
+			  console.log('handling 1');
 				if ( currentSuit === '' ) {
 					BHP.addError( prefix + currentChar + ' was found when a suit was expected!' );
 					continue;
-				}			
+				}
 				if ( i < handString.length - 1 && handString.charAt( i+1 ) === '0') {
+					console.log('found 0')
 					currentRank = 't';
 					i++;
+					try {
+					BHP.deal.addCard( currentSuit, currentRank, direction );
+					}
+					catch ( err ) {
+						BHP.addError( err );
+					}
 				}
 				else {
 					BHP.addError( prefix + 'a 1 is present without a subsequent 0. Use 10 or t to reprensent the ten.' );
@@ -280,8 +290,8 @@ BHP.loadHand = function( direction, handString) {
 				catch ( err ) {
 					BHP.addError( err );
 				}
-				break;											
-		}	
+				break;
+		}
 	}
 };
 
@@ -294,7 +304,7 @@ BHP.loadContract = function( contractString ) {
 	var contractLevel = parseInt( contractString.charAt(1) );
 	if ( isNaN( contractLevel ) ) {
 		// What is trump suit
-		trumpSuit = contractString.charAt(1);	
+		trumpSuit = contractString.charAt(1);
 		doubled = false;
 		redoubled = false;
 		// Who is the leader
@@ -305,18 +315,18 @@ BHP.loadContract = function( contractString ) {
 			leader = contractString.charAt(3);
 		}
 		declarer = Bridge.getRHO( leader );
-		contractLevel = 1;			
+		contractLevel = 1;
 	}
 	else {
 		trumpSuit = contractString.charAt(2);
 		declarer = contractString.charAt(3);
 		doubled = false;
-		redoubled = false;	
+		redoubled = false;
 		if ( declarer === 'd' || declarer === 'x' || declarer === 'r' ) {
 			redoubled = ( declarer === 'r' );
 			doubled = !redoubled;
 			declarer = contractString.charAt(4);
-		}			
+		}
 	}
 	try {
 		BHP.deal.setContract( contractLevel, trumpSuit, declarer, doubled, redoubled );
@@ -325,7 +335,7 @@ BHP.loadContract = function( contractString ) {
 	catch ( err ) {
 		BHP.addError( err );
 		return false;
-	}		
+	}
 	return true;
 };
 
@@ -361,11 +371,11 @@ BHP.loadAuction = function() {
 	if ( contractString.charAt(0) !== '-' ) {
 		try {
 			for( var i = 0;i < contractString.length; ++i ) {
-				var prefix = 'In auction specified at position ' + (i+1) + ' - ';							
+				var prefix = 'In auction specified at position ' + (i+1) + ' - ';
 				var currentChar = contractString.charAt( i );
 				var level = 1;
 				var suit = '';
-				var annotation = null, explanation = null;			
+				var annotation = null, explanation = null;
 				if ( currentChar === 'd' || currentChar === 'x'  ) {
 					suit = 'x';
 				}
@@ -382,38 +392,38 @@ BHP.loadAuction = function() {
 				var nextChar = contractString.charAt( i + 1 );
 				var endChar = '';
 				var value = '';
-				if ( nextChar === '('  || nextChar === '{' ) {  
+				if ( nextChar === '('  || nextChar === '{' ) {
 					endChar = nextChar === '(' ? ')' : '}';
 					value = BHP.parseAnnotation( originalString, i + 1, endChar );
 					if ( ! value ) {
-						BHP.addError( prefix + ' No closing ) found!' );	
+						BHP.addError( prefix + ' No closing ) found!' );
 						return false;
 					}
-					if ( nextChar === '(' ) {	
+					if ( nextChar === '(' ) {
 						explanation = value.annotation;
 					}
 					else {
 						annotation = value.annotation;
 					}
-					i = value.endBracePosition;			
+					i = value.endBracePosition;
 				}
 				// Check if there is an explanation or ignore annotation
 				nextChar = contractString.charAt( i + 1 );
-				if ( nextChar === '('  || nextChar === '{' ) {  
+				if ( nextChar === '('  || nextChar === '{' ) {
 					endChar = nextChar === '(' ? ')' : '}';
 					value = BHP.parseAnnotation( originalString, i + 1, endChar );
 					if ( ! value ) {
-						BHP.addError( prefix + ' No closing ) found!' );	
+						BHP.addError( prefix + ' No closing ) found!' );
 						return false;
 					}
-					if ( nextChar === '(' ) {	
+					if ( nextChar === '(' ) {
 						explanation = value.annotation;
 					}
 					else {
 						annotation = value.annotation;
 					}
-					i = value.endBracePosition;			
-				}		
+					i = value.endBracePosition;
+				}
 				BHP.deal.addBid( level, suit, explanation, annotation );
 			}
 		}
@@ -428,7 +438,7 @@ BHP.loadAuction = function() {
 	else {
 		return BHP.loadContract( contractString );
 	}
-		
+
 };
 
 // Display the auction
@@ -474,20 +484,20 @@ BHP.drawAuction = function( container, tableClass ) {
 		while( currentDirection !== 'w' ) {
 			html += '<td></td>';
 			if ( currentDirection === 's' ) html += '</tr>';
-			currentDirection = Bridge.getLHO( currentDirection );			
+			currentDirection = Bridge.getLHO( currentDirection );
 		}
-		html += '</tbody></table>';	
+		html += '</tbody></table>';
 		$( container ).append( html );
 		$( '.annotatable-bid' ).click(function() {
 			BHP.editBidExplanation( this );
-		});		
+		});
 	}
-	
+
 	// Bootstrap tooltip
 	$( '.bid-annotation' ).tooltip( {
 		placement:'bottom',
 		container: 'body'
-	});	
+	});
 };
 
 BHP.setVulnerability = function( vul ) {
@@ -498,15 +508,15 @@ BHP.setVulnerability = function( vul ) {
 	}
 	if ( vul === 'e' || vul === 'b' ) {
 		compass.addClass( 'ew-vulnerable' );
-	}	
+	}
 };
 
 BHP.drawDealInformation = function() {
-	
+
 	// Set vulnerability
 	var vul = BHP.deal.getVulnerability();
 	BHP.setVulnerability( vul );
-	
+
 	var tableID = 'deal-information-table';
 	var html = '<table id="' + tableID + '" class="table table-bordered table-condensed table-striped">';
 	html += '<thead><tr class="' + BHP.getOption( 'bootstrapClass' ) + '"><th class="middle" colspan="2">Deal Information</th></tr></thead>';
@@ -515,32 +525,32 @@ BHP.drawDealInformation = function() {
 	var board = BHP.deal.getBoard();
 	if ( board === null ) board = 1;
 	html += '<tr><td class="right">Board</td><td>';
-	html += '<span id="board" class="cursor-pointer label label-' + BHP.getOption( 'bootstrapClass' ) + '">' + board + '</span>';		
+	html += '<span id="board" class="cursor-pointer label label-' + BHP.getOption( 'bootstrapClass' ) + '">' + board + '</span>';
 	html += '</td></tr>';
 	html += '<tr><td class="right">Contract</td><td>';
 	var contractString = BHP.deal.getContract();
 	var declarer = BHP.deal.getDeclarer();
-	if ( declarer !== null ) contractString += ' by ' + declarer; 
+	if ( declarer !== null ) contractString += ' by ' + declarer;
 	html += '<span id="contract" class="label label-default">' + contractString + '</span>';
-	html += '</td></tr>';	
+	html += '</td></tr>';
 	html += '<tr><td class="right">NS Tricks</td><td>';
-	html += '<span id="ns-tricks" class="label label-default">0</span>';	
-	html += '</td></tr>';	
+	html += '<span id="ns-tricks" class="label label-default">0</span>';
+	html += '</td></tr>';
 	html += '<tr><td class="right">EW Tricks</td><td>';
 	html += '<span id="ew-tricks" class="label label-default">0</span>';
-	html += '</td></tr>';		
-	html += '</tbody></table>';	
+	html += '</td></tr>';
+	html += '</tbody></table>';
 	var container = '#deal-information';
-	$( container ).append( html );	
+	$( container ).append( html );
 	board = $( '#board' );
 	board.click( BHP.changeBoardDialog );
 	board.attr( 'title', 'Click to change Board Number' );
 	board.tooltip( {
 		placement : 'bottom',
 		container: 'body'
-	});			
-	
-	
+	});
+
+
 	// Add general notes
 	var notes = BHP.deal.getNotes();
 	if ( notes === null ) {
@@ -550,7 +560,7 @@ BHP.drawDealInformation = function() {
 	var general = $( '#general-messages' );
 	general.empty().append( unescape( notes ) );
 	general.addClass( 'alert' );
-	general.addClass( 'alert-' + BHP.getOption( 'bootstrapClass' ) );	
+	general.addClass( 'alert-' + BHP.getOption( 'bootstrapClass' ) );
 	general.addClass( 'cursor-pointer' );
 	general.click( BHP.changeNotesDialog );
 	general.attr( 'title', 'Click to change Title/Notes' );
@@ -567,28 +577,28 @@ BHP.changeNotesDialog = function() {
 		notes = 'Untitled';
 	}
 	$( '#modal-popup-save-content' ).val( unescape( notes ) );
-	BHP.showModalSaveDialog( title, BHP.saveNotes );	
+	BHP.showModalSaveDialog( title, BHP.saveNotes );
 };
 
 BHP.saveNotes = function() {
 	var notes = $( '#modal-popup-save-content' ).val();
 	BHP.deal.setNotes( notes );
-	$( '#general-messages' ).html( notes );	
+	$( '#general-messages' ).html( notes );
 	BHP.hideModalSaveDialog();
 };
 
 BHP.changeBoardDialog = function() {
 	var title = 'Change Board Number';
 	var board = BHP.deal.getBoard();
-	if ( board === null ) board = 1;	
+	if ( board === null ) board = 1;
 	$( '#modal-popup-save-content' ).val( board );
-	BHP.showModalSaveDialog( title, BHP.saveBoard );	
+	BHP.showModalSaveDialog( title, BHP.saveBoard );
 };
 
 BHP.saveBoard = function() {
 	var board = $( '#modal-popup-save-content' ).val();
 	BHP.deal.setBoard( board );
-	$( '#board' ).html( board );	
+	$( '#board' ).html( board );
 	BHP.hideModalSaveDialog();
 };
 
@@ -596,7 +606,7 @@ BHP.saveBoard = function() {
  * Add an error.
  */
 BHP.addError = function( error ) {
-	BHP.errors.push( error );	
+	BHP.errors.push( error );
 };
 
 /**
@@ -610,7 +620,7 @@ BHP.showErrors = function() {
 	html += BHP.errors.join( '</span></li><li class="list-group-item list-group-item-warning"><span class="item">' );
 	html += '</span></li></ol>';
 	html += '</div>';
-	$( container ).empty().append( html );	
+	$( container ).empty().append( html );
 	html = '<div id="postamble"></div>';
 	$( container ).append( html );
 	$( '#postamble' ).load( 'instructions.html' );
@@ -634,17 +644,17 @@ BHP.drawFooter = function() {
 		'edit-auction' : { name : 'Edit Auction', icon : 'heart-empty', iconAfter : false }
 	};
 	html = BHP.getButtonGroupHTML( 'edit-functions', fields );
-	BHP.footer.append( html );		
+	BHP.footer.append( html );
 	fields = {
 		'rewind' : { name: 'Rewind', icon: 'step-backward', iconAfter: false },
 		'undo-trick' : { name: 'Undo Previous Trick', icon: 'backward', iconAfter: false },
 		'undo-play' : { name: 'Undo Previous Play', icon: 'chevron-left', iconAfter: false },
 		'redo-play' : { name: 'Redo Next Play', icon: 'chevron-right', iconAfter: true },
 		'redo-trick' : { name: 'Redo Next Trick', icon: 'forward', iconAfter: true },
-		'fast-forward' : { name: 'Fast Forward', icon: 'step-forward', iconAfter: true }		
+		'fast-forward' : { name: 'Fast Forward', icon: 'step-forward', iconAfter: true }
 	};
 	html = BHP.getButtonGroupHTML( 'controls', fields );
-	BHP.footer.append( html );		
+	BHP.footer.append( html );
 	html = '<div class="btn-group btn-group-sm dropup">';
 	var fieldName = ( BHP.getOption( 'useIconsOnly' ) ? '' : '<span class="text-highlight">Save Play</span>' );
 	html += '<button title = "Save Play " id="save-play" type="button" class="toolbar btn btn-' + BHP.getOption( 'bootstrapClass' ) + '"><span class="glyphicon glyphicon-floppy-save"></span> ' + fieldName + '</button>';
@@ -653,14 +663,14 @@ BHP.drawFooter = function() {
 	html += '<ul id="lines" class="dropdown-menu" role="menu">';
 	html += '</ul>';
 	html += '</div>';
-	html += '</div>';	
-	BHP.footer.append( html );	
+	html += '</div>';
+	BHP.footer.append( html );
 	var left = BHP.viewport.width / 2 - BHP.footer.width() / 2;
 	BHP.footer.css({
 		left: left,
 		bottom:0
-	});		
-	
+	});
+
 	$( '#edit-hands' ).click( function() {
 		$( this ).tooltip( 'hide' );
 		BHP.handleHands( true );
@@ -669,40 +679,40 @@ BHP.drawFooter = function() {
 		$( this ).tooltip( 'hide' );
 		BHP.handleAuction( true );
 	});
-	
+
 	$('#undo-play').click(function() {
 		BHP.undoCard();
-		BHP.setHash();	
+		BHP.setHash();
 	});
 	$('#redo-play').click(function() {
-		BHP.redoCard();	
-		BHP.setHash();	
-	});	
+		BHP.redoCard();
+		BHP.setHash();
+	});
 	$('#undo-trick').click(function() {
 		BHP.undoTrick();
-		BHP.setHash();		
+		BHP.setHash();
 	});
 	$('#redo-trick').click(function() {
 		BHP.redoTrick();
-		BHP.setHash();		
-	});	
+		BHP.setHash();
+	});
 	$('#rewind').click(function() {
-		BHP.rewind();	
-		BHP.setHash();	
+		BHP.rewind();
+		BHP.setHash();
 	});
 	$('#fast-forward').click(function() {
 		BHP.fastForward();
-		BHP.setHash();		
-	});		
-	
+		BHP.setHash();
+	});
+
 	BHP.loadSavedPlaysList();
-	
+
 	// Handle save play button click.
 	$( '#save-play' ).click( function() {
 		var title = 'Save Current Play';
 		BHP.showModalSaveDialog( title, BHP.savePlay );
-	});	
-	
+	});
+
 	$( '.toolbar' ).tooltip({
 		placement : 'top',
 		container : 'body'
@@ -733,7 +743,7 @@ BHP.fastForward = function() {
 	while ( ! BHP.deal.isAtEnd() )	{
 		BHP.redoCard();
 	}
-	
+
 };
 
 BHP.redoTrick = function() {
@@ -744,7 +754,7 @@ BHP.redoTrick = function() {
 };
 
 BHP.redoCard = function() {
-	var redoneCard = BHP.deal.redoCard();	
+	var redoneCard = BHP.deal.redoCard();
 	if ( redoneCard === null ) return;
 	var card = '#' + BHP.getCardID( redoneCard.suit, redoneCard.rank );
 	var image = $( card );
@@ -755,11 +765,11 @@ BHP.redoCard = function() {
 		BHP.clearTableCards();
 	}
 	BHP.playTableCard( $( card ) );
-	BHP.setPlayableCards();	
+	BHP.setPlayableCards();
 };
 
 BHP.undoCard = function() {
-	var card = BHP.deal.undoCard();	
+	var card = BHP.deal.undoCard();
 	if ( card === null ) return;
 	var cardID = '#card-' + card.suit + card.rank;
 	$( cardID ).attr( 'src', $( cardID). attr( 'imageName' ) );
@@ -773,7 +783,7 @@ BHP.undoCard = function() {
 			var id = '#'+BHP.getCardID( tableCard.suit, tableCard.rank );
 			BHP.playTableCard( $( id ) );
 		}
-		
+
 	}
 	BHP.setPlayableCards();
 };
@@ -784,7 +794,7 @@ BHP.getCardID = function( suit, rank ) {
 };
 
 /**
- * Shows a card at specified location with specified dimensions  
+ * Shows a card at specified location with specified dimensions
  */
 BHP.showCard = function( container, suit, rank, direction, top, left, width, height ) {
 	var imageID = BHP.getCardID( suit, rank );
@@ -805,15 +815,15 @@ BHP.showCard = function( container, suit, rank, direction, top, left, width, hei
 		height: height,
 		top: top,
 		left: left
-	});	
+	});
 };
 
 // Draw the four hands
 BHP.drawHands = function() {
 	BHP.getHands();
-	BHP.computeScalingFactor();	
+	BHP.computeScalingFactor();
 	for( var direction in Bridge.Directions ) {
-		if ( Bridge.Directions.hasOwnProperty( direction ) ) {		
+		if ( Bridge.Directions.hasOwnProperty( direction ) ) {
 			var hand = BHP.hands[ direction ];
 			if ( hand.layout === 'horizontal' ) {
 				BHP.drawHorizontal( direction );
@@ -839,12 +849,12 @@ BHP.drawNames = function( direction, bottom, left ) {
 	var nameID = direction + '-name';
 	var html = '<span direction="' + direction +'" id="' + nameID + '"  class="cursor-pointer change-name text-size fixed label label-' + BHP.getOption( 'bootstrapClass' ) + '">' + name + '</span>';
 	var container = '#' + direction + '-hand';
-	$( container ).append( html ); 
+	$( container ).append( html );
 	var nameObject = $( '#' + nameID );
 	nameObject.css({
 		top: bottom - nameObject.outerHeight(),
 		left: left
-	});	
+	});
 	nameObject.attr( 'title', 'Click to change Name' ).tooltip({
 		container : 'body'
 	});
@@ -865,7 +875,7 @@ BHP.playTableCard = function( card ) {
 	image.attr( 'suit', card.attr( 'suit' ) );
 	image.attr( 'rank', card.attr( 'rank' ) );
 	image.attr( 'direction', direction );
-	image.attr( 'title', 'Click to add play annotation' );	
+	image.attr( 'title', 'Click to add play annotation' );
 	if ( BHP.getOption( 'animateCards' ) ) {
 		var position = card.position();
 		var currentPosition = $( '#' + playedCardID ).position();
@@ -887,7 +897,7 @@ BHP.editBidExplanation = function( bid ) {
 	var explanation = BHP.deal.getExplanationForBid( bidNumber );
 	if ( explanation === null ) explanation = '';
 	$( '#modal-popup-save-content' ).val( explanation ).attr( 'bidnumber', bidNumber );
-	BHP.showModalSaveDialog( title, BHP.saveBidExplanation );	
+	BHP.showModalSaveDialog( title, BHP.saveBidExplanation );
 };
 
 BHP.editBidAnnotation = function( bid ) {
@@ -897,7 +907,7 @@ BHP.editBidAnnotation = function( bid ) {
 	var annotation = BHP.deal.getAnnotationForBid( bidNumber );
 	if ( annotation === null ) annotation = '';
 	$( '#modal-popup-save-content' ).val( annotation ).attr( 'bidnumber', bidNumber );
-	BHP.showModalSaveDialog( title, BHP.saveBidAnnotation );	
+	BHP.showModalSaveDialog( title, BHP.saveBidAnnotation );
 };
 
 BHP.editAnnotation = function( card ) {
@@ -910,11 +920,11 @@ BHP.editAnnotation = function( card ) {
 	}
 	else {
 		title = 'Edit/Add Annotation for last played card';
-		annotation = BHP.deal.getAnnotation();		
+		annotation = BHP.deal.getAnnotation();
 	}
 	if ( annotation === null ) annotation = '';
 	$( '#modal-popup-save-content' ).val( annotation ).attr( 'suit', suit ).attr( 'rank', rank );
-	BHP.showModalSaveDialog( title, BHP.savePlayAnnotation );	
+	BHP.showModalSaveDialog( title, BHP.savePlayAnnotation );
 };
 
 /**
@@ -935,7 +945,7 @@ BHP.cardClicked = function( card ) {
 	BHP.playTableCard( $( card ) );
 	BHP.setPlayableCards();
 	BHP.setHash();
-	
+
 };
 
 /**
@@ -943,12 +953,12 @@ BHP.cardClicked = function( card ) {
  */
 BHP.setActiveHand = function( activeDirection ) {
 	for( var direction in Bridge.Directions ) {
-		if ( Bridge.Directions.hasOwnProperty( direction ) ) {				
+		if ( Bridge.Directions.hasOwnProperty( direction ) ) {
 			var nameID = direction + '-name';
 			var nameObject = $( '#' + nameID );
 			if ( direction === activeDirection ) {
-				nameObject.removeClass( 'label-' + BHP.getOption( 'bootstrapClass' ) ).addClass( 'label-primary' );	
-			}	
+				nameObject.removeClass( 'label-' + BHP.getOption( 'bootstrapClass' ) ).addClass( 'label-primary' );
+			}
 			else {
 				nameObject.addClass( 'label-' + BHP.getOption( 'bootstrapClass' ) ).removeClass( 'label-primary' );
 			}
@@ -966,8 +976,8 @@ BHP.updateButtonStatus = function() {
 	$('#undo-play').attr( 'disabled', prevDisabled );
 	var nextDisabled = BHP.deal.isAtEnd();
 	$('#redo-trick').attr( 'disabled', nextDisabled );
-	$('#redo-play').attr( 'disabled', nextDisabled );	
-	$('#fast-forward').attr( 'disabled', nextDisabled );	
+	$('#redo-play').attr( 'disabled', nextDisabled );
+	$('#fast-forward').attr( 'disabled', nextDisabled );
 };
 
 /**
@@ -979,7 +989,7 @@ BHP.setPlayableCards = function() {
 	$( '.card' ).unbind( 'click' ).removeClass( imageHighlightClass ).removeClass('cursor-pointer').addClass( 'cursor-not-allowed' ).tooltip( 'destroy' );
 	// Set the playable cards
 	var nextTurn = BHP.deal.getNextToPlay();
-	var elements = '[direction='+ nextTurn + '][status="not-played"]';	
+	var elements = '[direction='+ nextTurn + '][status="not-played"]';
 	var nextSuit = BHP.deal.getSuitLed();
 	if ( nextSuit !== null ) {
 		var extendedElements = elements + '[suit="' + nextSuit + '"]';
@@ -988,9 +998,9 @@ BHP.setPlayableCards = function() {
 	}
 	$( elements ).addClass( imageHighlightClass ).removeClass( 'cursor-not-allowed' ).addClass( 'cursor-pointer' );
 	$( elements ).attr( 'title', 'Click to Play Card' ).tooltip();
-	$( elements ).click(function() { 
+	$( elements ).click(function() {
 		BHP.cardClicked( this );
-	});	
+	});
 	BHP.setActiveHand( nextTurn );
 	BHP.updateButtonStatus();
 	BHP.updateAnnotation();
@@ -1007,12 +1017,12 @@ BHP.drawHorizontal = function( direction ) {
 	var container = '#' + direction + '-hand';
 	$( container ).empty();
 	var width = BHP.cardImageDimensions.width * BHP.scalingFactor;
-	var height = BHP.cardImageDimensions.height * BHP.scalingFactor;	
+	var height = BHP.cardImageDimensions.height * BHP.scalingFactor;
 	var fullHeight = height;
 	var fullWidth = 12 * width * BHP.cardImageDimensions.percentageWidthShowing + width;
 	var top = $( container ).position().top + $( container ).outerHeight() / 2 - fullHeight / 2;
 	var left = $( container ).position().left + $( container ).outerWidth() / 2 - fullWidth / 2;
-	BHP.drawNames( direction, top, left );	
+	BHP.drawNames( direction, top, left );
 	if ( BHP.getOption( 'alternateSuitColor' ) ) {
 		var suitOrder = BHP.deal.getSuitOrder( direction );
 	}
@@ -1029,8 +1039,8 @@ BHP.drawHorizontal = function( direction ) {
 				left += width * BHP.cardImageDimensions.percentageWidthShowing;
 			}
 		}
-	}	
-	
+	}
+
 };
 
 /**
@@ -1040,12 +1050,12 @@ BHP.drawVertical = function( direction ) {
 	var container = '#' + direction + '-hand';
 	$( container ).empty();
 	var width = BHP.cardImageDimensions.width * BHP.scalingFactor;
-	var height = BHP.cardImageDimensions.height * BHP.scalingFactor;	
+	var height = BHP.cardImageDimensions.height * BHP.scalingFactor;
 	var fullHeight = 3 * height * BHP.cardImageDimensions.percentageHeightShowing + height;
 	var fullWidth = ( BHP.hands[ direction ].longest - 1 ) * width * BHP.cardImageDimensions.percentageWidthShowing + width;
 	var top = $( container ).position().top + $( container ).outerHeight() / 2 - fullHeight / 2;
 	var startingLeft = $( container ).position().left + $( container ).outerWidth() / 2 - fullWidth / 2;
-	BHP.drawNames( direction, top, startingLeft );	
+	BHP.drawNames( direction, top, startingLeft );
 	for( var i = 0; i < Bridge.CardSuitOrder.length; ++i ) {
 		var left = startingLeft;
 		var suit = Bridge.CardSuitOrder[ i ];
@@ -1056,7 +1066,7 @@ BHP.drawVertical = function( direction ) {
 			left += width * BHP.cardImageDimensions.percentageWidthShowing;
 		}
 		top += height * BHP.cardImageDimensions.percentageHeightShowing;
-	}	
+	}
 };
 
 BHP.getHorizontalWidth = function( direction ) {
@@ -1088,7 +1098,7 @@ BHP.getHands = function() {
 	BHP.hands = {};
 	for( var direction in Bridge.Directions ) {
 		if ( Bridge.Directions.hasOwnProperty( direction ) ) {
-			var hand = BHP.deal.getHand( direction );		
+			var hand = BHP.deal.getHand( direction );
 			BHP.hands[ direction ] = {};
 			BHP.hands[ direction ].count = {};
 			BHP.hands[ direction ].cards = {};
@@ -1104,7 +1114,7 @@ BHP.getHands = function() {
 					}
 				}
 			}
-			BHP.hands[ direction ].longest = Math.max( BHP.hands[ direction ].count.s, BHP.hands[ direction ].count.h, BHP.hands[ direction ].count.d, BHP.hands[ direction ].count.c );		
+			BHP.hands[ direction ].longest = Math.max( BHP.hands[ direction ].count.s, BHP.hands[ direction ].count.h, BHP.hands[ direction ].count.d, BHP.hands[ direction ].count.c );
 			BHP.calculateHandDimensionsAndLayout( direction );
 		}
 	}
@@ -1114,21 +1124,21 @@ BHP.calculateHandDimensionsAndLayout = function( direction ) {
 	var hand = BHP.hands[ direction ];
 	var container = '#' + direction + '-hand';
 	var cWidth = $( container ).outerWidth() - 2 * BHP.gutter;
-	var cHeight = $( container ).outerHeight() - 2 * BHP.gutter;	
+	var cHeight = $( container ).outerHeight() - 2 * BHP.gutter;
 	var hWidth = BHP.getHorizontalWidth( direction );
 	var hHeight = BHP.getHorizontalHeight( direction );
 	var hwScalingFactor = cWidth / hWidth;
-	var hhScalingFactor = cHeight / hHeight;	
+	var hhScalingFactor = cHeight / hHeight;
 	var hScalingFactor = Math.min( hwScalingFactor, hhScalingFactor );
 	var vWidth = BHP.getVerticalWidth( direction );
 	var vHeight = BHP.getVerticalHeight( direction );
 	var vwScalingFactor = cWidth / vWidth;
-	var vhScalingFactor = cHeight / vHeight;	
+	var vhScalingFactor = cHeight / vHeight;
 	var vScalingfactor = Math.min( vwScalingFactor, vhScalingFactor );
 	if ( hScalingFactor < vScalingfactor ) {
 		hand.height = vHeight;
 		hand.width = vWidth;
-		hand.layout = 'vertical';		
+		hand.layout = 'vertical';
 	}
 	else {
 		hand.height = hHeight;
@@ -1147,7 +1157,7 @@ BHP.computeScalingFactor = function() {
 			var cHeight = $( container ).outerHeight() - 2 * BHP.gutter;
 			var wScalingFactor = cWidth / hand.width;
 			var hScalingFactor = cHeight / hand.height;
-			BHP.scalingFactor = Math.min( BHP.scalingFactor, wScalingFactor, hScalingFactor );	
+			BHP.scalingFactor = Math.min( BHP.scalingFactor, wScalingFactor, hScalingFactor );
 		}
 	}
 	var style = '<style>';
@@ -1160,8 +1170,8 @@ BHP.computeScalingFactor = function() {
 BHP.changeVulnerabilityDialog = function() {
 	var title = 'Change Vulnerability';
 	var vul = BHP.deal.getVulnerability();
-	if ( vul === null ) vul = '-';	
-	
+	if ( vul === null ) vul = '-';
+
 	var html = '';
 	var icons = {
 		'-' : '',
@@ -1176,15 +1186,15 @@ BHP.changeVulnerabilityDialog = function() {
 			var id = 'vulnerability-' + icon;
 			var btnClass = 'btn-default';
 			if ( vul === icon ) btnClass = 'btn-' + BHP.getOption( 'bootstrapClass' );
-			html += '<button type="button" id="' + id + '" vulnerability="' + icon + '" class="change-vulnerability btn ' + btnClass + '">';	
-			html += '<span class="glyphicon glyphicon-'+ icons[ icon ] + '"></span>';	
+			html += '<button type="button" id="' + id + '" vulnerability="' + icon + '" class="change-vulnerability btn ' + btnClass + '">';
+			html += '<span class="glyphicon glyphicon-'+ icons[ icon ] + '"></span>';
 			html += Bridge.getVulnerabilityName( icon );
 			html += '</button>';
 		}
-	}	
-	html += '</div>';	
+	}
+	html += '</div>';
 	$( '#modal-popup-confirm-content' ).attr( 'vulnerability', vul );
-	BHP.showModalConfirmDialog( title, html, BHP.saveVulnerability, 'vulnerability' );	
+	BHP.showModalConfirmDialog( title, html, BHP.saveVulnerability, 'vulnerability' );
 };
 
 BHP.saveVulnerability = function() {
@@ -1199,7 +1209,7 @@ BHP.saveVulnerability = function() {
 BHP.drawPlayingTable = function() {
 	var table = $( '#playing-table' );
 	table.addClass( 'card-table' );
-	
+
 	// Draw compass
 	var compassID = 'compass-area';
 	var html = '<img id="' + compassID + '" class="fixed"></img>';
@@ -1219,8 +1229,8 @@ BHP.drawPlayingTable = function() {
 		top: top,
 		left: left
 	};
-	compass.click( BHP.changeVulnerabilityDialog );		
-	compass.css( compassDimensions );		
+	compass.click( BHP.changeVulnerabilityDialog );
+	compass.css( compassDimensions );
 	// Add regions for played cards
 	var id = 'n-played-card';
 	html = '<div id="' + id + '" class="fixed"></div>';
@@ -1237,7 +1247,7 @@ BHP.drawPlayingTable = function() {
 		height: height,
 		zIndex: 10
 	});
-	
+
 	id = 'e-played-card';
 	html = '<div id="' + id + '" class="fixed"></div>';
 	table.append( html );
@@ -1252,9 +1262,9 @@ BHP.drawPlayingTable = function() {
 		width: width,
 		height: height,
 		zIndex: 10
-	});		
-	area.attr( 'z-index', 10 );	
-	
+	});
+	area.attr( 'z-index', 10 );
+
 	id = 's-played-card';
 	html = '<div id="' + id + '" class="fixed"></div>';
 	table.append( html );
@@ -1271,7 +1281,7 @@ BHP.drawPlayingTable = function() {
 		zIndex: 10
 	});
 	area.attr( 'z-index', 10 );
-	
+
 	id = 'w-played-card';
 	html = '<div id="' + id + '" class="fixed"></div>';
 	table.append( html );
@@ -1286,10 +1296,10 @@ BHP.drawPlayingTable = function() {
 		width: width,
 		height: height,
 		zIndex: 10
-	});	
+	});
 	area.attr( 'z-index', 10 );
-	
-	BHP.clearTableCards();			
+
+	BHP.clearTableCards();
 };
 
 /**
@@ -1301,7 +1311,7 @@ BHP.clearTableCards = function() {
 			var id = direction + '-played-card';
 			$( '#' + id ).empty();
 		}
-	}	
+	}
 };
 
 // Draw the main sections
@@ -1339,9 +1349,9 @@ BHP.drawMainSection = function() {
 			left: cellLeft,
 			width: cellWidth,
 			height: cellHeight
-		});		
+		});
 	}
-	
+
 	BHP.adjustCardTable();
 	$( '#annotation-area' ).addClass( 'cursor-pointer' ).attr( 'title', 'Click to add play annotation' ).tooltip({
 		placement : 'top',
@@ -1351,7 +1361,7 @@ BHP.drawMainSection = function() {
 		if ( BHP.deal.isAtBeginning() ) {
 			var title = 'No Play Made Yet!';
 			var html = '<h4>There is no card played to the table yet and so a play annotation cannot be added!</h4>';
-			BHP.showModalDialog( title, html );				
+			BHP.showModalDialog( title, html );
 		}
 		else {
 			BHP.editAnnotation( this );
@@ -1382,13 +1392,13 @@ BHP.adjustCardTable = function() {
 			left : east.position().left - diff,
 			width : east.outerWidth() + diff
 		});
-	}	
+	}
 	else if ( height > width ) {
 		diff = ( height - width ) / 2;
 		newWidth = width;
 		newHeight = width;
-		newTop = top + diff;	
-		newLeft = left;			
+		newTop = top + diff;
+		newLeft = left;
 		var north = $( '#n-hand' );
 		north.css({
 			height : north.outerHeight() + diff
@@ -1397,7 +1407,7 @@ BHP.adjustCardTable = function() {
 		south.css({
 			top : south.position().top - diff,
 			height : south.outerHeight() + diff
-		});		
+		});
 	}
 	else return;
 	cardTable.css({
@@ -1405,7 +1415,7 @@ BHP.adjustCardTable = function() {
 		left : newLeft,
 		width : newWidth,
 		height : newHeight
-	});	
+	});
 };
 
 BHP.drawTitles = function() {
@@ -1414,12 +1424,12 @@ BHP.drawTitles = function() {
 	var nameID = 'annotation-area-title';
 	var html = '<span id="' + nameID + '"  class="text-size fixed label label-default">' + name + '</span>';
 	var area = '#annotation-area';
-	$( container ).append( html ); 
+	$( container ).append( html );
 	var nameObject = $( '#' + nameID );
 	nameObject.css({
 		top: $( area ).position().top - nameObject.outerHeight(),
 		left: $( area ).position().left
-	});	
+	});
 };
 
 /**
@@ -1429,42 +1439,42 @@ BHP.drawAll = function() {
 	BHP.viewport = {
 		width: $(window).width(),
 		height: $(window).height()
-	};	
+	};
 	$( '#show-instructions' ).unbind( 'click' );
 	$( '#show-instructions' ).click( BHP.PA.showInstructions );
-	
+
 	// Set title
-	$( '#header-title' ).html( 'Play Hand' );	
-	
+	$( '#header-title' ).html( 'Play Hand' );
+
 	var container = '#section';
 	$( container ).empty();
 
 	// First draw footer.
 	BHP.drawFooter();
-	
+
 	// Draw the main section
 	BHP.drawMainSection();
-	
+
 	BHP.drawHands();
-	
-	BHP.drawPlayingTable();	
-	
+
+	BHP.drawPlayingTable();
+
 	BHP.drawAuction( '#auction', 'play1' );
-	
+
 	BHP.drawDealInformation();
-	
+
 	BHP.drawTitles();
-	
+
 	BHP.deal.resetPlayedCardIndex();
-	
+
 	BHP.manualHashChange = false;
-	
+
 	BHP.processHash();
-	
+
 	$( window ).unbind( 'hashchange' );
 	$( window ).hashchange( function(){
 		BHP.processHash();
-	});		
+	});
 };
 
 BHP.savePlayAnnotation = function() {
@@ -1478,8 +1488,8 @@ BHP.savePlayAnnotation = function() {
 	else {
 		BHP.deal.setAnnotationForCard( suit, rank, annotation );
 	}
-	BHP.updateAnnotation();	
-	BHP.hideModalSaveDialog();	
+	BHP.updateAnnotation();
+	BHP.hideModalSaveDialog();
 };
 
 BHP.saveBidExplanation = function() {
@@ -1489,7 +1499,7 @@ BHP.saveBidExplanation = function() {
 		bidNumber = parseInt( bidNumber );
 		var explanation = field.val();
 		BHP.deal.setExplanationForBid( bidNumber, explanation );
-		BHP.drawAuction( '#auction' );				
+		BHP.drawAuction( '#auction' );
 	}
 	BHP.hideModalSaveDialog();
 };
@@ -1501,7 +1511,7 @@ BHP.saveBidAnnotation = function() {
 		bidNumber = parseInt( bidNumber );
 		var annotation = field.val();
 		BHP.deal.setAnnotationForBid( bidNumber, annotation );
-		BHP.drawAuction( '#auction' );				
+		BHP.drawAuction( '#auction' );
 	}
 	BHP.hideModalSaveDialog();
 };
@@ -1518,7 +1528,7 @@ BHP.savePlay = function() {
 	}
 	else {
 		playName = unescape( playName );
-		try {	
+		try {
 			BHP.deal.savePlay( playName );
 			//$( '#current-line' ).html( playName );
 		}
@@ -1534,8 +1544,8 @@ BHP.savePlay = function() {
 		list.append(html);
 		$( '#' + lineID ).click(function(){
 			BHP.loadSavedPlay( this );
-		});			
-	}	
+		});
+	}
 };
 
 BHP.loadPlayByName = function( playString, playName ) {
@@ -1546,7 +1556,7 @@ BHP.loadPlayByName = function( playString, playName ) {
 		var suit = play.charAt( i );
 		Bridge.checkCardSuit( suit );
 		i++;
-		var prefix = 'In play ' + playName +' at position ' + (i+1) + ' - ';	
+		var prefix = 'In play ' + playName +' at position ' + (i+1) + ' - ';
 		if ( i >= play.length ) {
 			throw prefix + ' No rank has been specified for suit ' + suit;
 		}
@@ -1555,12 +1565,12 @@ BHP.loadPlayByName = function( playString, playName ) {
 		if (  play.charAt( i + 1 ) === '{' ) {
 			var value = BHP.parseAnnotation( playString, i + 1 );
 			if ( ! value ) {
-				throw prefix + ' No closing } found!';	
-			}	
+				throw prefix + ' No closing } found!';
+			}
 			annotation = value.annotation;
-			i = value.endBracePosition;		
-		}	
-		BHP.deal.playCard( suit, rank, null, annotation );	
+			i = value.endBracePosition;
+		}
+		BHP.deal.playCard( suit, rank, null, annotation );
 	}
 	BHP.deal.savePlay( playName );
 	BHP.deal.resetAll();
@@ -1576,7 +1586,7 @@ BHP.loadSavedPlaysList = function() {
 	}
 	$( '.saved-play' ).click(function(){
 		BHP.loadSavedPlay( this );
-	});	
+	});
 };
 
 BHP.loadSavedPlay = function( list ) {
@@ -1589,7 +1599,7 @@ BHP.loadSavedPlay = function( list ) {
 			BHP.deal.loadPlay( name );
 			BHP.hideModalConfirmDialog();
 			//$( '#modal-popup-confirm' ).modal( 'hide' );
-		} );		
+		} );
 	}
 	else {
 		var name = $( list ).html();
@@ -1635,7 +1645,7 @@ BHP.loadPlay = function() {
 BHP.createURLQueryParameters = function( allPlays ) {
 	if ( allPlays === undefined ) allPlays = false;
 	var url = '';
-	
+
 	// Get the hands and names
 	var hands = [];
 	var names = '';
@@ -1663,17 +1673,17 @@ BHP.createURLQueryParameters = function( allPlays ) {
 	}
 	url += hands.join( '&' );
 	url += names;
-	
+
 	// Deal information
 	var board = BHP.deal.getBoard();
 	if ( board !== null ) url += '&b=' + board;
-	
+
 	var dealer = BHP.deal.getDealer();
 	if ( dealer !== null ) url += '&d=' + dealer;
-	
+
 	var vulnerability = BHP.deal.getVulnerability();
 	if ( vulnerability !== null ) url += '&v=' + vulnerability;
-	
+
 	// auction
 	var auction = BHP.deal.getAuction();
 	if ( auction.length === 0 ) {
@@ -1688,29 +1698,29 @@ BHP.createURLQueryParameters = function( allPlays ) {
 			else url += bid.getLevel() + suit;
 			var annotation = bid.getAnnotation();
 			if ( annotation !== null )
-			url += '{' + annotation + '}';		
+			url += '{' + annotation + '}';
 			var explanation = bid.getExplanation();
 			if ( explanation !== null )
 			url += '(' + explanation + ')';
 		}
 	}
-	
+
 	// playStrings
 	url += BHP.deal.getPlayStrings( allPlays );
-	
+
 	// General notes if any
 	if ( allPlays ) {
 		var notes = BHP.deal.getNotes();
 		if ( notes !== null ) url += '&t=' + notes;
 	}
-		
+
 	return url;
 };
 
 BHP.changeToPlay = function( playNumber ) {
 	if ( ! BHP.deal.isValidPlayNumber( playNumber ) ) {
 		return false;
-	}	
+	}
 	var current = BHP.deal.getPlayNumber();
 	if ( playNumber < current ) {
 		while ( ! BHP.deal.isAtBeginning() && ! BHP.deal.isAtPlayNumber( playNumber ) ) {
@@ -1720,7 +1730,7 @@ BHP.changeToPlay = function( playNumber ) {
 	else if ( playNumber > current ) {
 		while ( ! BHP.deal.isAtEnd() && ! BHP.deal.isAtPlayNumber( playNumber ) ) {
 			BHP.redoCard();
-		}		
+		}
 	}
 	return true;
 };
@@ -1734,8 +1744,8 @@ BHP.processHash = function() {
 		var playNumber = hash ? parseInt( hash ) : 0;
 		return BHP.changeToPlay( playNumber );
 	}
-	BHP.manualHashChange = false;	
-}; 
+	BHP.manualHashChange = false;
+};
 
 /**
  * Set tha hash to current play number.
@@ -1751,15 +1761,15 @@ BHP.HA.drawHandAssignment = function() {
 	BHP.viewport = {
 		width: $(window).width(),
 		height: $(window).height()
-	};	
-	
+	};
+
 	var container = '#section';
 	$( container ).empty();
 
 	var headerHeight = $( '#header' ).outerHeight();
 	// First draw footer.
 	BHP.HA.drawFooter();
-	
+
 	// Split in two regions
 	var totalWidth = BHP.viewport.width;
 	var width = ( totalWidth - 3 * BHP.gutter ) / 2;
@@ -1767,38 +1777,38 @@ BHP.HA.drawHandAssignment = function() {
 	// Draw titles
 	var id = 'card-pile-title';
 	var html = '<span id="' + id + '"  class="text-size fixed label label-' + BHP.getOption( 'bootstrapClass' ) + '">Unassigned Cards</span>';
-	$( container ).append( html ); 
+	$( container ).append( html );
 	var title = $( '#' + id );
 	title.css({
 		top: headerHeight + BHP.gutter,
 		left: BHP.gutter
-	});	
+	});
 	var titleHeight = title.outerHeight();
-	
+
 	id = 'assigned-cards-title';
 	html = '<span id="' + id + '"  class="text-size fixed label label-' + BHP.getOption( 'bootstrapClass' ) + '">Assigned Cards</span>';
-	$( container ).append( html ); 
+	$( container ).append( html );
 	title = $( '#' + id );
 	title.css({
 		top: headerHeight + BHP.gutter,
 		left: width + 2 * BHP.gutter
-	});	
+	});
 	var title2Height = title.outerHeight();
 	titleHeight = Math.max( titleHeight, title2Height );
-		
+
 	var totalHeight = BHP.footer.position().top - headerHeight - titleHeight;
 	html = '<div id="card-pile" class="well fixed"></div>';
 	$( container ).append( html );
 	var cell = $( '#card-pile' );
 	var height = totalHeight - 2 * BHP.gutter;
-	
+
 	cell.css({
 		top: titleHeight + headerHeight + BHP.gutter,
 		left: BHP.gutter,
 		width: width,
-		height: height	
+		height: height
 	});
-	
+
 	html = '<div id="assigned-cards" class="well fixed"></div>';
 	$( container ).append( html );
 	cell = $( '#assigned-cards' );
@@ -1807,13 +1817,13 @@ BHP.HA.drawHandAssignment = function() {
 		left: width + 2 * BHP.gutter,
 		width: width,
 		height: height
-	});	
-	
+	});
+
 	var panelID = null;
 	html = '<div class="panel-group" id="assigned-hands">';
 	for( var direction in Bridge.Directions ) {
 		if ( Bridge.Directions.hasOwnProperty( direction ) ) {
-			var handID = direction + '-assigned-cards'; 
+			var handID = direction + '-assigned-cards';
 			panelID = direction + '-assigned-cards-body';
 			var nameID = direction + '-name';
 			var inClass, panelClass;
@@ -1824,7 +1834,7 @@ BHP.HA.drawHandAssignment = function() {
 			else {
 				inClass = '';
 				panelClass = 'panel panel-default';
-			}		
+			}
 			html += '<div class="' + panelClass + '">';
 			html += '<div class="panel-heading">';
 			html += '<h4 class="panel-title">';
@@ -1839,14 +1849,14 @@ BHP.HA.drawHandAssignment = function() {
 			html += '';
 			html += '</div>';
 			html += '</div>';
-			html += '</div>';	
-		}	
+			html += '</div>';
+		}
 	}
 	html += '</div>';
 	cell.empty().append(html);
 	for( var d in Bridge.Directions ) {
 		if ( Bridge.Directions.hasOwnProperty( d ) ) {
-			panelID = d + '-assigned-cards-body';	
+			panelID = d + '-assigned-cards-body';
 			var panelBody = $( '#' + panelID );
 			panelBody.height( cell.outerHeight() / 2 );
 		}
@@ -1859,22 +1869,22 @@ BHP.HA.drawHandAssignment = function() {
 		BHP.HA.shownHand = $( this ).attr('direction');
 		$( this ).parent().removeClass( 'panel-default' ).addClass( 'panel-' + BHP.getOption( 'bootstrapClass' ) );
 		BHP.HA.drawAssignedCards( BHP.HA.shownHand );
-	});		
+	});
 	$('.panel-collapse').on('hide.bs.collapse', function () {
 		$( this ).parent().addClass( 'panel-default' ).removeClass( 'panel-' + BHP.getOption( 'bootstrapClass' ) );
 	});
 	$( '.change-name' ).click(function() {
 		var direction = $( this ).attr( 'direction' );
 		BHP.changeNameDialog( direction );
-	});	
-	$( '.change-name' ).attr( 'title', 'Click to change Name' ).tooltip();	
+	});
+	$( '.change-name' ).attr( 'title', 'Click to change Name' ).tooltip();
 	$( '.hand-switcher' ).attr( 'title', 'Click make this the Active Hand' ).tooltip();
-	
+
 	BHP.HA.computeScalingFactor( width );
 	BHP.HA.drawUnassignedCards();
 	BHP.HA.updateHandCount();
 	BHP.HA.drawAssignedCards( BHP.HA.shownHand );
-	
+
 };
 
 BHP.changeNameDialog = function( direction ) {
@@ -1883,7 +1893,7 @@ BHP.changeNameDialog = function( direction ) {
 	var name = BHP.deal.getName( direction );
 	if ( name === null ) name = Bridge.getDirectionName( direction );
 	$( '#modal-popup-save-content' ).val( name ).attr( 'direction', direction );
-	BHP.showModalSaveDialog( title, BHP.saveName );	
+	BHP.showModalSaveDialog( title, BHP.saveName );
 	$( '#' + nameID ).html( name );
 };
 
@@ -1892,7 +1902,7 @@ BHP.saveName = function() {
 	var name = $( '#modal-popup-save-content' ).val();
 	var nameID = direction + '-name';
 	BHP.deal.setName( name, direction );
-	$( '#' + nameID ).html( name );	
+	$( '#' + nameID ).html( name );
 	BHP.hideModalSaveDialog();
 	//$( '#modal-popup-save' ).modal( 'hide' );
 };
@@ -1931,14 +1941,14 @@ BHP.HA.unAssignedCardClick = function( card ) {
 	$( card ).unbind('click');
 	$( card ).addClass('cursor-not-allowed');
 	$( card ).tooltip( 'destroy' );
-	BHP.HA.drawAssignedCards( BHP.HA.shownHand );	
-	BHP.HA.updateButtonStatus();	
+	BHP.HA.drawAssignedCards( BHP.HA.shownHand );
+	BHP.HA.updateButtonStatus();
 };
 
 BHP.HA.updateButtonStatus = function() {
 	var handsValid = BHP.HA.isValid();
-	$( '#check-hands' ).attr( 'disabled', ! handsValid );	
-	$( '#assign-randomly' ).attr( 'disabled', handsValid );		
+	$( '#check-hands' ).attr( 'disabled', ! handsValid );
+	$( '#assign-randomly' ).attr( 'disabled', handsValid );
 	//$( '#unassign-all' ).attr( 'disabled', $( '.assigned-card' ).length === 0 );
 };
 
@@ -1972,12 +1982,12 @@ BHP.HA.drawVertical = function( direction ) {
 				var imageID = BHP.HA.getAssignedCardID( suit, rank );
 				$( '#' + imageID ).remove();
 				BHP.HA.showCard( container, suit, rank, top, left, width, height, imageID, 'assigned-card' );
-				left += BHP.cardImageDimensions.width * BHP.cardImageDimensions.percentageWidthShowing * BHP.HA.assignedCardLayout.scalingFactor;	
-				numCards++;			
+				left += BHP.cardImageDimensions.width * BHP.cardImageDimensions.percentageWidthShowing * BHP.HA.assignedCardLayout.scalingFactor;
+				numCards++;
 			}
 		}
-	}	
-	var countID = direction + '-assigned-cards-count'; 
+	}
+	var countID = direction + '-assigned-cards-count';
 	$( '#' + countID ).html( numCards );
 };
 
@@ -2007,12 +2017,12 @@ BHP.HA.drawHorizontal = function( direction ) {
 				var imageID = BHP.HA.getAssignedCardID( suit, rank );
 				$( '#' + imageID ).remove();
 				BHP.HA.showCard( container, suit, rank, top, left, width, height, imageID, 'assigned-card' );
-				left += BHP.cardImageDimensions.width * BHP.cardImageDimensions.percentageWidthShowing * BHP.HA.assignedCardLayout.scalingFactor;	
-				numCards++;			
+				left += BHP.cardImageDimensions.width * BHP.cardImageDimensions.percentageWidthShowing * BHP.HA.assignedCardLayout.scalingFactor;
+				numCards++;
 			}
 		}
-	}	
-	var countID = direction + '-assigned-cards-count'; 
+	}
+	var countID = direction + '-assigned-cards-count';
 	$( '#' + countID ).html( numCards );
 };
 
@@ -2035,13 +2045,13 @@ BHP.HA.drawAssignedCards = function( direction ) {
 		});
 		BHP.HA.drawAssignedCards( BHP.HA.shownHand );
 		BHP.HA.updateButtonStatus();
-	});	
+	});
 };
 
 BHP.HA.isValid = function() {
 	for( var direction in Bridge.Directions ) {
 		if ( BHP.deal.getNumCards( direction ) !== 13 ) return false;
-	}	
+	}
 	return true;
 };
 
@@ -2068,9 +2078,9 @@ BHP.HA.updateUnassignedCardStatus = function() {
 			}
 			card.attr( 'status', status );
 			card.attr( 'src', src );
-			card.removeClass( 'cursor-not-allowed' ).addClass( cursorClass );		
+			card.removeClass( 'cursor-not-allowed' ).addClass( cursorClass );
 		}
-	}	
+	}
 };
 
 BHP.HA.showUnassignedCard = function( container, suit, rank, top, left, width, height ) {
@@ -2092,7 +2102,7 @@ BHP.HA.showUnassignedCard = function( container, suit, rank, top, left, width, h
 		height: height,
 		top: top,
 		left: left
-	});	
+	});
 	if ( ! isAssigned ) {
 		image.attr( 'title', 'Click to Assign to Active Hand' ).tooltip();
 	}
@@ -2116,7 +2126,7 @@ BHP.HA.showCard = function( container, suit, rank, top, left, width, height, ima
 		height: height,
 		top: top,
 		left: left
-	});	
+	});
 
 };
 
@@ -2127,36 +2137,36 @@ BHP.HA.computeScalingFactor = function( width ) {
 	var widthScalingFactor = ( width - 2 * BHP.gutter ) / handWidth;
 	var heightScalingFactor = ( cell.outerHeight() / 2 - 2 * BHP.gutter ) / handHeight;
 	BHP.HA.scalingFactor = Math.min( widthScalingFactor, heightScalingFactor );
-	
-	var panelID = '#' + BHP.HA.shownHand + '-assigned-cards';	
+
+	var panelID = '#' + BHP.HA.shownHand + '-assigned-cards';
 	BHP.HA.assignedCardLayout = BHP.computeScalingFactorForAllHands( panelID );
 };
 
 BHP.setModalTitle = function( title, save ) {
 	if ( save === undefined ) save = false;
 	var id = '#modal-popup' + ( save ? '-save' : '' ) + '-title';
-	$( id ).html( title );	
+	$( id ).html( title );
 };
 
 BHP.setModalContent = function( content, save ) {
 	if ( save === undefined ) save = false;
-	var id = '#modal-popup' + ( save ? '-save' : '' ) + '-content';	
-	$( id ).html( content );	
+	var id = '#modal-popup' + ( save ? '-save' : '' ) + '-content';
+	$( id ).html( content );
 };
 
 BHP.showModal = function( content ) {
 	$( '#modal-dialog-content' ).html( content );
-	$( '#modal-dialog' ).modal( 'show' );	
+	$( '#modal-dialog' ).modal( 'show' );
 };
 
 BHP.hideModal = function() {
-	$( '#modal-dialog' ).modal( 'hide' );	
+	$( '#modal-dialog' ).modal( 'hide' );
 };
 
 BHP.showModalDialog = function( title, html ) {
 	BHP.setModalTitle( title, false );
 	BHP.setModalContent( html, false );
-	$( '#modal-popup' ).modal( 'show' );	
+	$( '#modal-popup' ).modal( 'show' );
 };
 
 BHP.hideModalDialog = function() {
@@ -2171,12 +2181,12 @@ BHP.showModalConfirmDialog = function( title, content, callBack, type ) {
 			$( '#modal-popup-confirm-content' ).attr( 'vulnerability', $( this ).attr( 'vulnerability' ) );
 			$( '.change-vulnerability' ).removeClass( 'btn-' + BHP.getOption( 'bootstrapClass' ) ).addClass( 'btn-default' );
 			$( this ).addClass( 'btn-' + BHP.getOption( 'bootstrapClass' ) );
-		});		
-	}	
+		});
+	}
 	var buttonID = '#modal-popup-confirm-ok';
 	$( buttonID ).unbind( 'click' );
-	$( buttonID ).click( callBack );	
-	$( '#modal-popup-confirm' ).modal( 'show' );	
+	$( buttonID ).click( callBack );
+	$( '#modal-popup-confirm' ).modal( 'show' );
 };
 
 BHP.hideModalConfirmDialog = function() {
@@ -2188,7 +2198,7 @@ BHP.showModalSaveDialog = function( title, callBack ) {
 	var buttonID = '#modal-popup-save-ok';
 	$( buttonID ).unbind( 'click' );
 	$( buttonID ).click( callBack );
-	$( '#modal-popup-save' ).modal( 'show' );	
+	$( '#modal-popup-save' ).modal( 'show' );
 };
 
 BHP.hideModalSaveDialog = function() {
@@ -2199,13 +2209,13 @@ BHP.hideAllModals = function() {
 	BHP.hideModal();
 	BHP.hideModalDialog();
 	BHP.hideModalConfirmDialog();
-	BHP.hideModalSaveDialog();	
+	BHP.hideModalSaveDialog();
 };
 
 BHP.showContactInformation = function() {
 	var title = 'Contact Information';
 	var html = '<h4>Send email to <span style="unicode-bidi:bidi-override; direction: rtl;">moc.liamg@egdirbnaidni</span></h4>';
-	BHP.showModalDialog( title, html );	
+	BHP.showModalDialog( title, html );
 };
 
 BHP.showOptions = function() {
@@ -2234,15 +2244,15 @@ BHP.showOptions = function() {
 				break;
 		}
 		html += '</td>'
-	}					  
-	html += '</tbody></table>';	
+	}
+	html += '</tbody></table>';
 	$( '#modal-popup-options-body' ).empty().append( html );
 	$( '#modal-popup-options' ).modal( 'show' );
 };
 
 BHP.getOption = function( optionName ) {
 	if ( optionName in BHP.OptionSet ) {
-		return BHP.OptionSet[ optionName ].value;	
+		return BHP.OptionSet[ optionName ].value;
 	}
 	else return null;
 };
@@ -2266,8 +2276,8 @@ BHP.processOptions = function() {
 		if ( option.value !== value ) {
 			option.value = value;
 			changed = true;
-		}		
-	}	
+		}
+	}
 	$( '#modal-popup-options' ).modal( 'hide' );
 	if ( changed ) BHP.resizeHandler()
 };
@@ -2285,7 +2295,7 @@ BHP.PA.showInstructions = function() {
 	html += '<li class="list-group-item list-group-item-success">Click on player names to change the names, click on Board to change the board number, click on compass to change the vulnerability.</li>';
 	html += '<li class="list-group-item ">At any point you can use the Generate URL (top) button to generate BBO or BW or BHP url/embed code that would include all of the currently saved information. Note that for BBO and BW only the currently active play will be included.</li>';
 	html += '</ul>';
-	BHP.showModalDialog( title, html );				
+	BHP.showModalDialog( title, html );
 };
 
 BHP.HA.showInstructions = function() {
@@ -2302,25 +2312,25 @@ BHP.HA.showInstructions = function() {
 	html += '<li class="list-group-item ">When the hands form a valid deal (13 cards each) the Accept Hands button will be enabled and can be clicked to go to the next area.</li>';
 	html += '<li class="list-group-item list-group-item-success">At any point you can use the Generate URL (top) button to generate BBO or BW or BHP url/embed code that would include all of the currently saved information</li>';
 	html += '</ul>';
-	BHP.showModalDialog( title, html );				
+	BHP.showModalDialog( title, html );
 };
 
 BHP.HA.selectHands = function() {
 	// Setup instructions
 	$( '#show-instructions' ).unbind( 'click' );
 	$( '#show-instructions' ).click( BHP.HA.showInstructions );
-	
+
 	// Set title
 	$( '#header-title' ).html( 'Set Hands' );
-	BHP.HA.drawHandAssignment();	
+	BHP.HA.drawHandAssignment();
 };
 
 BHP.HA.updateHandCount = function() {
 	for( var direction in Bridge.Directions ) {
 		if ( direction !== BHP.HA.shownHand ) {
 			var numCards = BHP.deal.getNumCards( direction );
-			var countID = direction + '-assigned-cards-count'; 
-			$( '#' + countID ).html( numCards );				
+			var countID = direction + '-assigned-cards-count';
+			$( '#' + countID ).html( numCards );
 		}
 	}
 	BHP.HA.updateButtonStatus();
@@ -2332,7 +2342,7 @@ BHP.HA.updateHandCount = function() {
 BHP.HA.drawFooter = function() {
 	var footerID = "footer-menu-bar";
 	$( '#' + footerID ).remove();
-	var container = 'body';	
+	var container = 'body';
 	var html = '<div id="' + footerID + '" class="fixed btn-toolbar" role="toolbar"></div>';
 	$( container ).append( html );
 	BHP.footer = $( '#' + footerID );
@@ -2342,18 +2352,18 @@ BHP.HA.drawFooter = function() {
 		'unassign-all' :	{ name: 'Unassign All Cards (Reset)',	icon: 'remove', iconAfter: false }
 	};
 	html = BHP.getButtonGroupHTML( 'utility-function2', fields );
-	BHP.footer.append( html );	
+	BHP.footer.append( html );
 	fields = {
 		'check-hands' :	{ name: 'Accept Hands',	icon: 'ok', iconAfter: false }
-	};	
+	};
 	html = BHP.getButtonGroupHTML( 'accept-hands', fields );
-	BHP.footer.append( html );	
+	BHP.footer.append( html );
 	BHP.HA.updateButtonStatus();
 	var left = BHP.viewport.width / 2 - BHP.footer.width() / 2;
 	BHP.footer.css({
 		left: left,
 		bottom:0
-	});	
+	});
 	$( '#assign-randomly' ).click( function() {
 		BHP.deal.assignRest();
 		BHP.HA.updateUnassignedCardStatus();
@@ -2363,18 +2373,18 @@ BHP.HA.drawFooter = function() {
 	$( '#redeal' ).click( function() {
 		var title = 'Redeal Cards Confirm';
 		var content = 'Are you sure that you want to redeal cards? This will also delete the auction and all plays.';
-		BHP.showModalConfirmDialog( title, content, BHP.HA.redealCards );				
+		BHP.showModalConfirmDialog( title, content, BHP.HA.redealCards );
 	});
 	$( '#unassign-all' ).click( function() {
 		var title = 'Unassign All Cards Confirm';
 		var content = 'Are you sure that you want to unassign all cards? This will also delete the auction and all plays.';
-		BHP.showModalConfirmDialog( title, content, BHP.HA.unassignAllCards );		
+		BHP.showModalConfirmDialog( title, content, BHP.HA.unassignAllCards );
 
-	});		
+	});
 	$( '#check-hands' ).click( function() {
 		$( this ).tooltip( 'hide' );
-		BHP.handleAuction();		
-	});	
+		BHP.handleAuction();
+	});
 	$( '.toolbar' ).tooltip({
 		placement : 'top',
 		container : 'body'
@@ -2388,8 +2398,8 @@ BHP.HA.redealCards = function() {
 	BHP.HA.drawAssignedCards( BHP.HA.shownHand );
 	BHP.HA.updateHandCount();
 	BHP.deal.undoAllBids();
-	BHP.deal.deletePlays();		
-	BHP.hideModalConfirmDialog();	
+	BHP.deal.deletePlays();
+	BHP.hideModalConfirmDialog();
 };
 
 BHP.HA.unassignAllCards = function() {
@@ -2398,7 +2408,7 @@ BHP.HA.unassignAllCards = function() {
 	BHP.HA.drawAssignedCards( BHP.HA.shownHand );
 	BHP.HA.updateHandCount();
 	BHP.deal.undoAllBids();
-	BHP.deal.deletePlays();		
+	BHP.deal.deletePlays();
 	BHP.hideModalConfirmDialog();
 };
 
@@ -2407,7 +2417,7 @@ BHP.computeScalingFactorForAllHands = function( container ) {
 	// Cell dimensions
 	var cWidth = $( container ).outerWidth() - 2 * BHP.gutter;
 	var cHeight = $( container ).outerHeight() - 2 * BHP.gutter;
-	// Vertical layout 
+	// Vertical layout
 	var vHeight = 3 * BHP.cardImageDimensions.height * BHP.cardImageDimensions.percentageHeightShowing + BHP.cardImageDimensions.height;
 	var vWidth = ( longest - 1 ) * BHP.cardImageDimensions.width * BHP.cardImageDimensions.percentageWidthShowing + BHP.cardImageDimensions.width;
 	var vHScalingFactor = cHeight / vHeight;
@@ -2430,7 +2440,7 @@ BHP.computeScalingFactorForAllHands = function( container ) {
 	else {
 		layout.scalingFactor = vScalingFactor;
 		layout.type = 'vertical';
-	}	
+	}
 	return layout;
 }
 
@@ -2448,7 +2458,7 @@ BHP.AA.computeScalingFactor = function( height, width ) {
 		BHP.AA.buttonSize = 'sm';
 	}
 	else BHP.AA.buttonSize = 'xs';
-	
+
 	// Compute cards scaling fator
 	var layout = BHP.computeScalingFactorForAllHands( '#current-hand' );
 	BHP.AA.scalingFactor = layout.scalingFactor;
@@ -2473,10 +2483,10 @@ BHP.AA.drawVertical = function( direction ) {
 				var imageID = BHP.HA.getAssignedCardID( suit, rank );
 				$( '#' + imageID ).remove();
 				BHP.HA.showCard( cell, suit, rank, top, left, width, height, imageID, 'assigned-card' );
-				left += BHP.cardImageDimensions.width * BHP.cardImageDimensions.percentageWidthShowing * BHP.AA.scalingFactor;		
+				left += BHP.cardImageDimensions.width * BHP.cardImageDimensions.percentageWidthShowing * BHP.AA.scalingFactor;
 			}
 		}
-	}	
+	}
 };
 
 BHP.AA.drawHorizontal = function( direction ) {
@@ -2501,10 +2511,10 @@ BHP.AA.drawHorizontal = function( direction ) {
 				var imageID = BHP.HA.getAssignedCardID( suit, rank );
 				$( '#' + imageID ).remove();
 				BHP.HA.showCard( cell, suit, rank, top, left, width, height, imageID, 'assigned-card' );
-				left += BHP.cardImageDimensions.width * BHP.cardImageDimensions.percentageWidthShowing * BHP.AA.scalingFactor;		
+				left += BHP.cardImageDimensions.width * BHP.cardImageDimensions.percentageWidthShowing * BHP.AA.scalingFactor;
 			}
 		}
-	}	
+	}
 };
 
 BHP.AA.drawAssignedCards = function( direction ) {
@@ -2516,7 +2526,7 @@ BHP.AA.drawAssignedCards = function( direction ) {
 	if ( BHP.AA.handLayout === 'vertical' ) BHP.AA.drawVertical( direction );
 	else BHP.AA.drawHorizontal( direction );
 	var name = BHP.deal.getName( direction );
-	if ( name === null ) name = Bridge.getDirectionName( direction );	
+	if ( name === null ) name = Bridge.getDirectionName( direction );
 	$( '#current-hand-name' ).html( name );
 };
 
@@ -2524,15 +2534,15 @@ BHP.AA.drawAuctionAssignment = function() {
 	BHP.viewport = {
 		width: $(window).width(),
 		height: $(window).height()
-	};	
-	
+	};
+
 	var container = '#section';
 	$( container ).empty();
 
 	var headerHeight = $( '#header' ).outerHeight();
 	// First draw footer.
 	BHP.AA.drawFooter();
-	
+
 	// Split in two regions
 	var totalWidth = BHP.viewport.width;
 	var width = ( totalWidth - 3 * BHP.gutter ) / 2;
@@ -2541,25 +2551,25 @@ BHP.AA.drawAuctionAssignment = function() {
 	var id = 'bidding-box';
 	var titleID = id + '-title';
 	var html = '<span id="' + titleID + '" class="text-size fixed label label-' + BHP.getOption( 'bootstrapClass' ) + '">Bidding Box</span>';
-	$( container ).append( html ); 
+	$( container ).append( html );
 	var title = $( '#' + titleID );
 	title.css({
 		top: headerHeight + BHP.gutter,
 		left: BHP.gutter
-	});	
+	});
 	var titleHeight = title.outerHeight();
-	
+
 	id = 'auction';
 	titleID = id + '-title';
 	html = '<span id="' + titleID + '" class="text-size fixed label label-' + BHP.getOption( 'bootstrapClass' ) + '">Auction So Far</span>';
-	$( container ).append( html ); 
+	$( container ).append( html );
 	title = $( '#' + titleID );
 	title.css({
 		top: headerHeight + BHP.gutter,
 		left: width + 2 * BHP.gutter
-	});	
+	});
 	var title2Height = title.outerHeight();
-	titleHeight = Math.max( titleHeight, title2Height );	
+	titleHeight = Math.max( titleHeight, title2Height );
 	var totalHeight = BHP.footer.position().top - headerHeight - titleHeight;
 	id = 'bidding-box';
 	html = '<div id="' + id +'" class="well fixed status"></div>';
@@ -2572,20 +2582,20 @@ BHP.AA.drawAuctionAssignment = function() {
 		width: width,
 		height: height
 	});
-	
+
 	id = 'current-hand';
 	titleID = id + '-title';
 	html = '<span id="' + titleID + '" class="text-size fixed label label-' + BHP.getOption( 'bootstrapClass' ) + '">Current Hand (<span id="current-hand-name"></span>)</span>';
-	$( container ).append( html ); 
+	$( container ).append( html );
 	title = $( '#' + titleID );
-	var title3Height = title.outerHeight();	
+	var title3Height = title.outerHeight();
 	var rightHeight = height - BHP.gutter - title3Height;
 	var chTop = headerHeight + BHP.gutter + titleHeight + rightHeight / 2 + BHP.gutter;
 	title.css({
 		top: chTop,
 		left: width + 2 * BHP.gutter
 	});
-	
+
 	id = 'auction';
 	html = '<div id="' + id + '" class="well fixed status"></div>';
 	$( container ).append( html );
@@ -2605,7 +2615,7 @@ BHP.AA.drawAuctionAssignment = function() {
 		left: width + 2 * BHP.gutter,
 		width: width,
 		height: rightHeight / 2
-	});	
+	});
 	container = '#bidding-box';
 	$( container ).empty();
 	BHP.AA.computeScalingFactor( height, width );
@@ -2633,19 +2643,19 @@ BHP.AA.showDealInformation = function( container ) {
 			var id = direction + '-dealer-button';
 			var btnClass = 'btn-default';
 			if ( dealer === direction ) btnClass = 'btn-' + BHP.getOption( 'bootstrapClass' );
-			html += '<button type="button" id="' + id + '" direction="' + direction + '" class="text-size change-dealer btn ' + btnClass + '">';	
-			html += '<span class="glyphicon glyphicon-'+ icons[ direction ] + '"></span>';	
+			html += '<button type="button" id="' + id + '" direction="' + direction + '" class="text-size change-dealer btn ' + btnClass + '">';
+			html += '<span class="glyphicon glyphicon-'+ icons[ direction ] + '"></span>';
 			html += Bridge.getDirectionName( direction );
 			html += '</button>';
 		}
-	}	
-	html += '</div>';	
+	}
+	html += '</div>';
 	html += '</td><tr><tbody></table>';
 	$ ( container ).append( html );
 	var table = $( '#deal-information-table' );
 	table.css({
 		width: 'auto'
-	});	
+	});
 	$( '.change-dealer' ).click(function() {
 		var direction = $( this ).attr( 'direction' );
 		if ( BHP.deal.hasBids() ) {
@@ -2657,14 +2667,14 @@ BHP.AA.showDealInformation = function( container ) {
 		else {
 			BHP.deal.setDealer( direction );
 		}
-		BHP.AA.updateDealer();		
+		BHP.AA.updateDealer();
 	});
 };
 
 BHP.AA.setDealer = function() {
 	var direction = $( this ).attr( 'direction' );
 	BHP.deal.setDealer( direction );
-	BHP.AA.updateDealer();	
+	BHP.AA.updateDealer();
 	BHP.hideModalConfirmDialog();
 	//$( '#modal-popup-confirm' ).modal( 'hide' );
 };
@@ -2682,7 +2692,7 @@ BHP.AA.updateDealer = function() {
 				button.addClass( 'btn-default' ).removeClass( 'btn-' + BHP.getOption( 'bootstrapClass' ) ).attr( 'disabled', false);
 			}
 		}
-	}	
+	}
 	BHP.drawAuction( '#auction' );
 	BHP.AA.setBiddingBoxStatus();
 };
@@ -2703,7 +2713,7 @@ BHP.AA.setBiddingBoxStatus = function() {
 		$( '.bid' ).attr( 'disabled', false).removeClass( 'cursor-not-allowed' ).show();
 		$( '#check-auction' ).attr( 'disabled', true );
 		$( '#all-pass' ).attr( 'disabled', false );
-	
+
 		var currentLevel = BHP.deal.getCurrentLevels();
 		var level = parseInt(currentLevel.level);
 		var suit = currentLevel.suit;
@@ -2721,7 +2731,7 @@ BHP.AA.setBiddingBoxStatus = function() {
 					bid.attr( 'disabled', false).removeClass( 'cursor-not-allowed' ).show();
 				}
 			}
-		} 
+		}
 		if ( BHP.deal.isDoubleAllowed() ) {
 			$( '#double' ).attr( 'disabled', false ).show();
 		}
@@ -2737,7 +2747,7 @@ BHP.AA.setBiddingBoxStatus = function() {
 		var turn = BHP.deal.getCurrentBiddingTurn();
 		BHP.AA.drawAssignedCards( turn );
 	}
-	
+
 };
 
 BHP.AA.createBiddingBox = function( container ) {
@@ -2753,11 +2763,11 @@ BHP.AA.createBiddingBox = function( container ) {
 			html += '<td><button id="bid-' + bidNumber + '" bid="' + bidName + '" type="button" class="btn btn-' + BHP.AA.buttonSize + ' btn-default bid">' + i + Bridge.getSuitName( suit ) + '</button></td>';
 		}
 		html += '</tr>';
-	} 
+	}
 	html += '<tr><td colspan="5"><button id="pass" bid="1p" style="width:100%;" type="button" class="btn btn-success btn-' + BHP.AA.buttonSize + ' bid">Pass</button></td></tr>';
 	html += '<tr><td colspan="5"><button id="double" bid="1x" style="width:100%;" type="button" class="btn btn-danger btn-' + BHP.AA.buttonSize + ' bid">Double</button></td></tr>';
 	html += '<tr><td colspan="5"><button id="redouble" bid="1r" style="width:100%;" type="button" class="btn btn-info btn-' + BHP.AA.buttonSize + ' bid">Redouble</button></td></tr>';
-	html += '<tr><td colspan="5"><button id="undo-bid" style="width:100%;" type="button" class="btn btn-warning btn-' + BHP.AA.buttonSize + '">Undo Last Bid</button></td></tr>';	
+	html += '<tr><td colspan="5"><button id="undo-bid" style="width:100%;" type="button" class="btn btn-warning btn-' + BHP.AA.buttonSize + '">Undo Last Bid</button></td></tr>';
 	$ ( container ).append( html );
 	var table = $( '#bidding-box-table' );
 	table.css({
@@ -2771,7 +2781,7 @@ BHP.AA.createBiddingBox = function( container ) {
 		BHP.drawAuction( '#auction' );
 		BHP.AA.setBiddingBoxStatus();
 	});
-	
+
 	$( '#undo-bid' ).click(function() {
 		BHP.deal.undoLastBid();
 		BHP.drawAuction( '#auction' );
@@ -2797,17 +2807,17 @@ BHP.AA.showInstructions = function() {
 	html += '<li class="list-group-item ">When a valid auction has been created ( ending in 3 passes ), the Accept Auction button (bottom) will be enabled and can be clicked to proceed to the next area</li>';
 	html += '<li class="list-group-item list-group-item-success">At any point you can use the Generate URL (top) button to generate BBO or BW or BHP url/embed code that would include all of the currently saved information</li>';
 	html += '</ul>';
-	BHP.showModalDialog( title, html );				
+	BHP.showModalDialog( title, html );
 };
 
 BHP.AA.selectAuction = function( ) {
 	// Setup instructions
 	$( '#show-instructions' ).unbind( 'click' );
 	$( '#show-instructions' ).click( BHP.AA.showInstructions );
-	
+
 	// Set title
 	$( '#header-title' ).html( 'Set Auction' );
-	BHP.AA.drawAuctionAssignment();	
+	BHP.AA.drawAuctionAssignment();
 };
 
 BHP.getButtonGroupHTML = function( containerID, fields ) {
@@ -2826,11 +2836,11 @@ BHP.getButtonGroupHTML = function( containerID, fields ) {
 			}
 			if ( fields[ field ].iconAfter ){
 				html += ' ' + iconHtml;
-			}		
+			}
 			html += '</button>';
 		}
 	}
-	html += '</div>';	
+	html += '</div>';
 	return html;
 };
 
@@ -2840,16 +2850,16 @@ BHP.getButtonGroupHTML = function( containerID, fields ) {
 BHP.AA.drawFooter = function() {
 	var footerID = "footer-menu-bar";
 	$( '#' + footerID ).remove();
-	var container = 'body';	
+	var container = 'body';
 	var html = '<div id="' + footerID + '" class="fixed btn-toolbar" role="toolbar"></div>';
 	$( container ).append( html );
-	BHP.footer = $( '#' + footerID );	
+	BHP.footer = $( '#' + footerID );
 	var fields = {
-		'edit-hands' : { name : 'Edit Hands', icon : 'wrench', iconAfter : false }	
+		'edit-hands' : { name : 'Edit Hands', icon : 'wrench', iconAfter : false }
 	};
 	html = BHP.getButtonGroupHTML( 'edit-functions', fields );
-	BHP.footer.append( html );	
-	fields = {	
+	BHP.footer.append( html );
+	fields = {
 		'all-pass' : { name: 'Add All Pass', icon: 'plus', iconAfter: false },
 		'undo-all-bids' :	{ name: 'Undo All Bids',	icon: 'remove', iconAfter: false }
 	};
@@ -2859,36 +2869,36 @@ BHP.AA.drawFooter = function() {
 		'check-auction' : { name: 'Accept Auction/Contract', icon: 'ok', iconAfter: false }
 	};
 	html = BHP.getButtonGroupHTML( 'accept-auction', fields );
-	BHP.footer.append( html );	
+	BHP.footer.append( html );
 	$( '#check-auction' ).attr( 'disabled', ! BHP.HA.isValid() );
 	var left = BHP.viewport.width / 2 - BHP.footer.width() / 2;
 	BHP.footer.css({
 		left: left,
 		bottom:0
-	});	
+	});
 	$( '#edit-hands' ).click( function() {
 		$( this ).tooltip( 'hide' );
-		BHP.handleHands( true ); 
+		BHP.handleHands( true );
 	});
 	$( '#all-pass' ).click( function() {
 		while( BHP.deal.numPasses() < 3 ) {
 			BHP.deal.addBid( 0, 'p' );
 		}
 		BHP.drawAuction( '#auction' );
-		BHP.AA.setBiddingBoxStatus();		
+		BHP.AA.setBiddingBoxStatus();
 	});
 	$( '#check-auction' ).click(function() {
 		$( this ).tooltip( 'hide' );
 		BHP.deal.determineDeclarer();
 		BHP.handlePlay();
-	});	
-	
+	});
+
 	$( '#undo-all-bids' ).click(function() {
 		var title = 'Undo All Bids Confirm';
 		var content = 'Are you sure that you want to undo all bids? This will also delete all plays.';
 		BHP.showModalConfirmDialog( title, content, BHP.AA.undoAllBids );
 	});
-	
+
 	$( '.toolbar' ).tooltip({
 		placement : 'top',
 		container : 'body'
@@ -2898,7 +2908,7 @@ BHP.AA.drawFooter = function() {
 BHP.AA.undoAllBids = function() {
 	BHP.deal.undoAllBids();
 	BHP.drawAuction( '#auction' );
-	BHP.AA.setBiddingBoxStatus();	
+	BHP.AA.setBiddingBoxStatus();
 	BHP.deal.deletePlays();
 	BHP.hideModalConfirmDialog();
 };
@@ -2936,24 +2946,24 @@ BHP.generateURL = function() {
 		alert( 'Invalid ID : ' + id );
 		return;
 	}
-	BHP.showModalDialog( title, html );			
+	BHP.showModalDialog( title, html );
 };
 
 BHP.resizeHandler = function() {
 	if ( BHP.state === 'set-hands' ) {
 		BHP.HA.selectHands();
-	}	
+	}
 	else if ( BHP.state === 'set-auction' ) {
 		BHP.AA.selectAuction();
-	}	
+	}
 	else if ( BHP.state === 'set-play' ) {
 		BHP.drawAll();
 	}
 };
 
-BHP.handlePlay = function() {	
+BHP.handlePlay = function() {
 	BHP.state = 'set-play';
-	BHP.drawAll();						
+	BHP.drawAll();
 };
 
 BHP.handleHands = function( show ) {
@@ -2989,7 +2999,7 @@ BHP.loadBootswatchThemes = function() {
 			'name' : 'Default',
 			'cssCdn' : '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'
 		};
-		
+
 		// Add the retreived bootswatches next
 		var themes = data.themes;
 		for ( var i = 0; i < themes.length; i++) {
@@ -2998,19 +3008,19 @@ BHP.loadBootswatchThemes = function() {
 			options += '<li><a class="theme-name" href="javascript:void(0);" id="' + themeID + '">';
 			options += '<img width="25" height="25" src="' + themes[i].thumbnail + '" alt="' + themes[i].name + '"></img> ' + themes[i].name;
 			options += '</a></li>';
-		}		
+		}
 		// Set the dropdown
-		$( '#themes' ).html(options);	
-		
+		$( '#themes' ).html(options);
+
 		// Add click handler to switch themes
 		$( '.theme-name' ).click(function() {
 			var themeID = $(this).attr('id');
 			$.cookie( 'bootswatch_theme', JSON.stringify( BHP.bootswatchThemes[themeID]) );
 			var name = BHP.bootswatchThemes[themeID].name;
 			var stylesheet = 'http:' + BHP.bootswatchThemes[themeID].cssCdn;
-			BHP.loadStylesheet( name, stylesheet );		
-		});		
-	});	
+			BHP.loadStylesheet( name, stylesheet );
+		});
+	});
 };
 
 BHP.themeChanged = function( name ) {
@@ -3020,7 +3030,7 @@ BHP.themeChanged = function( name ) {
 };
 
 BHP.drawPage = function( name ) {
-	$( '#current-theme' ).html( name );	
+	$( '#current-theme' ).html( name );
 	if ( BHP.deal.areHandsValid() ) {
 		if ( BHP.deal.isAuctionValid() ) {
 			BHP.handlePlay();
@@ -3046,7 +3056,7 @@ BHP.loadStylesheet = function( name, stylesheet ) {
 			var theme = JSON.parse( themeCookie );
 			themeName = theme.name;
 			themeStylesheet = 'http:' + theme.cssCdn;
-		}	
+		}
 	}
 	else {
 		themeName = name;
@@ -3058,22 +3068,22 @@ BHP.loadStylesheet = function( name, stylesheet ) {
 	var html = '<link id="bootswatch-theme" href="' + themeStylesheet + '" rel="stylesheet">';
 	$( 'head' ).append( html );
 	$( '#bootswatch-theme' ).on( 'load', function() {
-		if ( name === undefined ) { 
-			BHP.drawPage( themeName );	
+		if ( name === undefined ) {
+			BHP.drawPage( themeName );
 		}
 		else {
 			BHP.themeChanged( themeName );
 		}
-	});		
+	});
 };
 
 
 $(function() {
-	
+
 	BHP.state = 'init';
 	// Hide all modals
 	BHP.hideAllModals();
-	
+
 	// Activate tooltips
 	$( '.tooltip-bottom' ).tooltip({
 		placement : 'bottom',
@@ -3081,30 +3091,30 @@ $(function() {
 	});
 
 	// Click handlers for generate url
-	$( '.generate-url' ).click( BHP.generateURL );	
-	
+	$( '.generate-url' ).click( BHP.generateURL );
+
 	// Setup contact click
 	$( '#show-contact' ).click( BHP.showContactInformation );
-	
+
 	$( '#show-options' ).click( BHP.showOptions );
 	$( '#modal-popup-options-ok' ).click( BHP.processOptions );
-	
+
 	// A new bridge deal
-	BHP.deal = new Bridge.Deal();	
-	
+	BHP.deal = new Bridge.Deal();
+
 	// Setup an errors array
 	BHP.errors = [];
-	
+
 	// Setup resize handler
 	$(window).resize(function() {
 		BHP.resizeHandler();
-	});		
+	});
 
 	// Parse the query Parameters
 	BHP.readQueryParameters();
-	
+
 	if ( BHP.queryParameters ) {
-		// Load everything specified 
+		// Load everything specified
 		BHP.loadNames();
 		BHP.loadHands();
 		BHP.loadDealInformation();
@@ -3115,6 +3125,6 @@ $(function() {
 	// Setup the skins
 	BHP.loadBootswatchThemes();
 	BHP.loadStylesheet();
-	//BHP.drawPage( 'Default' );	
-		
+	//BHP.drawPage( 'Default' );
+
 });
