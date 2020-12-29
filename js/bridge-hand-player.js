@@ -243,7 +243,6 @@ BHP.loadHand = function( direction, handString) {
 		var prefix = 'In hand for ' + directionName + ' at position ' + (i+1) + ' - ';
 		// Read the next character specified in hand
 		var currentChar = handString.charAt( i );
-		console.log('current char ' + currentChar);
 		switch( currentChar ) {
 			// Check if it specifies suit
 			case 'c' :
@@ -251,18 +250,15 @@ BHP.loadHand = function( direction, handString) {
 			case 'h' :
 			case 's' :
 				currentSuit = currentChar;
-				console.log(currentSuit);
 				break;
 
 			// Special handing for numeric 10
 			case '1' :
-			  console.log('handling 1');
 				if ( currentSuit === '' ) {
 					BHP.addError( prefix + currentChar + ' was found when a suit was expected!' );
 					continue;
 				}
 				if ( i < handString.length - 1 && handString.charAt( i+1 ) === '0') {
-					console.log('found 0')
 					currentRank = 't';
 					i++;
 					try {
@@ -2992,12 +2988,12 @@ BHP.handleAuction = function( show ) {
 
 BHP.loadBootswatchThemes = function() {
 	// Populate dropdown with bootswatch themes
-	$.get( 'http://api.bootswatch.com/3/', function( data ) {
+	$.get( 'https://bootswatch.com/api/3.json', function( data ) {
 		// Add the default bootstrap theme first
 		var options = '<li><a class="theme-name" href="javascript:void(0);" id="default">Default</a></li>';
 		BHP.bootswatchThemes['default'] = {
 			'name' : 'Default',
-			'cssCdn' : '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'
+			'cssCdn' : 'https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'
 		};
 
 		// Add the retreived bootswatches next
@@ -3017,7 +3013,7 @@ BHP.loadBootswatchThemes = function() {
 			var themeID = $(this).attr('id');
 			$.cookie( 'bootswatch_theme', JSON.stringify( BHP.bootswatchThemes[themeID]) );
 			var name = BHP.bootswatchThemes[themeID].name;
-			var stylesheet = 'http:' + BHP.bootswatchThemes[themeID].cssCdn;
+			var stylesheet = BHP.bootswatchThemes[themeID].cssCdn;
 			BHP.loadStylesheet( name, stylesheet );
 		});
 	});
@@ -3055,7 +3051,7 @@ BHP.loadStylesheet = function( name, stylesheet ) {
 		if ( themeCookie !== undefined ) {
 			var theme = JSON.parse( themeCookie );
 			themeName = theme.name;
-			themeStylesheet = 'http:' + theme.cssCdn;
+			themeStylesheet = theme.cssMin;
 		}
 	}
 	else {
