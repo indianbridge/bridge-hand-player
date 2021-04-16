@@ -3046,7 +3046,7 @@ BHP.loadStylesheet = function( name, stylesheet ) {
 	// If nothing specified use cookie or default
 	if ( name === undefined ) {
 		themeName = 'Default';
-		themeStylesheet = 'http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css';
+		themeStylesheet = 'https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css';
 		var themeCookie = $.cookie( 'bootswatch_theme' );
 		if ( themeCookie !== undefined ) {
 			var theme = JSON.parse( themeCookie );
@@ -3057,6 +3057,10 @@ BHP.loadStylesheet = function( name, stylesheet ) {
 	else {
 		themeName = name;
 		themeStylesheet = stylesheet;
+	}
+	if ( themeStylesheet === undefined ) {
+		themeName = 'Default';
+		themeStylesheet = 'https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css';
 	}
 	var content  = 'Loading ' + themeName + ' theme';
 	BHP.showModal( content );
