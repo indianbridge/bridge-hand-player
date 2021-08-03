@@ -17,7 +17,7 @@ var cardImagePacks = {
 var BootstrapParameters = {
 	tableHeaderClass: 'info',
 	tableRowKeyClass: 'active',
-	tableRowValueClass: '',	
+	tableRowValueClass: '',
 	flashOnLead: false,
 };
 
@@ -38,7 +38,7 @@ Parameters.tableImage = {
 	id: 'table',
 	class: 'card-table',
 	fullWidth: Parameters.cardImages.fullWidth * 5 + 20,
-	fullHeight: Parameters.cardImages.fullHeight * 3 + 20,	
+	fullHeight: Parameters.cardImages.fullHeight * 3 + 20,
 };
 
 
@@ -54,46 +54,46 @@ Parameters.tableCardPosition = {};
 for( var direction in Directions ) {
 	Parameters.tableCardPosition[ direction ] = {
 		top: 0,
-		left: 0,	
+		left: 0,
 	};
 }
 
 // At initial load or whenever window resizes recompute the scaling factor and all sizes
 function computeScaledParameters( ) {
-	
+
 	// Get viewport dimensions
 	Parameters.viewport = {
 		width: jQuery(window).width(),
 		height: jQuery(window).height(),
 	};
 	Parameters.viewport.centerX = Parameters.viewport.width/2;
-	Parameters.viewport.centerY = Parameters.viewport.height/2;	
-	
+	Parameters.viewport.centerY = Parameters.viewport.height/2;
+
 	// Compute scaling factor
 	var imageHeight = 0.152 * Parameters.viewport.height;
 	var imageWidth = 0.084 * Parameters.viewport.width;
 	var heightScalingFactor = imageHeight / Parameters.cardImages.fullHeight;
 	var widthScalingFactor = imageWidth / Parameters.cardImages.fullWidth;
-	Parameters.scalingFactor = Math.min( heightScalingFactor, widthScalingFactor );	
-	
+	Parameters.scalingFactor = Math.min( heightScalingFactor, widthScalingFactor );
+
 	// Card Image dimensions
 	Parameters.cardImages.width = Parameters.cardImages.fullWidth * Parameters.scalingFactor;
 	Parameters.cardImages.height = Parameters.cardImages.fullHeight * Parameters.scalingFactor;
 	Parameters.cardImages.widthShowing = Parameters.cardImages.width * Parameters.cardImages.percentageWidthShowing;
 	Parameters.cardImages.heightShowing = Parameters.cardImages.height * Parameters.cardImages.percentageHeightShowing;
-	
+
 	// Compute new center table dimensions
 	Parameters.tableImage.width = Parameters.tableImage.fullWidth * Parameters.scalingFactor;
 	Parameters.tableImage.height = Parameters.tableImage.fullHeight * Parameters.scalingFactor;
 	Parameters.tableImage.top = Parameters.viewport.centerY - Parameters.tableImage.height / 2;
 	Parameters.tableImage.left = Parameters.viewport.centerX - Parameters.tableImage.width / 2;
-	
+
 	// Compute new compass dimensions
 	Parameters.compassImage.width = 0.2 * Parameters.tableImage.width;
-	Parameters.compassImage.height = Parameters.compassImage.width;	
+	Parameters.compassImage.height = Parameters.compassImage.width;
 	Parameters.compassImage.top = Parameters.viewport.centerY - Parameters.compassImage.width / 2;
 	Parameters.compassImage.left = Parameters.viewport.centerX - Parameters.compassImage.height / 2;
-	
+
 	// The positions of cards played to table
 	for( var direction in Directions ) {
 		switch ( direction ) {
@@ -101,31 +101,31 @@ function computeScaledParameters( ) {
 				Parameters.tableCardPosition[ direction ] = {
 					top: Parameters.tableImage.top,
 					left: Parameters.viewport.centerX - Parameters.cardImages.width / 2,
-				};				
+				};
 				break;
 			case 's':
 				Parameters.tableCardPosition[ direction ] = {
 					top: Parameters.tableImage.top + Parameters.tableImage.height - Parameters.cardImages.height,
 					left: Parameters.viewport.centerX - Parameters.cardImages.width / 2,
-				};			
+				};
 				break;
 			case 'w':
 				Parameters.tableCardPosition[ direction ] = {
 					top: Parameters.viewport.centerY - Parameters.cardImages.height / 2,
 					left: Parameters.tableImage.left,
-				};			
+				};
 				break;
 			case 'e':
 				Parameters.tableCardPosition[ direction ] = {
 					top: Parameters.viewport.centerY - Parameters.cardImages.height / 2,
 					left: Parameters.tableImage.left + Parameters.tableImage.width - Parameters.cardImages.width,
-				};			
+				};
 				break;
-			default:												
+			default:
 				break;
-		}	
-	}	
-	
+		}
+	}
+
 	// Font sizes
 	Parameters.textSize.fontSize = Parameters.textSize.actualFontSize * Parameters.scalingFactor;
 	Parameters.textSize.lineHeight = Parameters.textSize.actualLineHeight * Parameters.scalingFactor;
@@ -134,19 +134,19 @@ function computeScaledParameters( ) {
 	style += '.panel {font-size: ' + Parameters.textSize.fontSize + 'px; line-height: ' + Parameters.textSize.lineHeight + 'em;}';
 	style += '.text-size {font-size: ' + Parameters.textSize.fontSize + 'px !important;}';
 	style += '</style>';
-	$( style ).appendTo( "head" )	
-	
-	trace( 'After scaling parameters are : ' + JSON.stringify( Parameters ) );		
-};	
+	$( style ).appendTo( "head" )
+
+	trace( 'After scaling parameters are : ' + JSON.stringify( Parameters ) );
+};
 
 // Add some rudimentary tracing capability
-if(!window.console){ window.console = {log: function(){} }; } 
+if(!window.console){ window.console = {log: function(){} }; }
 function trace( message ) {
-	console.log( message );	
+	console.log( message );
 };
 
 // Directions and utility functions for Directions
-var Directions = { 
+var Directions = {
 	'n' : { name : 'North',	layout : 'horizontal',	position : 'top',		index: 0 },
 	'e' : { name : 'East',	layout : 'vertical',	position : 'right',		index: 1 },
 	's' : { name : 'South',	layout : 'horizontal',	position : 'bottom',	index: 2 },
@@ -155,7 +155,7 @@ var Directions = {
 
 function getDirectionName( direction ) {
 	if ( direction in Directions ) return Directions[ direction ].name;
-	return 'Unknown';	
+	return 'Unknown';
 };
 
 // an indexed array of directions in order so that we can find who is next to play
@@ -163,47 +163,47 @@ var directionNames = [];
 for( var direction in Directions ) directionNames[ Directions[ direction ].index ] = direction;
 
 // Suits and utility functions for Suits
-var Suits = { 
+var Suits = {
 	'n' : { name : 'NT',									index : 4 },
-	's' : { name : '<font color="000000">&spades;</font>', 	index : 3 }, 
-	'h' : { name : '<font color="CB0000">&hearts;</font>', 	index : 2 }, 
-	'd' : { name : '<font color="CB0000">&diams;</font>',	index : 1 }, 
-	'c' : { name : '<font color="000000">&clubs;</font>', 	index : 0 }, 
+	's' : { name : '<font color="000000">&spades;</font>', 	index : 3 },
+	'h' : { name : '<font color="CB0000">&hearts;</font>', 	index : 2 },
+	'd' : { name : '<font color="CB0000">&diams;</font>',	index : 1 },
+	'c' : { name : '<font color="000000">&clubs;</font>', 	index : 0 },
 };
 
 function getSuitName( suit ) {
 	if ( suit in Suits ) return Suits[ suit ].name;
-	return 'Unknown';	
+	return 'Unknown';
 };
 
 function getSuitIndex( suit ) {
 	if ( suit in Suits ) return Suits[ suit ].index;
-	return -1;	
+	return -1;
 }
 
 // Ranks and utility functions for Ranks
-var Ranks = { 
-	'a' : { name : 'A', 	index : 0 }, 
-	'k' : { name : 'K', 	index : 1 }, 
-	'q' : { name : 'Q',		index : 2 }, 
-	'j' : { name : 'J', 	index : 3 }, 
-	't' : { name : 'T', 	index : 4 }, 
-	'9' : { name : '9', 	index : 5 }, 
-	'8' : { name : '8', 	index : 6 }, 
-	'7' : { name : '7', 	index : 7 }, 
-	'6' : { name : '6', 	index : 8 }, 
-	'5' : { name : '5', 	index : 9 }, 
-	'4' : { name : '4', 	index : 10 }, 
-	'3' : { name : '3', 	index : 11 }, 
-	'2' : { name : '2', 	index : 12 }, 
+var Ranks = {
+	'a' : { name : 'A', 	index : 0 },
+	'k' : { name : 'K', 	index : 1 },
+	'q' : { name : 'Q',		index : 2 },
+	'j' : { name : 'J', 	index : 3 },
+	't' : { name : 'T', 	index : 4 },
+	'9' : { name : '9', 	index : 5 },
+	'8' : { name : '8', 	index : 6 },
+	'7' : { name : '7', 	index : 7 },
+	'6' : { name : '6', 	index : 8 },
+	'5' : { name : '5', 	index : 9 },
+	'4' : { name : '4', 	index : 10 },
+	'3' : { name : '3', 	index : 11 },
+	'2' : { name : '2', 	index : 12 },
 };
 
 function getRankName( rank ) {
 	if ( rank in Ranks ) return Ranks[ rank ].name;
-	return 'Unknown';		
+	return 'Unknown';
 };
 
-// Vulnerability 
+// Vulnerability
 var Vulnerability = {
 	'n' : 'North-South',
 	'e' : 'East-West',
@@ -275,12 +275,12 @@ QueryParameters.parse = function() {
 		vars = [];
 		// Remove the part after # if it exists
 		q = q.split( '#' )[0];
-		
+
 		trace( 'Query Parameters are : ' +  q );
-		
+
 		// trim the string
 		q = q.trim();
-		if ( q ) {		
+		if ( q ) {
 			// Get all the different components
 			q = q.split('&');
 			for(var i = 0; i < q.length; i++){
@@ -290,7 +290,7 @@ QueryParameters.parse = function() {
 			}
 		}
 	}
-	return vars;	
+	return vars;
 };
 
 // A single hand
@@ -298,7 +298,7 @@ function Hand( direction ) {
 	this.direction = direction;
 	//this.name = getDirectionName( direction );
 	this.name = null;
-	this.suits = {};	
+	this.suits = {};
 	this.numCards = 0;
 	this.width = 0;
 	this.height = 0;
@@ -351,8 +351,8 @@ Hand.prototype.getWidth = function() {
 				width += ( firstSuit ? 0 : gutter ) + ( suits[ suit ].length - 1 ) * gutter + ( Parameters.cardImages.width );
 				firstSuit = false;
 			}
-		}	
-		return width;	
+		}
+		return width;
 	}
 	else if ( layout === 'vertical' ) {
 		return ( this.longest - 1 ) * Parameters.cardImages.widthShowing + Parameters.cardImages.width;
@@ -363,7 +363,7 @@ Hand.prototype.getWidth = function() {
 Hand.prototype.getHeight = function() {
 	var layout = Directions[ this.direction ].layout;
 	if ( layout === 'horizontal' ) {
-		return Parameters.cardImages.height;	
+		return Parameters.cardImages.height;
 	}
 	else if ( layout === 'vertical' ) {
 		var suits = this.suits;
@@ -372,10 +372,10 @@ Hand.prototype.getHeight = function() {
 			if ( suits[ suit ].length > 0) {
 				numSuits++;
 			}
-		}			
+		}
 		return ( numSuits - 1 ) * Parameters.cardImages.heightShowing + Parameters.cardImages.height;
 	}
-	else return 0;	
+	else return 0;
 };
 
 /**
@@ -395,23 +395,23 @@ Hand.prototype.setHandDimensions = function( ) {
 	hand.left = -1000;
 	if ( layout === 'horizontal' ) {
 		if ( position === 'top' ) {
-			hand.top = Parameters.viewport.centerY - Parameters.tableImage.height / 2 - 10 - hand.height;		
+			hand.top = Parameters.viewport.centerY - Parameters.tableImage.height / 2 - 10 - hand.height;
 		}
 		else if ( position === 'bottom' ) {
-			hand.top = Parameters.viewport.centerY + Parameters.tableImage.height / 2 + 10;			
+			hand.top = Parameters.viewport.centerY + Parameters.tableImage.height / 2 + 10;
 		}
 		hand.left = Parameters.viewport.centerX - hand.width / 2;
-		
+
 	}
 	else if ( layout === 'vertical' ) {
 		hand.top = Parameters.viewport.centerY - hand.height / 2;
 		if ( position === 'left' ) {
-			hand.left = Parameters.viewport.centerX - Parameters.tableImage.width / 2 - 10 - hand.width;	
+			hand.left = Parameters.viewport.centerX - Parameters.tableImage.width / 2 - 10 - hand.width;
 		}
 		else if ( position === 'right' ) {
-			hand.left = Parameters.viewport.centerX + Parameters.tableImage.width / 2 + 10;			
-		}		
-	}	
+			hand.left = Parameters.viewport.centerX + Parameters.tableImage.width / 2 + 10;
+		}
+	}
 };
 
 /**
@@ -427,9 +427,9 @@ Hand.prototype.show = function( declarer ) {
 	hand.setHandDimensions();
 	var top = hand.top;
 	var left = hand.left;
-	var direction = hand.direction;	
+	var direction = hand.direction;
 	for ( var suit in hand.suits ) {
-		for ( var i = 0; i < hand.suits[ suit ].length; ++i ) {	
+		for ( var i = 0; i < hand.suits[ suit ].length; ++i ) {
 			var rank = hand.suits[ suit ][ i ];
 			showCard( suit, rank, direction, top, left );
 			left += Parameters.cardImages.widthShowing;
@@ -442,7 +442,7 @@ Hand.prototype.show = function( declarer ) {
 			left = hand.left;
 		}
 	}
-	
+
 	var container = 'body';
 	var id = hand.direction + '-name-details';
 	var headerID = id + '-header';
@@ -462,7 +462,7 @@ Hand.prototype.show = function( declarer ) {
 		top: hand.top - headerHeight - 25,
 		width: hand.width + 10,
 		zIndex: -1,
-	});   
+	});
 	var bodyElement = 	$( '#' + bodyID );
 	bodyElement.css({
 		height: hand.height + 5,
@@ -528,7 +528,7 @@ function setActiveHand( activeDirection ) {
 
 Hand.prototype.hasCard = function( suit, rank ) {
 	var suit = this.suits[ suit ];
-	return suit.indexOf( rank ) !== -1;	
+	return suit.indexOf( rank ) !== -1;
 };
 
 Hand.prototype.getHandString = function() {
@@ -537,7 +537,7 @@ Hand.prototype.getHandString = function() {
 	for ( var suit in hand.suits ) {
 		if ( hand.suits[ suit ].length > 0 ) {
 			str += suit;
-			for ( var i = 0; i < hand.suits[ suit ].length; ++i ) {		
+			for ( var i = 0; i < hand.suits[ suit ].length; ++i ) {
 				str += hand.suits[ suit ][ i ];
 			}
 		}
@@ -557,12 +557,12 @@ function clearTableCards() {
 	for( var direction in Directions ) {
 		var id = getTableCardID( direction );
 		$( '#' + id ).remove();
-	}	
+	}
 };
 
 // Show a card on screen at specified location
 function showCard( suit, rank, direction, top, left ) {
-	var container = 'body';	
+	var container = 'body';
 	var imageID = getCardID( suit, rank );
 	var imageName = Parameters.cardImages.folder + '/' + suit + rank + '.png';
 	var src = imageName;
@@ -579,7 +579,7 @@ function showCard( suit, rank, direction, top, left ) {
 		height: Parameters.cardImages.height,
 		top: top,
 		left: left,
-	});	
+	});
 };
 
 
@@ -610,7 +610,7 @@ function Position( leader, trumpSuit ) {
 
 Position.prototype.getCardString = function() {
 	if ( this.playedCard ) return this.playedCard.suit + this.playedCard.rank;
-	else return '';	
+	else return '';
 };
 
 // Some increment methods
@@ -630,30 +630,30 @@ Position.prototype.incrementEWTricks = function() {
  * @constructor
  * @this {Position}
  * @param void
- * @return void 
+ * @return void
  */
 Position.prototype.clone = function( suit, rank ) {
 	var newPosition = new Position( this.nextTurn, this.trumpSuit );
-	
+
 	// Copy trump suit
 	newPosition.trumpSuit = this.trumpSuit;
-	
+
 	// This is the next play
 	newPosition.playNumber = this.playNumber + 1;
-	
+
 	//Trick number
 	newPosition.trickNumber = this.trickNumber;
 	if ( newPosition.playNumber % 4 === 1 ) {
 		// The first card to next trick has been played. increment trick number
 		newPosition.incrementTrickNumber();
 	}
-	
+
 	// Update trick winner
 	newPosition.trickWinner = {
 		direction: this.nextTurn,
 		suit: suit,
 		rank: rank,
-	}	
+	}
 	if ( this.trickWinner !== null && this.playNumber % 4 !== 0 ) {
 		// still old trick winner
 		if ( ! doesCard2BestCard1( this, newPosition ) ) {
@@ -662,13 +662,13 @@ Position.prototype.clone = function( suit, rank ) {
 			}
 		}
 	}
-		
+
 	// number of tricks won
 	newPosition.tricks = {};
 	for( var trick in this.tricks ) {
 		 newPosition.tricks[ trick ] = this.tricks[ trick ];
 	};
-	
+
 	if ( newPosition.playNumber % 4 === 0 ) {
 		// Trick completed so who won
 		var winner = newPosition.trickWinner.direction;
@@ -679,37 +679,37 @@ Position.prototype.clone = function( suit, rank ) {
 			newPosition.incrementEWTricks();
 		}
 	}
-	
+
 	// Set the played card
 	newPosition.playedCard = {
 		suit: suit,
 		rank: rank,
 	};
-	
+
 	// set the lead suit
 	newPosition.leadSuit = this.leadSuit;
 	if ( newPosition.playNumber % 4 === 1 ) {
 		// start of New trick so change lead suit to current suit
 		newPosition.leadSuit = suit;
 	}
-		
+
 	// Set the direction of this played card
 	newPosition.direction = this.nextTurn;
 	// Set next turn
 	newPosition.nextTurn = getNextToPlay( this.nextTurn );
-	if ( newPosition.playNumber % 4 === 0 ) {	
+	if ( newPosition.playNumber % 4 === 0 ) {
 		// Trick completed so set trick winner on lead
 		newPosition.nextTurn = newPosition.trickWinner.direction;
 	}
-	
+
 	// Set links back and forward
 	newPosition.previousPosition = this;
 	this.nextPosition = newPosition;
-	
+
 	// Start with no annotation
 	newPosition.annotation = null;
-	
-	return newPosition;	
+
+	return newPosition;
 };
 
 function doesCard2BestCard1( position1, position2 ) {
@@ -761,7 +761,7 @@ Position.prototype.playCard = function( animate ) {
 	if ( this.playedCard !== null ) {
 
 		this.animateTableCard( animate );
-	}	
+	}
 	this.setAnnotation();
 	this.setPlayableCards();
 	this.updatePositionInformation();
@@ -772,13 +772,13 @@ Position.prototype.animateTableCard = function( animate ) {
 	var suit = this.playedCard.suit;
 	var rank = this.playedCard.rank;
 	var cardImageID = getCardID( suit, rank );
-	var tableCardImageID = getTableCardID( direction );	
-	var container = 'body';	
+	var tableCardImageID = getTableCardID( direction );
+	var container = 'body';
 	var image = $( '#' + cardImageID );
 	var src = image.attr( 'imageName' );
 	var fromTop = image.position().top;
-	var fromLeft = image.position().left;	
-	
+	var fromLeft = image.position().left;
+
 	// Create table card
 	$( container ).append( '<img id="' + tableCardImageID + '" class="fixed table-card"></img>' );
 	var tableCardImage = $( '#' + tableCardImageID );
@@ -789,13 +789,13 @@ Position.prototype.animateTableCard = function( animate ) {
 		height: Parameters.cardImages.height,
 		top: fromTop,
 		left: fromLeft,
-	});	
-	
+	});
+
 	// animate it to its table position
 	var toTop = Parameters.tableCardPosition[ direction ].top;
 	var toLeft = Parameters.tableCardPosition[ direction ].left;
-	tableCardImage.animate({top:toTop,left:toLeft}, 300, function() {});	
-	
+	tableCardImage.animate({top:toTop,left:toLeft}, 300, function() {});
+
 	// Update original image properties
 	image.attr( 'src' , Parameters.cardImages.folder + '/' + Parameters.cardImages.cardBack );
 	image.attr( 'status', 'played' );
@@ -806,14 +806,14 @@ Position.prototype.playTableCard = function() {
 	var suit = this.playedCard.suit;
 	var rank = this.playedCard.rank;
 	var imageID = getCardID( suit, rank );
-	var tableCardImageID = getTableCardID( direction );	
+	var tableCardImageID = getTableCardID( direction );
 	$( '#' + tableCardImageID ).remove();
-	var container = 'body';	
+	var container = 'body';
 	var image = $( '#' + imageID );
 	var src = image.attr( 'imageName' );
 	var top = Parameters.tableCardPosition[ direction ].top;
-	var left = Parameters.tableCardPosition[ direction ].left;	
-	
+	var left = Parameters.tableCardPosition[ direction ].left;
+
 	// Create table card
 	$( container ).append( '<img id="' + tableCardImageID + '" class="fixed table-card"></img>' );
 	var tableCardImage = $( '#' + tableCardImageID );
@@ -824,25 +824,25 @@ Position.prototype.playTableCard = function() {
 		height: Parameters.cardImages.height,
 		top: top,
 		left: left,
-	});	
+	});
 };
 
 Position.prototype.setPlayableCards = function() {
-	
+
 	//var imageHighlightClass = 'thumbnail';
 	var imageHighlightClass = 'img-highlight';
 	// Remove highlight anc click handler on all cards
 	$( '.card' ).unbind( 'click' ).removeClass( imageHighlightClass ).addClass( 'cursor-not-allowed' );
 	// Set the playable cards
-	var elements = '[direction='+ this.nextTurn + '][status="not-played"]';	
+	var elements = '[direction='+ this.nextTurn + '][status="not-played"]';
 	if ( this.leadSuit !== '' && this.playNumber % 4 !== 0 ) {
 		var extendedElements = elements + '[suit="' + this.leadSuit + '"]';
 		var numInSuit = $( extendedElements ).length;
 		if ( numInSuit > 0 ) elements = extendedElements;
 	}
-	$( elements ).addClass( imageHighlightClass ).removeClass( 'cursor-not-allowed' ).click(function() { 
+	$( elements ).addClass( imageHighlightClass ).removeClass( 'cursor-not-allowed' ).click(function() {
 		deal.cardClicked( this );
-	});	
+	});
 	setActiveHand( this.nextTurn );
 };
 
@@ -867,8 +867,8 @@ Position.prototype.updateButtonStatus = function() {
 		nextDisabled = true;
 	}
 	$('#redo-trick').attr( 'disabled', nextDisabled );
-	$('#redo-play').attr( 'disabled', nextDisabled );	
-	$('#fast-forward').attr( 'disabled', nextDisabled );	
+	$('#redo-play').attr( 'disabled', nextDisabled );
+	$('#fast-forward').attr( 'disabled', nextDisabled );
 };
 
 function updateStatus( message ) {
@@ -879,8 +879,8 @@ Position.prototype.undoTrick = function() {
 	if ( this.playNumber === 0 ) {
 		trace( 'Nothing to Undo' );
 		return this.playNumber;
-	}	
-	
+	}
+
 	var playNumber = this.undoCard();
 	if ( playNumber === this.playNumber ) return playNumber;
 	var position = this.previousPosition;
@@ -888,7 +888,7 @@ Position.prototype.undoTrick = function() {
 		playNumber = position.undoCard();
 		if ( playNumber === position.playNumber ) return playNumber;
 		position = position.previousPosition;
-	}	
+	}
 	return position.playNumber;
 };
 
@@ -900,12 +900,12 @@ Position.prototype.redoTrick = function() {
 		playNumber = position.redoCard();
 		if ( playNumber === position.playNumber ) return playNumber;
 		position = position.nextPosition;
-	}	
+	}
 	return position.playNumber;
 };
 
 Position.prototype.changeToPlay = function( playNumber ) {
-	if ( this.playNumber < playNumber ) return this.fastForward( playNumber );	
+	if ( this.playNumber < playNumber ) return this.fastForward( playNumber );
 	else if ( this.playNumber > playNumber ) return this.rewind( playNumber );
 	else {
 		trace( 'Hash changed to ' + playNumber + ' but alread at that play number!' );
@@ -918,8 +918,8 @@ Position.prototype.rewind = function( endPlayNumber ) {
 	if ( this.playNumber === 0 ) {
 		trace( 'At Play 0. Nothing to Undo!' );
 		return this.playNumber;
-	}	
-	
+	}
+
 	var playNumber = this.undoCard();
 	if ( playNumber === this.playNumber ) return playNumber;
 	var position = this.previousPosition;
@@ -927,7 +927,7 @@ Position.prototype.rewind = function( endPlayNumber ) {
 		playNumber = position.undoCard();
 		if ( playNumber === position.playNumber ) return playNumber;
 		position = position.previousPosition;
-	}	
+	}
 	return position.playNumber;
 };
 
@@ -940,7 +940,7 @@ Position.prototype.fastForward = function( endPlayNumber ) {
 		position = position.nextPosition;
 		playNumber = position.redoCard();
 		if ( playNumber === position.playNumber ) return playNumber;
-	}	
+	}
 	return position.nextPosition.playNumber;
 };
 
@@ -952,7 +952,7 @@ Position.prototype.undoCard = function() {
 	var direction = this.direction;
 	var suit = this.playedCard.suit;
 	var rank = this.playedCard.rank;
-	
+
 	if ( this.playNumber % 4 === 1 ) {
 		clearTableCards();
 		var count = 0;
@@ -962,9 +962,9 @@ Position.prototype.undoCard = function() {
 			count++;
 			position = position.previousPosition;
 		}
-	} 
+	}
 	else {
-		var tableImageID = getTableCardID( direction );	
+		var tableImageID = getTableCardID( direction );
 		$( '#' + tableImageID ).remove();
 	}
 	var imageID = getCardID( suit, rank );
@@ -1000,7 +1000,7 @@ Bid.prototype.toString = function() {
 	else if ( this.suit === 'p' ) bidString = '<font color="green">Pass</font>';
 	else if ( this.suit in Suits ) {
 		bidString = this.level + getSuitName( this.suit );
-	}	
+	}
 	else bidString = 'Unknown';
 	if ( this.annotation === null ) return bidString;
 	else return '<span data-toggle="tooltip" class="bg-info bid-annotation" title="' + unescape( this.annotation ) +'">' + bidString + '</span>';
@@ -1013,7 +1013,7 @@ Bid.prototype.getString = function() {
 	else if ( this.suit === 'p' ) bidString = 'p';
 	else if ( this.suit in Suits ) {
 		bidString = this.level + this.suit;
-	}	
+	}
 	else bidString = 'u';
 	if ( this.annotation ) bidString += '{' + this.annotation + '}';
 	return bidString;
@@ -1026,36 +1026,36 @@ Bid.prototype.getString = function() {
  *
  * @constructor
  * @this {Deal}
- * @param {array} queryParameters an associative array of parsed query parameters 
+ * @param {array} queryParameters an associative array of parsed query parameters
  */
 function Deal( queryParameters ) {
 	this.queryParameters = queryParameters;
-	this.errors = [];	
+	this.errors = [];
 	this.hands = {};
 	this.positions = [];
 	this.auction = [];
 
 	for( var direction in Directions ) {
-		this.hands[ direction ] = new Hand( direction );	
+		this.hands[ direction ] = new Hand( direction );
 	};
-	
+
 	// Load the hands
 	this.loadHands( queryParameters );
-	
+
 	// Load other information like dealer, contract etc.
 	this.loadDealInformation( queryParameters );
-	
+
 	// Load the auction
 	this.loadAuction( queryParameters );
-	
+
 	// Load names of players
 	this.loadNames( queryParameters );
-	
+
 	// Load initial position
 	this.currentPositionIndex = 0;
-	this.positions[ 0 ] = new Position( this.leader, this.trumpSuit );	
-	
-	// Load any plays if specified 
+	this.positions[ 0 ] = new Position( this.leader, this.trumpSuit );
+
+	// Load any plays if specified
 	this.loadPlay( queryParameters );
 };
 
@@ -1064,14 +1064,14 @@ function Deal( queryParameters ) {
  *
  * @method createHandViewerURL
  * @this {Deal}
- * @param void 
+ * @param void
  * @return void
  */
 Deal.prototype.createHandViewerURL = function( ) {
-	
+
 	// URL
-	var url = 'http://www.bridgebase.com/tools/handviewer.html?';
-	
+	var url = 'https://www.bridgebase.com/tools/handviewer.html?';
+
 	// Get the hands and names
 	var hands = [];
 	var names = '';
@@ -1084,27 +1084,27 @@ Deal.prototype.createHandViewerURL = function( ) {
 	}
 	url += hands.join( '&' );
 	url += names;
-	
+
 	// Get the auction
 	url += '&a=';
 	if ( this.auction.length >  0 ) {
 		for( var i = 0; i < this.auction.length; ++i ) {
 			url += this.auction[ i ].getString();
-		}	
+		}
 	}
 	else {
 		url += this.auctionString;
 	}
-	
+
 	// Get the vulnerability if it exists
 	if ( this.vulnerability ) url += '&v=' + this.vulnerability;
-	
+
 	// Get the dealer
 	if ( this.dealer ) url += '&d=' + this.dealer;
-	
+
 	// Get the board
 	if ( this.board ) url += '&b=' + this.board;
-	
+
 	// Get the played cards upto current position
 	if ( this.currentPositionIndex > 0 ) {
 		url += '&p=';
@@ -1112,7 +1112,7 @@ Deal.prototype.createHandViewerURL = function( ) {
 			url += this.positions[ i ].getCardString();
 		}
 	}
-	
+
 	return url;
 };
 
@@ -1121,28 +1121,28 @@ Deal.prototype.createHandViewerURL = function( ) {
  *
  * @method loadPlay
  * @this {Deal}
- * @param {array} queryParameters an associative array of parsed query parameters 
+ * @param {array} queryParameters an associative array of parsed query parameters
  * @return void
  */
 Deal.prototype.loadPlay = function( queryParameters ) {
 	var playString = '';
-	if ( queryParameters['p'] !== undefined ) {	
+	if ( queryParameters['p'] !== undefined ) {
 		// Play has been specified
 		playString = queryParameters['p'];
 	}
-	else 	if ( queryParameters['P'] !== undefined ) {	
+	else 	if ( queryParameters['P'] !== undefined ) {
 		// Play has been specified
 		playString = queryParameters['P'];
 	}
 	else {
 		// No play specified
-		return;	
+		return;
 	}
 	var play = playString.toLowerCase();
 	var currentIndex = 0;
 	for( var i = 0;i < play.length; ++i ) {
 		var currentPosition = this.positions[ currentIndex ];
-		var prefix = 'In play specified at position ' + (i+1) + ' - ';		
+		var prefix = 'In play specified at position ' + (i+1) + ' - ';
 		var suit = play.charAt( i );
 		if ( suit === '{' ) {
 			var endBraces = play.indexOf( '}', i+1 );
@@ -1159,7 +1159,7 @@ Deal.prototype.loadPlay = function( queryParameters ) {
 			return;
 		}
 		i++;
-		prefix = 'In play specified at position ' + (i+1) + ' - ';	
+		prefix = 'In play specified at position ' + (i+1) + ' - ';
 		if ( i >= play.length ) {
 			this.addError( prefix + ' No rank has been specified for suit ' + suit );
 			return;
@@ -1181,7 +1181,7 @@ Deal.prototype.loadPlay = function( queryParameters ) {
 };
 
 Deal.prototype.cardClicked = function( card ) {
-	
+
 	var suit = $( card ).attr( 'suit' );
 	var rank = $( card ).attr( 'rank' );
 	var currentPosition = this.positions[ this.currentPositionIndex ];
@@ -1201,7 +1201,7 @@ Deal.prototype.cardClicked = function( card ) {
  * @return void
  */
 Deal.prototype.hasErrors = function() {
-	return this.errors.length > 0;	
+	return this.errors.length > 0;
 };
 
 /**
@@ -1231,7 +1231,7 @@ Deal.prototype.showErrors = function() {
 	html += '</span></li></ol>'
 	html += instructions;
 	html += '</div>';
-	$( container ).empty().append( html );		
+	$( container ).empty().append( html );
 };
 
 /**
@@ -1239,13 +1239,13 @@ Deal.prototype.showErrors = function() {
  *
  * @method loadHands
  * @this {Deal}
- * @param {array} queryParameters an associative array of parsed query parameters 
+ * @param {array} queryParameters an associative array of parsed query parameters
  * @return void
  */
 Deal.prototype.loadHands = function( queryParameters ) {
 	// A tally of which hands are not specified in the query Parameters
 	var unspecifiedHands = [];
-	
+
 	// Keeping track cards that have been assigned as we read query parameters
 	this.assigned = {};
 	for( var suit in Suits ) {
@@ -1255,9 +1255,9 @@ Deal.prototype.loadHands = function( queryParameters ) {
 			for( var rank in Ranks ) {
 				this.assigned[suit][rank] = '';
 			}
-		}	
-	};	
-	
+		}
+	};
+
 	// Look for hands specified for each direction
 	for( var direction in Directions ) {
 		if ( queryParameters [ direction ] !== undefined ) {
@@ -1273,11 +1273,11 @@ Deal.prototype.loadHands = function( queryParameters ) {
 			unspecifiedHands.push( direction );
 		}
 	}
-	
+
 	// If 3 hands specified then load fourth hand automatically
 	if ( unspecifiedHands.length === 1 ) {
 		this.assignRest( unspecifiedHands[ 0 ] );
-	}	
+	}
 	else if ( unspecifiedHands.length > 1 ) {
 		var hands = [];
 		for( var i = 0;i < unspecifiedHands.length; ++i ) hands.push( getDirectionName( unspecifiedHands[ i ]) );
@@ -1308,7 +1308,7 @@ Deal.prototype.assignRest = function( direction ) {
 	if ( currentHand.numCards < 1 || currentHand.numCards > 13 ) {
 		var message = getDirectionName( direction ) + ' hand had ' + currentHand.numCards + ' cards!';
 		this.addError( message );
-	}	
+	}
 };
 
 /**
@@ -1331,19 +1331,19 @@ Deal.prototype.loadHand = function( direction, handString) {
 		var currentChar = handString.charAt( i );
 		switch( currentChar ) {
 			// Check if it specifies suit
-			case 'c' :				
+			case 'c' :
 			case 'd' :
 			case 'h' :
-			case 's' :	
+			case 's' :
 				currentSuit = currentChar;
-				break;	
-			
+				break;
+
 			// Special handing for numeric 10
 			case '1' :
 				if ( currentSuit === '' ) {
 					this.addError( prefix + currentChar + ' was found when a suit was expected!' );
 					continue
-				}			
+				}
 				if ( i < handString.length - 1 && handString.charAt( i+1 ) === '0') {
 					currentRank = 't';
 					i++;
@@ -1352,7 +1352,7 @@ Deal.prototype.loadHand = function( direction, handString) {
 					this.addError( prefix + 'a 1 is present without a subsequent 0. Use 10 or t to reprensent the ten.' );
 					continue;
 				}
-			
+
 			// All other characters
 			default :
 				if ( currentSuit === '' ) {
@@ -1373,16 +1373,16 @@ Deal.prototype.loadHand = function( direction, handString) {
 				else {
 					// Unknown character
 					this.addError( prefix + 'character ' + currentRank + ' is not recognized as a card suit or rank!' );
-					continue;					
+					continue;
 				}
-				break;											
-		}	
+				break;
+		}
 	}
-	currentHand.sortAndCount();	
+	currentHand.sortAndCount();
 	if ( currentHand.numCards < 1 || currentHand.numCards > 13 ) {
 		var message = getDirectionName( direction ) + ' hand had ' + currentHand.numCards + ' cards!';
 		this.addError( message );
-	}	
+	}
 };
 
 function getParameterValue( queryParameters, parameterName ) {
@@ -1391,7 +1391,7 @@ function getParameterValue( queryParameters, parameterName ) {
 	}
 	else if ( queryParameters[ parameterName.toUpperCase() ] !== undefined ) {
 		return queryParameters[ parameterName.toUpperCase() ];
-	}	
+	}
 	return null;
 }
 
@@ -1399,7 +1399,7 @@ function getParameterValue( queryParameters, parameterName ) {
  * Parse query parameters for player names
  *
  * @this {Deal}
- * @param {array} queryParameters an associative array of parsed query parameters 
+ * @param {array} queryParameters an associative array of parsed query parameters
  * @return void
  */
 Deal.prototype.loadNames = function( queryParameters ) {
@@ -1411,7 +1411,7 @@ Deal.prototype.loadNames = function( queryParameters ) {
 };
 
 function areOppositeDirections( direction1, direction2 ) {
-	return ( (direction1 === 'n' || direction1 === 's') && (direction2 === 'e' || direction2 === 'w') )	|| 
+	return ( (direction1 === 'n' || direction1 === 's') && (direction2 === 'e' || direction2 === 'w') )	||
 	( (direction1 === 'e' || direction1 === 'w') && (direction2 === 'n' || direction2 === 's') );
 };
 
@@ -1419,11 +1419,11 @@ function areOppositeDirections( direction1, direction2 ) {
  * Parse query parameters to load auction
  *
  * @this {Deal}
- * @param {array} queryParameters an associative array of parsed query parameters 
+ * @param {array} queryParameters an associative array of parsed query parameters
  * @return void
  */
 Deal.prototype.loadAuction = function( queryParameters ) {
-	
+
 	var parameterName = 'a';
 	var contractString = getParameterValue( queryParameters, parameterName );
 	if ( contractString === null ) {
@@ -1450,11 +1450,11 @@ Deal.prototype.loadAuction = function( queryParameters ) {
 		var bid = null;
 		for( var i = 0;i < contractString.length; ++i ) {
 
-			var prefix = 'In auction specified at position ' + (i+1) + ' - ';		
+			var prefix = 'In auction specified at position ' + (i+1) + ' - ';
 			if ( numPasses >= 3 ) {
 				this.addError( prefix + '3 passes already but more characters in auction!' );
 				return;
-			}						
+			}
 			var currentChar = contractString.charAt( i );
 			if ( currentChar === '{' ) {
 				var endBraces = contractString.indexOf( '}', i+1 );
@@ -1464,7 +1464,7 @@ Deal.prototype.loadAuction = function( queryParameters ) {
 				}
 				if ( bid !== null ) bid.annotation = originalString.slice( i+1, endBraces );
 				i = endBraces;
-				continue;				
+				continue;
 			}
 			else if ( currentChar === 'd' || currentChar === 'x' ) {
 				if ( lastCall === '' || lastCall === 'd' || lastCall === 'r' || ! areOppositeDirections( lastCallBy, currentDirection ) ) {
@@ -1486,7 +1486,7 @@ Deal.prototype.loadAuction = function( queryParameters ) {
 				this.auction.push(bid);
 				lastCall = 'r';
 				lastCallBy = currentDirection;
-				numPasses = 0;				
+				numPasses = 0;
 			}
 			else if ( currentChar === 'p' ) {
 				numPasses++;
@@ -1515,10 +1515,10 @@ Deal.prototype.loadAuction = function( queryParameters ) {
 				this.auction.push(bid);
 				lastCall = 'b';
 				lastCallBy = currentDirection;
-				numPasses = 0;	
+				numPasses = 0;
 				currentLevel = level;
 				currentSuit = suit;
-				if ( firstCalledBy[ suit ] === '' ) firstCalledBy[ suit ] = currentDirection;				
+				if ( firstCalledBy[ suit ] === '' ) firstCalledBy[ suit ] = currentDirection;
 			}
 			currentDirection = getNextToPlay( currentDirection );
 		}
@@ -1538,10 +1538,10 @@ Deal.prototype.loadAuction = function( queryParameters ) {
 
 		//var declarer = firstCalledBy[ currentSuit ];
 		// Determine the contract
-		this.dealInformation[ 'Contract' ] = currentLevel + getSuitName( this.trumpSuit );	
+		this.dealInformation[ 'Contract' ] = currentLevel + getSuitName( this.trumpSuit );
 		if ( lastCall === 'd' ) this.dealInformation[ 'Contract' ] += 'X';
 		else if ( lastCall === 'r' ) this.dealInformation[ 'Contract' ] += 'XX';
-		this.dealInformation[ 'Declarer' ] = getDirectionName( declarer );		
+		this.dealInformation[ 'Declarer' ] = getDirectionName( declarer );
 		this.declarer = declarer;
 		this.leader = getLeader( declarer );
 	}
@@ -1554,64 +1554,64 @@ Deal.prototype.loadAuction = function( queryParameters ) {
 			this.dealInformation[ 'Trumps' ] = getSuitName( this.trumpSuit );
 			if ( !( this.trumpSuit in Suits ) ) {
 				this.addError( this.trumpSuit + ' is not a valid trump suit!' );
-			}				
-			
+			}
+
 			// Who is the leader
 			this.leader = contractString.charAt(2);
 			if ( !( this.leader in Directions ) ) {
 				this.addError( this.leader + ' is not a valid leader position' );
-			}	
-			this.declarer = '';			
+			}
+			this.declarer = '';
 		}
 		else {
 			// is contract level valid
 			if ( this.contractLevel < 1 || this.contractLevel > 7 ) {
 				this.addError( this.contractLevel + ' is not a valid contract level!' );
 			}
-			
+
 			// What is the trump suit
 			this.trumpSuit = contractString.charAt(2);
-			
+
 			if ( !( this.trumpSuit in Suits ) ) {
 				this.addError( this.trumpSuit + ' is not a valid trump suit!' );
 			}
-			
+
 			// Who is declarer
 			this.declarer = contractString.charAt(3);
-			
+
 			if ( !( this.declarer in Directions ) ) {
 				this.addError( this.declarer + ' is not a valid declarer position' );
-			}	
-			
+			}
+
 			// Who is on lead
 			this.leader = getLeader( this.declarer );
-					
+
 			// Determine the contract
-			this.dealInformation[ 'Contract' ] = contractLevel + ' ' + getSuitName( this.trumpSuit );	
-			this.dealInformation[ 'Declarer' ] = getDirectionName( this.declarer );		
+			this.dealInformation[ 'Contract' ] = contractLevel + ' ' + getSuitName( this.trumpSuit );
+			this.dealInformation[ 'Declarer' ] = getDirectionName( this.declarer );
 		}
 	}
-		
+
 };
 
 /**
  * Parse query parameters for other information like auction, dealer etc.
  *
  * @this {Deal}
- * @param {array} queryParameters an associative array of parsed query parameters 
+ * @param {array} queryParameters an associative array of parsed query parameters
  * @return void
  */
 Deal.prototype.loadDealInformation = function( queryParameters ) {
 	this.dealInformation = {};
-	
-	// Optional parameters 
-	
+
+	// Optional parameters
+
 	// Load Board Number
 	this.board = getParameterValue( queryParameters, 'b' );
 	if ( this.board ) {
 		this.dealInformation[ 'Board' ] = this.board;
 	}
-	
+
 	// Load dealer
 	this.dealer = getParameterValue( queryParameters, 'd' );
 	if ( this.dealer ) {
@@ -1623,7 +1623,7 @@ Deal.prototype.loadDealInformation = function( queryParameters ) {
 	this.vulnerability = getParameterValue( queryParameters, 'v' );
 	if ( this.vulnerability ) {
 		this.dealInformation[ 'Vulnerability' ] = getVulnerability( this.vulnerability.toLowerCase() );
-	}	
+	}
 
 };
 
@@ -1636,40 +1636,40 @@ Deal.prototype.loadDealInformation = function( queryParameters ) {
  */
 Deal.prototype.show = function() {
 	var container = 'body';
-	
+
 	// Calculate sizes of all elements
-	computeScaledParameters();	
-	
-	var instructions = $( '#instructions' ).html();	
-	
+	computeScaledParameters();
+
+	var instructions = $( '#instructions' ).html();
+
 	// empty the container
 	$( container ).empty();
-	
+
 	this.showTable();
-	
+
 	// Show information about deal
 	this.showDealInformation();
-	
-		
+
+
 	// Show the footer
 	this.showFooterBar();
-	
+
 	// Show information about deal
-	this.showPositionInformation();	
-	
+	this.showPositionInformation();
+
 	// Show the auction
 	this.showAuction();
-	
-	// Bootstrap tooltip
-	$( '.bid-annotation' ).tooltip();            	
 
-	
+	// Bootstrap tooltip
+	$( '.bid-annotation' ).tooltip();
+
+
 	// Show the hands
 	this.showHands();
-	
+
 	// The textbox in the bottom right to show text annotations, status etc.
 	this.showStatusInformation();
-	
+
 	// Show 0th position
 	this.positions[ 0 ].playCard( false );
 	this.currentPositionIndex = 0;
@@ -1691,7 +1691,7 @@ Deal.prototype.showFooterBar = function() {
 		'undo-play' :	{ name: 'Undo Previous Play',	icon: 'chevron-left', iconAfter: false, },
 		'redo-play' :	{ name: 'Redo Next Play',		icon: 'chevron-right', iconAfter: true, },
 		'redo-trick' :	{ name: 'Redo Next Trick',		icon: 'forward', iconAfter: true, },
-		'fast-forward' :{ name: 'Fast Forward',			icon: 'step-forward', iconAfter: true, },		
+		'fast-forward' :{ name: 'Fast Forward',			icon: 'step-forward', iconAfter: true, },
 	};
 	var sizeClass = 'btn-group-lg';
 	var html = '';
@@ -1705,7 +1705,7 @@ Deal.prototype.showFooterBar = function() {
 		html += fields[ field ].name;
 		if ( fields[ field ].iconAfter ){
 			html += ' ' + iconHtml;
-		}		
+		}
 		html += '</button>';
 	}
 	html += '</div>';
@@ -1716,36 +1716,36 @@ Deal.prototype.showFooterBar = function() {
 	}
 	if ( footer.width() >= Parameters.viewport.width ) {
 		footer.addClass( 'btn-group-sm' );
-	}	
+	}
 	if ( footer.width() >= Parameters.viewport.width ) {
 		footer.removeClass( 'btn-group-sm' ).addClass( 'btn-group-xs' );
-	}	
+	}
 	//alert(Parameters.viewport.width + ' ' + footer.width());
 	var left = Parameters.viewport.centerX - footer.width() / 2;
 	footer.css({
 		left: left,
 		bottom:0,
 	});
-	
+
 	$('#undo-play').click(function() {
-		deal.undoCard();	
+		deal.undoCard();
 	});
 	$('#redo-play').click(function() {
-		deal.redoCard();	
-	});	
+		deal.redoCard();
+	});
 	$('#undo-trick').click(function() {
-		deal.undoTrick();	
+		deal.undoTrick();
 	});
 	$('#redo-trick').click(function() {
-		deal.redoTrick();	
-	});	
+		deal.redoTrick();
+	});
 	$('#rewind').click(function() {
-		deal.rewind();	
+		deal.rewind();
 	});
 	$('#fast-forward').click(function() {
-		deal.fastForward();	
-	});		
-		
+		deal.fastForward();
+	});
+
 };
 
 /**
@@ -1756,11 +1756,11 @@ Deal.prototype.showFooterBar = function() {
  * @return void
  */
 Deal.prototype.showStatusInformation = function() {
-	var id = 'status-information';	
+	var id = 'status-information';
 	var html = '<div id="' + id + '" class="fixed panel panel-info">';
 	html += '<div id="status-header" class="panel-heading"><span class="panel-title1">Play Annotations and Other Information</span></div>';
 	html += '<div id="status" class="fixed status panel-body">test</div>';
-	html += '</div>';	
+	html += '</div>';
 	var container = 'body';
 	$( container ).append( html );
 	var table = $( '#' + id );
@@ -1799,7 +1799,7 @@ Deal.prototype.showPositionInformation = function() {
 	html += '<thead><tr class="' + BootstrapParameters.tableHeaderClass + '"><th class="text-center" colspan=2>Play Information</th></tr></thead><tbody>';
 	html += getTableBody( fields );
 	html += '<tr><td><button id="hand-viewer">HandViewer URL</button><td></td></tr>';
-	html += '<tbody></table>';	
+	html += '<tbody></table>';
 	var container = 'body';
 	$( container ).append( html );
 	var table = $( '#' + tableID );
@@ -1807,7 +1807,7 @@ Deal.prototype.showPositionInformation = function() {
 		width: 'auto',
 		bottom: $( '#footer' ).height() + 5,
 		left: 5,
-	});	
+	});
 	var self = this;
 	$( '#hand-viewer' ).click( function() {
 		var url = self.createHandViewerURL();
@@ -1822,7 +1822,7 @@ Deal.prototype.setPosition = function( index, changeHash ) {
 	this.currentPositionIndex = index;
 	if ( changeHash ) {
 		Parameters.manualHashChange = true;
-		window.location.hash = index;	
+		window.location.hash = index;
 	}
 };
 
@@ -1870,7 +1870,7 @@ Deal.prototype.showDealInformation = function() {
 	var html = '<table id="' + tableID + '" class="fixed table table-bordered table-condensed">'
 	html += '<thead><tr class="' + BootstrapParameters.tableHeaderClass + '"><th class="text-center" colspan=2>Deal Information</th></tr></thead><tbody>';
 	html += getTableBody( this.dealInformation );
-	html += '</tbody></table>';	
+	html += '</tbody></table>';
 	var container = 'body';
 	$( container ).append( html );
 	var table = $( '#' + tableID );
@@ -1878,7 +1878,7 @@ Deal.prototype.showDealInformation = function() {
 		width: 'auto',
 		top: 5,
 		left: 5,
-	});	
+	});
 };
 
 Deal.prototype.showAuction = function() {
@@ -1913,9 +1913,9 @@ Deal.prototype.showAuction = function() {
 		while( currentDirection !== 'w' ) {
 			html += '<td></td>';
 			if ( currentDirection === 's' ) html += '</tr>';
-			currentDirection = getNextToPlay( currentDirection );			
+			currentDirection = getNextToPlay( currentDirection );
 		}
-		html += '</tbody></table>';	
+		html += '</tbody></table>';
 		var container = 'body';
 		$( container ).append( html );
 		var table = $( '#' + tableID );
@@ -1923,7 +1923,7 @@ Deal.prototype.showAuction = function() {
 			width:'auto',
 			top: 5,
 			right: 5,
-		});	
+		});
 	}
 };
 
@@ -1936,7 +1936,7 @@ Deal.prototype.showAuction = function() {
  */
 Deal.prototype.showTable = function() {
 	var container = 'body';
-	
+
 	// Create a rectangular table in center with green background
 	var tableID = Parameters.tableImage.id;
 	$( container ).append( '<div id="' + tableID + '" class="fixed '+ Parameters.tableImage.class + '"></div>' );
@@ -1958,7 +1958,7 @@ Deal.prototype.showTable = function() {
 			table.addClass( 'ew-vul' );
 		}
 	}
-	
+
 	// Show the compass in middle of screen
 	var compassID = Parameters.compassImage.id;
 	$( container ).append( '<img id="' + compassID + '" class="fixed '+ Parameters.compassImage.class + '"></img>' );
@@ -1971,8 +1971,8 @@ Deal.prototype.showTable = function() {
 		top: Parameters.compassImage.top,
 		left: Parameters.compassImage.left,
 	};
-	//trace( 'Drawing compass with src ' + imageName + ' with dimensions ' + JSON.stringify( compassDimensions ) );		
-	compass.css( compassDimensions );	
+	//trace( 'Drawing compass with src ' + imageName + ' with dimensions ' + JSON.stringify( compassDimensions ) );
+	compass.css( compassDimensions );
 };
 
 /**
@@ -1996,38 +1996,38 @@ function processHash() {
 		var playNumber = hash ? parseInt( hash ) : 0;
 		deal.changeToPlay( parseInt( playNumber ) );
 	}
-	Parameters.manualHashChange = false;	
+	Parameters.manualHashChange = false;
 };
 
 jQuery(function($) {
 	// The equivalent of the main function
 	var queryParameters = QueryParameters.parse();
-	
+
 	// Check if any query parameters specified
 	if ( queryParameters !== undefined && queryParameters.length > 0 ) {
 		try  {
 			// Load the hands into a new deal
 			deal = new Deal( queryParameters );
-			
+
 			// Check if any errors
 			if ( deal.hasErrors() ) {
 				// Errors - Show the errors
 				deal.showErrors();
 			}
 			else {
-				
+
 				// Show deal information
 				deal.show();
 				processHash();
-				
+
 				// Setup handler to detect window resize and redraw everything
 				$(window).resize(function() {
 					deal.show();
 					processHash();
-				});		
+				});
 				$(window).hashchange( function(){
 					processHash();
-			  	});					
+			  	});
 			}
 		}
 		catch(err) {
@@ -2038,12 +2038,11 @@ jQuery(function($) {
 			var html = '<ol class="rounded-list"><li><span class="item">';
 			html += err;
 			html += '</span></li></ol>'
-			$( container ).append( html );	
-			$( container ).append( instructions );				
+			$( container ).append( html );
+			$( container ).append( instructions );
 		}
 	}
 	else {
 		// Will show default instructions page. Nothing to do.
 	}
 });
-
